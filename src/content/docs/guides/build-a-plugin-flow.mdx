@@ -1,0 +1,127 @@
+---
+title: Build a Plugin Flow
+description: Connect commands, menus, sidebars, and tablists in one small DaisyCore-powered plugin feature.
+---
+
+# Build a Plugin Flow
+
+This guide shows how the main DaisyCore systems fit together in one believable feature instead of isolated toy snippets.
+
+<div class="premium-callout note">
+  <h3>What this page assumes</h3>
+  <ul>
+    <li>You already have a working DaisyCore bootstrap.</li>
+    <li>You have read the basics of commands, menus, scoreboards, and tablists.</li>
+  </ul>
+</div>
+
+## What you'll build
+
+A `/profile` flow:
+
+- `/profile` opens a menu
+- the menu acts as the player's profile hub
+- a sidebar mirrors a few profile stats
+- a tablist shows a simple welcome header and footer
+
+## Step 1: bootstrap DaisyCore once
+
+```kotlin
+class ProfilePlugin : JavaPlugin() {
+    lateinit var daisy: DaisyPlatform
+        private set
+
+    override fun onEnable() {
+        daisy =
+            DaisyPlatform.create(this) {
+                text()
+                placeholders()
+                items()
+                commands()
+                menus()
+                scoreboards()
+                tablists()
+            }
+
+        ProfileRuntime.platform = daisy
+    }
+
+    override fun onDisable() {
+        daisy.close()
+    }
+}
+```
+
+## Step 2: define the shared UI pieces
+
+```kotlin
+val profileMenu =
+    menu("Profile", rows = 3) {
+        slot(13) {
+            item(Material.PLAYER_HEAD) {
+                name = "Your Stats"
+            }
+        }
+    }
+
+val profileSidebar =
+    sidebar {
+        title(DaisyText.plain("Profile"))
+        line("rank") { DaisyText.plain("Rank: Member") }
+        line("coins") { DaisyText.plain("Coins: 1,250") }
+    }
+
+val profileTablist =
+    tablist {
+        header { DaisyText.plain("Profile Hub") }
+        footer { DaisyText.plain("docs.daisy.cat") }
+    }
+```
+
+## Step 3: connect them in a command provider
+
+```kotlin
+object ProfileRuntime {
+    lateinit var platform: DaisyPlatform
+}
+
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandProvider {
+    override fun commands(): List<DaisyCommand> =
+        listOf(
+            command("profile") {
+                description("Open your profile tools")
+
+                executePlayer {
+                    player.openMenu(profileMenu)
+                    ProfileRuntime.platform.scoreboards?.show(player, profileSidebar)
+                    ProfileRuntime.platform.tablists?.show(player, profileTablist)
+                }
+            },
+        )
+}
+```
+
+<div class="premium-callout current">
+  <h3>Why the extra object exists</h3>
+  <p>The command provider needs a way to reach your platform owner. In a real plugin, that can be a plugin singleton, a service object, or another application-level access point. The docs use <code>ProfileRuntime</code> to keep the sample direct.</p>
+</div>
+
+## Why this example matters
+
+The point is not that DaisyCore forces these systems together. The point is that they can work together cleanly because they share one platform owner, one lifecycle model, and one general API style.
+
+## What to do next in a real plugin
+
+- move shared UI definitions into dedicated files
+- replace hard-coded values with placeholder-backed renderers
+- only enable the systems your plugin actually needs
+
+<div class="page-next">
+
+## Next steps
+
+- Deepen the architecture view: [Why DaisyCore Is One Library](/explanation/why-daisycore-is-one-library/)
+- Revisit command discovery: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Jump to the APIs: [Bootstrap API](/reference/bootstrap-api/)
+</div>

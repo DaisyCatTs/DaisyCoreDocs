@@ -1,0 +1,19 @@
+---
+title: Tablist Rendering Model
+description: DaisyCore tablists currently focus on header and footer rendering with clean per-player session ownership.
+---
+
+# Tablist Rendering Model
+
+The current DaisyCore tablist model is intentionally narrow.
+
+## What it does
+
+- per-player sessions
+- header rendering
+- footer rendering
+- refresh and cleanup through the platform runtime
+
+## What it does not promise yet
+
+The public API does not currently promise richer tab entry formatting or deeper packet-driven customization. The docs should stay honest about that until the implementation grows.

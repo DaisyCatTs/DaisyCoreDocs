@@ -5,6 +5,11 @@ description: DaisyPlatform is the one bootstrap path for DaisyCore services.
 
 # Bootstrap API
 
+<div class="premium-callout note">
+  <h3>Recommended default</h3>
+  <p>This is the normal all-systems bootstrap for a plugin that wants the full DaisyCore platform available.</p>
+</div>
+
 ```kotlin
 val daisy =
     DaisyPlatform.create(plugin) {
@@ -20,13 +25,25 @@ val daisy =
 
 ## Available builder flags
 
-- `text()`
-- `placeholders()`
-- `items()`
-- `commands()`
-- `menus()`
-- `scoreboards()`
-- `tablists()`
+<div class="reference-grid">
+  <div class="reference-panel">
+    <h3>Shared layers</h3>
+    <ul>
+      <li><code>text()</code></li>
+      <li><code>placeholders()</code></li>
+      <li><code>items()</code></li>
+    </ul>
+  </div>
+  <div class="reference-panel">
+    <h3>Feature systems</h3>
+    <ul>
+      <li><code>commands()</code></li>
+      <li><code>menus()</code></li>
+      <li><code>scoreboards()</code></li>
+      <li><code>tablists()</code></li>
+    </ul>
+  </div>
+</div>
 
 ## Notes
 

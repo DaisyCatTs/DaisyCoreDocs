@@ -27,3 +27,15 @@ fun sidebar(block: DaisySidebarBuilder.() -> Unit): DaisySidebar
 - `lineIf(key, visible, renderer)`
 - `blank()`
 - `options { ... }`
+
+## Important behavior
+
+- line keys should be unique
+- blank lines are supported, but DaisyCore still gives them internal unique identity
+- sidebars are limited to the normal sidebar line budget
+- `invalidate(vararg keys)` is for targeted refreshes, while `invalidate()` refreshes the full session
+
+## Read next
+
+- Tutorial: [First Scoreboard](/getting-started/first-scoreboard/)
+- Concepts: [Sidebar Refresh and Diffing](/explanation/sidebar-refresh-and-diffing/)

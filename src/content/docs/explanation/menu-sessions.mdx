@@ -1,0 +1,27 @@
+---
+title: Menu Sessions
+description: A DaisyMenu is the reusable definition, and a DaisyMenuSession is the player-specific runtime state created when the menu opens.
+---
+
+# Menu Sessions
+
+The easiest way to understand DaisyCore menus is to split them into two layers.
+
+## Definition layer
+
+`DaisyMenu` is the reusable menu definition. It describes slots, render logic, and click behavior.
+
+## Runtime layer
+
+When a player opens that menu, DaisyCore creates a `DaisyMenuSession`.
+
+That session is where runtime concerns live:
+
+- the open inventory
+- refresh scheduling
+- invalidation
+- player-specific state
+
+## Why this split is useful
+
+It keeps your reusable menu definitions clean while still letting the library handle per-player state safely.

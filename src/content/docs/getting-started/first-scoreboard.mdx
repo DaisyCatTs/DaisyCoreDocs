@@ -1,0 +1,69 @@
+---
+title: First Scoreboard
+description: Show a simple DaisyCore sidebar and understand keyed lines and session refreshes.
+---
+
+# First Scoreboard
+
+This page shows the current DaisyCore scoreboard baseline: sidebar sessions with keyed lines and clean player ownership.
+
+## What this page assumes
+
+<div class="premium-callout note">
+
+- your plugin has a `DaisyPlatform`
+- you want a simple sidebar for one player-facing feature
+</div>
+
+## What you'll build
+
+<div class="doc-section">
+You will create a small profile sidebar and show it to a player.
+</div>
+
+## Step 1: define a sidebar
+
+```kotlin
+val profileSidebar =
+    sidebar {
+        title(DaisyText.plain("Profile"))
+        line("rank") { DaisyText.plain("Rank: Member") }
+        line("coins") { DaisyText.plain("Coins: 1,250") }
+        blank()
+        line("online") { DaisyText.plain("Online: 42") }
+    }
+```
+
+## Step 2: show it to a player
+
+```kotlin
+daisy.scoreboards?.show(player, profileSidebar)
+```
+
+## Why keys matter
+
+Each line has a key like `rank` or `coins`. DaisyCore uses those keys so a session can refresh specific lines instead of rebuilding everything blindly.
+
+This is why `line(key, renderer)` is the normal path instead of relying on anonymous lines only.
+
+## What the current implementation focuses on
+
+- title rendering
+- keyed lines
+- blank line support
+- targeted invalidation
+- safe cleanup when the player quits or the platform closes
+
+<div class="premium-callout current">
+  <h3>Current behavior</h3>
+  <p>The sidebar runtime is intentionally scoped to a stable, usable baseline. It focuses on predictable keyed updates and clean session ownership instead of packet-heavy public APIs.</p>
+</div>
+
+<div class="page-next">
+
+## Next steps
+
+- Add a header and footer too: [First Tablist](/getting-started/first-tablist/)
+- Learn the current sidebar model: [Sidebar Refresh and Diffing](/explanation/sidebar-refresh-and-diffing/)
+- Jump to API details: [Sidebar DSL](/reference/sidebar-dsl/)
+</div>

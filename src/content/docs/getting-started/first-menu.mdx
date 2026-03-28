@@ -1,0 +1,75 @@
+---
+title: First Menu
+description: Open a simple DaisyCore menu from a command and understand what a menu session is.
+---
+
+# First Menu
+
+This page shows the smallest useful menu flow: define a menu, open it for a player, and keep the runtime concepts simple.
+
+## What this page assumes
+
+<div class="premium-callout note">
+
+- you already have a working DaisyCore bootstrap
+- you are comfortable with the command flow from [First Command](/getting-started/first-command/)
+</div>
+
+## What you'll build
+
+<div class="doc-section">
+You will create a simple profile menu that opens from your `/profile` command.
+</div>
+
+## Step 1: define the menu
+
+```kotlin
+val profileMenu =
+    menu("Profile", rows = 3) {
+        slot(13) {
+            item(Material.PLAYER_HEAD) {
+                name = "Your Profile"
+            }
+
+            onClick {
+                player.sendMessage("Profile clicked.")
+            }
+        }
+    }
+```
+
+## Step 2: open the menu from a command
+
+```kotlin
+command("profile") {
+    executePlayer {
+        player.openMenu(profileMenu)
+    }
+}
+```
+
+## What a menu session is
+
+The `DaisyMenu` value is the static menu definition. When a player opens it, DaisyCore creates a `DaisyMenuSession` for that player. That session holds runtime state like rendering and refresh lifecycle.
+
+You usually care about the definition first. DaisyCore handles the session ownership under the hood.
+
+<div class="premium-callout current">
+  <h3>Current behavior</h3>
+  <p>Menu definitions stay reusable while runtime state stays session-specific. That separation is one of the main reasons DaisyCore menus stay clean in plugin code.</p>
+</div>
+
+## What to keep in mind
+
+- menu definitions are meant to stay reusable
+- per-player runtime state lives in sessions
+- DaisyCore cleans up sessions when the platform shuts down
+
+<div class="page-next">
+
+## Next steps
+
+- Add a sidebar beside the menu: [First Scoreboard](/getting-started/first-scoreboard/)
+- Understand sessions better: [Menu Sessions](/explanation/menu-sessions/)
+- Jump to API details: [Menu DSL](/reference/menu-dsl/)
+</div>

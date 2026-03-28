@@ -1,0 +1,63 @@
+---
+title: First Tablist
+description: Show a simple DaisyCore tablist with a header and footer and understand the current scope of the API.
+---
+
+# First Tablist
+
+This page shows the current DaisyCore tablist model: per-player sessions that render header and footer content.
+
+## What this page assumes
+
+<div class="premium-callout note">
+
+- you already have a `DaisyPlatform`
+- you want a simple player-facing header and footer
+</div>
+
+## What you'll build
+
+<div class="doc-section">
+You will create a small profile tablist with a welcome header and server footer.
+</div>
+
+## Step 1: define the tablist
+
+```kotlin
+val profileTablist =
+    tablist {
+        header { DaisyText.plain("Welcome back") }
+        footer { DaisyText.plain("docs.daisy.cat") }
+    }
+```
+
+## Step 2: show it to a player
+
+```kotlin
+daisy.tablists?.show(player, profileTablist)
+```
+
+## Current scope
+
+The current public tablist API is intentionally simple:
+
+- header
+- footer
+- options
+- session refresh and cleanup
+
+It does not currently promise richer tab entry formatting or advanced packet-driven customization.
+
+<div class="premium-callout current">
+  <h3>Current behavior</h3>
+  <p>This page intentionally teaches only header and footer because that is the honest scope of the current public tablist API.</p>
+</div>
+
+<div class="page-next">
+
+## Next steps
+
+- See all four systems together: [Build a Plugin Flow](/guides/build-a-plugin-flow/)
+- Read the tablist model honestly: [Tablist Rendering Model](/explanation/tablist-rendering-model/)
+- Jump to API details: [Tablist DSL](/reference/tablist-dsl/)
+</div>

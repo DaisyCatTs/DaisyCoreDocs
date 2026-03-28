@@ -1,0 +1,23 @@
+---
+title: Sidebar Refresh and Diffing
+description: DaisyCore sidebars use keyed lines and targeted refreshes so sessions can update predictably.
+---
+
+# Sidebar Refresh and Diffing
+
+The current DaisyCore sidebar system is built around keyed lines and session refreshes.
+
+## Why keys exist
+
+A line key gives a stable identity to a sidebar line. That makes targeted updates possible.
+
+## Current model
+
+- define a sidebar
+- show it to a player
+- DaisyCore owns the player session
+- invalidate the whole session or specific keys when data changes
+
+## What this is not trying to do yet
+
+This layer does not try to expose every packet-level optimization or advanced fake-entry technique. The current goal is a stable, honest baseline runtime.

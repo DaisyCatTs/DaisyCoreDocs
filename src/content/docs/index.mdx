@@ -1,28 +1,14 @@
 ---
 title: DaisyCore
-description: One mega Kotlin-first Paper library for commands, menus, scoreboards, tablists, placeholders, items, and runtime glue.
+description: One Kotlin-first Paper library for commands, menus, scoreboards, tablists, placeholders, items, and runtime glue.
 ---
 
 # DaisyCore
 
-DaisyCore is the one library approach for your Paper plugins. Instead of splitting your stack across separate command, menu, scoreboard, and tablist libraries, DaisyCore puts them in one Kotlin-first platform with one bootstrap path.
-
-## Why it exists
-
-- Plugin projects should be able to depend on one thing.
-- Shared runtime and text layers should not be duplicated across systems.
-- Public types should make it obvious that they come from DaisyCore.
-- New developers should have docs that actually teach, not just list APIs.
-
-## What you get
-
-- Auto-loaded commands from annotated providers
-- Menus with session-based runtime handling
-- Sidebars and tablists from the same platform bootstrap
-- Shared text, placeholder, item, and runtime layers
-- One dependency for real plugin projects
-
-## Install
+<div class="home-hero">
+  <span class="home-kicker">One Mega Paper Library</span>
+  <h2>The premium Kotlin-first toolkit for Paper plugins that want one dependency, one platform owner, and zero library sprawl.</h2>
+  <p>DaisyCore brings commands, menus, sidebars, tablists, placeholders, items, and runtime ownership together so your plugin stack feels coherent instead of stitched together.</p>
 
 ```kotlin
 dependencies {
@@ -30,9 +16,82 @@ dependencies {
 }
 ```
 
+  <div class="home-actions">
+    <a class="home-button" href="/getting-started/install/">Start Here</a>
+    <a class="home-button-secondary" href="/reference/bootstrap-api/">Read the API</a>
+  </div>
+</div>
+
+<div class="value-strip">
+  <div class="value-pill"><strong>One dependency</strong><span>Install DaisyCore once and bootstrap only the systems your plugin needs.</span></div>
+  <div class="value-pill"><strong>Auto-loaded commands</strong><span>Providers are discovered at startup through DaisyPlatform.</span></div>
+  <div class="value-pill"><strong>Shared runtime</strong><span>Menus, sidebars, tablists, and placeholders follow one lifecycle model.</span></div>
+  <div class="value-pill"><strong>Paper + Kotlin first</strong><span>Modern APIs without exposing the internal module sprawl.</span></div>
+</div>
+
+## What DaisyCore includes
+
+<div class="home-grid">
+  <div class="home-card">
+    <h3>Commands</h3>
+    <p>Auto-loaded providers, Kotlin DSL builders, and one command bootstrap path through <code>DaisyPlatform</code>.</p>
+  </div>
+  <div class="home-card">
+    <h3>Menus</h3>
+    <p>Immutable menu definitions with session-based runtime handling, inventory safety, and refresh support.</p>
+  </div>
+  <div class="home-card">
+    <h3>Scoreboards</h3>
+    <p>Sidebar-first sessions with keyed lines, invalidate-by-key updates, and clean platform ownership.</p>
+  </div>
+  <div class="home-card">
+    <h3>Tablists</h3>
+    <p>Header and footer rendering with per-player sessions and a simple baseline API that stays honest.</p>
+  </div>
+  <div class="home-card">
+    <h3>Placeholders</h3>
+    <p>A shared placeholder registry so menus, sidebars, tablists, and messages can resolve viewer-aware values consistently.</p>
+  </div>
+  <div class="home-card">
+    <h3>Items</h3>
+    <p>Reusable item builders that keep Adventure text and inventory rendering code cleaner across the platform.</p>
+  </div>
+</div>
+
+## Why DaisyCore
+
+<div class="home-panel">
+  <h2>One dependency, shared foundations, cleaner plugin code</h2>
+  <p>DaisyCore is designed so normal plugin projects depend on one thing. Internally, the repo stays modular. Publicly, your plugin code gets one bootstrap path, one text model, one placeholder system, and one family of Daisy-branded types.</p>
+</div>
+
 ## Start here
 
-- Install DaisyCore: [Install DaisyCore](/getting-started/install/)
-- Bootstrap your first plugin: [First Plugin](/getting-started/first-plugin/)
-- Learn command auto-loading: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
-- See the platform shape: [Architecture](/explanation/architecture/)
+<div class="path-grid">
+  <a class="home-card" href="/getting-started/install/">
+    <div class="path-step"><strong>1</strong><div><h3>Install</h3><p>Add DaisyCore to a Paper plugin project.</p></div></div>
+  </a>
+  <a class="home-card" href="/getting-started/first-plugin/">
+    <div class="path-step"><strong>2</strong><div><h3>Bootstrap</h3><p>Create a <code>DaisyPlatform</code> and own your plugin lifecycle cleanly.</p></div></div>
+  </a>
+  <a class="home-card" href="/getting-started/first-command/">
+    <div class="path-step"><strong>3</strong><div><h3>First Command</h3><p>Define an auto-loaded command provider and let DaisyCore discover it.</p></div></div>
+  </a>
+  <a class="home-card" href="/guides/build-a-plugin-flow/">
+    <div class="path-step"><strong>4</strong><div><h3>Build the Full Flow</h3><p>Connect a command, menu, sidebar, and tablist in one small plugin feature.</p></div></div>
+  </a>
+</div>
+
+## Current status
+
+<div class="api-note">
+  <p><strong>Current command discovery:</strong> DaisyCore currently scans your plugin jar for <code>@DaisyCommandSet</code> providers at startup.</p>
+  <p><strong>Scoreboards and tablists:</strong> both are production baseline systems. They are meant to be usable now, while leaving room for deeper transports later.</p>
+</div>
+
+## Where to go next
+
+- New to DaisyCore: [Install DaisyCore](/getting-started/install/), then [First Plugin](/getting-started/first-plugin/)
+- Learning commands: [First Command](/getting-started/first-command/) and [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Jumping straight to APIs: [Bootstrap API](/reference/bootstrap-api/) and [Command DSL](/reference/command-dsl/)
+- Understanding the architecture: [Why DaisyCore Is One Library](/explanation/why-daisycore-is-one-library/)

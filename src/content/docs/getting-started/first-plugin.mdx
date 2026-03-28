@@ -7,6 +7,12 @@ description: Bootstrap DaisyCore in a Paper plugin.
 
 This is the simplest good starting point when you want DaisyCore to own your plugin runtime.
 
+## What you'll build
+
+<div class="doc-section">
+By the end of this page, you will have a Paper plugin that creates a `DaisyPlatform` during startup and closes it during shutdown.
+</div>
+
 ```kotlin
 class MyPlugin : JavaPlugin() {
     private lateinit var daisy: DaisyPlatform
@@ -38,8 +44,20 @@ class MyPlugin : JavaPlugin() {
 - auto-loads command providers by scanning your plugin jar for `@DaisyCommandSet`
 - enables menu, scoreboard, and tablist services
 
+## Why this matters
+
+`DaisyPlatform` is the object that owns the DaisyCore systems you enabled. It is responsible for lifecycle cleanup, so closing it during plugin shutdown is not optional boilerplate. It is how your menus, sidebars, tablists, and command runtime get cleaned up safely.
+
+<div class="premium-callout current">
+  <h3>Current behavior</h3>
+  <p>The platform builder is the one public bootstrap path DaisyCore wants plugin users to learn first. It keeps lifecycle ownership and service initialization in one place.</p>
+</div>
+
+<div class="page-next">
+
 ## Next steps
 
-- Learn how commands are discovered: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
-- Learn why DaisyCore uses a runtime scan right now: [Why Commands Auto-Load](/explanation/command-auto-loading/)
-- Read the command overview: [Commands](/commands/overview/)
+- Create your first auto-loaded command: [First Command](/getting-started/first-command/)
+- Learn how command discovery works: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Understand platform ownership: [Runtime and Shutdown](/explanation/runtime-and-shutdown/)
+</div>

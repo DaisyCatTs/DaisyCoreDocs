@@ -7,6 +7,8 @@ description: DaisyCore menus use immutable menu definitions and session-based ru
 
 DaisyCore menus keep the external usage compact while moving the runtime complexity into the library.
 
+The menu definition is the static description of what a menu should look like. The menu session is the per-player runtime state that exists after a player opens it.
+
 ## Shape
 
 ```kotlin
@@ -30,7 +32,12 @@ player.openMenu(menu)
 - pagination and template helpers
 - runtime safety around top-inventory interactions
 
+## Current behavior
+
+Menus are owned by the DaisyCore platform runtime. That means menu sessions are cleaned up with the platform instead of being left as isolated global state inside your plugin.
+
 ## Learn next
 
+- Tutorial: [First Menu](/getting-started/first-menu/)
 - API reference: [Menu DSL](/reference/menu-dsl/)
 - Migration notes: [Migrate from DaisyMenu](/migration/daisymenu/)

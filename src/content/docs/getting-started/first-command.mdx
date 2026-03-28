@@ -1,0 +1,89 @@
+---
+title: First Command
+description: Create your first DaisyCore command provider and let DaisyCore auto-load it at startup.
+---
+
+# First Command
+
+This page shows the normal DaisyCore command workflow: define a provider, annotate it, and let `DaisyPlatform` discover it during startup.
+
+## What this page assumes
+
+- you have already completed [Install DaisyCore](/getting-started/install/)
+- your plugin already creates a `DaisyPlatform` like the one shown in [First Plugin](/getting-started/first-plugin/)
+
+## What you'll build
+
+You will create a `/profile` command that only players can run.
+
+## Step 1: create a provider
+
+```kotlin
+package cat.daisy.example.command
+
+import cat.daisy.command.DaisyCommand
+import cat.daisy.command.DaisyCommandProvider
+import cat.daisy.command.DaisyCommandSet
+import cat.daisy.command.dsl.command
+
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandProvider {
+    override fun commands(): List<DaisyCommand> =
+        listOf(
+            command("profile") {
+                description("Open your profile tools")
+
+                executePlayer {
+                    reply("Opening your profile soon.")
+                }
+            },
+        )
+}
+```
+
+## Step 2: add a subcommand
+
+```kotlin
+command("profile") {
+    description("Open your profile tools")
+
+    sub("open") {
+        executePlayer {
+            reply("Opening your profile.")
+        }
+    }
+}
+```
+
+`command(...)` and `sub(...)` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so the library ownership is obvious.
+
+## Step 3: use startup availability
+
+Use `enabled { ... }` when a command should depend on config or plugin state at startup.
+
+```kotlin
+sub("debug") {
+    enabled { plugin.config.getBoolean("commands.profile.debug") }
+
+    executePlayer {
+        reply("Debug mode.")
+    }
+}
+```
+
+Use `ignore(true)` if you want a simple hard off switch.
+
+## How discovery works
+
+When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for classes annotated with `@DaisyCommandSet`. Valid `DaisyCommandProvider` implementations are loaded automatically.
+
+That means you do not manually register this provider in normal usage.
+
+<div class="page-next">
+
+## Next steps
+
+- Learn the discovery model: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Open a UI from a command: [First Menu](/getting-started/first-menu/)
+- Jump to API details: [Command DSL](/reference/command-dsl/)
+</div>

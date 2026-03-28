@@ -1,0 +1,29 @@
+---
+title: Why DaisyCore Is One Library
+description: DaisyCore keeps related plugin systems together so they can share runtime ownership and stay coherent in real projects.
+---
+
+# Why DaisyCore Is One Library
+
+DaisyCore is not trying to be a random bundle of unrelated utilities. It groups systems that already depend on the same ideas in real Paper plugins.
+
+## The problem with splitting everything apart
+
+Commands, menus, sidebars, tablists, placeholders, and item rendering often need:
+
+- the same plugin lifecycle
+- the same text model
+- the same viewer context
+- the same cleanup rules
+
+If those are all separate libraries, each one tends to invent its own slightly different model.
+
+## What DaisyCore does differently
+
+DaisyCore keeps the public experience simple:
+
+- one dependency for normal plugin users
+- one bootstrap path through `DaisyPlatform`
+- one family of Daisy-branded public types
+
+Internally, the codebase still stays modular. That is why the repo has internal `platform-*` modules even though plugin users should only need `DaisyCore`.

@@ -1,0 +1,31 @@
+---
+title: Runtime and Shutdown
+description: DaisyPlatform owns DaisyCore services and is responsible for shutting them down cleanly.
+---
+
+# Runtime and Shutdown
+
+`DaisyPlatform` is the runtime owner for the DaisyCore systems you enabled in your plugin bootstrap.
+
+## What DaisyPlatform owns
+
+Depending on your builder configuration, it may own:
+
+- the shared runtime
+- placeholder registry
+- command registry
+- menu runtime
+- sidebar runtime
+- tablist runtime
+
+## Why `close()` matters
+
+Closing `DaisyPlatform` is how DaisyCore cleans up sessions, runtime handles, and service state during plugin shutdown.
+
+If you skip that step, you are no longer letting the library own its lifecycle cleanly.
+
+## Mental model
+
+- your plugin owns `DaisyPlatform`
+- `DaisyPlatform` owns DaisyCore services
+- services own their sessions and runtime cleanup

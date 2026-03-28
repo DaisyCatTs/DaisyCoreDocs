@@ -5,11 +5,15 @@ description: Quick lookup for DaisyCore menu types and entrypoints.
 
 # Menu DSL
 
+This page is the fast lookup for the public menu shape. It does not try to explain every runtime detail of sessions or invalidation strategy.
+
 ## Main types
 
 - `DaisyMenu`
 - `DaisyMenuSession`
 - `DaisyMenuPlatform`
+- `DaisyMenuClickContext`
+- `DaisyMenuRenderContext`
 
 ## Main entrypoints
 
@@ -28,3 +32,13 @@ fun Player.openMenu(menu: DaisyMenu): DaisyMenuSession
 - `onClose { ... }`
 - `template { ... }`
 - `pagination(...)`
+
+## Session terminology
+
+- A `DaisyMenu` is the immutable menu definition.
+- A `DaisyMenuSession` is the per-player runtime instance created after a player opens that menu.
+
+## Read next
+
+- Tutorial: [First Menu](/getting-started/first-menu/)
+- Concepts: [Menu Sessions](/explanation/menu-sessions/)
