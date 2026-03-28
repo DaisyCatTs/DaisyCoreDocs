@@ -5,7 +5,7 @@ description: Create your first DaisyCore command provider and let DaisyCore auto
 
 # First Command
 
-This page shows the normal DaisyCore command workflow: define a provider, annotate it, and let `DaisyPlatform` discover it during startup.
+This page shows the normal DaisyCore command workflow: define a command group, annotate it, and let `DaisyPlatform` discover it during startup.
 
 ## What this page assumes
 
@@ -16,29 +16,24 @@ This page shows the normal DaisyCore command workflow: define a provider, annota
 
 You will create a `/profile` command that only players can run.
 
-## Step 1: create a provider
+## Step 1: create a command group
 
 ```kotlin
 package cat.daisy.example.command
 
-import cat.daisy.command.DaisyCommand
-import cat.daisy.command.DaisyCommandProvider
+import cat.daisy.command.DaisyCommandGroup
 import cat.daisy.command.DaisyCommandSet
-import cat.daisy.command.dsl.command
 
 @DaisyCommandSet
-object ProfileCommands : DaisyCommandProvider {
-    override fun commands(): List<DaisyCommand> =
-        listOf(
-            command("profile") {
-                description("Open your profile tools")
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        description("Open your profile tools")
 
-                executePlayer {
-                    reply("Opening your profile soon.")
-                }
-            },
-        )
-}
+        player {
+            reply("Opening your profile soon.")
+        }
+    }
+})
 ```
 
 ## Step 2: add a subcommand
@@ -47,15 +42,15 @@ object ProfileCommands : DaisyCommandProvider {
 command("profile") {
     description("Open your profile tools")
 
-    sub("open") {
-        executePlayer {
+    subcommand("open") {
+        player {
             reply("Opening your profile.")
         }
     }
 }
 ```
 
-`command(...)` and `sub(...)` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so the library ownership is obvious.
+`command(...)`, `subcommand(...)`, and `player { ... }` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so the library ownership is obvious.
 
 ## Step 3: use startup availability
 
@@ -75,7 +70,7 @@ Use `ignore(true)` if you want a simple hard off switch.
 
 ## How discovery works
 
-When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for classes annotated with `@DaisyCommandSet`. Valid `DaisyCommandProvider` implementations are loaded automatically.
+When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for classes annotated with `@DaisyCommandSet`. Valid `DaisyCommandGroup` and `DaisyCommandProvider` implementations are loaded automatically.
 
 That means you do not manually register this provider in normal usage.
 

@@ -5,7 +5,7 @@ description: Open a simple DaisyCore menu from a command and understand what a m
 
 # First Menu
 
-This page shows the smallest useful menu flow: define a menu, open it for a player, and keep the runtime concepts simple.
+This page shows the smallest useful menu flow: open a menu inline for a player, then understand what DaisyCore turns that into at runtime.
 
 ## What this page assumes
 
@@ -21,38 +21,48 @@ This page shows the smallest useful menu flow: define a menu, open it for a play
 You will create a simple profile menu that opens from your `/profile` command.
 </div>
 
-## Step 1: define the menu
+## Step 1: open a menu inline
 
 ```kotlin
-val profileMenu =
-    menu("Profile", rows = 3) {
-        slot(13) {
-            item(Material.PLAYER_HEAD) {
-                name = "Your Profile"
-            }
-
-            onClick {
-                player.sendMessage("Profile clicked.")
-            }
-        }
+player.openMenu("Profile", rows = 3) {
+    background(Material.GRAY_STAINED_GLASS_PANE) {
+        name(" ")
     }
+
+    slot(13) {
+        item(Material.PLAYER_HEAD) {
+            nameMm("<#f38ba8><bold>Your Profile")
+        }
+
+        messageMm("<#f38ba8>Profile clicked.")
+        closeOnClick()
+    }
+}
 ```
 
-## Step 2: open the menu from a command
+Inline opening is the main ergonomic path for quick plugin UI flows.
+
+## Step 2: open it from a command
 
 ```kotlin
 command("profile") {
-    executePlayer {
-        player.openMenu(profileMenu)
+    player {
+        player.openMenu("Profile", rows = 3) {
+            slot(13) {
+                item(Material.PLAYER_HEAD) {
+                    nameMm("<#f38ba8><bold>Your Profile")
+                }
+            }
+        }
     }
 }
 ```
 
 ## What a menu session is
 
-The `DaisyMenu` value is the static menu definition. When a player opens it, DaisyCore creates a `DaisyMenuSession` for that player. That session holds runtime state like rendering and refresh lifecycle.
+If you want reuse, keep a `DaisyMenu` value around. When a player opens it, DaisyCore creates a `DaisyMenuSession` for that player. That session holds runtime state like rendering and refresh lifecycle.
 
-You usually care about the definition first. DaisyCore handles the session ownership under the hood.
+For quick flows, inline opening is usually enough. DaisyCore still handles the session ownership under the hood.
 
 <div class="premium-callout current">
   <h3>Current behavior</h3>

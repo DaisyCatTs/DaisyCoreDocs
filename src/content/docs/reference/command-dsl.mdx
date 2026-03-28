@@ -17,6 +17,7 @@ description: Quick lookup for DaisyCore command types and DSL entrypoints.
     <h3>Primary models</h3>
     <ul>
       <li><code>DaisyCommand</code></li>
+      <li><code>DaisyCommandGroup</code></li>
       <li><code>DaisyCommandProvider</code></li>
       <li><code>DaisyCommandContext</code></li>
       <li><code>DaisyPlayerCommandContext</code></li>
@@ -33,12 +34,16 @@ description: Quick lookup for DaisyCore command types and DSL entrypoints.
 
 ```kotlin
 fun command(name: String, block: DaisyCommandBuilder.() -> Unit): DaisyCommand
+abstract class DaisyCommandGroup(
+    block: DaisyCommandGroupBuilder.() -> Unit,
+)
 ```
 
 ## Common builder methods
 
 - `description(...)`
 - `aliases(...)`
+- `withAliases(...)`
 - `permission(...)`
 - `playerOnly()`
 - `consoleOnly()`
@@ -46,19 +51,29 @@ fun command(name: String, block: DaisyCommandBuilder.() -> Unit): DaisyCommand
 - `requires { ... }`
 - `enabled { ... }`
 - `ignore(true)`
+- `anySender { ... }`
+- `player { ... }`
+- `console { ... }`
 - `execute { ... }`
 - `executePlayer { ... }`
 - `executeConsole { ... }`
 - `sub(...)`
+- `subcommand(...)`
 
 ## Discovery contracts
 
 ```kotlin
 @DaisyCommandSet
-interface DaisyCommandProvider {
-    fun commands(): List<DaisyCommand>
-}
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        player {
+            reply("Hello.")
+        }
+    }
+})
 ```
+
+`DaisyCommandGroup` is the clean default. `DaisyCommandProvider` still exists if you need custom provider logic.
 
 ## Availability context
 
@@ -69,6 +84,20 @@ data class DaisyCommandAvailabilityContext(
 ```
 
 `enabled { ... }` runs during DaisyCore command loading. Use it for config-driven startup decisions, not per-execution permission logic.
+
+## Context helpers
+
+- `arg(name)`
+- `argOr(name, default)`
+- `string(name)`
+- `stringOr(name, default)`
+- `int(name)`
+- `intOr(name, default)`
+- `double(name)`
+- `doubleOr(name, default)`
+- `replyLang(key, ...)`
+- `lang(key, ...)`
+- `langList(key)`
 
 ## Read next
 

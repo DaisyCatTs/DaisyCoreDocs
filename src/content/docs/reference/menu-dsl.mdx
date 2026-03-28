@@ -20,14 +20,26 @@ This page is the fast lookup for the public menu shape. It does not try to expla
 ```kotlin
 fun menu(title: String, rows: Int = 3, block: DaisyMenuBuilder.() -> Unit): DaisyMenu
 fun Player.openMenu(menu: DaisyMenu): DaisyMenuSession
+fun Player.openMenu(
+    title: String,
+    rows: Int = 3,
+    block: DaisyMenuBuilder.() -> Unit,
+): DaisyMenuSession
 ```
+
+The inline `openMenu(title, rows) { ... }` form is the preferred quick-flow API.
 
 ## Common builder features
 
 - `slot(...)`
 - `item(...)`
+- `background(...)`
 - `render { ... }`
 - `onClick(...)`
+- `message(...)`
+- `messageMm(...)`
+- `closeOnClick()`
+- `refreshOnClick(...)`
 - `onOpen { ... }`
 - `onClose { ... }`
 - `template { ... }`
