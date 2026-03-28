@@ -1,0 +1,30 @@
+---
+title: Install DaisyCore
+description: Add DaisyCore to a modern Paper plugin project.
+---
+
+# Install DaisyCore
+
+## Requirements
+
+- Java 21
+- Kotlin 2.3.x
+- Paper 1.21.x
+
+## Gradle Kotlin DSL
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation("cat.daisy:DaisyCore:0.1.0-SNAPSHOT")
+}
+```
+
+## Next step
+
+Build a plugin bootstrap with [First Plugin](/getting-started/first-plugin/).

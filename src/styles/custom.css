@@ -1,0 +1,30 @@
+:root {
+  --sl-color-accent-low: #d8f5d8;
+  --sl-color-accent: #227a4f;
+  --sl-color-accent-high: #103b2d;
+  --sl-color-white: #fbfdf9;
+  --sl-color-gray-1: #eef5ee;
+  --sl-color-gray-2: #dbe7dd;
+  --sl-color-gray-3: #7a8a7b;
+  --sl-color-gray-4: #516252;
+  --sl-color-gray-5: #304132;
+  --sl-color-gray-6: #1d281f;
+  --sl-color-black: #0f1711;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at top right, rgba(94, 194, 129, 0.18), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(39, 98, 58, 0.16), transparent 35%),
+    linear-gradient(180deg, #f9fcf8 0%, #f3f8f3 100%);
+}
+
+[data-theme='dark'] body {
+  background:
+    radial-gradient(circle at top right, rgba(94, 194, 129, 0.15), transparent 24%),
+    linear-gradient(180deg, #121813 0%, #0d110e 100%);
+}

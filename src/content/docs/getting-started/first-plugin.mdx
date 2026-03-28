@@ -1,0 +1,31 @@
+---
+title: First Plugin
+description: Bootstrap DaisyCore in a Paper plugin.
+---
+
+# First Plugin
+
+```kotlin
+class MyPlugin : JavaPlugin() {
+    private lateinit var daisy: DaisyPlatform
+
+    override fun onEnable() {
+        daisy =
+            DaisyPlatform.create(this) {
+                text()
+                placeholders()
+                items()
+                scoreboards()
+                tablists()
+                commands()
+                menus()
+            }
+    }
+
+    override fun onDisable() {
+        daisy.close()
+    }
+}
+```
+
+This unified bootstrap is the easiest way to start when your plugin will use multiple DaisyCore systems.
