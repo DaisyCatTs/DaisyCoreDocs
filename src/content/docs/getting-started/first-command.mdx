@@ -16,6 +16,8 @@ This page shows the normal DaisyCore command workflow: define a command group, a
 
 You will create a `/profile` command that only players can run.
 
+This page assumes your plugin already installs a shared `DaisyTextSource` during platform bootstrap.
+
 ## Step 1: create a command group
 
 ```kotlin
@@ -30,7 +32,7 @@ object ProfileCommands : DaisyCommandGroup({
         description("Open your profile tools")
 
         player {
-            reply("Opening your profile soon.")
+            replyLang("messages.profile.opening")
         }
     }
 })
@@ -44,7 +46,7 @@ command("profile") {
 
     subcommand("open") {
         player {
-            reply("Opening your profile.")
+            replyLang("messages.profile.opened")
         }
     }
 }
@@ -67,6 +69,26 @@ sub("debug") {
 ```
 
 Use `ignore(true)` if you want a simple hard off switch.
+
+## Step 4: keep async replies clean
+
+```kotlin
+subcommand("sync") {
+    player {
+        loading()
+
+        profileService.sync(player.uniqueId).replyResult(
+            context = this,
+            success = {
+                replyLang("messages.profile.synced", "player" to player.name)
+            },
+            failure = { error ->
+                failLang("messages.profile.error", "error" to error.message.orEmpty())
+            },
+        )
+    }
+}
+```
 
 ## How discovery works
 

@@ -19,3 +19,10 @@ The external feel stays familiar on purpose.
 - menus now live under the DaisyCore platform umbrella
 - runtime ownership is tied to DaisyCore bootstrap and shutdown
 - menus can share DaisyCore text, items, and placeholder layers
+
+## Recommended migration targets
+
+- bootstrap-only menu setup -> `DaisyPlatform.create(this) { messages(...); menus() }`
+- filler panes -> `background(...)`
+- plugin-local MiniMessage wrappers -> `nameLang(...)`, `loreLang(...)`, `messageLang(...)`
+- ad-hoc click lambdas for common actions -> `closeOnClick()`, `refreshOnClick(...)`, `openUrl(...)`

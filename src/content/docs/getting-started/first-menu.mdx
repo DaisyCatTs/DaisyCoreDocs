@@ -31,10 +31,11 @@ player.openMenu("Profile", rows = 3) {
 
     slot(13) {
         item(Material.PLAYER_HEAD) {
-            nameMm("<#f38ba8><bold>Your Profile")
+            nameLang("menus.profile.card.name", viewer = player)
+            loreLang("menus.profile.card.lore", viewer = player)
         }
 
-        messageMm("<#f38ba8>Profile clicked.")
+        messageLang("messages.profile.clicked", "player" to player.name)
         closeOnClick()
     }
 }
@@ -50,7 +51,7 @@ command("profile") {
         player.openMenu("Profile", rows = 3) {
             slot(13) {
                 item(Material.PLAYER_HEAD) {
-                    nameMm("<#f38ba8><bold>Your Profile")
+                    nameLang("menus.profile.card.name", viewer = player)
                 }
             }
         }
@@ -74,6 +75,7 @@ For quick flows, inline opening is usually enough. DaisyCore still handles the s
 - menu definitions are meant to stay reusable
 - per-player runtime state lives in sessions
 - DaisyCore cleans up sessions when the platform shuts down
+- shared lang/config text can be installed once through `DaisyPlatform`
 
 <div class="page-next">
 

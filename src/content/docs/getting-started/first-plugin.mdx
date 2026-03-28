@@ -14,17 +14,23 @@ By the end of this page, you will have a Paper plugin that creates a `DaisyPlatf
 </div>
 
 ```kotlin
+object MyTextSource : DaisyTextSource {
+    override fun text(key: String): String? =
+        when (key) {
+            "messages.ready" -> "<#f38ba8>Daisy is ready."
+            else -> null
+        }
+
+    override fun textList(key: String): List<String> = emptyList()
+}
+
 class MyPlugin : JavaPlugin() {
     private lateinit var daisy: DaisyPlatform
 
     override fun onEnable() {
         daisy =
             DaisyPlatform.create(this) {
-                text()
-                placeholders()
-                items()
-                scoreboards()
-                tablists()
+                messages(MyTextSource)
                 commands()
                 menus()
             }
@@ -39,10 +45,9 @@ class MyPlugin : JavaPlugin() {
 ## What this bootstrap does
 
 - creates the shared DaisyCore runtime
-- creates a placeholder registry
-- enables item and text helpers
+- installs one shared Daisy text source for commands and menus
 - auto-loads command providers by scanning your plugin jar for `@DaisyCommandSet`
-- enables menu, scoreboard, and tablist services
+- enables menu services
 
 ## Why this matters
 
@@ -58,6 +63,7 @@ class MyPlugin : JavaPlugin() {
 ## Next steps
 
 - Create your first auto-loaded command: [First Command](/getting-started/first-command/)
+- Learn the shared text flow: [Config and Lang Text](/guides/use-config-and-lang-text-with-daisycore/)
 - Learn how command discovery works: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
 - Understand platform ownership: [Runtime and Shutdown](/explanation/runtime-and-shutdown/)
 </div>

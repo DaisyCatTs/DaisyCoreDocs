@@ -11,10 +11,18 @@ The main mental model stays the same: concise DSL, typed arguments, and readable
 
 - DaisyCore is now the home for commands
 - plugin bootstrap happens through `DaisyPlatform`
-- command sets are discovered from annotated providers
+- command sets are discovered from annotated providers or command groups
+- shared lang/config rendering can be installed once through `messages(...)`
 
 ## New normal path
 
-1. Move your commands into one or more `DaisyCommandProvider` objects.
+1. Move your commands into one or more `DaisyCommandGroup` objects.
 2. Annotate each provider with `@DaisyCommandSet`.
 3. Enable `commands()` in `DaisyPlatform.create { ... }`.
+
+## Recommended migration targets
+
+- `DaisyCommandProvider` with manual `commands(): List<DaisyCommand>` -> `DaisyCommandGroup`
+- `executePlayer { ... }` -> `player { ... }`
+- `getString(...) ?: return` -> `stringOr(...)` or `argOr(...)`
+- plugin-local lang helper wrappers -> `replyLang(...)`, `lang(...)`, `loading()`, `failLang(...)`

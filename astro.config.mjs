@@ -53,6 +53,7 @@ export default defineConfig({
           label: 'Guides',
           items: [
             { label: 'Auto-Loaded Commands', slug: 'guides/auto-loaded-commands' },
+            { label: 'Config and Lang Text', slug: 'guides/use-config-and-lang-text-with-daisycore' },
             { label: 'Build a Plugin Flow', slug: 'guides/build-a-plugin-flow' },
             { label: 'Why Commands Auto-Load', slug: 'explanation/command-auto-loading' },
             { label: 'Architecture', slug: 'explanation/architecture' },

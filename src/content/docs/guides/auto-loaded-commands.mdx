@@ -13,21 +13,18 @@ Right now, DaisyCore does this with a runtime scan of your plugin jar. That keep
 
 ```kotlin
 @DaisyCommandSet
-object IslandCommands : DaisyCommandProvider {
-    override fun commands(): List<DaisyCommand> =
-        listOf(
-            command("island") {
-                description("Island management")
+object IslandCommands : DaisyCommandGroup({
+    command("island") {
+        description("Island management")
 
-                sub("create") {
-                    enabled { plugin.config.getBoolean("commands.island.create") }
-                    executePlayer {
-                        reply("Island created.")
-                    }
-                }
-            },
-        )
-}
+        subcommand("create") {
+            enabled { plugin.config.getBoolean("commands.island.create") }
+            player {
+                replyLang("messages.island.created")
+            }
+        }
+    }
+})
 ```
 
 ## Bootstrap
@@ -44,7 +41,7 @@ override fun onEnable() {
 ## What DaisyCore does
 
 - scans your plugin jar for classes annotated with `@DaisyCommandSet`
-- loads valid `DaisyCommandProvider` implementations
+- loads valid `DaisyCommandGroup` and `DaisyCommandProvider` implementations
 - collects their commands
 - filters disabled roots and subcommands
 - validates root collisions

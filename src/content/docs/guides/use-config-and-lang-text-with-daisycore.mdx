@@ -1,0 +1,93 @@
+---
+title: Config and Lang Text
+description: Install one Daisy text source and use it cleanly across commands, menus, and item rendering.
+---
+
+# Config and Lang Text
+
+This guide shows the intended DaisyCore workflow for config-heavy plugins: install one shared text source, then use Daisy helpers everywhere else.
+
+## Step 1: install a shared text source
+
+```kotlin
+object PluginText : DaisyTextSource {
+    override fun text(key: String): String? = config.getString(key)
+
+    override fun textList(key: String): List<String> = config.getStringList(key)
+}
+
+class MyPlugin : JavaPlugin() {
+    private lateinit var daisy: DaisyPlatform
+
+    override fun onEnable() {
+        daisy =
+            DaisyPlatform.create(this) {
+                messages(PluginText)
+                commands()
+                menus()
+            }
+    }
+}
+```
+
+## Step 2: use it in commands
+
+```kotlin
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        player {
+            replyLang("messages.profile.opening", "player" to player.name)
+        }
+
+        subcommand("sync") {
+            player {
+                loading()
+
+                profileService.sync(player.uniqueId).replyResult(
+                    context = this,
+                    success = {
+                        replyLang("messages.profile.synced", "player" to player.name)
+                    },
+                    failure = { error ->
+                        failLang("messages.profile.error", "error" to error.message.orEmpty())
+                    },
+                )
+            }
+        }
+    }
+})
+```
+
+## Step 3: use it in menus and items
+
+```kotlin
+player.openMenu(lang("menus.profile.title"), rows = 3) {
+    background(Material.GRAY_STAINED_GLASS_PANE) {
+        name(" ")
+    }
+
+    slot(13) {
+        item(Material.PLAYER_HEAD) {
+            nameLang("menus.profile.card.name", viewer = player, "player" to player.name)
+            loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
+        }
+
+        messageLang("messages.profile.clicked", "player" to player.name)
+        closeOnClick()
+    }
+}
+```
+
+## What DaisyCore handles for you
+
+- key lookup through the installed `DaisyTextSource`
+- placeholder replacement with `Pair<String, Any?>`
+- MiniMessage parsing
+- viewer-aware PlaceholderAPI rendering when a player is available
+- shared command and menu text style without plugin-local wrapper utilities
+
+## Next step
+
+- See the full command surface: [Command DSL](/reference/command-dsl/)
+- See the menu surface: [Menu DSL](/reference/menu-dsl/)
