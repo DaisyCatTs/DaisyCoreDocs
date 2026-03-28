@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 64) rotate(90) scale(64)">
+      <stop stop-color="#2a1327"/>
+      <stop offset="1" stop-color="#120913"/>
+    </radialGradient>
+    <linearGradient id="petal" x1="64" y1="18" x2="64" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffd7ef"/>
+      <stop offset="1" stop-color="#ff78c9"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 64) rotate(90) scale(18)">
+      <stop stop-color="#fff0a8"/>
+      <stop offset="1" stop-color="#ffcb65"/>
+    </radialGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <g opacity="0.95">
+    <ellipse cx="64" cy="28" rx="13" ry="24" fill="url(#petal)"/>
+    <ellipse cx="64" cy="100" rx="13" ry="24" fill="url(#petal)"/>
+    <ellipse cx="28" cy="64" rx="24" ry="13" fill="url(#petal)"/>
+    <ellipse cx="100" cy="64" rx="24" ry="13" fill="url(#petal)"/>
+    <ellipse cx="39" cy="39" rx="12" ry="22" transform="rotate(-45 39 39)" fill="url(#petal)"/>
+    <ellipse cx="89" cy="39" rx="12" ry="22" transform="rotate(45 89 39)" fill="url(#petal)"/>
+    <ellipse cx="39" cy="89" rx="12" ry="22" transform="rotate(45 39 89)" fill="url(#petal)"/>
+    <ellipse cx="89" cy="89" rx="12" ry="22" transform="rotate(-45 89 89)" fill="url(#petal)"/>
+  </g>
+  <circle cx="64" cy="64" r="18" fill="url(#core)"/>
+  <circle cx="64" cy="64" r="7" fill="#fff6cf" opacity="0.9"/>
+</svg>

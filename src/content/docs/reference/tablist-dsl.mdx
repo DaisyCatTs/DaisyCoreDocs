@@ -1,0 +1,26 @@
+---
+title: Tablist DSL
+description: Quick lookup for DaisyCore tablist types and entrypoints.
+---
+
+# Tablist DSL
+
+## Main types
+
+- `DaisyTablist`
+- `DaisyTablistRenderContext`
+- `DaisyTablistSession`
+- `DaisyTablistPlatform`
+
+## Main entrypoint
+
+```kotlin
+fun tablist(block: DaisyTablistBuilder.() -> Unit): DaisyTablist
+```
+
+## Common builder methods
+
+- `header(renderer)`
+- `footer(renderer)`
+- `names { format { ... } }`
+- `options { ... }`

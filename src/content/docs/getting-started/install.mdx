@@ -5,6 +5,8 @@ description: Add DaisyCore to a modern Paper plugin project.
 
 # Install DaisyCore
 
+DaisyCore is meant to be the one dependency for normal plugin projects. You should not need to pull in `platform-command`, `platform-menu`, or the other internal modules directly.
+
 ## Requirements
 
 - Java 21
@@ -21,9 +23,20 @@ repositories {
 }
 
 dependencies {
-    implementation("cat.daisy:DaisyCore:0.1.0-SNAPSHOT")
+    implementation("cat.daisy:DaisyCore:1.0.0")
 }
 ```
+
+## What this gives you
+
+- Commands
+- Menus
+- Scoreboards
+- Tablists
+- Text helpers
+- Placeholders
+- Items
+- Shared runtime plumbing
 
 ## Next step
 

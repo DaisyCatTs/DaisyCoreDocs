@@ -1,7 +1,29 @@
 ---
 title: Tablists Overview
+description: DaisyCore tablists provide header and footer rendering from the same platform bootstrap as the other systems.
 ---
 
 # Tablists Overview
 
-The tablists module handles header/footer rendering, player list formatting, and ordering logic with room for packet-enhanced capabilities later.
+DaisyCore tablists focus on header and footer rendering first. The goal is a clean runtime API now, with room for richer transports later.
+
+## Shape
+
+```kotlin
+val tab =
+    tablist {
+        header { DaisyText.plain("Welcome") }
+        footer { DaisyText.plain("store.example.net") }
+    }
+```
+
+## What you get
+
+- per-player tablist sessions
+- refresh and invalidate hooks
+- shared placeholder-aware render context
+- a naming hook for future formatting layers
+
+## Learn next
+
+- API reference: [Tablist DSL](/reference/tablist-dsl/)

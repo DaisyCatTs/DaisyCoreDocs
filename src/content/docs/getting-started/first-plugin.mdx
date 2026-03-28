@@ -5,6 +5,8 @@ description: Bootstrap DaisyCore in a Paper plugin.
 
 # First Plugin
 
+This is the simplest good starting point when you want DaisyCore to own your plugin runtime.
+
 ```kotlin
 class MyPlugin : JavaPlugin() {
     private lateinit var daisy: DaisyPlatform
@@ -28,4 +30,15 @@ class MyPlugin : JavaPlugin() {
 }
 ```
 
-This unified bootstrap is the easiest way to start when your plugin will use multiple DaisyCore systems.
+## What this bootstrap does
+
+- creates the shared DaisyCore runtime
+- creates a placeholder registry
+- enables item and text helpers
+- auto-loads command providers
+- enables menu, scoreboard, and tablist services
+
+## Next steps
+
+- Learn how commands are discovered: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Read the command overview: [Commands](/commands/overview/)

@@ -1,0 +1,43 @@
+---
+title: Command DSL
+description: Quick lookup for DaisyCore command types and DSL entrypoints.
+---
+
+# Command DSL
+
+## Main types
+
+- `DaisyCommand`
+- `DaisyCommandProvider`
+- `DaisyCommandContext`
+- `DaisyPlayerCommandContext`
+- `DaisyConsoleCommandContext`
+
+## Main entrypoints
+
+```kotlin
+fun command(name: String, block: DaisyCommandBuilder.() -> Unit): DaisyCommand
+```
+
+## Common builder methods
+
+- `description(...)`
+- `aliases(...)`
+- `permission(...)`
+- `playerOnly()`
+- `consoleOnly()`
+- `cooldown(...)`
+- `requires { ... }`
+- `execute { ... }`
+- `executePlayer { ... }`
+- `executeConsole { ... }`
+- `sub(...)`
+
+## Discovery contracts
+
+```kotlin
+@DaisyCommandSet
+interface DaisyCommandProvider {
+    fun commands(): List<DaisyCommand>
+}
+```

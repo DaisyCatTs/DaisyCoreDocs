@@ -1,0 +1,20 @@
+---
+title: Migrate from DaisyCommand
+description: Move old DaisyCommand usage into DaisyCore.
+---
+
+# Migrate from DaisyCommand
+
+The main mental model stays the same: concise DSL, typed arguments, and readable execution blocks.
+
+## What changed
+
+- DaisyCore is now the home for commands
+- plugin bootstrap happens through `DaisyPlatform`
+- command sets are discovered from annotated providers
+
+## New normal path
+
+1. Move your commands into one or more `DaisyCommandProvider` objects.
+2. Annotate each provider with `@DaisyCommandSet`.
+3. Enable `commands()` in `DaisyPlatform.create { ... }`.

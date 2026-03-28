@@ -2,13 +2,20 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
-  site: 'https://docs.daisycore.dev',
+  site: 'https://docs.daisy.cat',
   integrations: [
     starlight({
       title: 'DaisyCore',
-      description: 'Kotlin-first Paper platform for commands, menus, scoreboards, tablists, text, placeholders, and items.',
+      description: 'One Kotlin-first Paper library for commands, menus, scoreboards, tablists, placeholders, items, and platform runtime.',
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/your-org/DaisyCore' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/DaisyCatTs/DaisyCore' },
+      ],
+      head: [
+        { tag: 'link', attrs: { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' } },
+        { tag: 'link', attrs: { rel: 'icon', sizes: 'any', href: '/favicon.ico' } },
+        { tag: 'link', attrs: { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' } },
+        { tag: 'link', attrs: { rel: 'manifest', href: '/site.webmanifest' } },
+        { tag: 'meta', attrs: { name: 'theme-color', content: '#130913' } },
       ],
       sidebar: [
         {
@@ -17,6 +24,7 @@ export default defineConfig({
             { label: 'Overview', slug: 'index' },
             { label: 'Install DaisyCore', slug: 'getting-started/install' },
             { label: 'First Plugin', slug: 'getting-started/first-plugin' },
+            { label: 'Auto-Loaded Commands', slug: 'guides/auto-loaded-commands' },
           ],
         },
         {
@@ -29,7 +37,7 @@ export default defineConfig({
           ],
         },
         {
-          label: 'Runtime APIs',
+          label: 'Core Systems',
           items: [
             { label: 'Commands', slug: 'commands/overview' },
             { label: 'Menus', slug: 'menus/overview' },
@@ -41,6 +49,8 @@ export default defineConfig({
           label: 'Guides',
           items: [
             { label: 'Architecture', slug: 'explanation/architecture' },
+            { label: 'Migrate from DaisyCommand', slug: 'migration/daisycommand' },
+            { label: 'Migrate from DaisyMenu', slug: 'migration/daisymenu' },
             { label: 'Performance', slug: 'guides/performance' },
             { label: 'Cloudflare Deploy', slug: 'guides/cloudflare-deploy' },
             { label: 'Migration', slug: 'migration/overview' },
@@ -50,6 +60,10 @@ export default defineConfig({
           label: 'Reference',
           items: [
             { label: 'Bootstrap API', slug: 'reference/bootstrap-api' },
+            { label: 'Command DSL', slug: 'reference/command-dsl' },
+            { label: 'Menu DSL', slug: 'reference/menu-dsl' },
+            { label: 'Sidebar DSL', slug: 'reference/sidebar-dsl' },
+            { label: 'Tablist DSL', slug: 'reference/tablist-dsl' },
             { label: 'Placeholder API', slug: 'reference/placeholder-api' },
           ],
         },

@@ -1,0 +1,51 @@
+---
+title: Auto-Loaded Commands
+description: DaisyCore can discover annotated command providers automatically at startup.
+---
+
+# Auto-Loaded Commands
+
+DaisyCore command registration is provider-based. You define one or more providers, annotate them with `@DaisyCommandSet`, and DaisyCore discovers them when the command subsystem starts.
+
+## Example
+
+```kotlin
+@DaisyCommandSet
+object IslandCommands : DaisyCommandProvider {
+    override fun commands(): List<DaisyCommand> =
+        listOf(
+            command("island") {
+                description("Island management")
+
+                sub("create") {
+                    executePlayer {
+                        reply("Island created.")
+                    }
+                }
+            },
+        )
+}
+```
+
+## Bootstrap
+
+```kotlin
+override fun onEnable() {
+    daisy =
+        DaisyPlatform.create(this) {
+            commands()
+        }
+}
+```
+
+## What DaisyCore does
+
+- scans your plugin jar for classes annotated with `@DaisyCommandSet`
+- loads valid `DaisyCommandProvider` implementations
+- collects their commands
+- validates root collisions
+- registers the active command set with Paper
+
+## Why this exists
+
+The normal path should be clean. You should be able to define commands and let DaisyCore wire them in, instead of maintaining a manual registration list in every project.

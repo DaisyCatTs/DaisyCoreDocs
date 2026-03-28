@@ -1,0 +1,21 @@
+---
+title: Migrate from DaisyMenu
+description: Move old DaisyMenu usage into DaisyCore.
+---
+
+# Migrate from DaisyMenu
+
+The external feel stays familiar on purpose.
+
+## What stayed familiar
+
+- `menu(...)`
+- `player.openMenu(...)`
+- session-based runtime behavior
+- pagination and template helpers
+
+## What changed
+
+- menus now live under the DaisyCore platform umbrella
+- runtime ownership is tied to DaisyCore bootstrap and shutdown
+- menus can share DaisyCore text, items, and placeholder layers

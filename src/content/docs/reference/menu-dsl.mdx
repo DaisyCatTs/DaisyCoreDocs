@@ -1,0 +1,30 @@
+---
+title: Menu DSL
+description: Quick lookup for DaisyCore menu types and entrypoints.
+---
+
+# Menu DSL
+
+## Main types
+
+- `DaisyMenu`
+- `DaisyMenuSession`
+- `DaisyMenuPlatform`
+
+## Main entrypoints
+
+```kotlin
+fun menu(title: String, rows: Int = 3, block: DaisyMenuBuilder.() -> Unit): DaisyMenu
+fun Player.openMenu(menu: DaisyMenu): DaisyMenuSession
+```
+
+## Common builder features
+
+- `slot(...)`
+- `item(...)`
+- `render { ... }`
+- `onClick(...)`
+- `onOpen { ... }`
+- `onClose { ... }`
+- `template { ... }`
+- `pagination(...)`

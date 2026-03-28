@@ -1,22 +1,38 @@
 ---
 title: DaisyCore
-description: One Kotlin-first Paper platform for commands, menus, scoreboards, tablists, text, placeholders, and items.
+description: One mega Kotlin-first Paper library for commands, menus, scoreboards, tablists, placeholders, items, and runtime glue.
 ---
 
 # DaisyCore
 
-DaisyCore is a modern Paper platform built for Kotlin-first server development. It aims to give one coherent dependency and one coherent way of building the systems you use repeatedly in real servers.
+DaisyCore is the one library approach for your Paper plugins. Instead of splitting your stack across separate command, menu, scoreboard, and tablist libraries, DaisyCore puts them in one Kotlin-first platform with one bootstrap path.
 
-## What DaisyCore includes
+## Why it exists
 
-- Commands built around clean Kotlin DSLs
-- Menus and views with safe runtime behavior
-- Scoreboards and tablists designed for high-frequency updates
+- Plugin projects should be able to depend on one thing.
+- Shared runtime and text layers should not be duplicated across systems.
+- Public types should make it obvious that they come from DaisyCore.
+- New developers should have docs that actually teach, not just list APIs.
+
+## What you get
+
+- Auto-loaded commands from annotated providers
+- Menus with session-based runtime handling
+- Sidebars and tablists from the same platform bootstrap
 - Shared text, placeholder, item, and runtime layers
-- One platform bootstrap for projects that want the full stack
+- One dependency for real plugin projects
+
+## Install
+
+```kotlin
+dependencies {
+    implementation("cat.daisy:DaisyCore:1.0.0")
+}
+```
 
 ## Start here
 
 - Install DaisyCore: [Install DaisyCore](/getting-started/install/)
-- Create your first plugin: [First Plugin](/getting-started/first-plugin/)
-- Learn the platform shape: [Architecture](/explanation/architecture/)
+- Bootstrap your first plugin: [First Plugin](/getting-started/first-plugin/)
+- Learn command auto-loading: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- See the platform shape: [Architecture](/explanation/architecture/)

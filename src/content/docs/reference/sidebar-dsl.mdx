@@ -1,0 +1,29 @@
+---
+title: Sidebar DSL
+description: Quick lookup for DaisyCore sidebar types and entrypoints.
+---
+
+# Sidebar DSL
+
+## Main types
+
+- `DaisySidebar`
+- `DaisySidebarLine`
+- `DaisySidebarRenderContext`
+- `DaisySidebarSession`
+- `DaisyScoreboardPlatform`
+
+## Main entrypoint
+
+```kotlin
+fun sidebar(block: DaisySidebarBuilder.() -> Unit): DaisySidebar
+```
+
+## Common builder methods
+
+- `title(Component)`
+- `title(renderer)`
+- `line(key, renderer)`
+- `lineIf(key, visible, renderer)`
+- `blank()`
+- `options { ... }`

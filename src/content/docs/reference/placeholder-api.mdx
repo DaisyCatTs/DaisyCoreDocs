@@ -1,10 +1,17 @@
 ---
 title: Placeholder API
+description: DaisyCore placeholders are shared across runtime systems.
 ---
 
 # Placeholder API
 
 ```kotlin
-val registry = PlaceholderRegistry()
+val registry = DaisyPlaceholderRegistry()
 registry.register("coins") { _, context -> "150" }
 ```
+
+## Notes
+
+- keys are registered case-insensitively
+- the same registry can be shared across commands, menus, sidebars, and tablists
+- placeholder resolution works against `DaisyAudienceContext`

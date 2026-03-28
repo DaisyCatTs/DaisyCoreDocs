@@ -1,15 +1,15 @@
 :root {
-  --sl-color-accent-low: #d8f5d8;
-  --sl-color-accent: #227a4f;
-  --sl-color-accent-high: #103b2d;
-  --sl-color-white: #fbfdf9;
-  --sl-color-gray-1: #eef5ee;
-  --sl-color-gray-2: #dbe7dd;
-  --sl-color-gray-3: #7a8a7b;
-  --sl-color-gray-4: #516252;
-  --sl-color-gray-5: #304132;
-  --sl-color-gray-6: #1d281f;
-  --sl-color-black: #0f1711;
+  --sl-color-accent-low: #3f1136;
+  --sl-color-accent: #ff74c8;
+  --sl-color-accent-high: #ffd1ef;
+  --sl-color-white: #fff7fd;
+  --sl-color-gray-1: #ffe7f6;
+  --sl-color-gray-2: #efc4df;
+  --sl-color-gray-3: #c794b8;
+  --sl-color-gray-4: #8b5e81;
+  --sl-color-gray-5: #533049;
+  --sl-color-gray-6: #241320;
+  --sl-color-black: #0d0710;
 }
 
 html {
@@ -18,13 +18,51 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top right, rgba(94, 194, 129, 0.18), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(39, 98, 58, 0.16), transparent 35%),
-    linear-gradient(180deg, #f9fcf8 0%, #f3f8f3 100%);
+    radial-gradient(circle at top right, rgba(255, 116, 200, 0.2), transparent 26%),
+    radial-gradient(circle at bottom left, rgba(223, 123, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, #140b15 0%, #0d0710 100%);
 }
 
-[data-theme='dark'] body {
+[data-theme='light'] body {
   background:
-    radial-gradient(circle at top right, rgba(94, 194, 129, 0.15), transparent 24%),
-    linear-gradient(180deg, #121813 0%, #0d110e 100%);
+    radial-gradient(circle at top right, rgba(255, 116, 200, 0.14), transparent 26%),
+    radial-gradient(circle at bottom left, rgba(255, 209, 239, 0.25), transparent 32%),
+    linear-gradient(180deg, #fff9fd 0%, #fff3fb 100%);
+}
+
+.hero {
+  position: relative;
+}
+
+.card,
+.site-title,
+.expressive-code,
+.sl-markdown-content blockquote {
+  backdrop-filter: blur(12px);
+}
+
+.sl-markdown-content a {
+  text-decoration-thickness: 0.08em;
+}
+
+.sl-markdown-content :is(h1, h2, h3) {
+  letter-spacing: -0.02em;
+}
+
+.sl-markdown-content code:not(pre code) {
+  background: rgba(255, 116, 200, 0.12);
+  border: 1px solid rgba(255, 116, 200, 0.15);
+  border-radius: 0.45rem;
+}
+
+[data-theme='dark'] .card {
+  background: linear-gradient(180deg, rgba(34, 17, 32, 0.84), rgba(16, 9, 19, 0.88));
+  border: 1px solid rgba(255, 116, 200, 0.14);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme='dark'] .hero {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 116, 200, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(255, 209, 239, 0.09), transparent 26%);
 }

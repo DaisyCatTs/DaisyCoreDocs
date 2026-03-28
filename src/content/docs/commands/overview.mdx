@@ -1,7 +1,36 @@
 ---
 title: Commands Overview
+description: DaisyCore commands use short DSL verbs, Daisy-branded public types, and automatic provider discovery.
 ---
 
 # Commands Overview
 
-The commands module is the Kotlin-first command system inside DaisyCore. It is designed to stay typed, compact, and readable in real plugin code.
+DaisyCore commands are designed to feel clean in plugin code while still making it obvious which library they come from.
+
+## Shape
+
+```kotlin
+@DaisyCommandSet
+object IslandCommands : DaisyCommandProvider {
+    override fun commands(): List<DaisyCommand> =
+        listOf(
+            command("island") {
+                description("Island management")
+                executePlayer {
+                    reply("Hi from DaisyCore.")
+                }
+            },
+        )
+}
+```
+
+## Why this shape works
+
+- `command(...)` stays short because it is a DSL verb
+- `DaisyCommand` and `DaisyCommandProvider` make library ownership obvious
+- providers auto-load, so normal plugin code does not need a manual registration call
+
+## Learn next
+
+- Provider discovery: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- API reference: [Command DSL](/reference/command-dsl/)

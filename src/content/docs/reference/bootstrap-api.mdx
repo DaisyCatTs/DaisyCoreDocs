@@ -1,5 +1,6 @@
 ---
 title: Bootstrap API
+description: DaisyPlatform is the one bootstrap path for DaisyCore services.
 ---
 
 # Bootstrap API
@@ -15,4 +16,22 @@ val daisy =
         commands()
         menus()
     }
+```
+
+## Available builder flags
+
+- `text()`
+- `placeholders()`
+- `items()`
+- `commands()`
+- `menus()`
+- `scoreboards()`
+- `tablists()`
+
+## Shutdown
+
+```kotlin
+override fun onDisable() {
+    daisy.close()
+}
 ```
