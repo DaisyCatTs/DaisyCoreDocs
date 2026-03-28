@@ -1,0 +1,41 @@
+---
+title: Why Commands Auto-Load
+description: DaisyCore auto-loads commands so plugin bootstrap stays clean, while keeping the discovery model explicit.
+---
+
+# Why Commands Auto-Load
+
+DaisyCore is meant to be one platform library, not a pile of separate setup systems. Commands follow that same rule.
+
+Instead of writing a manual registration list, you define command providers, annotate them with `@DaisyCommandSet`, and let `DaisyPlatform` load them when `commands()` is enabled.
+
+## Why DaisyCore uses a runtime scan right now
+
+The current implementation scans your plugin jar at startup for annotated providers.
+
+That gives DaisyCore a clean developer experience now:
+
+- no manual per-command registration
+- no extra code generation setup
+- deterministic provider discovery order
+- one obvious bootstrap path through `DaisyPlatform`
+
+This is an implementation detail, not the public contract. DaisyCore can switch to generated indexing later without changing how you write commands.
+
+## What gets loaded
+
+Only classes annotated with `@DaisyCommandSet` and implementing `DaisyCommandProvider` are considered.
+
+If a provider is invalid or cannot be created, DaisyCore logs a warning and keeps going.
+
+## Availability happens before registration
+
+Command availability is evaluated before DaisyCore validates and registers the tree.
+
+That means:
+
+- disabled root commands do not register
+- disabled subcommands are removed before tree validation
+- roots with no active handler and no active children are skipped
+
+Use `enabled { ... }` for config-driven startup decisions and `ignore(true)` for a quick explicit opt-out.

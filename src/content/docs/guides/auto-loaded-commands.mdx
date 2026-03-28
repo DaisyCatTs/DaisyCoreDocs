@@ -7,6 +7,8 @@ description: DaisyCore can discover annotated command providers automatically at
 
 DaisyCore command registration is provider-based. You define one or more providers, annotate them with `@DaisyCommandSet`, and DaisyCore discovers them when the command subsystem starts.
 
+Right now, DaisyCore does this with a runtime scan of your plugin jar. That keeps setup simple while the command system stabilizes.
+
 ## Example
 
 ```kotlin
@@ -18,6 +20,7 @@ object IslandCommands : DaisyCommandProvider {
                 description("Island management")
 
                 sub("create") {
+                    enabled { plugin.config.getBoolean("commands.island.create") }
                     executePlayer {
                         reply("Island created.")
                     }
@@ -43,8 +46,31 @@ override fun onEnable() {
 - scans your plugin jar for classes annotated with `@DaisyCommandSet`
 - loads valid `DaisyCommandProvider` implementations
 - collects their commands
+- filters disabled roots and subcommands
 - validates root collisions
 - registers the active command set with Paper
+
+## Availability controls
+
+Use `enabled { ... }` when a command should depend on config or plugin state at startup.
+
+```kotlin
+command("debug") {
+    enabled { plugin.config.getBoolean("commands.debug") }
+
+    executePlayer {
+        reply("Debug command enabled.")
+    }
+}
+```
+
+Use `ignore(true)` as a short way to force a command or subcommand off.
+
+```kotlin
+command("oldadmin") {
+    ignore(true)
+}
+```
 
 ## Why this exists
 

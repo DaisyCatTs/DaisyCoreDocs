@@ -29,8 +29,10 @@ object IslandCommands : DaisyCommandProvider {
 - `command(...)` stays short because it is a DSL verb
 - `DaisyCommand` and `DaisyCommandProvider` make library ownership obvious
 - providers auto-load, so normal plugin code does not need a manual registration call
+- startup availability can be controlled with `enabled { ... }` or `ignore(true)`
 
 ## Learn next
 
 - Provider discovery: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Discovery explanation: [Why Commands Auto-Load](/explanation/command-auto-loading/)
 - API reference: [Command DSL](/reference/command-dsl/)

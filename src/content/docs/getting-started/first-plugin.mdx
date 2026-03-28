@@ -35,10 +35,11 @@ class MyPlugin : JavaPlugin() {
 - creates the shared DaisyCore runtime
 - creates a placeholder registry
 - enables item and text helpers
-- auto-loads command providers
+- auto-loads command providers by scanning your plugin jar for `@DaisyCommandSet`
 - enables menu, scoreboard, and tablist services
 
 ## Next steps
 
 - Learn how commands are discovered: [Auto-Loaded Commands](/guides/auto-loaded-commands/)
+- Learn why DaisyCore uses a runtime scan right now: [Why Commands Auto-Load](/explanation/command-auto-loading/)
 - Read the command overview: [Commands](/commands/overview/)

@@ -28,6 +28,8 @@ fun command(name: String, block: DaisyCommandBuilder.() -> Unit): DaisyCommand
 - `consoleOnly()`
 - `cooldown(...)`
 - `requires { ... }`
+- `enabled { ... }`
+- `ignore(true)`
 - `execute { ... }`
 - `executePlayer { ... }`
 - `executeConsole { ... }`
@@ -41,3 +43,13 @@ interface DaisyCommandProvider {
     fun commands(): List<DaisyCommand>
 }
 ```
+
+## Availability context
+
+```kotlin
+data class DaisyCommandAvailabilityContext(
+    val plugin: JavaPlugin,
+)
+```
+
+`enabled { ... }` runs during DaisyCore command loading. Use it for config-driven startup decisions, not per-execution permission logic.

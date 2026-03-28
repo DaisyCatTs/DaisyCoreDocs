@@ -28,6 +28,11 @@ val daisy =
 - `scoreboards()`
 - `tablists()`
 
+## Notes
+
+- `commands()` discovers `@DaisyCommandSet` providers by scanning your plugin jar at startup.
+- `menus()`, `scoreboards()`, and `tablists()` create the runtime services owned by `DaisyPlatform`.
+
 ## Shutdown
 
 ```kotlin
