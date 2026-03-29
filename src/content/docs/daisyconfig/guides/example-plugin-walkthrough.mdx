@@ -1,0 +1,256 @@
+---
+title: Example Plugin Walkthrough
+description: Walk through the real DaisyConfig Phase 3 example plugin with managed YAML files, module bundles, migrations, and DaisyCore text usage.
+---
+
+# Example Plugin Walkthrough
+
+This page mirrors the current DaisyConfig `example-plugin` instead of inventing a second docs-only example.
+
+Use it when you want to see the full Phase 3 shape in one place:
+
+- managed YAML files
+- module bundles
+- `config_version`
+- migrations
+- `reloadAll()` and `migrateAll()`
+- DaisyCore text consumption through `textSource`
+
+## What the example plugin contains
+
+The example plugin loads three managed module bundles:
+
+- `modules/commands/spawn`
+- `modules/commands/warp`
+- `modules/guis/store`
+
+Each module has:
+
+- `settings.yml`
+- `lang.yml`
+
+That means the runtime shape is:
+
+```text
+modules/
+  commands/
+    spawn/
+      settings.yml
+      lang.yml
+    warp/
+      settings.yml
+      lang.yml
+  guis/
+    store/
+      settings.yml
+      lang.yml
+```
+
+## The registry
+
+The example plugin builds one registry and lets DaisyConfig own module lifecycle from there.
+
+```kotlin
+class ExampleModuleRegistry(
+    plugin: JavaPlugin,
+) {
+    private val registry: DaisyModuleRegistry =
+        DaisyModules.load(plugin) {
+            module(
+                DaisyModuleDefinition(
+                    category = "commands",
+                    module = "spawn",
+                    settings =
+                        DaisyManagedYamlFile(
+                            id = "commands/spawn/settings",
+                            path = "modules/commands/spawn/settings.yml",
+                            codec = spawnModuleConfigCodec,
+                            currentVersion = 2,
+                            migrations = listOf(
+                                DaisyYamlMigrations.move(1, 2, "spawn-delay", "spawn.delay"),
+                            ),
+                        ),
+                    lang = langFile("commands", "spawn"),
+                ),
+            )
+            module(
+                DaisyModuleDefinition(
+                    category = "commands",
+                    module = "warp",
+                    settings =
+                        DaisyManagedYamlFile(
+                            id = "commands/warp/settings",
+                            path = "modules/commands/warp/settings.yml",
+                            codec = warpModuleConfigCodec,
+                            currentVersion = 2,
+                        ),
+                    lang = langFile("commands", "warp"),
+                ),
+            )
+            module(
+                DaisyModuleDefinition(
+                    category = "guis",
+                    module = "store",
+                    settings =
+                        DaisyManagedYamlFile(
+                            id = "guis/store/settings",
+                            path = "modules/guis/store/settings.yml",
+                            codec = storeModuleConfigCodec,
+                        ),
+                    lang = langFile("guis", "store"),
+                ),
+            )
+        }
+}
+```
+
+## Why these three modules exist
+
+They demonstrate three different Phase 3 cases:
+
+- `commands/spawn`: migration from an old key shape
+- `commands/warp`: managed versioning without a rename
+- `guis/store`: DaisySeries-backed values in a nested GUI config
+
+## The migration example
+
+`commands/spawn/settings.yml` is the migration case.
+
+Current bundled shape:
+
+```yaml
+config_version: 2
+spawn:
+  delay: 3
+  bypass_permission: example.spawn.bypass
+```
+
+The managed file definition still accepts the old `spawn-delay` key through an ordered migration:
+
+```kotlin
+DaisyManagedYamlFile(
+    id = "commands/spawn/settings",
+    path = "modules/commands/spawn/settings.yml",
+    codec = spawnModuleConfigCodec,
+    currentVersion = 2,
+    migrations = listOf(
+        DaisyYamlMigrations.move(1, 2, "spawn-delay", "spawn.delay"),
+    ),
+)
+```
+
+If an older disk file still has:
+
+```yaml
+config_version: 1
+spawn-delay: 3
+```
+
+then managed load will:
+
+1. treat the disk file as version `1`
+2. move `spawn-delay` to `spawn.delay`
+3. merge missing defaults such as `spawn.bypass_permission`
+4. write `config_version: 2`
+5. decode the new typed runtime value
+
+## What one module handle gives you
+
+```kotlin
+val spawn = registry.require<SpawnModuleConfig>("commands", "spawn")
+
+val settings = spawn.current.settings
+val lang = spawn.current.lang
+val textSource = spawn.textSource
+```
+
+That gives one handle for:
+
+- typed settings data
+- optional lang data
+- DaisyCore-facing text access
+- one reload/migrate boundary
+
+## How the plugin uses it at runtime
+
+The plugin logs settings from all three modules during startup:
+
+```kotlin
+logger.info(
+    "Loaded DaisyConfig managed modules: " +
+        "spawn=${modules.spawn.current.settings.delaySeconds}s, " +
+        "warp=${modules.warp.current.settings.maxWarps} max, " +
+        "storeRows=${modules.store.current.settings.rows}",
+)
+```
+
+The command example also renders lang data through `textSource` instead of making DaisyConfig own rendering:
+
+```kotlin
+val settings = plugin.modules.spawn.current.settings
+val message =
+    plugin.modules.spawn.textSource.text("messages.spawn.ready")
+        ?.replace("%delay%", settings.delaySeconds.toString())
+        ?: "<green>Spawn ready in ${settings.delaySeconds}s.</green>"
+reply(message)
+```
+
+That boundary matters:
+
+- DaisyConfig stores and reloads the lang file
+- DaisyCore still owns the runtime reply/render path
+
+## Reload and migrate
+
+The example plugin exposes both flows.
+
+```kotlin
+when (val result = plugin.modules.reloadAll()) {
+    is DaisyManagedBundleReloadResult.Success -> {
+        reply("<green>Reloaded ${result.value.size} managed module bundles.</green>")
+        result.reports.forEachIndexed { index, report ->
+            reply("<gray>#${index + 1} ${formatReport(report)}</gray>")
+        }
+    }
+    is DaisyManagedBundleReloadResult.Failure -> {
+        reply("<red>Reload failed.</red>")
+        result.errors.forEach { error ->
+            reply("<gray>${error.path}: ${error.message}</gray>")
+        }
+    }
+}
+```
+
+```kotlin
+when (val result = plugin.modules.migrateAll()) {
+    is DaisyManagedBundleReloadResult.Success -> {
+        reply("<green>Managed migration completed.</green>")
+        result.reports.forEachIndexed { index, report ->
+            reply("<gray>#${index + 1} ${formatReport(report)}</gray>")
+        }
+    }
+    is DaisyManagedBundleReloadResult.Failure -> {
+        reply("<red>Migration failed.</red>")
+        result.errors.forEach { error ->
+            reply("<gray>${error.path}: ${error.message}</gray>")
+        }
+    }
+}
+```
+
+## What this walkthrough is trying to teach
+
+Start simple when one file is enough. Move to this shape when your plugin really has:
+
+- many config files
+- versioning pressure
+- `settings.yml` plus `lang.yml` pairs
+- runtime reload requirements
+- migration concerns you do not want to reimplement locally
+
+## Where to go next
+
+- Start from the lower-level guide: [Managed YAML Files](/daisyconfig/guides/managed-yaml-files/)
+- Learn the bundle model: [Module Bundles](/daisyconfig/guides/module-bundles/)
+- See the handle/result surface: [Module Registry](/daisyconfig/reference/module-registry/)
+- Migrate existing services: [From Plugin-Local Config Loaders](/daisyconfig/migration/from-plugin-local-config-loaders/)

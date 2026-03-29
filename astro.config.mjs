@@ -159,6 +159,7 @@ export default defineConfig({
               items: [
                 { label: 'Reload-Safe Configs', slug: 'daisyconfig/guides/reload-safe-configs' },
                 { label: 'Module Bundles', slug: 'daisyconfig/guides/module-bundles' },
+                { label: 'Example Plugin Walkthrough', slug: 'daisyconfig/guides/example-plugin-walkthrough' },
                 { label: 'Use DaisyConfig with DaisyCore', slug: 'daisyconfig/guides/use-daisyconfig-with-daisycore' },
                 { label: 'Use DaisyConfig with DaisySeries', slug: 'daisyconfig/guides/use-daisyconfig-with-daisyseries' },
                 { label: 'Config Text vs Direct MiniMessage', slug: 'daisyconfig/guides/when-to-use-config-text-vs-direct-minimessage' },
