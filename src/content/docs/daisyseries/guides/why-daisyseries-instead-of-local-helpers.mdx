@@ -35,6 +35,8 @@ It does **not** mean:
 - framework ownership
 - config-loader ownership
 
+That is the point of the product boundary: DaisySeries should be the modern Paper-first alternative to XSeries-style parsing glue, not a maximal clone of every helper category older compatibility libraries accumulated.
+
 ## What you stop writing locally
 
 Instead of this:
@@ -65,6 +67,7 @@ val mode = DaisyGameModes.parse(config.gameMode)
 - one display-name model
 - one place for curated aliases
 - easier migration between plugins because keys stay stable
+- cleaner handoff into DaisyConfig codecs and DaisyCore runtime code
 
 ## Use DaisySeries alone or in the stack
 

@@ -11,6 +11,7 @@ Use DaisySeries to replace:
 - hand-written alias maps
 - repeated lowercase serialization
 - one-off friendly-name helpers
+- XSeries-style glue in modern Paper-only plugins
 
 ## Typical replacements
 
@@ -20,8 +21,24 @@ val key = DaisyMaterials.key(material)
 val label = DaisyMaterials.displayName(material)
 ```
 
+## Adopt incrementally
+
+You do not need the whole suite to adopt DaisySeries.
+
+Start by replacing the ugliest local helper maps first:
+
+- materials and sounds
+- flags and effects
+- biome, particle, or statistic parsing where configs are already carrying user-friendly strings
+
+Then standardize serialization on `key(...)`.
+
+Add DaisyConfig later only when those values should live in typed YAML.
+
+Add DaisyCore later only when those parsed values should feed runtime systems.
+
 ## Next steps
 
 - [Install DaisySeries](/daisyseries/getting-started/install/)
 - [First Parse](/daisyseries/getting-started/first-parse/)
-
+- [Why DaisySeries Instead of Local Helpers](/daisyseries/guides/why-daisyseries-instead-of-local-helpers/)
