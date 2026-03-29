@@ -1,0 +1,13 @@
+---
+import DefaultTableOfContents from '@astrojs/starlight/components/TableOfContents.astro';
+const routeId = Astro.locals.starlightRoute.id;
+const pageKind = routeId.includes('/reference/')
+  ? 'reference'
+  : routeId.includes('/dictionary/')
+    ? 'dictionary'
+    : 'doc';
+---
+
+<div class={`custom-toc-shell custom-toc-${pageKind}`}>
+  <DefaultTableOfContents />
+</div>

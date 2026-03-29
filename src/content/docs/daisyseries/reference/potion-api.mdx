@@ -1,18 +1,24 @@
 ---
 title: Potion API
-description: Quick lookup for DaisySeries potion-effect entrypoints.
+description: Public DaisySeries potion effect parsing helpers.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Potion API
 
-```kotlin
-object DaisyPotions : DaisySeriesParser<PotionEffectType> {
-    fun parse(input: String): PotionEffectType
-    fun parseOrNull(input: String): PotionEffectType?
-    fun key(effect: PotionEffectType): String
-    fun displayName(effect: PotionEffectType): String
-    fun aliases(effect: PotionEffectType): Set<String>
-}
-```
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisyPotions is centered on <code>PotionEffectType</code> parsing, not brewing-item concepts.</h3>
+</div>
 
-Successful `parse(...)` resolution happens against a live Paper registry during plugin runtime.
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a potion effect type from canonical or alias input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null on invalid potion effect input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries potion effect key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns the user-facing effect label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns accepted aliases for the potion effect.', required: false },
+  ]}
+/>

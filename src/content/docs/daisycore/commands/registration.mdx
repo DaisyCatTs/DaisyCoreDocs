@@ -1,0 +1,31 @@
+---
+title: Registration
+description: How DaisyCore command providers are discovered and registered during startup.
+---
+
+# Registration
+
+<div class="doc-lead">
+  <span class="eyebrow">Commands</span>
+  <h3>DaisyCore registers commands by discovering providers at startup instead of making you wire the tree manually.</h3>
+</div>
+
+```kotlin
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        player {
+            reply("Hello from DaisyCore.")
+        }
+    }
+})
+```
+
+- mark providers with `@DaisyCommandSet`
+- keep the command tree inside `DaisyCommandGroup`
+- let DaisyCore discover and register the active command set during startup
+
+Read next:
+
+- [Commands Overview](/daisycore/commands/overview/)
+- [Command DSL](/daisycore/reference/command-dsl/)

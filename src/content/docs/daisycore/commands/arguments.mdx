@@ -1,0 +1,37 @@
+---
+title: Arguments
+description: The normal DaisyCore argument helpers and typed context accessors.
+---
+
+# Arguments
+
+<div class="doc-lead">
+  <span class="eyebrow">Commands</span>
+  <h3>Use DaisyCore context helpers to read arguments cleanly instead of scattering parse logic through executors.</h3>
+</div>
+
+## Common helpers
+
+- `arg(name)`
+- `argOr(name, default)`
+- `string(name)`
+- `stringOr(name, default)`
+- `int(name)`
+- `intOr(name, default)`
+- `double(name)`
+- `doubleOr(name, default)`
+
+```kotlin
+command("coins") {
+    player {
+        val target = stringOr("player", player.name)
+        val amount = intOr("amount", 100)
+        reply("<gray>Granting <white>${amount}</white> coins to <white>${target}</white>.</gray>")
+    }
+}
+```
+
+Read next:
+
+- [Command DSL](/daisycore/reference/command-dsl/)
+- [First Command](/daisycore/getting-started/first-command/)

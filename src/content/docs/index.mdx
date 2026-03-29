@@ -3,100 +3,67 @@ title: Daisy
 description: Premium docs for DaisyCore, DaisySeries, and DaisyConfig, the Kotlin-first Paper platform, parser toolkit, and typed config layer.
 ---
 
-# Daisy
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import StepCard from '@components/StepCard.astro'
 
 <div class="home-hero">
   <span class="home-kicker">Kotlin-First Paper Tooling</span>
-  <h2>One ecosystem for modern Paper development: DaisyCore for runtime systems, DaisySeries for parser-heavy values, and DaisyConfig for typed YAML and reload-safe config state.</h2>
-  <p>This site should help you choose the right product quickly, start cleanly, and move from installation to real plugin code without digging through stale snippets or disconnected pages.</p>
+  <h2>One Daisy suite for modern Paper plugins: DaisyCore runs runtime systems, DaisySeries owns canonical values, and DaisyConfig owns typed YAML.</h2>
+  <p>One docs surface for the whole suite: runtime ownership in DaisyCore, parser-safe values in DaisySeries, and typed config plus shared text storage in DaisyConfig.</p>
+  <p class="dependency-chain"><strong>Normal flow:</strong> <strong>DaisySeries</strong> parses values -> <strong>DaisyConfig</strong> stores typed config -> <strong>DaisyCore</strong> renders and runs the feature.</p>
 
   <div class="home-actions">
     <a class="home-button" href="/daisycore/">Start with DaisyCore</a>
-    <a class="home-button-secondary" href="/daisyseries/">Explore DaisySeries</a>
+    <a class="home-button-secondary" href="/overview/choose-a-product/">Which product do I need?</a>
   </div>
 </div>
 
 <div class="value-strip">
-  <div class="value-pill"><strong>DaisyCore</strong><span>The full platform for commands, menus, sidebars, tablists, placeholders, text, and shared runtime ownership.</span></div>
-  <div class="value-pill"><strong>DaisySeries</strong><span>The lightweight parser toolkit for materials, sounds, item flags, enchantments, potions, canonical keys, and display names.</span></div>
-  <div class="value-pill"><strong>DaisyConfig</strong><span>The typed config layer for YAML loading, reload-safe handles, DaisySeries-aware codecs, and DaisyCore text integration.</span></div>
-  <div class="value-pill"><strong>One docs surface</strong><span>One search system, one design language, and one place to learn how the Daisy ecosystem actually fits together.</span></div>
+  <div class="value-pill"><strong>DaisyCore</strong><span>Commands, menus, sidebars, tablists, MiniMessage text, placeholders, items, and lifecycle ownership.</span></div>
+  <div class="value-pill"><strong>DaisySeries</strong><span>Canonical keys, aliases, and parser-safe materials, sounds, enchantments, item flags, and potions.</span></div>
+  <div class="value-pill"><strong>DaisyConfig</strong><span>Typed YAML codecs, reload-safe handles, DaisySeries-backed decoding, and DaisyCore text bridging.</span></div>
 </div>
 
-<div class="doc-shell">
-  <div class="doc-lead">
-    <span class="eyebrow">Choose Fast</span>
-    <h3>Use DaisyCore when you are building plugin systems.</h3>
-    <p>DaisyCore is the runtime product. It owns bootstrap, lifecycle, UI systems, text, and the normal Paper plugin flow. If you need commands, menus, sidebars, tablists, and one coherent API style, start there.</p>
-    <p><a href="/daisycore/">Open DaisyCore overview</a></p>
-  </div>
-  <div class="doc-rail">
-    <span class="eyebrow">Use DaisySeries</span>
-    <h3>When parsing is the problem, not runtime.</h3>
-    <p>DaisySeries is the focused utility layer. It removes `valueOf(...)` wrappers, ad hoc alias maps, and hand-written friendly-name helpers without pulling in a full platform.</p>
-    <p><a href="/daisyseries/">Open DaisySeries overview</a></p>
-  </div>
+## What can you build?
+
+<div class="feature-matrix">
+  <div class="feature-card"><strong>Profile runtime flow</strong><p>Use DaisyCore when one feature spans a command, menu, sidebar, and tablist in one runtime-owned flow.</p></div>
+  <div class="feature-card"><strong>Config-heavy plugin data</strong><p>Use DaisyConfig when YAML shape, reload safety, and shared text ownership become the real maintenance problem.</p></div>
+  <div class="feature-card"><strong>Canonical parser layer</strong><p>Use DaisySeries when materials, sounds, flags, enchantments, or effects should stop leaking enum helpers through plugin code.</p></div>
+  <div class="feature-card"><strong>Full stack plugin</strong><p>Use all three together when config ownership, canonical values, and runtime systems all matter in the same plugin.</p></div>
 </div>
 
-<div class="doc-shell">
-  <div class="doc-lead">
-    <span class="eyebrow">Use DaisyConfig</span>
-    <h3>When YAML, reloads, and typed config state are the real problem.</h3>
-    <p>DaisyConfig is the typed config layer. It turns config sprawl into explicit codecs, reload-safe handles, DaisySeries-backed value decoding, and DaisyCore-friendly text adapters.</p>
-    <p><a href="/daisyconfig/">Open DaisyConfig overview</a></p>
-  </div>
-  <div class="doc-rail">
-    <span class="eyebrow">Use all three</span>
-    <h3>For the clean modern Paper stack.</h3>
-    <p>Use DaisyCore for runtime systems, DaisySeries for normalized value parsing, and DaisyConfig for typed YAML and reload-safe configuration ownership.</p>
-    <p><a href="/daisyconfig/guides/use-daisyconfig-with-daisycore/">See the DaisyConfig + DaisyCore path</a></p>
-  </div>
-</div>
+<CrossProductCallout
+  product="core"
+  label="DaisyCore is the runtime owner at the top of the chain"
+  href="/daisycore/"
+  description="DaisyCore renders text, owns UI systems, and runs the actual player-facing flow."
+/>
 
-## Start the right path
+<CrossProductCallout
+  product="series"
+  label="DaisySeries sits at the bottom of the dependency chain"
+  href="/daisyseries/"
+  description="Canonical values and aliases should come from DaisySeries instead of being copied into config or runtime docs."
+/>
 
-<div class="path-grid">
-  <a class="home-card" href="/daisycore/getting-started/install/">
-    <div class="path-step"><strong>1</strong><div><h3>Need runtime systems</h3><p>Install DaisyCore if you are building real Paper plugin flows with commands, menus, sidebars, and tablists.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyseries/getting-started/install/">
-    <div class="path-step"><strong>2</strong><div><h3>Need parsing only</h3><p>Install DaisySeries if your immediate problem is config-heavy Paper values like materials, sounds, flags, enchantments, or effects.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyconfig/getting-started/install/">
-    <div class="path-step"><strong>3</strong><div><h3>Need typed config</h3><p>Install DaisyConfig if YAML loading, reload safety, validation, and config-backed text are the part you are tired of rebuilding.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyconfig/guides/use-daisyconfig-with-daisycore/">
-    <div class="path-step"><strong>4</strong><div><h3>Need the full stack</h3><p>Use DaisyCore for runtime ownership, DaisySeries for value parsing, and DaisyConfig for typed config ownership around them.</p></div></div>
-  </a>
-  <a class="home-card" href="/overview/full-ecosystem-example/">
-    <div class="path-step"><strong>5</strong><div><h3>Need one complete example</h3><p>See one profile-style feature where commands, menus, sidebars, tablists, typed config, and DaisySeries values all work together.</p></div></div>
-  </a>
-  <a class="home-card" href="/overview/roadmap/">
-    <div class="path-step"><strong>6</strong><div><h3>Need the big picture</h3><p>Read the ecosystem roadmap and understand where DaisyCore, DaisySeries, and DaisyConfig sit in the longer product story.</p></div></div>
-  </a>
-</div>
+<CrossProductCallout
+  product="config"
+  label="DaisyConfig turns DaisySeries values into typed config state"
+  href="/daisyconfig/"
+  description="Use DaisyConfig when those canonical values live in YAML and need reload-safe ownership."
+/>
 
-## What good Daisy docs should give you
+## Start the normal path
 
-<div class="trust-grid">
-  <div class="trust-card">
-    <strong>Clear onboarding</strong>
-    <p>You should know what to install, what to build first, and what the default authoring style is without reading half the site.</p>
-  </div>
-  <div class="trust-card">
-    <strong>Real examples</strong>
-    <p>The docs should show believable plugin flows, not just tiny snippets that leave the integration work to you.</p>
-  </div>
-  <div class="trust-card">
-    <strong>Current runtime truth</strong>
-    <p>The docs should be honest about what each product does now, what is stable, and where a feature is intentionally scoped.</p>
-  </div>
-</div>
+<StepCard step={1} title="Pick the product that owns your problem" product="core">
+  <p>Use <a href="/overview/choose-a-product/">Which product do I need?</a> if you are choosing between runtime, parsing, or typed YAML ownership.</p>
+</StepCard>
 
-## Ecosystem entrypoints
+<StepCard step={2} title="Start with DaisySeries when parsing is the actual problem" product="series">
+  <p>Use <a href="/daisyseries/getting-started/install/">Install DaisySeries</a> first when canonical values, aliases, and parser-safe inputs are the real issue.</p>
+</StepCard>
 
-- DaisyCore GitHub: [github.com/DaisyCatTs/DaisyCore](https://github.com/DaisyCatTs/DaisyCore)
-- DaisySeries GitHub: [github.com/DaisyCatTs/DaisySeries](https://github.com/DaisyCatTs/DaisySeries)
-- DaisyConfig GitHub: [github.com/DaisyCatTs/DaisyConfig](https://github.com/DaisyCatTs/DaisyConfig)
-- Choose a product: [Choose a Product](/overview/choose-a-product/)
-- See the roadmap: [Roadmap](/overview/roadmap/)
+<StepCard step={3} title="Move to DaisyConfig when YAML ownership becomes the maintenance problem" product="config">
+  <p>Use <a href="/daisyconfig/getting-started/install/">Install DaisyConfig</a> when config shape, reload safety, and shared text ownership matter more than parser or runtime concerns alone.</p>
+</StepCard>

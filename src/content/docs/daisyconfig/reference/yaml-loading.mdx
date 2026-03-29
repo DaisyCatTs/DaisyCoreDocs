@@ -1,15 +1,22 @@
 ---
 title: YAML Loading
-description: Load typed YAML config values and handles with DaisyConfig.
+description: The normal DaisyConfig YAML loading entrypoints.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # YAML Loading
 
-Main APIs:
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>Load typed YAML once, then work against decoded config objects instead of raw getters.</h3>
+</div>
 
-- `DaisyYaml.load(file, codec)`
-- `DaisyYaml.handle(file, codec)`
-- `plugin.loadYamlConfig(name, codec)`
-- `plugin.yamlConfigHandle(name, codec)`
-- `plugin.ensureDefaultConfigResource(...)`
-
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'yamlConfigHandle', type: 'object', description: 'Loads one YAML file into a typed reload handle.', required: true },
+    { name: 'ensureDefaultConfigResource', type: 'string', description: 'Copies the default YAML resource into the plugin data folder when missing.', required: false },
+    { name: 'codec', type: 'object', description: 'Supplies the decoding shape used when the YAML file is loaded.', required: true },
+  ]}
+/>

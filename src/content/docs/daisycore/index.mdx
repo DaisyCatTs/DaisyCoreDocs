@@ -3,83 +3,66 @@ title: DaisyCore
 description: The premium Kotlin-first Paper platform for commands, menus, sidebars, tablists, text, placeholders, items, and runtime ownership.
 ---
 
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import ProductLandingHero from '@components/ProductLandingHero.astro'
+import StepCard from '@components/StepCard.astro'
+
 # DaisyCore
 
-<div class="home-hero">
-  <span class="home-kicker">The Full Paper Platform</span>
-  <h2>One Kotlin-first runtime platform for real plugin features, not a pile of stitched-together libraries.</h2>
-  <p>DaisyCore is for plugins that want one dependency, one platform owner, one shared text model, and one coherent style across commands, menus, sidebars, and tablists.</p>
-
-  <div class="home-actions">
-    <a class="home-button" href="/daisycore/getting-started/install/">Install DaisyCore</a>
-    <a class="home-button-secondary" href="/daisycore/guides/build-a-plugin-flow/">Build a Real Flow</a>
-  </div>
-</div>
+<ProductLandingHero
+  product="core"
+  title="DaisyCore is the one-library runtime platform for real Paper plugin features."
+  description="Use DaisyCore when one feature spans commands, menus, sidebars, tablists, text, placeholders, items, and one runtime owner."
+  primaryCta={{ label: 'Install DaisyCore', href: '/daisycore/getting-started/install/' }}
+  secondaryCta={{ label: 'Build a Plugin Flow', href: '/daisycore/guides/build-a-plugin-flow/' }}
+/>
 
 <div class="value-strip">
-  <div class="value-pill"><strong>One dependency</strong><span>Install DaisyCore once instead of assembling separate command, menu, sidebar, and tablist libraries.</span></div>
-  <div class="value-pill"><strong>One runtime owner</strong><span><code>DaisyPlatform</code> owns lifecycle, cleanup, and service startup in one place.</span></div>
-  <div class="value-pill"><strong>MiniMessage first</strong><span>DaisyCore-facing string APIs are designed for modern Adventure + MiniMessage usage by default, with shared text sources available when you want scale.</span></div>
-  <div class="value-pill"><strong>One API language</strong><span>The same Kotlin-first style carries through runtime systems instead of changing tone per subsystem.</span></div>
+  <div class="value-pill"><strong>One runtime owner</strong><span><code>DaisyPlatform</code> is the normal bootstrap path and owns service startup and cleanup in one place.</span></div>
+  <div class="value-pill"><strong>MiniMessage first</strong><span>Use direct MiniMessage strings for feature-local UI and replies by default, then move to shared text later.</span></div>
+  <div class="value-pill"><strong>UI systems together</strong><span>Commands, menus, sidebars, and tablists share one Kotlin-first API language.</span></div>
+  <div class="value-pill"><strong>Config-friendly later</strong><span>Use shared text and <code>messages(...)</code> only when the plugin is genuinely config-heavy.</span></div>
 </div>
 
-<div class="doc-shell">
-  <div class="doc-lead">
-    <span class="eyebrow">What DaisyCore is best at</span>
-    <h3>Building one believable Paper feature flow from command to UI.</h3>
-    <p>DaisyCore is strongest when one player-facing feature touches multiple systems: a command opens a menu, the menu uses shared text, a sidebar reflects state, and a tablist shows the same player context.</p>
-  </div>
-  <div class="doc-rail">
-    <span class="eyebrow">Current runtime truth</span>
-    <ul>
-      <li>commands auto-load through runtime discovery</li>
-      <li>menus are inline-first by default</li>
-      <li>sidebars are keyed and diff-friendly</li>
-      <li>tablists are intentionally header/footer-focused</li>
-    </ul>
-  </div>
-</div>
-
-## What DaisyCore includes
+## What DaisyCore handles
 
 <div class="feature-matrix">
-  <div class="feature-card"><strong>Commands</strong><p>Auto-loaded command groups, terse executor verbs, async reply helpers, and installed lang/text support.</p></div>
-  <div class="feature-card"><strong>Menus</strong><p>Inline-first menu opening, reusable definitions, clean click sugar, and viewer-aware item text.</p></div>
-  <div class="feature-card"><strong>Sidebars</strong><p>Keyed lines, focused invalidation, and stable session ownership for player-facing scoreboards.</p></div>
-  <div class="feature-card"><strong>Tablists</strong><p>Honest header/footer rendering with session refresh and cleanup behavior.</p></div>
-  <div class="feature-card"><strong>Text and placeholders</strong><p>Installed text sources and viewer-aware rendering that keep commands and UI in sync.</p></div>
-  <div class="feature-card"><strong>Items</strong><p>Reusable item builders that keep menus and inventory-heavy features cleaner.</p></div>
+  <div class="feature-card"><strong>Commands</strong><p>Auto-loaded command groups, clean executor helpers, and startup-time availability control.</p></div>
+  <div class="feature-card"><strong>Menus</strong><p>Inline-first menu flows, viewer-aware items, and lightweight click handling.</p></div>
+  <div class="feature-card"><strong>Sidebars</strong><p>Keyed lines and stable session ownership for scoreboard-style UI.</p></div>
+  <div class="feature-card"><strong>Tablists</strong><p>Header/footer rendering with explicit lifecycle cleanup.</p></div>
 </div>
 
-## Start the normal path
+<CrossProductCallout
+  product="series"
+  label="Pair DaisySeries with DaisyCore when parsing enters the same feature"
+  href="/daisyseries/guides/use-daisyseries-with-daisycore/"
+  description="Keep canonical values and alias handling in DaisySeries instead of leaking parser glue into runtime files."
+/>
 
-<div class="doc-journey">
-  <div class="step-card">
-    <span class="eyebrow">Step 1</span>
-    <h3>Install and bootstrap the platform</h3>
-    <p>Start with <a href="/daisycore/getting-started/install/">Install DaisyCore</a> and then move directly to <a href="/daisycore/getting-started/first-plugin/">First Plugin</a>.</p>
-  </div>
-  <div class="step-card">
-    <span class="eyebrow">Step 2</span>
-    <h3>Build one believable first feature</h3>
-    <p>Do not learn DaisyCore as isolated fragments only. Use <a href="/daisycore/guides/build-a-plugin-flow/">Build a Plugin Flow</a> to see how the systems fit together.</p>
-  </div>
-  <div class="step-card">
-    <span class="eyebrow">Step 3</span>
-    <h3>Go deeper by system</h3>
-    <p>After the real flow makes sense, move into the focused getting-started pages and reference docs.</p>
-  </div>
-</div>
+<CrossProductCallout
+  product="config"
+  label="Pair DaisyConfig with DaisyCore when text and YAML need ownership"
+  href="/daisyconfig/guides/use-daisyconfig-with-daisycore/"
+  description="DaisyConfig stores typed text and config state. DaisyCore still renders and owns the runtime UI."
+/>
 
-<div class="premium-callout current">
-  <h3>Pair DaisyCore with DaisySeries when config parsing becomes a separate problem</h3>
-  <p>DaisyCore should own runtime systems. DaisySeries should own low-friction parsing of materials, sounds, item flags, enchantments, and potion effects. Use both when you want each layer to stay honest and clean.</p>
-</div>
+## Onboarding path
 
-## Best next pages
+<StepCard step={1} title="Install and bootstrap DaisyCore" product="core">
+  <p>Start with <a href="/daisycore/getting-started/install/">Install DaisyCore</a> and then move directly to <a href="/daisycore/getting-started/first-plugin/">First Plugin</a>.</p>
+</StepCard>
 
-- Install and bootstrap: [Install DaisyCore](/daisycore/getting-started/install/) and [First Plugin](/daisycore/getting-started/first-plugin/)
-- Build one full example: [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
-- Learn command discovery: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
-- Jump to API details: [Bootstrap API](/daisycore/reference/bootstrap-api/) and [Command DSL](/daisycore/reference/command-dsl/)
-- Pair with utility parsing: [DaisySeries Overview](/daisyseries/)
+<StepCard step={2} title="Build one believable runtime flow" product="core">
+  <p>Use <a href="/daisycore/guides/build-a-plugin-flow/">Build a Plugin Flow</a> before reading APIs in isolation.</p>
+</StepCard>
+
+<StepCard step={3} title="Go deeper by system and API" product="core">
+  <p>Move from guides into <a href="/daisycore/reference/bootstrap-api/">Bootstrap API</a>, <a href="/daisycore/reference/command-dsl/">Command DSL</a>, and the rest of the runtime references.</p>
+</StepCard>
+
+## Quick links
+
+- Start here: [Install DaisyCore](/daisycore/getting-started/install/)
+- Main guide: [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
+- Reference: [Bootstrap API](/daisycore/reference/bootstrap-api/)

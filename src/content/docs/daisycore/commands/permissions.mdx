@@ -1,0 +1,40 @@
+---
+title: Permissions
+description: Startup-time availability, sender restrictions, and normal permission checks in DaisyCore commands.
+---
+
+# Permissions
+
+<div class="doc-lead">
+  <span class="eyebrow">Commands</span>
+  <h3>Use permission checks for execution access, and use startup availability only for shaping the command tree before registration.</h3>
+</div>
+
+## Normal command restrictions
+
+- `permission(...)`
+- `playerOnly()`
+- `consoleOnly()`
+- `requires { ... }`
+
+## Startup availability
+
+- `enabled { ... }`
+- `ignore(true)`
+
+```kotlin
+command("profile") {
+    permission("daisy.profile")
+
+    player {
+        reply("<gray>Opening your profile.</gray>")
+    }
+}
+```
+
+`enabled { ... }` is for startup-time inclusion, not per-execution permission logic.
+
+Read next:
+
+- [Command DSL](/daisycore/reference/command-dsl/)
+- [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)

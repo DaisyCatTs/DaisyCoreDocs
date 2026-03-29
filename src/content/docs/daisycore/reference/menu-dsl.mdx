@@ -3,17 +3,27 @@ title: Menu DSL
 description: Quick lookup for DaisyCore menu types and entrypoints.
 ---
 
+import ReferenceTable from '@components/ReferenceTable.astro'
+
 # Menu DSL
 
-This page is the fast lookup for the public menu shape. It does not try to explain every runtime detail of sessions or invalidation strategy.
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>The inline <code>openMenu(...)</code> path is the preferred quick-flow API for most menu work.</h3>
+</div>
 
-## Main types
-
-- `DaisyMenu`
-- `DaisyMenuSession`
-- `DaisyMenuPlatform`
-- `DaisyMenuClickContext`
-- `DaisyMenuRenderContext`
+<ReferenceTable
+  rows={[
+    { name: 'DaisyMenu', type: 'object', description: 'Immutable menu definition.', required: true },
+    { name: 'DaisyMenuSession', type: 'object', description: 'Per-player runtime menu instance created when a menu opens.', required: true },
+    { name: 'slot', type: 'object', description: 'Assigns one slot render and click contract.', required: false },
+    { name: 'background', type: 'object', description: 'Applies a repeated filler item to unassigned menu slots.', required: false },
+    { name: 'message', type: 'string', description: 'MiniMessage-first feedback path for menu clicks.', required: false },
+    { name: 'plainMessage', type: 'string', description: 'Literal text escape hatch when you truly need raw text.', required: false },
+    { name: 'closeOnClick', type: 'boolean', description: 'Closes the active menu session after click handling.', required: false },
+    { name: 'pagination', type: 'object', description: 'Adds paged rendering behavior to repeated content areas.', required: false },
+  ]}
+/>
 
 ## Main entrypoints
 
@@ -26,35 +36,3 @@ fun Player.openMenu(
     block: DaisyMenuBuilder.() -> Unit,
 ): DaisyMenuSession
 ```
-
-The inline `openMenu(title, rows) { ... }` form is the preferred quick-flow API.
-
-`message("...")` is the MiniMessage-first string path.
-
-`plainMessage("...")` is the explicit raw/plain escape hatch when you genuinely want literal text.
-
-## Common builder features
-
-- `slot(...)`
-- `item(...)`
-- `background(...)`
-- `render { ... }`
-- `onClick(...)`
-- `message(...)`
-- `plainMessage(...)`
-- `closeOnClick()`
-- `refreshOnClick(...)`
-- `onOpen { ... }`
-- `onClose { ... }`
-- `template { ... }`
-- `pagination(...)`
-
-## Session terminology
-
-- A `DaisyMenu` is the immutable menu definition.
-- A `DaisyMenuSession` is the per-player runtime instance created after a player opens that menu.
-
-## Read next
-
-- Tutorial: [First Menu](/daisycore/getting-started/first-menu/)
-- Concepts: [Menu Sessions](/daisycore/explanation/menu-sessions/)

@@ -1,0 +1,33 @@
+---
+interface Prereq {
+  label: string;
+  href?: string;
+  product?: 'core' | 'series' | 'config';
+}
+
+interface Props {
+  items: Prereq[];
+}
+
+const { items } = Astro.props;
+
+const productNames = {
+  core: 'DaisyCore',
+  series: 'DaisySeries',
+  config: 'DaisyConfig',
+} as const;
+---
+
+<aside class="doc-lead prerequisites-block">
+  <span class="eyebrow">Before You Start</span>
+  <h3>What you'll need</h3>
+  <ul class="prerequisites-list">
+    {items.map((item) => (
+      <li>
+        <span class={`prereq-dot${item.product ? ` prereq-dot-${item.product}` : ''}`}></span>
+        {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
+        {item.product && <span class="prereq-product">{productNames[item.product]}</span>}
+      </li>
+    ))}
+  </ul>
+</aside>

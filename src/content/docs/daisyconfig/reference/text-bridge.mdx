@@ -1,37 +1,26 @@
 ---
 title: Text Bridge
-description: Use DaisyTextConfig and asDaisyTextSource to hand config-backed text into DaisyCore safely without creating a second renderer.
+description: Use DaisyConfig text sources with DaisyCore without moving rendering ownership out of DaisyCore.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Text Bridge
 
-Main APIs:
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisyConfig stores text. DaisyCore still renders it. The bridge exists to preserve that boundary.</h3>
+</div>
 
-- `DaisyTextConfig`
-- `asDaisyTextSource()`
-- `yamlTextConfigHandle(plugin, "lang.yml")`
-
-## What this bridge does
-
-The bridge turns config-backed text into a DaisyCore-compatible text source.
-
-That is useful when:
-
-- your plugin stores text in `lang.yml` or similar files
-- you want shared wording across commands, menus, sidebars, and tablists
-- you want reloadable text
-
-## What this bridge does not do
-
-The bridge provides text only.
-
-It does **not**:
-
-- render MiniMessage itself
-- expand PlaceholderAPI directly
-- replace DaisyCore's viewer-aware runtime rendering
-
-## Normal integration
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'yamlTextConfigHandle', type: 'object', description: 'Loads a config-backed text source from YAML.', required: true },
+    { name: 'asDaisyTextSource', type: 'object', description: 'Exposes the loaded text data in the shape DaisyCore expects.', required: true },
+    { name: 'messages', type: 'object', description: 'Installs the text source into DaisyCore for viewer-aware rendering.', required: true },
+    { name: 'textLang', type: 'string', description: 'Resolves shared language keys through DaisyCore once the text source is installed.', required: false },
+  ]}
+/>
 
 ```kotlin
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
@@ -39,16 +28,5 @@ val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
 val daisy =
     DaisyPlatform.create(plugin) {
         messages(langHandle.current.asDaisyTextSource())
-        commands()
-        menus()
-        scoreboards()
-        tablists()
     }
 ```
-
-## Mental model
-
-- DaisyConfig stores text
-- DaisyCore renders text
-
-That is the correct production boundary.

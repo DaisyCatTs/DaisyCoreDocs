@@ -42,3 +42,5 @@ npx wrangler pages deploy dist
 ## Product Planning
 
 - Daisy docs platform direction: [DAISY_DOCS_PLATFORM_PLAN.md](./DAISY_DOCS_PLATFORM_PLAN.md)
+- Claude docs redesign brief: [CLAUDE_DOCS_BRIEF.md](./CLAUDE_DOCS_BRIEF.md)
+- Copy-paste prompt for Claude research/design pass: [CLAUDE_UI_RESEARCH_PROMPT.md](./CLAUDE_UI_RESEARCH_PROMPT.md)

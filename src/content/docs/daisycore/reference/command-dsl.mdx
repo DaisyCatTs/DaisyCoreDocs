@@ -3,32 +3,27 @@ title: Command DSL
 description: Quick lookup for DaisyCore command types and DSL entrypoints.
 ---
 
+import ReferenceTable from '@components/ReferenceTable.astro'
+
 # Command DSL
 
-<div class="premium-callout note">
-  <h3>Quick lookup</h3>
-  <p>This page is for scanning the public command shape quickly. It is not the full conceptual explanation of the command runtime.</p>
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>Use this page to scan the command surface quickly. The runtime explanation lives elsewhere.</h3>
 </div>
 
-## Main types
-
-<div class="reference-grid">
-  <div class="reference-panel">
-    <h3>Primary models</h3>
-    <ul>
-      <li><code>DaisyCommand</code></li>
-      <li><code>DaisyCommandGroup</code></li>
-      <li><code>DaisyCommandProvider</code></li>
-      <li><code>DaisyCommandContext</code></li>
-      <li><code>DaisyPlayerCommandContext</code></li>
-      <li><code>DaisyConsoleCommandContext</code></li>
-    </ul>
-  </div>
-  <div class="reference-panel">
-    <h3>Availability</h3>
-    <p><code>enabled</code> and <code>ignore(true)</code> are startup-time filters, not per-execution permission checks.</p>
-  </div>
-</div>
+<ReferenceTable
+  rows={[
+    { name: 'DaisyCommand', type: 'object', description: 'Immutable command model returned by the command DSL.', required: true },
+    { name: 'DaisyCommandGroup', type: 'object', description: 'The clean default container for command trees discovered at startup.', required: true },
+    { name: 'DaisyCommandProvider', type: 'object', description: 'Lower-level provider shape when you need custom command exposure logic.', required: false },
+    { name: 'permission', type: 'string', description: 'Sets the execution permission for a command or subcommand.', required: false },
+    { name: 'enabled', type: 'boolean', description: 'Startup-time inclusion filter, not a runtime permission check.', required: false },
+    { name: 'ignore', type: 'boolean', description: 'Explicitly removes a command node before registration.', required: false },
+    { name: 'player', type: 'object', description: 'Player-only executor block with player-aware reply helpers.', required: false },
+    { name: 'console', type: 'object', description: 'Console-only executor block for console-targeted execution.', required: false },
+  ]}
+/>
 
 ## Main entrypoints
 
@@ -38,68 +33,3 @@ abstract class DaisyCommandGroup(
     block: DaisyCommandGroupBuilder.() -> Unit,
 )
 ```
-
-## Common builder methods
-
-- `description(...)`
-- `aliases(...)`
-- `withAliases(...)`
-- `permission(...)`
-- `playerOnly()`
-- `consoleOnly()`
-- `cooldown(...)`
-- `requires { ... }`
-- `enabled { ... }`
-- `ignore(true)`
-- `anySender { ... }`
-- `player { ... }`
-- `console { ... }`
-- `execute { ... }`
-- `executePlayer { ... }`
-- `executeConsole { ... }`
-- `sub(...)`
-- `subcommand(...)`
-
-## Discovery contracts
-
-```kotlin
-@DaisyCommandSet
-object ProfileCommands : DaisyCommandGroup({
-    command("profile") {
-        player {
-            reply("Hello.")
-        }
-    }
-})
-```
-
-`DaisyCommandGroup` is the clean default. `DaisyCommandProvider` still exists if you need custom provider logic.
-
-## Availability context
-
-```kotlin
-data class DaisyCommandAvailabilityContext(
-    val plugin: JavaPlugin,
-)
-```
-
-`enabled { ... }` runs during DaisyCore command loading. Use it for config-driven startup decisions, not per-execution permission logic.
-
-## Context helpers
-
-- `arg(name)`
-- `argOr(name, default)`
-- `string(name)`
-- `stringOr(name, default)`
-- `int(name)`
-- `intOr(name, default)`
-- `double(name)`
-- `doubleOr(name, default)`
-- `replyLang(key, ...)`
-- `lang(key, ...)`
-- `langList(key)`
-
-## Read next
-
-- Tutorial: [First Command](/daisycore/getting-started/first-command/)
-- Discovery guide: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)

@@ -1,0 +1,59 @@
+---
+const routeId = Astro.locals.starlightRoute.id;
+const isReference = routeId.includes('/reference/');
+const isDictionary = routeId.includes('/dictionary/');
+---
+
+<div
+  class="sl-markdown-content"
+  data-page-kind={isReference ? 'reference' : isDictionary ? 'dictionary' : 'doc'}
+  data-route-id={routeId}
+>
+  <slot />
+</div>
+
+<script is:inline>
+  (() => {
+    const script = document.currentScript;
+    const root = script?.previousElementSibling;
+    if (!root) return;
+    const kind = root.getAttribute('data-page-kind');
+
+    if (kind === 'reference' || kind === 'dictionary') {
+      root.querySelectorAll('h2[id], h3[id], h4[id]').forEach((heading) => {
+        if (heading.querySelector('.anchor-link')) return;
+        const id = heading.getAttribute('id');
+        if (!id) return;
+        const link = document.createElement('a');
+        link.href = `#${id}`;
+        link.className = 'anchor-link';
+        link.setAttribute('aria-label', `Link to ${heading.textContent || id}`);
+        link.textContent = '#';
+        heading.appendChild(link);
+      });
+    }
+
+    if (kind === 'dictionary') {
+      const table = root.querySelector('table');
+      if (table && !root.querySelector('[data-dictionary-filter]')) {
+        const label = document.createElement('label');
+        label.className = 'dictionary-filter';
+        label.setAttribute('data-dictionary-filter', '');
+        const input = document.createElement('input');
+        input.type = 'search';
+        input.placeholder = 'Filter canonical keys, aliases, or labels';
+        label.appendChild(input);
+        table.parentElement?.insertBefore(label, table);
+
+        const rows = Array.from(table.querySelectorAll('tbody tr'));
+        input.addEventListener('input', () => {
+          const query = input.value.trim().toLowerCase();
+          rows.forEach((row) => {
+            const text = row.textContent?.toLowerCase() || '';
+            row.classList.toggle('scope-hidden', query.length > 0 && !text.includes(query));
+          });
+        });
+      }
+    }
+  })();
+</script>

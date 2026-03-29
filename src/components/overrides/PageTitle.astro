@@ -1,0 +1,40 @@
+---
+const PAGE_TITLE_ID = '_top';
+
+const route = Astro.locals.starlightRoute;
+const title = route.entry.data.title;
+const parts = route.id.split('/').filter(Boolean);
+
+const productMap: Record<string, string> = {
+  daisycore: 'DaisyCore',
+  daisyseries: 'DaisySeries',
+  daisyconfig: 'DaisyConfig',
+  overview: 'Overview',
+};
+
+const sectionMap: Record<string, string> = {
+  commands: 'Commands',
+  'getting-started': 'Start Here',
+  guides: 'Guides',
+  reference: 'Reference',
+  migration: 'Migration',
+  explanation: 'Migration',
+  dictionary: 'Dictionary',
+  modules: 'Modules',
+  text: 'Text & UI',
+  menus: 'Text & UI',
+  scoreboards: 'Text & UI',
+  tablists: 'Text & UI',
+};
+
+const breadcrumb = parts.length === 0
+  ? 'Overview'
+  : [productMap[parts[0]] || 'Overview', parts[1] ? sectionMap[parts[1]] || parts[1] : null]
+      .filter(Boolean)
+      .join(' > ');
+---
+
+<div class="page-title-shell">
+  <p class="page-breadcrumb">{breadcrumb}</p>
+  <h1 id={PAGE_TITLE_ID}>{title}</h1>
+</div>

@@ -1,0 +1,37 @@
+---
+interface Props {
+  product: 'core' | 'series' | 'config';
+  title: string;
+  description: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  dependsOn?: Array<'core' | 'series' | 'config'>;
+}
+
+const { product, title, description, primaryCta, secondaryCta, dependsOn = [] } = Astro.props;
+
+const productMeta = {
+  core: { label: 'DaisyCore', kicker: 'Runtime Platform' },
+  series: { label: 'DaisySeries', kicker: 'Parser Toolkit' },
+  config: { label: 'DaisyConfig', kicker: 'Typed YAML Layer' },
+} as const;
+
+const dependencyLabels = dependsOn.map((item) => productMeta[item].label);
+---
+
+<div class={`home-hero home-hero-${product}`}>
+  <span class="home-kicker">{productMeta[product].kicker}</span>
+  <h2>{title}</h2>
+  <p>{description}</p>
+
+  {dependencyLabels.length > 0 && (
+    <p class="dependency-chain">
+      Depends on {dependencyLabels.join(' + ')} to complete the normal runtime flow.
+    </p>
+  )}
+
+  <div class="home-actions">
+    <a class="home-button" href={primaryCta.href}>{primaryCta.label}</a>
+    <a class="home-button-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>
+  </div>
+</div>

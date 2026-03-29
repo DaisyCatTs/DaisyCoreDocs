@@ -1,18 +1,24 @@
 ---
 title: Enchantment API
-description: Quick lookup for DaisySeries enchantment entrypoints.
+description: Public DaisySeries enchantment parsing helpers.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Enchantment API
 
-```kotlin
-object DaisyEnchantments : DaisySeriesParser<Enchantment> {
-    fun parse(input: String): Enchantment
-    fun parseOrNull(input: String): Enchantment?
-    fun key(enchantment: Enchantment): String
-    fun displayName(enchantment: Enchantment): String
-    fun aliases(enchantment: Enchantment): Set<String>
-}
-```
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisyEnchantments handles canonical keys and curated aliases while staying explicit about registry-sensitive runtime behavior.</h3>
+</div>
 
-Successful `parse(...)` resolution happens against a live Paper registry during plugin runtime.
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses an enchantment from canonical or alias-driven input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null when an enchantment key cannot be resolved.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical enchantment key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns the user-facing enchantment label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns curated shorthand aliases such as ff or prot where supported.', required: false },
+  ]}
+/>

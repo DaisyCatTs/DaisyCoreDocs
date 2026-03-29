@@ -1,17 +1,24 @@
 ---
 title: Sound API
-description: Quick lookup for DaisySeries sound entrypoints.
+description: Public DaisySeries sound parsing helpers.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Sound API
 
-```kotlin
-object DaisySounds : DaisySeriesParser<Sound> {
-    fun parse(input: String): Sound
-    fun parseOrNull(input: String): Sound?
-    fun key(sound: Sound): String
-    fun displayName(sound: Sound): String
-    fun aliases(sound: Sound): Set<String>
-}
-```
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisySounds handles config-safe sound parsing, canonical keys, and human-readable labels.</h3>
+</div>
 
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a sound from canonical, lowercase, or alias-driven input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid sound input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries sound key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly display name.', required: true },
+    { name: 'aliases', type: 'object', description: 'Lists curated accepted aliases for a given sound.', required: false },
+  ]}
+/>

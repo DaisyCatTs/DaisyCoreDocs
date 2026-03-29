@@ -1,0 +1,23 @@
+---
+interface Props {
+  step: number;
+  title: string;
+  product?: 'core' | 'series' | 'config';
+  dependency?: string;
+}
+
+const { step, title, product = 'core', dependency } = Astro.props;
+---
+
+<section class={`step-card step-card-${product}`}>
+  <div class="step-card-header">
+    <span class={`step-badge step-badge-${product}`}>{step}</span>
+    <div class="step-card-copy">
+      <h3>{title}</h3>
+      {dependency && <p class="step-dependency">Requires {dependency}</p>}
+    </div>
+  </div>
+  <div class="step-card-body">
+    <slot />
+  </div>
+</section>

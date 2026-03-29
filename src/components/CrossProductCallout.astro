@@ -1,0 +1,24 @@
+---
+interface Props {
+  product: 'core' | 'series' | 'config';
+  label: string;
+  href: string;
+  description?: string;
+}
+
+const { product, label, href, description } = Astro.props;
+const productNames = {
+  core: 'DaisyCore',
+  series: 'DaisySeries',
+  config: 'DaisyConfig',
+} as const;
+---
+
+<aside class={`premium-callout cross-product cross-product-${product}`}>
+  <span class="eyebrow">Related Product</span>
+  <h3>{label}</h3>
+  {description && <p>{description}</p>}
+  <p>
+    <a href={href}>Open {productNames[product]} docs</a>
+  </p>
+</aside>

@@ -3,44 +3,55 @@ title: Use DaisySeries with DaisyCore
 description: Pair DaisySeries parsing helpers with DaisyCore runtime systems.
 ---
 
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import Prerequisites from '@components/Prerequisites.astro'
+import StepCard from '@components/StepCard.astro'
+
 # Use DaisySeries with DaisyCore
 
-Use DaisyCore when your plugin needs commands, menus, sidebars, or tablists.
+<div class="doc-lead">
+  <span class="eyebrow">Guide</span>
+  <h3>Keep runtime ownership in DaisyCore and keep parser-safe value handling in DaisySeries.</h3>
+</div>
 
-Use DaisySeries when those same flows also need config-heavy values like:
+<Prerequisites
+  items={[
+    { label: 'Install DaisySeries', href: '/daisyseries/getting-started/install/', product: 'series' },
+    { label: 'Install DaisyCore', href: '/daisycore/getting-started/install/', product: 'core' },
+  ]}
+/>
 
-- materials
-- sounds
-- item flags
-- enchantments
-- potion effects
+<StepCard step={1} title="Use DaisySeries when config values need normalization" product="series">
+  <p>Materials, sounds, item flags, enchantments, and potion effects should not be normalized in runtime files with plugin-local helpers.</p>
+</StepCard>
 
+<StepCard step={2} title="Parse values before they reach runtime UI code" product="series">
 ```kotlin
 val icon = DaisyMaterials.parse(config.icon)
 val clickSound = DaisySounds.parse(config.sound)
 val enchantment = DaisyEnchantments.parse(config.enchantment)
 val effect = DaisyPotions.parse(config.effect)
+```
+</StepCard>
 
+<StepCard step={3} title="Let DaisyCore own commands, menus, sidebars, and tablists" product="core" dependency="DaisyCore">
+```kotlin
 player.openMenu("Profile", rows = 3) {
     background(Material.GRAY_STAINED_GLASS_PANE) {
         name(" ")
     }
 }
 ```
+</StepCard>
 
-## Recommended split
+<CrossProductCallout
+  product="config"
+  label="Add DaisyConfig when those same values live in YAML"
+  href="/daisyconfig/guides/use-daisyconfig-with-daisyseries/"
+  description="DaisyConfig can decode DaisySeries values directly without copying parser rules."
+/>
 
-- DaisyCore owns runtime, lifecycle, and UI
-- DaisySeries owns enum parsing, canonical keys, and friendly names
-
-## Typical real-world flow
-
-- DaisySeries parses config-heavy values like item materials, sounds, enchantments, and potion effects
-- DaisyCore handles commands, menus, sidebars, tablists, and shared text rendering
-- MiniMessage and components stay in DaisyCore-facing UI code
-- config value normalization stays in DaisySeries instead of leaking into feature files
-
-## Related DaisyCore guides
-
-- [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
-- [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
+<div class="premium-callout info">
+  <h3>You've separated parsing from runtime ownership</h3>
+  <p>Next read <a href="/daisycore/guides/build-a-plugin-flow/">Build a Plugin Flow</a> for the runtime side or open the <a href="/daisyseries/dictionary/materials/">dictionary pages</a> when you need actual canonical values.</p>
+</div>

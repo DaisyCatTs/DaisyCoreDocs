@@ -3,27 +3,26 @@ title: Build a Plugin Flow
 description: Connect commands, menus, sidebars, and tablists in one believable DaisyCore feature flow without forcing config keys for every message.
 ---
 
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import Prerequisites from '@components/Prerequisites.astro'
+import StepCard from '@components/StepCard.astro'
+
 # Build a Plugin Flow
 
-This guide shows how the main DaisyCore systems fit together in one believable feature instead of disconnected snippets.
+<div class="doc-lead">
+  <span class="eyebrow">Guide</span>
+  <h3>Build one believable DaisyCore feature instead of learning commands, menus, sidebars, and tablists as disconnected fragments.</h3>
+</div>
 
-## What you'll build
+<Prerequisites
+  items={[
+    { label: 'Install DaisyCore', href: '/daisycore/getting-started/install/', product: 'core' },
+    { label: 'Know the normal Paper plugin bootstrap shape', product: 'core' },
+  ]}
+/>
 
-A `/profile` flow where:
-
-- `/profile` opens a menu
-- the menu acts as the player's profile hub
-- a sidebar mirrors a few player stats
-- a tablist shows a simple welcome header and footer
-
-## The important rule before you start
-
-You can build this entire flow with direct MiniMessage strings.
-
-Shared config-backed text is the scaling path for plugins that already keep text in config or lang files.
-It is not the requirement for a normal modern DaisyCore feature.
-
-## Step 1: bootstrap DaisyCore once
+<StepCard step={1} title="Bootstrap DaisyCore once" product="core">
+  <p>You can build this entire flow with direct MiniMessage strings. Shared config-backed text is the scaling path, not the requirement.</p>
 
 ```kotlin
 class ProfilePlugin : JavaPlugin() {
@@ -45,9 +44,9 @@ class ProfilePlugin : JavaPlugin() {
     }
 }
 ```
+</StepCard>
 
-## Step 2: build sidebar and tablist with direct MiniMessage strings
-
+<StepCard step={2} title="Build sidebar and tablist with direct MiniMessage strings" product="core">
 ```kotlin
 fun profileSidebar(player: Player) =
     sidebar {
@@ -63,9 +62,9 @@ fun profileTablist(player: Player) =
         footer("<gray>Coins: <white>1,250</white>")
     }
 ```
+</StepCard>
 
-## Step 3: connect everything inside one command group
-
+<StepCard step={3} title="Connect everything inside one command group" product="core">
 ```kotlin
 @DaisyCommandSet
 object ProfileCommands : DaisyCommandGroup({
@@ -100,43 +99,20 @@ object ProfileCommands : DaisyCommandGroup({
     }
 })
 ```
+</StepCard>
 
-## Step 4: move to shared text only when the plugin is config-heavy
+<StepCard step={4} title="Move to shared text only when the plugin is config-heavy" product="config" dependency="DaisyConfig">
+  <p>If your plugin keeps wording in config or lang files, swap local strings for `replyLang(...)`, `nameLang(...)`, `titleLang(...)`, and related helpers. Those config paths are useful scaling tools, not DaisyCore requirements.</p>
+</StepCard>
 
-If your plugin keeps wording in config or lang files, install one shared text source and swap local strings for:
+<CrossProductCallout
+  product="config"
+  label="Use DaisyConfig when the same flow needs shared text ownership"
+  href="/daisyconfig/guides/use-daisyconfig-with-daisycore/"
+  description="DaisyConfig stores and loads the text source. DaisyCore still renders it."
+/>
 
-- `replyLang(...)`
-- `lang(...)`
-- `nameLang(...)`
-- `titleLang(...)`
-- `headerLang(...)`
-- related text helpers
-
-That is the right time for config paths like:
-
-- `profile.opening`
-- `profile.menu.title`
-- `profile.sidebar.title`
-- `profile.tablist.header`
-
-Those are useful config paths, not DaisyCore requirements.
-
-<div class="premium-callout current">
-  <h3>Why this matters</h3>
-  <p>The same DaisyCore systems support both styles: direct MiniMessage strings for fast feature work, and shared key-backed text for config-heavy plugins.</p>
-</div>
-
-## When to choose each style
-
-- use direct MiniMessage strings for most feature-local UI and command feedback
-- use components when you want explicit low-level Adventure control
-- use shared config-backed text when your plugin already stores wording outside code
-
-<div class="page-next">
-
-## Next steps
-
-- Learn the shared config-backed text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
-- See the full cross-product example: [Full Ecosystem Example](/overview/full-ecosystem-example/)
-- Jump to the APIs: [Bootstrap API](/daisycore/reference/bootstrap-api/)
+<div class="premium-callout info">
+  <h3>You've built the runtime flow</h3>
+  <p>Next read <a href="/daisycore/guides/use-config-and-lang-text-with-daisycore/">Config and Lang Text</a> if the feature is becoming config-heavy, or jump to <a href="/daisycore/reference/bootstrap-api/">Bootstrap API</a> for the lower-level surface.</p>
 </div>

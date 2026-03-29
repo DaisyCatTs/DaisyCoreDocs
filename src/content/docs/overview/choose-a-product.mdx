@@ -1,54 +1,63 @@
 ---
-title: Choose a Product
-description: Decide whether DaisyCore, DaisySeries, DaisyConfig, or the full Daisy stack belong in your plugin.
+title: Which product do I need?
+description: Three products, one ecosystem. Pick the layer that owns your problem first.
 ---
 
-# Choose a Product
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import DecisionMatrix from '@components/DecisionMatrix.astro'
 
-## Choose DaisyCore when you need a platform
+# Which product do I need?
 
-Pick DaisyCore if your plugin needs:
+<div class="doc-lead">
+  <span class="eyebrow">Decision Matrix</span>
+  <h3>Three products, one ecosystem. Here's how to pick.</h3>
+  <p>Choose the product that owns the problem you are actually solving first, not the one with the most features.</p>
+</div>
 
-- command registration and execution
-- menu sessions
-- sidebars
-- tablists
-- MiniMessage-first text and placeholder rendering
-- one runtime owner through `DaisyPlatform`
+<DecisionMatrix
+  scenarios={[
+    {
+      goal: 'I need commands, menus, sidebars, tablists, and one runtime owner for the feature.',
+      product: 'core',
+      startHref: '/daisycore/getting-started/install/',
+    },
+    {
+      goal: 'I need canonical values and aliases for materials, sounds, enchantments, flags, or potions.',
+      product: 'series',
+      startHref: '/daisyseries/getting-started/install/',
+    },
+    {
+      goal: 'I need typed YAML, reload safety, and clean config-backed text ownership.',
+      product: 'config',
+      startHref: '/daisyconfig/getting-started/install/',
+    },
+  ]}
+/>
 
-Start here: [DaisyCore install](/daisycore/getting-started/install/)
+<p>The Daisy suite has three separate ownership layers: DaisyCore owns runtime systems, DaisySeries owns canonical values, and DaisyConfig owns typed YAML plus shared config state. The dependency chain still matters, but the first question is which product actually owns your problem.</p>
 
-## Choose DaisySeries when you need lightweight helpers
+<CrossProductCallout
+  product="core"
+  label="Use DaisyCore when runtime systems are the problem"
+  href="/daisycore/"
+  description="If the feature lives in commands, menus, sidebars, or tablists, DaisyCore is the default entrypoint."
+/>
 
-Pick DaisySeries if your plugin mainly needs:
+<CrossProductCallout
+  product="series"
+  label="Use DaisySeries when values are the problem"
+  href="/daisyseries/"
+  description="If you are about to write alias maps or lowercase enum serializers, start here."
+/>
 
-- enum parsing from config-safe strings
-- canonical lowercase serialization keys
-- friendly display names
-- curated aliases for real plugin inputs
+<CrossProductCallout
+  product="config"
+  label="Use DaisyConfig when YAML ownership is the problem"
+  href="/daisyconfig/"
+  description="If reload safety and config shape are the pain point, DaisyConfig should own that layer."
+/>
 
-Start here: [DaisySeries install](/daisyseries/getting-started/install/)
-
-## Choose DaisyConfig when your config layer is the problem
-
-Pick DaisyConfig if your plugin mainly needs:
-
-- typed YAML mapping
-- reload-safe config state
-- validation with useful path errors
-- DaisySeries-backed config codecs
-- DaisyCore-friendly config-backed text sources when you want reloadable or shared wording
-
-Start here: [DaisyConfig install](/daisyconfig/getting-started/install/)
-
-## Use all three together when your plugin is runtime-heavy and config-heavy
-
-This is the strongest pairing when:
-
-- DaisyCore owns commands, menus, sidebars, or tablists
-- DaisySeries parses materials, sounds, or item flags from config
-- DaisyConfig owns the typed YAML and reload-safe state around those systems
-
-Next step: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
-
-If you want to see the whole stack before deciding, read [Full Ecosystem Example](/overview/full-ecosystem-example/).
+<div class="premium-callout info">
+  <h3>Start with DaisyCore unless you have a specific reason not to</h3>
+  <p>Most plugin authors hit the runtime problem first. Only start lower in the chain when parsing or config ownership is clearly the real issue.</p>
+</div>

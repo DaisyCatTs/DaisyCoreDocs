@@ -3,15 +3,26 @@ title: Placeholder API
 description: DaisyCore placeholders are shared across runtime systems.
 ---
 
+import ReferenceTable from '@components/ReferenceTable.astro'
+
 # Placeholder API
+
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>One placeholder registry can be shared across commands, menus, sidebars, and tablists.</h3>
+</div>
 
 ```kotlin
 val registry = DaisyPlaceholderRegistry()
 registry.register("coins") { _, context -> "150" }
 ```
 
-## Notes
-
-- keys are registered case-insensitively
-- the same registry can be shared across commands, menus, sidebars, and tablists
-- placeholder resolution works against `DaisyAudienceContext`
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'DaisyPlaceholderRegistry', type: 'object', description: 'Shared registry for runtime placeholder resolvers.', required: true },
+    { name: 'register', type: 'string', description: 'Registers a placeholder key and resolver pair.', required: true },
+    { name: 'keys', type: 'enum', description: 'Placeholder keys are resolved case-insensitively.', required: false },
+    { name: 'DaisyAudienceContext', type: 'object', description: 'Context object passed through placeholder resolution.', required: true },
+  ]}
+/>

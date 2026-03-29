@@ -1,15 +1,22 @@
 ---
 title: Reload Handles
-description: Use DaisyConfigHandle and DaisyReloadResult safely.
+description: DaisyConfig reload handles keep the last valid config loaded when a refresh fails.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Reload Handles
 
-Main types:
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>Reload handles let you refresh config safely without discarding the last valid runtime state.</h3>
+</div>
 
-- `DaisyConfigHandle<T>`
-- `DaisyReloadResult.Success`
-- `DaisyReloadResult.Failure`
-
-`current` always points at the last valid typed config.
-
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'yamlConfigHandle', type: 'object', description: 'Creates a reloadable handle for one typed YAML file.', required: true },
+    { name: 'current', type: 'object', description: 'Returns the last valid decoded config object.', required: true },
+    { name: 'reload', type: 'object', description: 'Attempts a fresh decode while preserving the last valid state on failure.', required: true },
+  ]}
+/>

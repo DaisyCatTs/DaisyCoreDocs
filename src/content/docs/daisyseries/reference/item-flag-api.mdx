@@ -1,19 +1,24 @@
 ---
 title: Item Flag API
-description: Quick lookup for DaisySeries item-flag entrypoints.
+description: Public DaisySeries item flag parsing helpers.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Item Flag API
 
-```kotlin
-object DaisyItemFlags : DaisySeriesParser<ItemFlag> {
-    fun parse(input: String): ItemFlag
-    fun parseOrNull(input: String): ItemFlag?
-    fun key(flag: ItemFlag): String
-    fun displayName(flag: ItemFlag): String
-    fun aliases(flag: ItemFlag): Set<String>
-    fun parseMany(inputs: Iterable<String>): Set<ItemFlag>
-    fun parseManyOrNull(inputs: Iterable<String>): Set<ItemFlag>?
-}
-```
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisyItemFlags covers both single-value item flag parsing and set-oriented config usage.</h3>
+</div>
 
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a single item flag from config-safe input.', required: true },
+    { name: 'parseList', type: 'object', description: 'Parses multiple item flags into a collection shape.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical item flag key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a human-readable label for UI or logs.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns accepted aliases for the canonical flag.', required: false },
+  ]}
+/>

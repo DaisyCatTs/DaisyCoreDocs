@@ -19,20 +19,28 @@ export default defineConfig({
         { tag: 'link', attrs: { rel: 'manifest', href: '/site.webmanifest' } },
         { tag: 'meta', attrs: { name: 'theme-color', content: '#130913' } },
       ],
+      components: {
+        Header: './src/components/overrides/Header.astro',
+        Sidebar: './src/components/overrides/Sidebar.astro',
+        PageTitle: './src/components/overrides/PageTitle.astro',
+        Hero: './src/components/overrides/Hero.astro',
+        TableOfContents: './src/components/overrides/TableOfContents.astro',
+        Footer: './src/components/overrides/Footer.astro',
+        MarkdownContent: './src/components/overrides/MarkdownContent.astro',
+      },
       sidebar: [
         {
           label: 'Overview',
           items: [
-            { label: 'Overview', slug: 'index' },
-            { label: 'Choose a Product', slug: 'overview/choose-a-product' },
-            { label: 'Full Ecosystem Example', slug: 'overview/full-ecosystem-example' },
+            { label: 'Getting Started', slug: 'index' },
+            { label: 'Which product do I need?', slug: 'overview/choose-a-product' },
+            { label: 'Ecosystem Example', slug: 'overview/full-ecosystem-example' },
             { label: 'Roadmap', slug: 'overview/roadmap' },
           ],
         },
         {
           label: 'DaisyCore',
           items: [
-            { label: 'Overview', slug: 'daisycore' },
             {
               label: 'Start Here',
               items: [
@@ -48,41 +56,31 @@ export default defineConfig({
             {
               label: 'Commands',
               items: [
-                { label: 'Commands Overview', slug: 'daisycore/commands/overview' },
-                { label: 'Command DSL', slug: 'daisycore/reference/command-dsl' },
+                { label: 'Overview', slug: 'daisycore/commands/overview' },
+                { label: 'Registration', slug: 'daisycore/commands/registration' },
+                { label: 'Arguments', slug: 'daisycore/commands/arguments' },
+                { label: 'Permissions', slug: 'daisycore/commands/permissions' },
               ],
             },
             {
-              label: 'Text and UI',
+              label: 'Text & UI',
               items: [
-                { label: 'Core Overview', slug: 'daisycore/core/overview' },
-                { label: 'Text', slug: 'daisycore/text/overview' },
-                { label: 'Placeholders', slug: 'daisycore/placeholders/overview' },
-                { label: 'Items', slug: 'daisycore/items/overview' },
+                { label: 'MiniMessage Overview', slug: 'daisycore/text/overview' },
                 { label: 'Menus', slug: 'daisycore/menus/overview' },
-                { label: 'Scoreboards', slug: 'daisycore/scoreboards/overview' },
+                { label: 'Sidebars', slug: 'daisycore/scoreboards/overview' },
                 { label: 'Tablists', slug: 'daisycore/tablists/overview' },
-                { label: 'Auto-Loaded Commands', slug: 'daisycore/guides/auto-loaded-commands' },
-                { label: 'Config and Lang Text', slug: 'daisycore/guides/use-config-and-lang-text-with-daisycore' },
+              ],
+            },
+            {
+              label: 'Reference',
+              items: [
+                { label: 'Bootstrap API', slug: 'daisycore/reference/bootstrap-api' },
+                { label: 'Command DSL', slug: 'daisycore/reference/command-dsl' },
                 { label: 'Menu DSL', slug: 'daisycore/reference/menu-dsl' },
                 { label: 'Sidebar DSL', slug: 'daisycore/reference/sidebar-dsl' },
                 { label: 'Tablist DSL', slug: 'daisycore/reference/tablist-dsl' },
                 { label: 'Placeholder API', slug: 'daisycore/reference/placeholder-api' },
                 { label: 'Item Builder API', slug: 'daisycore/reference/item-builder-api' },
-                { label: 'Performance', slug: 'daisycore/guides/performance' },
-              ],
-            },
-            {
-              label: 'Reference and Explanation',
-              items: [
-                { label: 'Bootstrap API', slug: 'daisycore/reference/bootstrap-api' },
-                { label: 'Why DaisyCore Is One Library', slug: 'daisycore/explanation/why-daisycore-is-one-library' },
-                { label: 'Architecture', slug: 'daisycore/explanation/architecture' },
-                { label: 'Why Commands Auto-Load', slug: 'daisycore/explanation/command-auto-loading' },
-                { label: 'Runtime and Shutdown', slug: 'daisycore/explanation/runtime-and-shutdown' },
-                { label: 'Menu Sessions', slug: 'daisycore/explanation/menu-sessions' },
-                { label: 'Sidebar Refresh and Diffing', slug: 'daisycore/explanation/sidebar-refresh-and-diffing' },
-                { label: 'Tablist Rendering Model', slug: 'daisycore/explanation/tablist-rendering-model' },
               ],
             },
             {
@@ -98,7 +96,6 @@ export default defineConfig({
         {
           label: 'DaisySeries',
           items: [
-            { label: 'Overview', slug: 'daisyseries' },
             {
               label: 'Start Here',
               items: [
@@ -119,19 +116,12 @@ export default defineConfig({
             {
               label: 'Dictionary',
               items: [
-                { label: 'Dictionary Overview', slug: 'daisyseries/dictionary' },
-                { label: 'Materials Dictionary', slug: 'daisyseries/dictionary/materials' },
-                { label: 'Sounds Dictionary', slug: 'daisyseries/dictionary/sounds' },
-                { label: 'Item Flags Dictionary', slug: 'daisyseries/dictionary/item-flags' },
-                { label: 'Enchantments Dictionary', slug: 'daisyseries/dictionary/enchantments' },
-                { label: 'Potions Dictionary', slug: 'daisyseries/dictionary/potions' },
-              ],
-            },
-            {
-              label: 'Guides',
-              items: [
-                { label: 'Use DaisySeries with DaisyCore', slug: 'daisyseries/guides/use-daisyseries-with-daisycore' },
-                { label: 'Config-Driven Plugins', slug: 'daisyseries/guides/use-daisyseries-in-config-driven-plugins' },
+                { label: 'Materials', slug: 'daisyseries/dictionary/materials' },
+                { label: 'Sounds', slug: 'daisyseries/dictionary/sounds' },
+                { label: 'Enchantments', slug: 'daisyseries/dictionary/enchantments' },
+                { label: 'Item Flags', slug: 'daisyseries/dictionary/item-flags' },
+                { label: 'Potions', slug: 'daisyseries/dictionary/potions' },
+                { label: 'Canonical Keys', slug: 'daisyseries/dictionary/canonical-keys' },
               ],
             },
             {
@@ -145,7 +135,7 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Explanation and Migration',
+              label: 'Migration',
               items: [
                 { label: 'Why DaisySeries Is Separate', slug: 'daisyseries/explanation/why-daisyseries-is-separate' },
                 { label: 'Migration', slug: 'daisyseries/migration/from-plugin-local-enum-helpers' },
@@ -156,7 +146,6 @@ export default defineConfig({
         {
           label: 'DaisyConfig',
           items: [
-            { label: 'Overview', slug: 'daisyconfig' },
             {
               label: 'Start Here',
               items: [
@@ -184,7 +173,7 @@ export default defineConfig({
               ],
             },
             {
-              label: 'Explanation and Migration',
+              label: 'Migration',
               items: [
                 { label: 'Why DaisyConfig Is Separate', slug: 'daisyconfig/explanation/why-daisyconfig-is-separate' },
                 { label: 'Migration', slug: 'daisyconfig/migration/from-plugin-local-config-loaders' },

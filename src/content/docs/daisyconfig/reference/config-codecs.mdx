@@ -3,23 +3,28 @@ title: Config Codecs
 description: The DaisyConfig codec surface for primitives, collections, object mapping, and DaisySeries-backed values.
 ---
 
+import ReferenceTable from '@components/ReferenceTable.astro'
+
 # Config Codecs
 
-Main public surface:
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>Use codecs to turn raw YAML into typed config objects without scattering path lookups through plugin code.</h3>
+</div>
 
-- `stringCodec()`
-- `intCodec()`
-- `longCodec()`
-- `doubleCodec()`
-- `booleanCodec()`
-- `listCodec(...)`
-- `setCodec(...)`
-- `mapCodec(...)`
-- `objectCodec { ... }`
-- `materialCodec()`
-- `soundCodec()`
-- `itemFlagCodec()`
-- `itemFlagsCodec()`
-- `enchantmentCodec()`
-- `potionEffectCodec()`
-
+<ReferenceTable
+  rows={[
+    { name: 'stringCodec', type: 'string', description: 'Decodes string values from YAML.', required: true },
+    { name: 'intCodec', type: 'number', description: 'Decodes integer values.', required: true },
+    { name: 'doubleCodec', type: 'number', description: 'Decodes decimal values.', required: true },
+    { name: 'booleanCodec', type: 'boolean', description: 'Decodes boolean values.', required: true },
+    { name: 'listCodec', type: 'object', description: 'Builds a list codec from another element codec.', required: false },
+    { name: 'setCodec', type: 'object', description: 'Builds a set codec from another element codec.', required: false },
+    { name: 'objectCodec', type: 'object', description: 'Maps named fields into a typed config object.', required: true },
+    { name: 'materialCodec', type: 'enum', description: 'Decodes DaisySeries-backed material values from config-safe strings.', required: false },
+    { name: 'soundCodec', type: 'enum', description: 'Decodes DaisySeries-backed sound values.', required: false },
+    { name: 'itemFlagsCodec', type: 'enum', description: 'Decodes DaisySeries-backed item flag sets.', required: false },
+    { name: 'enchantmentCodec', type: 'enum', description: 'Decodes DaisySeries-backed enchantment values.', required: false },
+    { name: 'potionEffectCodec', type: 'enum', description: 'Decodes DaisySeries-backed potion effect values.', required: false },
+  ]}
+/>

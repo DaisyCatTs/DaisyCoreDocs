@@ -3,37 +3,23 @@ title: Tablist DSL
 description: Quick lookup for DaisyCore tablist types and entrypoints.
 ---
 
+import ReferenceTable from '@components/ReferenceTable.astro'
+
 # Tablist DSL
 
-## Main types
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>The current public tablist API is intentionally header and footer focused.</h3>
+</div>
 
-- `DaisyTablist`
-- `DaisyTablistRenderContext`
-- `DaisyTablistSession`
-- `DaisyTablistPlatform`
-
-## Main entrypoint
-
-```kotlin
-fun tablist(block: DaisyTablistBuilder.() -> Unit): DaisyTablist
-```
-
-## Common builder methods
-
-- `header(Component)`
-- `header(String)`
-- `header(renderer)`
-- `headerLang(key, viewer, placeholders...)`
-- `footer(Component)`
-- `footer(String)`
-- `footer(renderer)`
-- `footerLang(key, viewer, placeholders...)`
-- `options { ... }`
-
-## Important behavior
-
-- the current public tablist API is header and footer only
-- `refreshNow()` recomputes and sends the current header and footer immediately
-- `invalidate()` is the compatibility alias for a full refresh
-- close clears the player's header and footer safely
-- if you install `messages(...)`, tablists can resolve shared lang keys through the same text layer as commands, menus, items, and sidebars
+<ReferenceTable
+  rows={[
+    { name: 'DaisyTablist', type: 'object', description: 'Immutable tablist definition for one viewer-facing session.', required: true },
+    { name: 'header', type: 'string', description: 'Sets the header using String, Component, or renderer overloads.', required: false },
+    { name: 'footer', type: 'string', description: 'Sets the footer using String, Component, or renderer overloads.', required: false },
+    { name: 'headerLang', type: 'string', description: 'Resolves a shared language key through the installed message source.', required: false },
+    { name: 'footerLang', type: 'string', description: 'Resolves a shared language key for the footer.', required: false },
+    { name: 'refreshNow', type: 'object', description: 'Immediately recomputes and sends the current header and footer.', required: false },
+    { name: 'invalidate', type: 'object', description: 'Compatibility alias for a full refresh of the tablist session.', required: false },
+  ]}
+/>

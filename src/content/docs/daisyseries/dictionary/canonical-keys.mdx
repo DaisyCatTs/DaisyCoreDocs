@@ -1,0 +1,30 @@
+---
+title: Canonical Keys
+description: How DaisySeries canonical keys behave across modules and why they should remain the only serialized form.
+---
+
+# Canonical Keys
+
+<div class="doc-lead">
+  <span class="eyebrow">Dictionary</span>
+  <h3>DaisySeries canonical keys are the stable serialized form for parser-safe values across modules.</h3>
+</div>
+
+- canonical keys are lowercase underscore names
+- aliases are accepted on input only
+- namespaced inputs normalize to the canonical DaisySeries key when supported
+- config and storage layers should serialize canonical keys, not aliases
+
+## Why this matters
+
+- DaisySeries stays the single value authority
+- DaisyConfig can decode canonical keys directly
+- DaisyCore can consume the resolved runtime value without copying enum rules
+
+## Use these dictionaries next
+
+- [Materials](/daisyseries/dictionary/materials/)
+- [Sounds](/daisyseries/dictionary/sounds/)
+- [Enchantments](/daisyseries/dictionary/enchantments/)
+- [Item Flags](/daisyseries/dictionary/item-flags/)
+- [Potions](/daisyseries/dictionary/potions/)

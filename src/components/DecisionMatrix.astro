@@ -1,0 +1,29 @@
+---
+interface Scenario {
+  goal: string;
+  product: 'core' | 'series' | 'config';
+  startHref: string;
+}
+
+interface Props {
+  scenarios: Scenario[];
+}
+
+const { scenarios } = Astro.props;
+
+const productMeta = {
+  core: { label: 'Use DaisyCore', cta: 'Start with DaisyCore' },
+  series: { label: 'Use DaisySeries', cta: 'Start with DaisySeries' },
+  config: { label: 'Use DaisyConfig', cta: 'Start with DaisyConfig' },
+} as const;
+---
+
+<div class="feature-matrix decision-matrix">
+  {scenarios.map((scenario) => (
+    <a class={`home-card decision-card decision-card-${scenario.product}`} href={scenario.startHref}>
+      <span class="eyebrow">{productMeta[scenario.product].label}</span>
+      <h3>{scenario.goal}</h3>
+      <p>{productMeta[scenario.product].cta}</p>
+    </a>
+  ))}
+</div>

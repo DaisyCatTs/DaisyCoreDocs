@@ -1,0 +1,104 @@
+---
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const path = Astro.url.pathname;
+
+const productGroups = new Set(['DaisyCore', 'DaisySeries', 'DaisyConfig']);
+
+function scopeForLabel(label: string) {
+  if (label === 'DaisyCore') return 'core';
+  if (label === 'DaisySeries') return 'series';
+  if (label === 'DaisyConfig') return 'config';
+  return 'overview';
+}
+
+function scopeForPath(pathname: string) {
+  if (pathname.startsWith('/daisycore')) return 'core';
+  if (pathname.startsWith('/daisyseries')) return 'series';
+  if (pathname.startsWith('/daisyconfig')) return 'config';
+  return 'overview';
+}
+
+const activeScope = scopeForPath(path);
+const topLevelGroups = sidebar.filter((entry) => entry.type === 'group');
+const overviewGroup = topLevelGroups.find((group) => !productGroups.has(group.label));
+const productSections = topLevelGroups.filter((group) => productGroups.has(group.label));
+---
+
+<nav class="sidebar-shell" data-scope={activeScope} data-active-path={path}>
+  <div class="product-scope-bar" role="tablist" aria-label="Product scope">
+    <button class="product-scope-button" type="button" data-scope-button="core">Core</button>
+    <button class="product-scope-button" type="button" data-scope-button="series">Series</button>
+    <button class="product-scope-button" type="button" data-scope-button="config">Config</button>
+  </div>
+
+  <SidebarPersister>
+    {overviewGroup && (
+      <section class="sidebar-section sidebar-section-overview" data-scope-group="overview">
+        <p class="sidebar-product-label">OVERVIEW</p>
+        <SidebarSublist sublist={overviewGroup.entries} />
+      </section>
+    )}
+
+    {productSections.map((group) => (
+      <Fragment>
+        <hr class="sidebar-product-rule" />
+        <section class="sidebar-section" data-scope-group={scopeForLabel(group.label)}>
+          <p class="sidebar-product-label">
+            <span class={`sidebar-product-dot sidebar-product-dot-${scopeForLabel(group.label)}`}></span>
+            {group.label.toUpperCase()}
+          </p>
+          <SidebarSublist sublist={group.entries} />
+        </section>
+      </Fragment>
+    ))}
+  </SidebarPersister>
+
+  <div class="md:sl-hidden">
+    <MobileMenuFooter />
+  </div>
+</nav>
+
+<script is:inline>
+  (() => {
+    const nav = document.querySelector('.sidebar-shell');
+    if (!nav) return;
+    const storageKey = 'daisy-docs-scope';
+    const path = nav.getAttribute('data-active-path') || '/';
+    const currentScope = path.startsWith('/daisycore')
+      ? 'core'
+      : path.startsWith('/daisyseries')
+        ? 'series'
+        : path.startsWith('/daisyconfig')
+          ? 'config'
+          : 'overview';
+    const storedScope = sessionStorage.getItem(storageKey);
+    const initialScope = currentScope === 'overview' ? (storedScope || 'core') : currentScope;
+
+    const applyScope = (scope) => {
+      nav.setAttribute('data-scope', scope);
+      nav.querySelectorAll('[data-scope-group]').forEach((section) => {
+        const groupScope = section.getAttribute('data-scope-group');
+        const keepVisible = groupScope === 'overview' || groupScope === scope;
+        section.classList.toggle('scope-hidden', !keepVisible);
+      });
+      nav.querySelectorAll('[data-scope-button]').forEach((button) => {
+        const active = button.getAttribute('data-scope-button') === scope;
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      sessionStorage.setItem(storageKey, scope);
+    };
+
+    nav.querySelectorAll('[data-scope-button]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const scope = button.getAttribute('data-scope-button');
+        if (scope) applyScope(scope);
+      });
+    });
+
+    applyScope(initialScope);
+  })();
+</script>

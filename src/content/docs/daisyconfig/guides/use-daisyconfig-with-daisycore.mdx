@@ -3,30 +3,29 @@ title: Use DaisyConfig with DaisyCore
 description: Pair typed YAML config with DaisyCore runtime systems while keeping MiniMessage rendering and Placeholder safety inside DaisyCore.
 ---
 
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import Prerequisites from '@components/Prerequisites.astro'
+import StepCard from '@components/StepCard.astro'
+
 # Use DaisyConfig with DaisyCore
 
-Use DaisyCore for:
+<div class="doc-lead">
+  <span class="eyebrow">Guide</span>
+  <h3>Keep YAML ownership in DaisyConfig and keep viewer-aware rendering in DaisyCore.</h3>
+</div>
 
-- commands
-- menus
-- sidebars
-- tablists
-- runtime ownership
-- MiniMessage rendering
+<Prerequisites
+  items={[
+    { label: 'Install DaisyConfig', href: '/daisyconfig/getting-started/install/', product: 'config' },
+    { label: 'Install DaisyCore', href: '/daisycore/getting-started/install/', product: 'core' },
+  ]}
+/>
 
-Use DaisyConfig for:
+<StepCard step={1} title="Treat DaisyConfig as the storage layer" product="config">
+  <p>DaisyConfig owns typed YAML values, reload-safe handles, and config-backed text storage. It does not become a second rendering runtime.</p>
+</StepCard>
 
-- typed YAML values
-- reload-safe config ownership
-- config-backed text
-
-## The important rule
-
-DaisyConfig stores and loads text.
-DaisyCore renders it.
-
-That means a clean integration looks like this:
-
+<StepCard step={2} title="Install the DaisyConfig text source into DaisyCore" product="core" dependency="DaisyConfig">
 ```kotlin
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
 
@@ -39,35 +38,13 @@ val daisy =
         tablists()
     }
 ```
+</StepCard>
 
-## What DaisyCore still owns
+<StepCard step={3} title="Keep MiniMessage parsing and placeholders inside DaisyCore" product="core">
+  <p>Even when the text comes from config, DaisyCore still owns MiniMessage parsing, viewer-aware rendering, PlaceholderAPI integration, and fallback behavior.</p>
+</StepCard>
 
-Even when the text came from config, DaisyCore still owns:
-
-- MiniMessage parsing
-- viewer-aware rendering
-- PlaceholderAPI integration
-- fallback behavior when PlaceholderAPI is absent
-
-## What DaisyConfig does not do
-
-DaisyConfig does **not**:
-
-- expand PlaceholderAPI directly
-- become a second rendering runtime
-- replace DaisyCore's UI/render model
-
-## Normal production pattern
-
-Use:
-
-- direct MiniMessage strings for feature-local text
-- DaisyConfig-backed text when you want shared, reloadable, or admin-editable wording
-
-That gives you the best of both models without mixing responsibilities.
-
-## Example
-
+<StepCard step={4} title="Use config-backed text only when you need shared wording" product="config">
 ```kotlin
 val profileHandle = yamlConfigHandle("profile-ui.yml", profileUiCodec)
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
@@ -89,12 +66,16 @@ val sidebar =
         }
     }
 ```
+</StepCard>
 
-<div class="page-next">
+<CrossProductCallout
+  product="series"
+  label="Pull DaisySeries in when config values stop being primitive"
+  href="/daisyconfig/guides/use-daisyconfig-with-daisyseries/"
+  description="Use DaisySeries-backed codecs for sounds, materials, flags, enchantments, and potion effects."
+/>
 
-## Next steps
-
-- Learn the safety boundary directly: [Safe Placeholder-Aware Text](/daisyconfig/guides/safe-placeholder-aware-text/)
-- See the full stack together: [Full Ecosystem Example](/overview/full-ecosystem-example/)
-- Jump to the bridge details: [Text Bridge](/daisyconfig/reference/text-bridge/)
+<div class="premium-callout info">
+  <h3>You've separated storage from rendering</h3>
+  <p>Next read <a href="/daisyconfig/guides/safe-placeholder-aware-text/">Safe Placeholder-Aware Text</a> or jump to <a href="/daisyconfig/reference/text-bridge/">Text Bridge</a> for the low-level integration details.</p>
 </div>

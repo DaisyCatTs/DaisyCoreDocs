@@ -1,0 +1,90 @@
+---
+interface ReferenceRow {
+  name: string;
+  type: 'string' | 'boolean' | 'number' | 'object' | 'enum' | string;
+  default?: string;
+  required?: boolean;
+  description: string;
+}
+
+interface Props {
+  rows: ReferenceRow[];
+  filterable?: boolean;
+}
+
+const { rows, filterable = rows.length > 10 } = Astro.props;
+---
+
+<div class="reference-table-shell" data-reference-shell>
+  {filterable && (
+    <label class="reference-filter">
+      <span class="sr-only">Filter reference rows</span>
+      <input type="search" placeholder="Filter properties or descriptions" data-reference-filter />
+    </label>
+  )}
+
+  <div class="reference-table" role="table">
+    {rows.map((row) => (
+      <section
+        class="reference-row"
+        role="row"
+        id={row.name}
+        data-reference-row
+        data-reference-text={`${row.name} ${row.type} ${row.description} ${row.default ?? ''}`.toLowerCase()}
+      >
+        <div class="reference-row-key" role="cell">
+          <a class="reference-anchor" href={`#${row.name}`}>
+            <code>{row.name}</code>
+          </a>
+          <span class={`reference-type-badge reference-type-${row.type.replace(/[^a-z0-9_-]/gi, '-').toLowerCase()}`}>
+            {row.type}
+          </span>
+        </div>
+        <div class="reference-row-value" role="cell">
+          <p>{row.description}</p>
+          {(row.default || row.required !== undefined) && (
+            <p class="reference-meta">
+              {row.required !== undefined && <span>{row.required ? 'Required' : 'Optional'}</span>}
+              {row.default && <span>Default: {row.default}</span>}
+            </p>
+          )}
+        </div>
+      </section>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const script = document.currentScript;
+    const root = script?.previousElementSibling;
+    if (!root) return;
+    const input = root.querySelector('[data-reference-filter]');
+    if (!(input instanceof HTMLInputElement)) return;
+
+    const bind = () => {
+      const rows = Array.from(root.querySelectorAll('[data-reference-row]'));
+      input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
+        rows.forEach((row) => {
+          const text = row.getAttribute('data-reference-text') || '';
+          row.classList.toggle('scope-hidden', query.length > 0 && !text.includes(query));
+        });
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      bind();
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        bind();
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(root);
+  })();
+</script>

@@ -1,0 +1,67 @@
+---
+title: Component Testbed
+description: Internal component validation page for docs UI primitives.
+sidebar:
+  hidden: true
+pagefind: false
+---
+
+import CrossProductCallout from '@components/CrossProductCallout.astro'
+import DecisionMatrix from '@components/DecisionMatrix.astro'
+import Prerequisites from '@components/Prerequisites.astro'
+import ProductLandingHero from '@components/ProductLandingHero.astro'
+import ReferenceTable from '@components/ReferenceTable.astro'
+import StepCard from '@components/StepCard.astro'
+
+# Component Testbed
+
+<ProductLandingHero
+  product="core"
+  title="Internal test hero"
+  description="Validates the product hero contract."
+  primaryCta={{ label: 'Start', href: '/daisycore/' }}
+  secondaryCta={{ label: 'Reference', href: '/daisycore/reference/bootstrap-api/' }}
+/>
+
+<Prerequisites
+  items={[
+    { label: 'Install DaisyCore', href: '/daisycore/getting-started/install/', product: 'core' },
+    { label: 'Understand MiniMessage', product: 'core' },
+  ]}
+/>
+
+<StepCard step={1} title="Render a command" product="core" dependency="DaisyCore">
+  <p>This is a step card body.</p>
+</StepCard>
+
+<CrossProductCallout
+  product="series"
+  label="Use DaisySeries when config values need parsing"
+  href="/daisyseries/"
+  description="Keep runtime ownership in DaisyCore and value normalization in DaisySeries."
+/>
+
+<ReferenceTable
+  rows={[
+    {
+      name: 'messages',
+      type: 'object',
+      description: 'Registers the shared message source for runtime rendering.',
+      required: false,
+    },
+    {
+      name: 'commands',
+      type: 'boolean',
+      description: 'Enables command discovery and registration.',
+      default: 'false',
+    },
+  ]}
+/>
+
+<DecisionMatrix
+  scenarios={[
+    { goal: 'Need one runtime owner for commands and UI', product: 'core', startHref: '/daisycore/' },
+    { goal: 'Need canonical value parsing only', product: 'series', startHref: '/daisyseries/' },
+    { goal: 'Need typed YAML and reload safety', product: 'config', startHref: '/daisyconfig/' },
+  ]}
+/>

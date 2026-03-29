@@ -1,19 +1,24 @@
 ---
 title: Material API
-description: Quick lookup for DaisySeries material entrypoints.
+description: Public DaisySeries material parsing helpers.
 ---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
 
 # Material API
 
-```kotlin
-object DaisyMaterials : DaisySeriesParser<Material> {
-    fun parse(input: String): Material
-    fun parseOrNull(input: String): Material?
-    fun key(material: Material): String
-    fun displayName(material: Material): String
-    fun aliases(material: Material): Set<String>
-    fun isBlock(material: Material): Boolean
-    fun isItem(material: Material): Boolean
-}
-```
+<div class="doc-lead">
+  <span class="eyebrow">Reference</span>
+  <h3>DaisyMaterials is the parser-safe entrypoint for canonical material keys, aliases, and display names.</h3>
+</div>
 
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a config-safe material string into a Material value.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null instead of throwing or failing hard for invalid input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries key for a material.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns the user-facing label for a material.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns accepted curated aliases for a canonical material value.', required: false },
+  ]}
+/>
