@@ -1,6 +1,6 @@
-# DaisyCoreDocs
+# Daisy Docs
 
-Documentation site for DaisyCore.
+Documentation site for the Daisy ecosystem.
 
 ## Stack
 
@@ -28,3 +28,7 @@ npm run build
 npm run build
 npx wrangler pages deploy dist
 ```
+
+## Product Planning
+
+- Daisy docs platform direction: [DAISY_DOCS_PLATFORM_PLAN.md](./DAISY_DOCS_PLATFORM_PLAN.md)
