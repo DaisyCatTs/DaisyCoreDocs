@@ -1,0 +1,29 @@
+---
+title: Biomes
+description: Parse biome values, canonical keys, and display names with DaisySeries.
+---
+
+# Biomes
+
+`DaisyBiomes` is the biome entrypoint.
+
+## What it does
+
+- parses normalized biome input
+- supports a small curated alias set
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val biome = DaisyBiomes.parse("minecraft:cherry_grove")
+val key = DaisyBiomes.key(biome)
+val label = DaisyBiomes.displayName(biome)
+```
+
+## Input examples
+
+- `cherry_grove`
+- `cherry grove`
+- `cherry-grove`
+- `minecraft:cherry_grove`
+- `nether`

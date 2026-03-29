@@ -1,0 +1,39 @@
+---
+title: Game Modes Dictionary
+description: Canonical DaisySeries game-mode keys, display names, and accepted aliases.
+---
+
+# Game Modes Dictionary
+
+Use these values for default-mode settings, mode-gated features, and admin-editable gameplay rules.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `survival` and `spectator`.
+- Curated aliases are accepted on input only.
+- Game modes stay intentionally small and modern.
+
+## Quick config example
+
+```yaml
+game_mode: adventure
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyGameModes.parse(config.game_mode)
+val key = DaisyGameModes.key(value)
+val label = DaisyGameModes.displayName(value)
+
+val typed = required("game_mode", gameModeCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``adventure`` | Adventure | - |
+| ``creative`` | Creative | - |
+| ``spectator`` | Spectator | ``spec`` |
+| ``survival`` | Survival | ``surv`` |

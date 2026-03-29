@@ -1,0 +1,20 @@
+---
+title: Statistics
+description: Parse statistics, canonical keys, and display names with DaisySeries.
+---
+
+# Statistics
+
+`DaisyStatistics` is the statistic entrypoint.
+
+## What it does
+
+- parses normalized statistic input
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val statistic = DaisyStatistics.parse("player kills")
+val key = DaisyStatistics.key(statistic)
+val label = DaisyStatistics.displayName(statistic)
+```

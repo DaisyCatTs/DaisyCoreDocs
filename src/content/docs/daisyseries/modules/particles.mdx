@@ -1,0 +1,21 @@
+---
+title: Particles
+description: Parse particle values, canonical keys, and display names with DaisySeries.
+---
+
+# Particles
+
+`DaisyParticles` is the particle entrypoint.
+
+## What it does
+
+- parses normalized particle input
+- supports a small curated alias set
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val particle = DaisyParticles.parse("totem")
+val key = DaisyParticles.key(particle)
+val label = DaisyParticles.displayName(particle)
+```

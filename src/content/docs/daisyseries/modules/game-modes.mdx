@@ -1,0 +1,21 @@
+---
+title: Game Modes
+description: Parse game modes, canonical keys, and display names with DaisySeries.
+---
+
+# Game Modes
+
+`DaisyGameModes` keeps the game-mode surface tiny and consistent.
+
+## What it does
+
+- parses normalized game-mode input
+- supports curated aliases like `surv` and `spec`
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val gameMode = DaisyGameModes.parse("surv")
+val key = DaisyGameModes.key(gameMode)
+val label = DaisyGameModes.displayName(gameMode)
+```

@@ -30,6 +30,9 @@ data class ProfileUiConfig(
     val flags: Set<ItemFlag>,
     val enchantment: Enchantment,
     val effect: PotionEffectType,
+    val biome: Biome,
+    val particle: Particle,
+    val statistic: Statistic,
     val sidebarTitle: String,
 )
 
@@ -41,6 +44,9 @@ val profileUiCodec =
             flags = defaulted("flags", itemFlagsCodec(), emptySet()),
             enchantment = required("enchantment", enchantmentCodec()),
             effect = required("effect", potionEffectCodec()),
+            biome = required("biome", biomeCodec()),
+            particle = required("particle", particleCodec()),
+            statistic = required("statistic", statisticCodec()),
             sidebarTitle = defaulted(
                 "sidebar_title",
                 stringCodec(),
@@ -102,6 +108,9 @@ flags:
   - hide_enchants
 enchantment: sharpness
 effect: slow_falling
+biome: cherry_grove
+particle: totem
+statistic: player_kills
 sidebar_title: "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"
 ```
 
@@ -133,6 +142,8 @@ object ProfileCommands : DaisyCommandGroup({
                         lore(
                             "<gray>Enchant: <white>${DaisyEnchantments.displayName(config.enchantment)}</white>",
                             "<gray>Effect: <white>${DaisyPotions.displayName(config.effect)}</white>",
+                            "<gray>Biome: <white>${DaisyBiomes.displayName(config.biome)}</white>",
+                            "<gray>Statistic: <white>${DaisyStatistics.displayName(config.statistic)}</white>",
                         )
                     }
 
@@ -140,6 +151,8 @@ object ProfileCommands : DaisyCommandGroup({
                     closeOnClick()
                 }
             }
+
+            player.spawnParticle(config.particle, player.location, 4)
 
             daisy.scoreboards?.show(
                 player,

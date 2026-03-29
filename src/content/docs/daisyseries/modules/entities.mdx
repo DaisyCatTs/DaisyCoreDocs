@@ -1,0 +1,21 @@
+---
+title: Entity Types
+description: Parse entity types, canonical keys, and display names with DaisySeries.
+---
+
+# Entity Types
+
+`DaisyEntities` is the entity-type entrypoint.
+
+## What it does
+
+- parses normalized entity-type input
+- supports a tiny curated alias set
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val entity = DaisyEntities.parse("zombie villager")
+val key = DaisyEntities.key(entity)
+val label = DaisyEntities.displayName(entity)
+```

@@ -1,6 +1,6 @@
 ---
 title: First Parse
-description: Parse your first material, sound, and item-flag values with DaisySeries.
+description: Parse your first modern Paper values with DaisySeries and see the canonical parser contract in one place.
 ---
 
 # First Parse
@@ -20,6 +20,11 @@ val sound = DaisySounds.parse("entity player levelup")
 val flags = DaisyItemFlags.parseMany(listOf("hide enchants", "hide attributes"))
 val enchantment = DaisyEnchantments.parse("sharpness")
 val effect = DaisyPotions.parse("slow falling")
+val biome = DaisyBiomes.parse("cherry grove")
+val entity = DaisyEntities.parse("zombie villager")
+val gameMode = DaisyGameModes.parse("surv")
+val particle = DaisyParticles.parse("totem")
+val statistic = DaisyStatistics.parse("player kills")
 
 logger.info("Icon: ${DaisyMaterials.displayName(icon)} (${DaisyMaterials.key(icon)})")
 logger.info("Sound: ${DaisySounds.displayName(sound)}")
@@ -34,6 +39,7 @@ logger.info("Effect: ${DaisyPotions.displayName(effect)}")
 - nullable `parseOrNull(...)`
 - canonical `key(...)`
 - UI-friendly `displayName(...)`
+- curated `aliases(...)`
 
 ## Why this matters
 
@@ -48,5 +54,5 @@ The goal is not just parsing. The goal is replacing all the repetitive plugin-lo
 
 ## Next steps
 
-- Learn the modules: [Materials](/daisyseries/modules/materials/), [Sounds](/daisyseries/modules/sounds/), [Item Flags](/daisyseries/modules/item-flags/), [Enchantments](/daisyseries/modules/enchantments/), and [Potions](/daisyseries/modules/potions/)
+- Learn the modules: [Materials](/daisyseries/modules/materials/), [Sounds](/daisyseries/modules/sounds/), [Item Flags](/daisyseries/modules/item-flags/), [Enchantments](/daisyseries/modules/enchantments/), [Potions](/daisyseries/modules/potions/), [Biomes](/daisyseries/modules/biomes/), [Entity Types](/daisyseries/modules/entities/), [Game Modes](/daisyseries/modules/game-modes/), [Particles](/daisyseries/modules/particles/), and [Statistics](/daisyseries/modules/statistics/)
 - Pair it with runtime systems: [Use DaisySeries with DaisyCore](/daisyseries/guides/use-daisyseries-with-daisycore/)

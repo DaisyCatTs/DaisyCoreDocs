@@ -14,6 +14,11 @@ DaisySeries is strongest when configs contain user-friendly strings that still n
 - item flag lists
 - enchantments
 - potion effects
+- biome names
+- entity types
+- default game modes
+- particles
+- statistics
 
 ## Recommended pattern
 
@@ -25,6 +30,11 @@ val sound = DaisySounds.parse(config.sound)
 val flags = DaisyItemFlags.parseMany(config.flags)
 val enchantment = DaisyEnchantments.parse(config.enchantment)
 val effect = DaisyPotions.parse(config.effect)
+val biome = DaisyBiomes.parse(config.biome)
+val entity = DaisyEntities.parse(config.entity)
+val gameMode = DaisyGameModes.parse(config.gameMode)
+val particle = DaisyParticles.parse(config.particle)
+val statistic = DaisyStatistics.parse(config.statistic)
 ```
 
 ## Why this is cleaner
@@ -33,3 +43,4 @@ val effect = DaisyPotions.parse(config.effect)
 - fewer local alias maps
 - fewer scattered `name.lowercase()` calls
 - one consistent error model
+- one canonical key model across more of modern Minecraft

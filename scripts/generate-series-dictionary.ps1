@@ -149,6 +149,26 @@ $potionAliases = @{
     "fire_resistance" = @("fire_res")
 }
 
+$biomeAliases = @{
+    "nether_wastes" = @("nether")
+    "the_end" = @("end")
+}
+
+$entityAliases = @{
+    "mooshroom" = @("mushroom_cow")
+}
+
+$gameModeAliases = @{
+    "survival" = @("surv")
+    "spectator" = @("spec")
+}
+
+$particleAliases = @{
+    "totem_of_undying" = @("totem")
+}
+
+$statisticAliases = @{}
+
 $materials =
     Get-StaticFieldNames "org.bukkit.Material" "org.bukkit.Material" |
     ForEach-Object {
@@ -184,10 +204,45 @@ $potions =
         New-Entry $key $potionAliases[$key]
     }
 
+$biomes =
+    Get-StaticFieldNames "org.bukkit.block.Biome" "org.bukkit.block.Biome" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $biomeAliases[$key]
+    }
+
+$entities =
+    Get-StaticFieldNames "org.bukkit.entity.EntityType" "org.bukkit.entity.EntityType" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $entityAliases[$key]
+    }
+
+$gameModes =
+    Get-StaticFieldNames "org.bukkit.GameMode" "org.bukkit.GameMode" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $gameModeAliases[$key]
+    }
+
+$particles =
+    Get-StaticFieldNames "org.bukkit.Particle" "org.bukkit.Particle" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $particleAliases[$key]
+    }
+
+$statistics =
+    Get-StaticFieldNames "org.bukkit.Statistic" "org.bukkit.Statistic" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $statisticAliases[$key]
+    }
+
 $index = @(
 "---",
 "title: Dictionary Overview",
-"description: Browse the canonical DaisySeries value dictionaries for materials, sounds, item flags, enchantments, and potions.",
+"description: Browse the canonical DaisySeries value dictionaries for the modern Paper parser families DaisySeries ships today.",
 "---",
 "",
 "# DaisySeries Dictionary",
@@ -210,6 +265,11 @@ $index = @(
 "- [Item Flags](/daisyseries/dictionary/item-flags/)",
 "- [Enchantments](/daisyseries/dictionary/enchantments/)",
 "- [Potions](/daisyseries/dictionary/potions/)",
+"- [Biomes](/daisyseries/dictionary/biomes/)",
+"- [Entity Types](/daisyseries/dictionary/entities/)",
+"- [Game Modes](/daisyseries/dictionary/game-modes/)",
+"- [Particles](/daisyseries/dictionary/particles/)",
+"- [Statistics](/daisyseries/dictionary/statistics/)",
 ""
 ) -join "`r`n"
 
@@ -289,5 +349,80 @@ Write-DictionaryPage `
         "Namespaced inputs like ``minecraft:speed`` are normalized on parse."
     ) `
     -entries $potions
+
+Write-DictionaryPage `
+    -slug "biomes" `
+    -title "Biomes Dictionary" `
+    -description "Canonical DaisySeries biome keys, display names, and accepted aliases." `
+    -whatFor "Use these values for biome-aware config, region defaults, and gameplay systems that need stable biome selection." `
+    -yamlKey "biome" `
+    -parserName "DaisyBiomes" `
+    -codecName "biomeCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``cherry_grove``.",
+        "Curated aliases are accepted on input only.",
+        "Namespaced inputs like ``minecraft:cherry_grove`` are normalized on parse."
+    ) `
+    -entries $biomes
+
+Write-DictionaryPage `
+    -slug "entities" `
+    -title "Entity Types Dictionary" `
+    -description "Canonical DaisySeries entity-type keys, display names, and accepted aliases." `
+    -whatFor "Use these values for mob settings, entity-based features, and config-driven entity selection." `
+    -yamlKey "entity" `
+    -parserName "DaisyEntities" `
+    -codecName "entityTypeCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``zombie_villager``.",
+        "Curated aliases are accepted on input only.",
+        "Namespaced inputs like ``minecraft:zombie_villager`` are normalized on parse."
+    ) `
+    -entries $entities
+
+Write-DictionaryPage `
+    -slug "game-modes" `
+    -title "Game Modes Dictionary" `
+    -description "Canonical DaisySeries game-mode keys, display names, and accepted aliases." `
+    -whatFor "Use these values for default-mode settings, mode-gated features, and admin-editable gameplay rules." `
+    -yamlKey "game_mode" `
+    -parserName "DaisyGameModes" `
+    -codecName "gameModeCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``survival`` and ``spectator``.",
+        "Curated aliases are accepted on input only.",
+        "Game modes stay intentionally small and modern."
+    ) `
+    -entries $gameModes
+
+Write-DictionaryPage `
+    -slug "particles" `
+    -title "Particles Dictionary" `
+    -description "Canonical DaisySeries particle keys, display names, and accepted aliases." `
+    -whatFor "Use these values for config-driven particles, feedback effects, and lightweight display settings." `
+    -yamlKey "particle" `
+    -parserName "DaisyParticles" `
+    -codecName "particleCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``totem_of_undying``.",
+        "Curated aliases are accepted on input only.",
+        "Namespaced inputs like ``minecraft:totem_of_undying`` are normalized on parse."
+    ) `
+    -entries $particles
+
+Write-DictionaryPage `
+    -slug "statistics" `
+    -title "Statistics Dictionary" `
+    -description "Canonical DaisySeries statistic keys and display names." `
+    -whatFor "Use these values for statistic-driven gameplay, thresholds, leaderboards, and config-backed progression rules." `
+    -yamlKey "statistic" `
+    -parserName "DaisyStatistics" `
+    -codecName "statisticCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``player_kills``.",
+        "Statistics currently do not ship curated aliases.",
+        "Namespaced inputs are normalized when the DaisySeries statistic parser accepts them."
+    ) `
+    -entries $statistics
 
 Write-Host "Generated DaisySeries dictionary pages at $dictionaryRoot using $paperJar"

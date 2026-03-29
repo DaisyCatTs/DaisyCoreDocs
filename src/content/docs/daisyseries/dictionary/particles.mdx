@@ -1,0 +1,144 @@
+---
+title: Particles Dictionary
+description: Canonical DaisySeries particle keys, display names, and accepted aliases.
+---
+
+# Particles Dictionary
+
+Use these values for config-driven particles, feedback effects, and lightweight display settings.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `totem_of_undying`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs like `minecraft:totem_of_undying` are normalized on parse.
+
+## Quick config example
+
+```yaml
+particle: angry_villager
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyParticles.parse(config.particle)
+val key = DaisyParticles.key(value)
+val label = DaisyParticles.displayName(value)
+
+val typed = required("particle", particleCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``angry_villager`` | Angry Villager | - |
+| ``ash`` | Ash | - |
+| ``block`` | Block | - |
+| ``block_marker`` | Block Marker | - |
+| ``bubble`` | Bubble | - |
+| ``bubble_column_up`` | Bubble Column Up | - |
+| ``bubble_pop`` | Bubble Pop | - |
+| ``campfire_cosy_smoke`` | Campfire Cosy Smoke | - |
+| ``campfire_signal_smoke`` | Campfire Signal Smoke | - |
+| ``cherry_leaves`` | Cherry Leaves | - |
+| ``cloud`` | Cloud | - |
+| ``composter`` | Composter | - |
+| ``crimson_spore`` | Crimson Spore | - |
+| ``crit`` | Crit | - |
+| ``current_down`` | Current Down | - |
+| ``damage_indicator`` | Damage Indicator | - |
+| ``dolphin`` | Dolphin | - |
+| ``dragon_breath`` | Dragon Breath | - |
+| ``dripping_dripstone_lava`` | Dripping Dripstone Lava | - |
+| ``dripping_dripstone_water`` | Dripping Dripstone Water | - |
+| ``dripping_honey`` | Dripping Honey | - |
+| ``dripping_lava`` | Dripping Lava | - |
+| ``dripping_obsidian_tear`` | Dripping Obsidian Tear | - |
+| ``dripping_water`` | Dripping Water | - |
+| ``dust`` | Dust | - |
+| ``dust_color_transition`` | Dust Color Transition | - |
+| ``dust_pillar`` | Dust Pillar | - |
+| ``dust_plume`` | Dust Plume | - |
+| ``effect`` | Effect | - |
+| ``egg_crack`` | Egg Crack | - |
+| ``elder_guardian`` | Elder Guardian | - |
+| ``electric_spark`` | Electric Spark | - |
+| ``enchant`` | Enchant | - |
+| ``enchanted_hit`` | Enchanted Hit | - |
+| ``end_rod`` | End Rod | - |
+| ``entity_effect`` | Entity Effect | - |
+| ``explosion`` | Explosion | - |
+| ``explosion_emitter`` | Explosion Emitter | - |
+| ``falling_dripstone_lava`` | Falling Dripstone Lava | - |
+| ``falling_dripstone_water`` | Falling Dripstone Water | - |
+| ``falling_dust`` | Falling Dust | - |
+| ``falling_honey`` | Falling Honey | - |
+| ``falling_lava`` | Falling Lava | - |
+| ``falling_nectar`` | Falling Nectar | - |
+| ``falling_obsidian_tear`` | Falling Obsidian Tear | - |
+| ``falling_spore_blossom`` | Falling Spore Blossom | - |
+| ``falling_water`` | Falling Water | - |
+| ``firework`` | Firework | - |
+| ``fishing`` | Fishing | - |
+| ``flame`` | Flame | - |
+| ``flash`` | Flash | - |
+| ``glow`` | Glow | - |
+| ``glow_squid_ink`` | Glow Squid Ink | - |
+| ``gust`` | Gust | - |
+| ``gust_emitter_large`` | Gust Emitter Large | - |
+| ``gust_emitter_small`` | Gust Emitter Small | - |
+| ``happy_villager`` | Happy Villager | - |
+| ``heart`` | Heart | - |
+| ``infested`` | Infested | - |
+| ``instant_effect`` | Instant Effect | - |
+| ``item`` | Item | - |
+| ``item_cobweb`` | Item Cobweb | - |
+| ``item_slime`` | Item Slime | - |
+| ``item_snowball`` | Item Snowball | - |
+| ``landing_honey`` | Landing Honey | - |
+| ``landing_lava`` | Landing Lava | - |
+| ``landing_obsidian_tear`` | Landing Obsidian Tear | - |
+| ``large_smoke`` | Large Smoke | - |
+| ``lava`` | Lava | - |
+| ``mycelium`` | Mycelium | - |
+| ``nautilus`` | Nautilus | - |
+| ``note`` | Note | - |
+| ``ominous_spawning`` | Ominous Spawning | - |
+| ``poof`` | Poof | - |
+| ``portal`` | Portal | - |
+| ``raid_omen`` | Raid Omen | - |
+| ``rain`` | Rain | - |
+| ``reverse_portal`` | Reverse Portal | - |
+| ``scrape`` | Scrape | - |
+| ``sculk_charge`` | Sculk Charge | - |
+| ``sculk_charge_pop`` | Sculk Charge Pop | - |
+| ``sculk_soul`` | Sculk Soul | - |
+| ``shriek`` | Shriek | - |
+| ``small_flame`` | Small Flame | - |
+| ``small_gust`` | Small Gust | - |
+| ``smoke`` | Smoke | - |
+| ``sneeze`` | Sneeze | - |
+| ``snowflake`` | Snowflake | - |
+| ``sonic_boom`` | Sonic Boom | - |
+| ``soul`` | Soul | - |
+| ``soul_fire_flame`` | Soul Fire Flame | - |
+| ``spit`` | Spit | - |
+| ``splash`` | Splash | - |
+| ``spore_blossom_air`` | Spore Blossom Air | - |
+| ``squid_ink`` | Squid Ink | - |
+| ``sweep_attack`` | Sweep Attack | - |
+| ``totem_of_undying`` | Totem Of Undying | ``totem`` |
+| ``trial_omen`` | Trial Omen | - |
+| ``trial_spawner_detection`` | Trial Spawner Detection | - |
+| ``trial_spawner_detection_ominous`` | Trial Spawner Detection Ominous | - |
+| ``underwater`` | Underwater | - |
+| ``vault_connection`` | Vault Connection | - |
+| ``vibration`` | Vibration | - |
+| ``warped_spore`` | Warped Spore | - |
+| ``wax_off`` | Wax Off | - |
+| ``wax_on`` | Wax On | - |
+| ``white_ash`` | White Ash | - |
+| ``white_smoke`` | White Smoke | - |
+| ``witch`` | Witch | - |

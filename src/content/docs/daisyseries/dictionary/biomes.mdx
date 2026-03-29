@@ -1,0 +1,100 @@
+---
+title: Biomes Dictionary
+description: Canonical DaisySeries biome keys, display names, and accepted aliases.
+---
+
+# Biomes Dictionary
+
+Use these values for biome-aware config, region defaults, and gameplay systems that need stable biome selection.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `cherry_grove`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs like `minecraft:cherry_grove` are normalized on parse.
+
+## Quick config example
+
+```yaml
+biome: badlands
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyBiomes.parse(config.biome)
+val key = DaisyBiomes.key(value)
+val label = DaisyBiomes.displayName(value)
+
+val typed = required("biome", biomeCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``badlands`` | Badlands | - |
+| ``bamboo_jungle`` | Bamboo Jungle | - |
+| ``basalt_deltas`` | Basalt Deltas | - |
+| ``beach`` | Beach | - |
+| ``birch_forest`` | Birch Forest | - |
+| ``cherry_grove`` | Cherry Grove | - |
+| ``cold_ocean`` | Cold Ocean | - |
+| ``crimson_forest`` | Crimson Forest | - |
+| ``custom`` | Custom | - |
+| ``dark_forest`` | Dark Forest | - |
+| ``deep_cold_ocean`` | Deep Cold Ocean | - |
+| ``deep_dark`` | Deep Dark | - |
+| ``deep_frozen_ocean`` | Deep Frozen Ocean | - |
+| ``deep_lukewarm_ocean`` | Deep Lukewarm Ocean | - |
+| ``deep_ocean`` | Deep Ocean | - |
+| ``desert`` | Desert | - |
+| ``dripstone_caves`` | Dripstone Caves | - |
+| ``end_barrens`` | End Barrens | - |
+| ``end_highlands`` | End Highlands | - |
+| ``end_midlands`` | End Midlands | - |
+| ``eroded_badlands`` | Eroded Badlands | - |
+| ``flower_forest`` | Flower Forest | - |
+| ``forest`` | Forest | - |
+| ``frozen_ocean`` | Frozen Ocean | - |
+| ``frozen_peaks`` | Frozen Peaks | - |
+| ``frozen_river`` | Frozen River | - |
+| ``grove`` | Grove | - |
+| ``ice_spikes`` | Ice Spikes | - |
+| ``jagged_peaks`` | Jagged Peaks | - |
+| ``jungle`` | Jungle | - |
+| ``lukewarm_ocean`` | Lukewarm Ocean | - |
+| ``lush_caves`` | Lush Caves | - |
+| ``mangrove_swamp`` | Mangrove Swamp | - |
+| ``meadow`` | Meadow | - |
+| ``mushroom_fields`` | Mushroom Fields | - |
+| ``nether_wastes`` | Nether Wastes | ``nether`` |
+| ``ocean`` | Ocean | - |
+| ``old_growth_birch_forest`` | Old Growth Birch Forest | - |
+| ``old_growth_pine_taiga`` | Old Growth Pine Taiga | - |
+| ``old_growth_spruce_taiga`` | Old Growth Spruce Taiga | - |
+| ``plains`` | Plains | - |
+| ``river`` | River | - |
+| ``savanna`` | Savanna | - |
+| ``savanna_plateau`` | Savanna Plateau | - |
+| ``small_end_islands`` | Small End Islands | - |
+| ``snowy_beach`` | Snowy Beach | - |
+| ``snowy_plains`` | Snowy Plains | - |
+| ``snowy_slopes`` | Snowy Slopes | - |
+| ``snowy_taiga`` | Snowy Taiga | - |
+| ``soul_sand_valley`` | Soul Sand Valley | - |
+| ``sparse_jungle`` | Sparse Jungle | - |
+| ``stony_peaks`` | Stony Peaks | - |
+| ``stony_shore`` | Stony Shore | - |
+| ``sunflower_plains`` | Sunflower Plains | - |
+| ``swamp`` | Swamp | - |
+| ``taiga`` | Taiga | - |
+| ``the_end`` | The End | ``end`` |
+| ``the_void`` | The Void | - |
+| ``warm_ocean`` | Warm Ocean | - |
+| ``warped_forest`` | Warped Forest | - |
+| ``windswept_forest`` | Windswept Forest | - |
+| ``windswept_gravelly_hills`` | Windswept Gravelly Hills | - |
+| ``windswept_hills`` | Windswept Hills | - |
+| ``windswept_savanna`` | Windswept Savanna | - |
+| ``wooded_badlands`` | Wooded Badlands | - |

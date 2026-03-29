@@ -1,0 +1,79 @@
+---
+title: Why DaisySeries Instead of Local Helpers
+description: Use DaisySeries as the modern Paper-first parser layer instead of rebuilding XSeries-style glue or plugin-local enum helpers.
+---
+
+# Why DaisySeries Instead of Local Helpers
+
+DaisySeries exists because most modern Paper plugins eventually reinvent the same layer:
+
+- `valueOf(...)` wrappers
+- alias maps
+- lowercase normalization
+- kebab/space handling
+- display-name formatting
+- canonical serialization keys
+
+That layer is boring, repeated, and easy to make inconsistent.
+
+## The modern position
+
+DaisySeries is trying to be the parser layer you actually want for modern Minecraft plugin work.
+
+That means:
+
+- modern Paper-first scope
+- canonical lowercase keys
+- curated aliases only
+- stronger docs and migration guidance
+- cleaner integration with DaisyConfig and DaisyCore
+
+It does **not** mean:
+
+- every historical XSeries edge
+- giant legacy compatibility maps
+- framework ownership
+- config-loader ownership
+
+## What you stop writing locally
+
+Instead of this:
+
+```kotlin
+val material = Material.valueOf(config.icon.uppercase())
+val sound = Sound.valueOf(config.sound.uppercase())
+val mode =
+    when (config.gameMode.lowercase()) {
+        "surv" -> GameMode.SURVIVAL
+        "spec" -> GameMode.SPECTATOR
+        else -> GameMode.valueOf(config.gameMode.uppercase())
+    }
+```
+
+Use this:
+
+```kotlin
+val material = DaisyMaterials.parse(config.icon)
+val sound = DaisySounds.parse(config.sound)
+val mode = DaisyGameModes.parse(config.gameMode)
+```
+
+## Why this is better
+
+- one parse contract across modules
+- one canonical key model
+- one display-name model
+- one place for curated aliases
+- easier migration between plugins because keys stay stable
+
+## Use DaisySeries alone or in the stack
+
+Use DaisySeries alone when the problem is just value parsing.
+
+Pair it with DaisyConfig when those values live in typed YAML.
+
+Pair it with DaisyCore when those parsed values feed runtime menus, sounds, commands, or UI.
+
+## The practical promise
+
+For modern Minecraft, DaisySeries should be the better answer than local enum glue and the cleaner answer than dragging old compatibility assumptions into a modern Paper plugin.

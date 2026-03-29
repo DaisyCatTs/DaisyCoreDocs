@@ -105,6 +105,14 @@ export default defineConfig({
               ],
             },
             {
+              label: 'Guides',
+              items: [
+                { label: 'Config-Driven Plugins', slug: 'daisyseries/guides/use-daisyseries-in-config-driven-plugins' },
+                { label: 'Use DaisySeries with DaisyCore', slug: 'daisyseries/guides/use-daisyseries-with-daisycore' },
+                { label: 'Why DaisySeries Instead of Local Helpers', slug: 'daisyseries/guides/why-daisyseries-instead-of-local-helpers' },
+              ],
+            },
+            {
               label: 'Modules',
               items: [
                 { label: 'Materials', slug: 'daisyseries/modules/materials' },
@@ -112,6 +120,11 @@ export default defineConfig({
                 { label: 'Item Flags', slug: 'daisyseries/modules/item-flags' },
                 { label: 'Enchantments', slug: 'daisyseries/modules/enchantments' },
                 { label: 'Potions', slug: 'daisyseries/modules/potions' },
+                { label: 'Biomes', slug: 'daisyseries/modules/biomes' },
+                { label: 'Entity Types', slug: 'daisyseries/modules/entities' },
+                { label: 'Game Modes', slug: 'daisyseries/modules/game-modes' },
+                { label: 'Particles', slug: 'daisyseries/modules/particles' },
+                { label: 'Statistics', slug: 'daisyseries/modules/statistics' },
               ],
             },
             {
@@ -122,6 +135,11 @@ export default defineConfig({
                 { label: 'Enchantments', slug: 'daisyseries/dictionary/enchantments' },
                 { label: 'Item Flags', slug: 'daisyseries/dictionary/item-flags' },
                 { label: 'Potions', slug: 'daisyseries/dictionary/potions' },
+                { label: 'Biomes', slug: 'daisyseries/dictionary/biomes' },
+                { label: 'Entity Types', slug: 'daisyseries/dictionary/entities' },
+                { label: 'Game Modes', slug: 'daisyseries/dictionary/game-modes' },
+                { label: 'Particles', slug: 'daisyseries/dictionary/particles' },
+                { label: 'Statistics', slug: 'daisyseries/dictionary/statistics' },
                 { label: 'Canonical Keys', slug: 'daisyseries/dictionary/canonical-keys' },
               ],
             },
@@ -133,6 +151,11 @@ export default defineConfig({
                 { label: 'Item Flag API', slug: 'daisyseries/reference/item-flag-api' },
                 { label: 'Enchantment API', slug: 'daisyseries/reference/enchantment-api' },
                 { label: 'Potion API', slug: 'daisyseries/reference/potion-api' },
+                { label: 'Biome API', slug: 'daisyseries/reference/biome-api' },
+                { label: 'Entity API', slug: 'daisyseries/reference/entity-api' },
+                { label: 'Game Mode API', slug: 'daisyseries/reference/game-mode-api' },
+                { label: 'Particle API', slug: 'daisyseries/reference/particle-api' },
+                { label: 'Statistic API', slug: 'daisyseries/reference/statistic-api' },
               ],
             },
             {

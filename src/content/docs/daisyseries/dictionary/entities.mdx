@@ -1,0 +1,166 @@
+---
+title: Entity Types Dictionary
+description: Canonical DaisySeries entity-type keys, display names, and accepted aliases.
+---
+
+# Entity Types Dictionary
+
+Use these values for mob settings, entity-based features, and config-driven entity selection.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `zombie_villager`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs like `minecraft:zombie_villager` are normalized on parse.
+
+## Quick config example
+
+```yaml
+entity: allay
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyEntities.parse(config.entity)
+val key = DaisyEntities.key(value)
+val label = DaisyEntities.displayName(value)
+
+val typed = required("entity", entityTypeCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``allay`` | Allay | - |
+| ``area_effect_cloud`` | Area Effect Cloud | - |
+| ``armadillo`` | Armadillo | - |
+| ``armor_stand`` | Armor Stand | - |
+| ``arrow`` | Arrow | - |
+| ``axolotl`` | Axolotl | - |
+| ``bat`` | Bat | - |
+| ``bee`` | Bee | - |
+| ``blaze`` | Blaze | - |
+| ``block_display`` | Block Display | - |
+| ``boat`` | Boat | - |
+| ``bogged`` | Bogged | - |
+| ``breeze`` | Breeze | - |
+| ``breeze_wind_charge`` | Breeze Wind Charge | - |
+| ``camel`` | Camel | - |
+| ``cat`` | Cat | - |
+| ``cave_spider`` | Cave Spider | - |
+| ``chest_boat`` | Chest Boat | - |
+| ``chest_minecart`` | Chest Minecart | - |
+| ``chicken`` | Chicken | - |
+| ``cod`` | Cod | - |
+| ``command_block_minecart`` | Command Block Minecart | - |
+| ``cow`` | Cow | - |
+| ``creeper`` | Creeper | - |
+| ``dolphin`` | Dolphin | - |
+| ``donkey`` | Donkey | - |
+| ``dragon_fireball`` | Dragon Fireball | - |
+| ``drowned`` | Drowned | - |
+| ``egg`` | Egg | - |
+| ``elder_guardian`` | Elder Guardian | - |
+| ``end_crystal`` | End Crystal | - |
+| ``ender_dragon`` | Ender Dragon | - |
+| ``ender_pearl`` | Ender Pearl | - |
+| ``enderman`` | Enderman | - |
+| ``endermite`` | Endermite | - |
+| ``evoker`` | Evoker | - |
+| ``evoker_fangs`` | Evoker Fangs | - |
+| ``experience_bottle`` | Experience Bottle | - |
+| ``experience_orb`` | Experience Orb | - |
+| ``eye_of_ender`` | Eye Of Ender | - |
+| ``falling_block`` | Falling Block | - |
+| ``fireball`` | Fireball | - |
+| ``firework_rocket`` | Firework Rocket | - |
+| ``fishing_bobber`` | Fishing Bobber | - |
+| ``fox`` | Fox | - |
+| ``frog`` | Frog | - |
+| ``furnace_minecart`` | Furnace Minecart | - |
+| ``ghast`` | Ghast | - |
+| ``giant`` | Giant | - |
+| ``glow_item_frame`` | Glow Item Frame | - |
+| ``glow_squid`` | Glow Squid | - |
+| ``goat`` | Goat | - |
+| ``guardian`` | Guardian | - |
+| ``hoglin`` | Hoglin | - |
+| ``hopper_minecart`` | Hopper Minecart | - |
+| ``horse`` | Horse | - |
+| ``husk`` | Husk | - |
+| ``illusioner`` | Illusioner | - |
+| ``interaction`` | Interaction | - |
+| ``iron_golem`` | Iron Golem | - |
+| ``item`` | Item | - |
+| ``item_display`` | Item Display | - |
+| ``item_frame`` | Item Frame | - |
+| ``leash_knot`` | Leash Knot | - |
+| ``lightning_bolt`` | Lightning Bolt | - |
+| ``llama`` | Llama | - |
+| ``llama_spit`` | Llama Spit | - |
+| ``magma_cube`` | Magma Cube | - |
+| ``marker`` | Marker | - |
+| ``minecart`` | Minecart | - |
+| ``mooshroom`` | Mooshroom | ``mushroom_cow`` |
+| ``mule`` | Mule | - |
+| ``ocelot`` | Ocelot | - |
+| ``ominous_item_spawner`` | Ominous Item Spawner | - |
+| ``painting`` | Painting | - |
+| ``panda`` | Panda | - |
+| ``parrot`` | Parrot | - |
+| ``phantom`` | Phantom | - |
+| ``pig`` | Pig | - |
+| ``piglin`` | Piglin | - |
+| ``piglin_brute`` | Piglin Brute | - |
+| ``pillager`` | Pillager | - |
+| ``player`` | Player | - |
+| ``polar_bear`` | Polar Bear | - |
+| ``potion`` | Potion | - |
+| ``pufferfish`` | Pufferfish | - |
+| ``rabbit`` | Rabbit | - |
+| ``ravager`` | Ravager | - |
+| ``salmon`` | Salmon | - |
+| ``sheep`` | Sheep | - |
+| ``shulker`` | Shulker | - |
+| ``shulker_bullet`` | Shulker Bullet | - |
+| ``silverfish`` | Silverfish | - |
+| ``skeleton`` | Skeleton | - |
+| ``skeleton_horse`` | Skeleton Horse | - |
+| ``slime`` | Slime | - |
+| ``small_fireball`` | Small Fireball | - |
+| ``sniffer`` | Sniffer | - |
+| ``snow_golem`` | Snow Golem | - |
+| ``snowball`` | Snowball | - |
+| ``spawner_minecart`` | Spawner Minecart | - |
+| ``spectral_arrow`` | Spectral Arrow | - |
+| ``spider`` | Spider | - |
+| ``squid`` | Squid | - |
+| ``stray`` | Stray | - |
+| ``strider`` | Strider | - |
+| ``tadpole`` | Tadpole | - |
+| ``text_display`` | Text Display | - |
+| ``tnt`` | Tnt | - |
+| ``tnt_minecart`` | Tnt Minecart | - |
+| ``trader_llama`` | Trader Llama | - |
+| ``trident`` | Trident | - |
+| ``tropical_fish`` | Tropical Fish | - |
+| ``turtle`` | Turtle | - |
+| ``unknown`` | Unknown | - |
+| ``vex`` | Vex | - |
+| ``villager`` | Villager | - |
+| ``vindicator`` | Vindicator | - |
+| ``wandering_trader`` | Wandering Trader | - |
+| ``warden`` | Warden | - |
+| ``wind_charge`` | Wind Charge | - |
+| ``witch`` | Witch | - |
+| ``wither`` | Wither | - |
+| ``wither_skeleton`` | Wither Skeleton | - |
+| ``wither_skull`` | Wither Skull | - |
+| ``wolf`` | Wolf | - |
+| ``zoglin`` | Zoglin | - |
+| ``zombie`` | Zombie | - |
+| ``zombie_horse`` | Zombie Horse | - |
+| ``zombie_villager`` | Zombie Villager | - |
+| ``zombified_piglin`` | Zombified Piglin | - |

@@ -51,6 +51,8 @@ data class SpawnSettings(
     val delaySeconds: Int,
     val icon: Material,
     val readySound: Sound,
+    val spawnBiome: Biome,
+    val readyParticle: Particle,
 )
 
 val spawnSettingsCodec =
@@ -59,13 +61,15 @@ val spawnSettingsCodec =
             delaySeconds = defaulted("spawn.delay", intCodec(), 3),
             icon = required("spawn.icon", materialCodec()),
             readySound = required("spawn.ready_sound", soundCodec()),
+            spawnBiome = required("spawn.biome", biomeCodec()),
+            readyParticle = required("spawn.ready_particle", particleCodec()),
         )
     }
 ```
 
 Ownership here:
 
-- DaisySeries codecs parse `Material` and `Sound`
+- DaisySeries codecs parse `Material`, `Sound`, `Biome`, and `Particle`
 - DaisyConfig owns the file and typed decode
 - DaisyCore is not involved yet
 
@@ -78,6 +82,8 @@ spawn:
   delay: 3
   icon: compass
   ready_sound: entity_player_levelup
+  biome: cherry_grove
+  ready_particle: totem_of_undying
 ```
 
 ```yaml
@@ -191,6 +197,7 @@ class SpawnCommands(
             }
 
             player.playSound(player.location, settings.readySound, 1f, 1f)
+            player.spawnParticle(settings.readyParticle, player.location, 4)
         }
     }
 })

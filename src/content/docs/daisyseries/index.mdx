@@ -11,8 +11,8 @@ import StepCard from '@components/StepCard.astro'
 
 <ProductLandingHero
   product="series"
-  title="DaisySeries is the canonical value and alias layer for modern Paper plugins."
-  description="Use DaisySeries when config-safe parsing is the problem and you do not want canonical keys, aliases, and normalization leaking through the rest of your plugin."
+  title="DaisySeries is the modern Paper parser layer for canonical values, aliases, and config-safe normalization."
+  description="Use DaisySeries when you want the modern Minecraft replacement for plugin-local enum helpers and XSeries-style parsing glue without dragging legacy compatibility baggage through the rest of your code."
   primaryCta={{ label: 'Install DaisySeries', href: '/daisyseries/getting-started/install/' }}
   secondaryCta={{ label: 'First Parse', href: '/daisyseries/getting-started/first-parse/' }}
 />
@@ -21,6 +21,7 @@ import StepCard from '@components/StepCard.astro'
   <div class="value-pill"><strong>Canonical keys</strong><span>Serialize stable lowercase keys instead of plugin-local enum formatting.</span></div>
   <div class="value-pill"><strong>Curated aliases</strong><span>Accept practical real-world input without writing your own alias maps.</span></div>
   <div class="value-pill"><strong>Tiny contract</strong><span>Parse, key, display name, and aliases stay consistent across modules.</span></div>
+  <div class="value-pill"><strong>Modern replacement</strong><span>Use DaisySeries as the modern Paper-first alternative to local enum helpers and legacy XSeries-style parser glue.</span></div>
   <div class="value-pill"><strong>Standalone or paired</strong><span>Use DaisySeries alone, or feed its values into DaisyConfig and DaisyCore when config or runtime layers need them.</span></div>
 </div>
 
@@ -30,6 +31,7 @@ import StepCard from '@components/StepCard.astro'
   <div class="feature-card"><strong>Materials</strong><p>Config-friendly parsing for item and block selections with stable serialization keys.</p></div>
   <div class="feature-card"><strong>Sounds</strong><p>Canonical sound values and aliases for config-driven audio cues.</p></div>
   <div class="feature-card"><strong>Enchantments and potions</strong><p>Registry-sensitive values with one consistent parser surface.</p></div>
+  <div class="feature-card"><strong>Biomes, entities, game modes, particles, and statistics</strong><p>Expand the same canonical contract into more of the modern Paper surface plugin authors actually hit in config-heavy work.</p></div>
   <div class="feature-card"><strong>Dictionary lookups</strong><p>Static committed dictionaries so values stay searchable and linkable in docs.</p></div>
 </div>
 
@@ -61,8 +63,13 @@ import StepCard from '@components/StepCard.astro'
   <p>Open the <a href="/daisyseries/dictionary/materials/">dictionary pages</a> when you need canonical values without digging through code.</p>
 </StepCard>
 
+<StepCard step={4} title="Reach for DaisySeries when modern enum helpers are the real problem" product="series">
+  <p>Read <a href="/daisyseries/guides/why-daisyseries-instead-of-local-helpers/">Why DaisySeries Instead of Local Helpers</a> when you want the modern Paper answer to XSeries-style parsing without legacy baggage.</p>
+</StepCard>
+
 ## Quick links
 
 - Start here: [Install DaisySeries](/daisyseries/getting-started/install/)
 - Main guide: [First Parse](/daisyseries/getting-started/first-parse/)
 - Reference: [Material API](/daisyseries/reference/material-api/)
+- Why this product: [Why DaisySeries Instead of Local Helpers](/daisyseries/guides/why-daisyseries-instead-of-local-helpers/)

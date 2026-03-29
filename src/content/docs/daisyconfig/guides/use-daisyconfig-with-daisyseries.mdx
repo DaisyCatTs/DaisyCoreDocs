@@ -14,6 +14,11 @@ Use DaisySeries-backed codecs for values like:
 - item flags
 - enchantments
 - potion effects
+- biomes
+- entity types
+- game modes
+- particles
+- statistics
 
 ```kotlin
 val profileUiCodec =
@@ -24,6 +29,11 @@ val profileUiCodec =
             flags = defaulted("flags", itemFlagsCodec(), emptySet()),
             enchantment = required("enchantment", enchantmentCodec()),
             effect = required("effect", potionEffectCodec()),
+            biome = required("biome", biomeCodec()),
+            entity = required("entity", entityTypeCodec()),
+            gameMode = required("game_mode", gameModeCodec()),
+            particle = required("particle", particleCodec()),
+            statistic = required("statistic", statisticCodec()),
             sidebarTitle = defaulted("sidebar_title", stringCodec(), "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"),
         )
     }

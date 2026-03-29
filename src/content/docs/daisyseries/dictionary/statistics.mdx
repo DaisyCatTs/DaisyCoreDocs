@@ -1,0 +1,118 @@
+---
+title: Statistics Dictionary
+description: Canonical DaisySeries statistic keys and display names.
+---
+
+# Statistics Dictionary
+
+Use these values for statistic-driven gameplay, thresholds, leaderboards, and config-backed progression rules.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `player_kills`.
+- Statistics currently do not ship curated aliases.
+- Namespaced inputs are normalized when the DaisySeries statistic parser accepts them.
+
+## Quick config example
+
+```yaml
+statistic: animals_bred
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyStatistics.parse(config.statistic)
+val key = DaisyStatistics.key(value)
+val label = DaisyStatistics.displayName(value)
+
+val typed = required("statistic", statisticCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``animals_bred`` | Animals Bred | - |
+| ``armor_cleaned`` | Armor Cleaned | - |
+| ``aviate_one_cm`` | Aviate One Cm | - |
+| ``banner_cleaned`` | Banner Cleaned | - |
+| ``beacon_interaction`` | Beacon Interaction | - |
+| ``bell_ring`` | Bell Ring | - |
+| ``boat_one_cm`` | Boat One Cm | - |
+| ``break_item`` | Break Item | - |
+| ``brewingstand_interaction`` | Brewingstand Interaction | - |
+| ``cake_slices_eaten`` | Cake Slices Eaten | - |
+| ``cauldron_filled`` | Cauldron Filled | - |
+| ``cauldron_used`` | Cauldron Used | - |
+| ``chest_opened`` | Chest Opened | - |
+| ``clean_shulker_box`` | Clean Shulker Box | - |
+| ``climb_one_cm`` | Climb One Cm | - |
+| ``craft_item`` | Craft Item | - |
+| ``crafting_table_interaction`` | Crafting Table Interaction | - |
+| ``crouch_one_cm`` | Crouch One Cm | - |
+| ``damage_absorbed`` | Damage Absorbed | - |
+| ``damage_blocked_by_shield`` | Damage Blocked By Shield | - |
+| ``damage_dealt`` | Damage Dealt | - |
+| ``damage_dealt_absorbed`` | Damage Dealt Absorbed | - |
+| ``damage_dealt_resisted`` | Damage Dealt Resisted | - |
+| ``damage_resisted`` | Damage Resisted | - |
+| ``damage_taken`` | Damage Taken | - |
+| ``deaths`` | Deaths | - |
+| ``dispenser_inspected`` | Dispenser Inspected | - |
+| ``drop`` | Drop | - |
+| ``drop_count`` | Drop Count | - |
+| ``dropper_inspected`` | Dropper Inspected | - |
+| ``enderchest_opened`` | Enderchest Opened | - |
+| ``entity_killed_by`` | Entity Killed By | - |
+| ``fall_one_cm`` | Fall One Cm | - |
+| ``fish_caught`` | Fish Caught | - |
+| ``flower_potted`` | Flower Potted | - |
+| ``fly_one_cm`` | Fly One Cm | - |
+| ``furnace_interaction`` | Furnace Interaction | - |
+| ``hopper_inspected`` | Hopper Inspected | - |
+| ``horse_one_cm`` | Horse One Cm | - |
+| ``interact_with_anvil`` | Interact With Anvil | - |
+| ``interact_with_blast_furnace`` | Interact With Blast Furnace | - |
+| ``interact_with_campfire`` | Interact With Campfire | - |
+| ``interact_with_cartography_table`` | Interact With Cartography Table | - |
+| ``interact_with_grindstone`` | Interact With Grindstone | - |
+| ``interact_with_lectern`` | Interact With Lectern | - |
+| ``interact_with_loom`` | Interact With Loom | - |
+| ``interact_with_smithing_table`` | Interact With Smithing Table | - |
+| ``interact_with_smoker`` | Interact With Smoker | - |
+| ``interact_with_stonecutter`` | Interact With Stonecutter | - |
+| ``item_enchanted`` | Item Enchanted | - |
+| ``jump`` | Jump | - |
+| ``kill_entity`` | Kill Entity | - |
+| ``leave_game`` | Leave Game | - |
+| ``mine_block`` | Mine Block | - |
+| ``minecart_one_cm`` | Minecart One Cm | - |
+| ``mob_kills`` | Mob Kills | - |
+| ``noteblock_played`` | Noteblock Played | - |
+| ``noteblock_tuned`` | Noteblock Tuned | - |
+| ``open_barrel`` | Open Barrel | - |
+| ``pickup`` | Pickup | - |
+| ``pig_one_cm`` | Pig One Cm | - |
+| ``play_one_minute`` | Play One Minute | - |
+| ``player_kills`` | Player Kills | - |
+| ``raid_trigger`` | Raid Trigger | - |
+| ``raid_win`` | Raid Win | - |
+| ``record_played`` | Record Played | - |
+| ``shulker_box_opened`` | Shulker Box Opened | - |
+| ``sleep_in_bed`` | Sleep In Bed | - |
+| ``sneak_time`` | Sneak Time | - |
+| ``sprint_one_cm`` | Sprint One Cm | - |
+| ``strider_one_cm`` | Strider One Cm | - |
+| ``swim_one_cm`` | Swim One Cm | - |
+| ``talked_to_villager`` | Talked To Villager | - |
+| ``target_hit`` | Target Hit | - |
+| ``time_since_death`` | Time Since Death | - |
+| ``time_since_rest`` | Time Since Rest | - |
+| ``total_world_time`` | Total World Time | - |
+| ``traded_with_villager`` | Traded With Villager | - |
+| ``trapped_chest_triggered`` | Trapped Chest Triggered | - |
+| ``use_item`` | Use Item | - |
+| ``walk_on_water_one_cm`` | Walk On Water One Cm | - |
+| ``walk_one_cm`` | Walk One Cm | - |
+| ``walk_under_water_one_cm`` | Walk Under Water One Cm | - |
