@@ -1,0 +1,30 @@
+---
+title: Use DaisyConfig with DaisySeries
+description: Use DaisySeries-backed codecs inside DaisyConfig instead of rebuilding parser logic.
+---
+
+# Use DaisyConfig with DaisySeries
+
+DaisyConfig and DaisySeries are meant to fit together.
+
+Use DaisySeries-backed codecs for values like:
+- materials
+- sounds
+- item flags
+- enchantments
+- potion effects
+
+```kotlin
+val profileUiCodec =
+    objectCodec {
+        ProfileUiConfig(
+            icon = required("icon", materialCodec()),
+            feedbackSound = required("feedback_sound", soundCodec()),
+            flags = defaulted("flags", itemFlagsCodec(), emptySet()),
+            enchantment = required("enchantment", enchantmentCodec()),
+            effect = required("effect", potionEffectCodec()),
+            sidebarTitle = defaulted("sidebar_title", stringCodec(), "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"),
+        )
+    }
+```
+

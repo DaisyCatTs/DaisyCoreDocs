@@ -1,0 +1,42 @@
+---
+title: Use DaisyConfig with DaisyCore
+description: Pair typed YAML config with DaisyCore runtime systems and text integration.
+---
+
+# Use DaisyConfig with DaisyCore
+
+Use DaisyCore for:
+- commands
+- menus
+- sidebars
+- tablists
+- runtime ownership
+
+Use DaisyConfig for:
+- typed YAML values
+- reload-safe config ownership
+- config-backed text sources
+
+```kotlin
+val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
+
+val daisy =
+    DaisyPlatform.create(plugin) {
+        messages(langHandle.current.asDaisyTextSource())
+        commands()
+        menus()
+        scoreboards()
+        tablists()
+    }
+```
+
+## Important safety rule
+
+DaisyConfig does not render placeholders itself.
+
+It only supplies the text source. DaisyCore still owns:
+- MiniMessage parsing
+- viewer-aware rendering
+- PlaceholderAPI integration
+- safe fallback when PlaceholderAPI is absent
+

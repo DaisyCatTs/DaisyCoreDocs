@@ -1,0 +1,21 @@
+---
+title: Migration
+description: Move from plugin-local config helpers to DaisyConfig.
+---
+
+# Migration
+
+Replace:
+
+- raw `getString(...)` lookups
+- manual nested-section traversal
+- plugin-local reload code
+- one-off DaisyCore text adapters
+
+With:
+
+- typed codecs
+- `DaisyConfigHandle<T>`
+- `yamlConfigHandle(...)`
+- `DaisyTextConfig` plus `asDaisyTextSource()`
+

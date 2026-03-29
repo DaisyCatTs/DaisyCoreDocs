@@ -1,0 +1,15 @@
+---
+title: Why DaisyConfig Is Separate
+description: Understand why DaisyConfig is its own Daisy product instead of being folded into DaisyCore.
+---
+
+# Why DaisyConfig Is Separate
+
+DaisyConfig is separate because it solves a different problem:
+
+- DaisyCore is runtime/platform
+- DaisySeries is parser/normalization
+- DaisyConfig is typed config ownership
+
+That boundary keeps each product smaller, clearer, and more reusable.
+

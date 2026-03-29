@@ -1,0 +1,54 @@
+---
+title: First Config
+description: Build your first typed YAML config with DaisyConfig.
+---
+
+# First Config
+
+This is the normal DaisyConfig flow:
+
+1. define a typed config class
+2. define a codec
+3. load it from YAML
+4. keep it in a reload-safe handle
+
+```kotlin
+data class ProfileUiConfig(
+    val icon: Material,
+    val sidebarTitle: String,
+)
+
+val profileUiCodec =
+    objectCodec {
+        ProfileUiConfig(
+            icon = required("icon", materialCodec()),
+            sidebarTitle = defaulted("sidebar_title", stringCodec(), "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"),
+        )
+    }
+```
+
+```kotlin
+class MyPlugin : JavaPlugin() {
+    lateinit var profileConfig: DaisyConfigHandle<ProfileUiConfig>
+        private set
+
+    override fun onEnable() {
+        ensureDefaultConfigResource("profile-ui.yml")
+        profileConfig = yamlConfigHandle("profile-ui.yml", profileUiCodec)
+    }
+}
+```
+
+## What this gives you
+
+- typed values instead of raw string lookups
+- DaisySeries parsing for config-heavy value types
+- a stable `current` config value
+- safe reload behavior
+
+## Next steps
+
+- Learn reload behavior: [Reload-Safe Configs](/daisyconfig/guides/reload-safe-configs/)
+- Pair it with DaisyCore: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
+- Learn the codec surface: [Config Codecs](/daisyconfig/reference/config-codecs/)
+

@@ -1,0 +1,24 @@
+---
+title: Reload-Safe Configs
+description: Use DaisyConfig handles to keep the last good config live when a reload fails.
+---
+
+# Reload-Safe Configs
+
+`DaisyConfigHandle<T>` exists so config reloads stay production-safe.
+
+## The rule
+
+- `current` always exposes the last good config
+- successful reload replaces it
+- failed reload keeps the previous good value live
+
+```kotlin
+when (val result = profileConfig.reload()) {
+    is DaisyReloadResult.Success -> logger.info("Reloaded.")
+    is DaisyReloadResult.Failure -> logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+}
+```
+
+That is the default because a typo in YAML should not put your runtime into a half-decoded state.
+

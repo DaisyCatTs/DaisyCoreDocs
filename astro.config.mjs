@@ -6,10 +6,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Daisy',
-      description: 'Shared docs for DaisyCore and DaisySeries: the Kotlin-first Paper platform and the lightweight parsing toolkit.',
+      description: 'Shared docs for DaisyCore, DaisySeries, and DaisyConfig: the Kotlin-first Paper platform, parser toolkit, and typed config layer.',
       social: [
         { icon: 'github', label: 'DaisyCore on GitHub', href: 'https://github.com/DaisyCatTs/DaisyCore' },
         { icon: 'github', label: 'DaisySeries on GitHub', href: 'https://github.com/DaisyCatTs/DaisySeries' },
+        { icon: 'github', label: 'DaisyConfig on GitHub', href: 'https://github.com/DaisyCatTs/DaisyConfig' },
       ],
       head: [
         { tag: 'link', attrs: { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' } },
@@ -141,6 +142,44 @@ export default defineConfig({
               items: [
                 { label: 'Why DaisySeries Is Separate', slug: 'daisyseries/explanation/why-daisyseries-is-separate' },
                 { label: 'Migration', slug: 'daisyseries/migration/from-plugin-local-enum-helpers' },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'DaisyConfig',
+          items: [
+            { label: 'Overview', slug: 'daisyconfig' },
+            {
+              label: 'Start Here',
+              items: [
+                { label: 'Install DaisyConfig', slug: 'daisyconfig/getting-started/install' },
+                { label: 'First Config', slug: 'daisyconfig/getting-started/first-config' },
+              ],
+            },
+            {
+              label: 'Guides',
+              items: [
+                { label: 'Reload-Safe Configs', slug: 'daisyconfig/guides/reload-safe-configs' },
+                { label: 'Use DaisyConfig with DaisyCore', slug: 'daisyconfig/guides/use-daisyconfig-with-daisycore' },
+                { label: 'Use DaisyConfig with DaisySeries', slug: 'daisyconfig/guides/use-daisyconfig-with-daisyseries' },
+                { label: 'Safe Placeholder-Aware Text', slug: 'daisyconfig/guides/safe-placeholder-aware-text' },
+              ],
+            },
+            {
+              label: 'Reference',
+              items: [
+                { label: 'Config Codecs', slug: 'daisyconfig/reference/config-codecs' },
+                { label: 'YAML Loading', slug: 'daisyconfig/reference/yaml-loading' },
+                { label: 'Reload Handles', slug: 'daisyconfig/reference/reload-handles' },
+                { label: 'Text Bridge', slug: 'daisyconfig/reference/text-bridge' },
+              ],
+            },
+            {
+              label: 'Explanation and Migration',
+              items: [
+                { label: 'Why DaisyConfig Is Separate', slug: 'daisyconfig/explanation/why-daisyconfig-is-separate' },
+                { label: 'Migration', slug: 'daisyconfig/migration/from-plugin-local-config-loaders' },
               ],
             },
           ],

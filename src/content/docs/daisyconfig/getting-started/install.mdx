@@ -1,0 +1,49 @@
+---
+title: Install DaisyConfig
+description: Add DaisyConfig to a modern Paper plugin project.
+---
+
+# Install DaisyConfig
+
+DaisyConfig is the typed config layer in the Daisy ecosystem.
+
+Use it when you want:
+
+- typed YAML config objects
+- reload-safe config handles
+- validation with useful path errors
+- DaisySeries-backed value codecs
+- DaisyCore-friendly config-backed text sources
+
+## Requirements
+
+- Java 21
+- Kotlin 2.3.x
+- Paper 1.21.x
+
+## Gradle Kotlin DSL
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation("cat.daisy:DaisyConfig:0.1.0-SNAPSHOT")
+}
+```
+
+## Narrower installs
+
+```kotlin
+implementation("cat.daisy:config-base:0.1.0-SNAPSHOT")
+implementation("cat.daisy:config-yaml:0.1.0-SNAPSHOT")
+implementation("cat.daisy:config-daisycore:0.1.0-SNAPSHOT")
+```
+
+## Next step
+
+Build your first typed YAML config with [First Config](/daisyconfig/getting-started/first-config/).
+

@@ -1,13 +1,13 @@
 ---
 title: Daisy
-description: Premium docs for DaisyCore and DaisySeries, the Kotlin-first Paper platform and parser toolkit.
+description: Premium docs for DaisyCore, DaisySeries, and DaisyConfig, the Kotlin-first Paper platform, parser toolkit, and typed config layer.
 ---
 
 # Daisy
 
 <div class="home-hero">
   <span class="home-kicker">Kotlin-First Paper Tooling</span>
-  <h2>One ecosystem for modern Paper development: DaisyCore when you need runtime systems, DaisySeries when you need clean config-safe parsing.</h2>
+  <h2>One ecosystem for modern Paper development: DaisyCore for runtime systems, DaisySeries for parser-heavy values, and DaisyConfig for typed YAML and reload-safe config state.</h2>
   <p>This site should help you choose the right product quickly, start cleanly, and move from installation to real plugin code without digging through stale snippets or disconnected pages.</p>
 
   <div class="home-actions">
@@ -19,6 +19,7 @@ description: Premium docs for DaisyCore and DaisySeries, the Kotlin-first Paper 
 <div class="value-strip">
   <div class="value-pill"><strong>DaisyCore</strong><span>The full platform for commands, menus, sidebars, tablists, placeholders, text, and shared runtime ownership.</span></div>
   <div class="value-pill"><strong>DaisySeries</strong><span>The lightweight parser toolkit for materials, sounds, item flags, enchantments, potions, canonical keys, and display names.</span></div>
+  <div class="value-pill"><strong>DaisyConfig</strong><span>The typed config layer for YAML loading, reload-safe handles, DaisySeries-aware codecs, and DaisyCore text integration.</span></div>
   <div class="value-pill"><strong>One docs surface</strong><span>One search system, one design language, and one place to learn how the Daisy ecosystem actually fits together.</span></div>
 </div>
 
@@ -37,6 +38,21 @@ description: Premium docs for DaisyCore and DaisySeries, the Kotlin-first Paper 
   </div>
 </div>
 
+<div class="doc-shell">
+  <div class="doc-lead">
+    <span class="eyebrow">Use DaisyConfig</span>
+    <h3>When YAML, reloads, and typed config state are the real problem.</h3>
+    <p>DaisyConfig is the typed config layer. It turns config sprawl into explicit codecs, reload-safe handles, DaisySeries-backed value decoding, and DaisyCore-friendly text adapters.</p>
+    <p><a href="/daisyconfig/">Open DaisyConfig overview</a></p>
+  </div>
+  <div class="doc-rail">
+    <span class="eyebrow">Use all three</span>
+    <h3>For the clean modern Paper stack.</h3>
+    <p>Use DaisyCore for runtime systems, DaisySeries for normalized value parsing, and DaisyConfig for typed YAML and reload-safe configuration ownership.</p>
+    <p><a href="/daisyconfig/guides/use-daisyconfig-with-daisycore/">See the DaisyConfig + DaisyCore path</a></p>
+  </div>
+</div>
+
 ## Start the right path
 
 <div class="path-grid">
@@ -46,11 +62,14 @@ description: Premium docs for DaisyCore and DaisySeries, the Kotlin-first Paper 
   <a class="home-card" href="/daisyseries/getting-started/install/">
     <div class="path-step"><strong>2</strong><div><h3>Need parsing only</h3><p>Install DaisySeries if your immediate problem is config-heavy Paper values like materials, sounds, flags, enchantments, or effects.</p></div></div>
   </a>
-  <a class="home-card" href="/daisyseries/guides/use-daisyseries-with-daisycore/">
-    <div class="path-step"><strong>3</strong><div><h3>Need both together</h3><p>Use DaisyCore for runtime ownership and DaisySeries for the config-safe parsing layer around it.</p></div></div>
+  <a class="home-card" href="/daisyconfig/getting-started/install/">
+    <div class="path-step"><strong>3</strong><div><h3>Need typed config</h3><p>Install DaisyConfig if YAML loading, reload safety, validation, and config-backed text are the part you are tired of rebuilding.</p></div></div>
+  </a>
+  <a class="home-card" href="/daisyconfig/guides/use-daisyconfig-with-daisycore/">
+    <div class="path-step"><strong>4</strong><div><h3>Need the full stack</h3><p>Use DaisyCore for runtime ownership, DaisySeries for value parsing, and DaisyConfig for typed config ownership around them.</p></div></div>
   </a>
   <a class="home-card" href="/overview/roadmap/">
-    <div class="path-step"><strong>4</strong><div><h3>Need the big picture</h3><p>Read the ecosystem roadmap and understand where DaisyCore and DaisySeries sit in the longer product story.</p></div></div>
+    <div class="path-step"><strong>5</strong><div><h3>Need the big picture</h3><p>Read the ecosystem roadmap and understand where DaisyCore, DaisySeries, and DaisyConfig sit in the longer product story.</p></div></div>
   </a>
 </div>
 
@@ -75,5 +94,6 @@ description: Premium docs for DaisyCore and DaisySeries, the Kotlin-first Paper 
 
 - DaisyCore GitHub: [github.com/DaisyCatTs/DaisyCore](https://github.com/DaisyCatTs/DaisyCore)
 - DaisySeries GitHub: [github.com/DaisyCatTs/DaisySeries](https://github.com/DaisyCatTs/DaisySeries)
+- DaisyConfig GitHub: [github.com/DaisyCatTs/DaisyConfig](https://github.com/DaisyCatTs/DaisyConfig)
 - Choose a product: [Choose a Product](/overview/choose-a-product/)
 - See the roadmap: [Roadmap](/overview/roadmap/)

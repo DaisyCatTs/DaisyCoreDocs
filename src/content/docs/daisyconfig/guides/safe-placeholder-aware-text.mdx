@@ -1,0 +1,30 @@
+---
+title: Safe Placeholder-Aware Text
+description: Understand the DaisyConfig and DaisyCore rendering boundary for PlaceholderAPI-aware text.
+---
+
+# Safe Placeholder-Aware Text
+
+This is the locked ecosystem rule:
+
+- DaisyConfig owns typed config and text-source data
+- DaisyCore owns render-time behavior
+
+That means DaisyConfig does **not**:
+- call PlaceholderAPI directly
+- run a parallel placeholder engine
+- create a second viewer-aware rendering runtime
+
+If config-backed text is used in:
+- menu items
+- sidebars
+- tablists
+- command replies
+
+then DaisyCore still applies its current runtime truth:
+- MiniMessage parsing
+- viewer-aware rendering
+- PlaceholderAPI fallback behavior
+
+That is the safety boundary.
+
