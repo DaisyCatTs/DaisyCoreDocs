@@ -1,0 +1,32 @@
+---
+title: Potions
+description: Parse potion-effect types from config-safe input with DaisySeries.
+---
+
+# Potions
+
+`DaisyPotions` works with `PotionEffectType`, not `PotionType`.
+
+## What it does
+
+- parses canonical potion-effect keys
+- accepts spaced and kebab-case input
+- accepts namespaced input like `minecraft:speed`
+- exposes canonical keys and clean display names
+- supports a small curated alias set
+
+`DaisyPotions` resolves real `PotionEffectType` values against the live Paper registry during plugin runtime.
+
+```kotlin
+val effect = DaisyPotions.parse("slow falling")
+val key = DaisyPotions.key(effect)
+val label = DaisyPotions.displayName(effect)
+```
+
+## Input examples
+
+- `speed`
+- `minecraft:speed`
+- `slow falling`
+- `slow-falling`
+- `slow_falling`

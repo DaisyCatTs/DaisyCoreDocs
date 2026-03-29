@@ -1,0 +1,32 @@
+---
+title: Enchantments
+description: Parse enchantments from config-safe input with DaisySeries.
+---
+
+# Enchantments
+
+`DaisyEnchantments` resolves enchantments through namespaced-key-aware parsing instead of plugin-local alias maps.
+
+## What it does
+
+- parses canonical enchantment keys
+- accepts spaced and kebab-case input
+- accepts namespaced input like `minecraft:sharpness`
+- exposes canonical keys and clean display names
+- supports a small curated alias set
+
+`DaisyEnchantments` resolves real enchantment values against the live Paper registry during plugin runtime.
+
+```kotlin
+val enchantment = DaisyEnchantments.parse("fire aspect")
+val key = DaisyEnchantments.key(enchantment)
+val label = DaisyEnchantments.displayName(enchantment)
+```
+
+## Input examples
+
+- `sharpness`
+- `minecraft:sharpness`
+- `fire aspect`
+- `fire-aspect`
+- `fire_aspect`

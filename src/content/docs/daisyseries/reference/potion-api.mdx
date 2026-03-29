@@ -1,0 +1,18 @@
+---
+title: Potion API
+description: Quick lookup for DaisySeries potion-effect entrypoints.
+---
+
+# Potion API
+
+```kotlin
+object DaisyPotions : DaisySeriesParser<PotionEffectType> {
+    fun parse(input: String): PotionEffectType
+    fun parseOrNull(input: String): PotionEffectType?
+    fun key(effect: PotionEffectType): String
+    fun displayName(effect: PotionEffectType): String
+    fun aliases(effect: PotionEffectType): Set<String>
+}
+```
+
+Successful `parse(...)` resolution happens against a live Paper registry during plugin runtime.

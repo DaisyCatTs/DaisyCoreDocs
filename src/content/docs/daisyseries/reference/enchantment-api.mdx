@@ -1,0 +1,18 @@
+---
+title: Enchantment API
+description: Quick lookup for DaisySeries enchantment entrypoints.
+---
+
+# Enchantment API
+
+```kotlin
+object DaisyEnchantments : DaisySeriesParser<Enchantment> {
+    fun parse(input: String): Enchantment
+    fun parseOrNull(input: String): Enchantment?
+    fun key(enchantment: Enchantment): String
+    fun displayName(enchantment: Enchantment): String
+    fun aliases(enchantment: Enchantment): Set<String>
+}
+```
+
+Successful `parse(...)` resolution happens against a live Paper registry during plugin runtime.

@@ -12,6 +12,8 @@ DaisySeries is strongest when configs contain user-friendly strings that still n
 - menu icon materials
 - click or feedback sounds
 - item flag lists
+- enchantments
+- potion effects
 
 ## Recommended pattern
 
@@ -21,6 +23,8 @@ Parse once near the configuration edge, then use canonical keys and display name
 val icon = DaisyMaterials.parse(config.icon)
 val sound = DaisySounds.parse(config.sound)
 val flags = DaisyItemFlags.parseMany(config.flags)
+val enchantment = DaisyEnchantments.parse(config.enchantment)
+val effect = DaisyPotions.parse(config.effect)
 ```
 
 ## Why this is cleaner
@@ -29,4 +33,3 @@ val flags = DaisyItemFlags.parseMany(config.flags)
 - fewer local alias maps
 - fewer scattered `name.lowercase()` calls
 - one consistent error model
-
