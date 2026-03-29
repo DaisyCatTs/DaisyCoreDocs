@@ -5,13 +5,14 @@ description: Show a simple DaisyCore tablist with a header and footer and unders
 
 # First Tablist
 
-This page shows the current DaisyCore tablist model: per-player sessions that render header and footer content.
+This page shows the modern DaisyCore tablist path: per-player header and footer sessions that can reuse the same shared text source as commands, menus, and sidebars.
 
 ## What this page assumes
 
 <div class="premium-callout note">
 
 - you already have a `DaisyPlatform`
+- you enabled `messages(...)` and `tablists()`
 - you want a simple player-facing header and footer
 </div>
 
@@ -24,17 +25,24 @@ You will create a small profile tablist with a welcome header and server footer.
 ## Step 1: define the tablist
 
 ```kotlin
-val profileTablist =
+fun profileTablist(player: Player) =
     tablist {
-        header { DaisyText.plain("Welcome back") }
-        footer { DaisyText.plain("docs.daisy.cat") }
+        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
+        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
     }
 ```
 
 ## Step 2: show it to a player
 
 ```kotlin
-daisy.tablists?.show(player, profileTablist)
+val session = daisy.tablists?.show(player, profileTablist(player))
+```
+
+## Step 3: refresh or close it
+
+```kotlin
+session?.refreshNow()
+session?.close()
 ```
 
 ## Current scope
@@ -45,6 +53,8 @@ The current public tablist API is intentionally simple:
 - footer
 - options
 - session refresh and cleanup
+
+That is the full honest public contract in this pass.
 
 It does not currently promise richer tab entry formatting or advanced packet-driven customization.
 

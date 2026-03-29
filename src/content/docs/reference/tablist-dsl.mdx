@@ -20,6 +20,20 @@ fun tablist(block: DaisyTablistBuilder.() -> Unit): DaisyTablist
 
 ## Common builder methods
 
+- `header(Component)`
+- `header(String)`
 - `header(renderer)`
+- `headerLang(key, viewer, placeholders...)`
+- `footer(Component)`
+- `footer(String)`
 - `footer(renderer)`
+- `footerLang(key, viewer, placeholders...)`
 - `options { ... }`
+
+## Important behavior
+
+- the current public tablist API is header and footer only
+- `refreshNow()` recomputes and sends the current header and footer immediately
+- `invalidate()` is the compatibility alias for a full refresh
+- close clears the player's header and footer safely
+- if you install `messages(...)`, tablists can resolve shared lang keys through the same text layer as commands, menus, items, and sidebars

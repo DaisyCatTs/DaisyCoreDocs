@@ -34,16 +34,12 @@ class ProfilePlugin : JavaPlugin() {
     override fun onEnable() {
         daisy =
             DaisyPlatform.create(this) {
-                text()
-                placeholders()
-                items()
+                messages(ProfileText)
                 commands()
                 menus()
                 scoreboards()
                 tablists()
             }
-
-        ProfileRuntime.platform = daisy
     }
 
     override fun onDisable() {
@@ -52,59 +48,79 @@ class ProfilePlugin : JavaPlugin() {
 }
 ```
 
-## Step 2: define the shared UI pieces
+## Step 2: define one shared text source
 
 ```kotlin
-val profileMenu =
-    menu("Profile", rows = 3) {
-        slot(13) {
-            item(Material.PLAYER_HEAD) {
-                name = "Your Stats"
-            }
+object ProfileText : DaisyTextSource {
+    override fun text(key: String): String? =
+        when (key) {
+            "menus.profile.title" -> "<#f38ba8><bold>Profile</bold></#f38ba8>"
+            "menus.profile.card.name" -> "<#f38ba8><bold>{player}</bold></#f38ba8>"
+            "sidebar.profile.title" -> "<#f38ba8><bold>Profile</bold></#f38ba8>"
+            "sidebar.profile.coins" -> "<white>Coins: <#f38ba8>{coins}</#f38ba8>"
+            "tablist.profile.header" -> "<#f38ba8><bold>Welcome back</bold></#f38ba8>\n<white>{player}</white>"
+            "tablist.profile.footer" -> "<gray>Coins: <white>{coins}</white>"
+            else -> null
+        }
+
+    override fun textList(key: String): List<String> =
+        when (key) {
+            "menus.profile.card.lore" -> listOf("<gray>Inline Daisy menu flow", "<white>Built for {player}")
+            else -> emptyList()
+        }
+}
+```
+
+## Step 3: define the sidebar and tablist
+
+```kotlin
+fun profileSidebar(player: Player) =
+    sidebar {
+        titleLang("sidebar.profile.title", viewer = player)
+        line("coins") {
+            textLang("sidebar.profile.coins", viewer = player, "coins" to "1,250")
         }
     }
 
-val profileSidebar =
-    sidebar {
-        title(DaisyText.plain("Profile"))
-        line("rank") { DaisyText.plain("Rank: Member") }
-        line("coins") { DaisyText.plain("Coins: 1,250") }
-    }
-
-val profileTablist =
+fun profileTablist(player: Player) =
     tablist {
-        header { DaisyText.plain("Profile Hub") }
-        footer { DaisyText.plain("docs.daisy.cat") }
+        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
+        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
     }
 ```
 
-## Step 3: connect them in a command provider
+## Step 4: connect everything in one command group
 
 ```kotlin
-object ProfileRuntime {
-    lateinit var platform: DaisyPlatform
-}
-
 @DaisyCommandSet
-object ProfileCommands : DaisyCommandProvider {
-    override fun commands(): List<DaisyCommand> =
-        listOf(
-            command("profile") {
-                description("Open your profile tools")
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        description("Open your profile tools")
 
-                executePlayer {
-                    player.openMenu(profileMenu)
-                    ProfileRuntime.platform.scoreboards?.show(player, profileSidebar)
-                    ProfileRuntime.platform.tablists?.show(player, profileTablist)
+        player {
+            player.openMenu(lang("menus.profile.title"), rows = 3) {
+                background(Material.GRAY_STAINED_GLASS_PANE) {
+                    name(" ")
                 }
-            },
-        )
-}
+
+                slot(13) {
+                    item(Material.PLAYER_HEAD) {
+                        nameLang("menus.profile.card.name", viewer = player, "player" to player.name)
+                        loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
+                    }
+                }
+            }
+
+            daisy.scoreboards?.show(player, profileSidebar(player))
+            daisy.tablists?.show(player, profileTablist(player))
+        }
+    }
+})
 ```
 
 <div class="premium-callout current">
-  <h3>Why the extra object exists</h3>
-  <p>The command provider needs a way to reach your platform owner. In a real plugin, that can be a plugin singleton, a service object, or another application-level access point. The docs use <code>ProfileRuntime</code> to keep the sample direct.</p>
+  <h3>Why this version is cleaner</h3>
+  <p>The same installed text source now drives commands, menus, sidebars, and tablists. You do not need plugin-local lang wrappers for each system anymore.</p>
 </div>
 
 ## Why this example matters
