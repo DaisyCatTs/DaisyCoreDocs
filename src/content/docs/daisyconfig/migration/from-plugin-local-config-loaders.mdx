@@ -1,21 +1,129 @@
 ---
-title: Migration
-description: Move from plugin-local config helpers to DaisyConfig.
+title: From Plugin-Local Config Loaders
+description: Replace plugin-local ConfigService patterns with DaisyConfig codecs, managed YAML files, and module bundles.
 ---
 
-# Migration
+# From Plugin-Local Config Loaders
 
-Replace:
+If your plugin already has a local `ConfigService`, it probably owns more than raw getters. It usually also owns:
+
+- `saveResource(...)`
+- file version bumps
+- default merge logic
+- `settings.yml` plus `lang.yml` pairing
+- module file maps
+- reload orchestration
+- runtime fallback rules
+
+Replace those responsibilities with DaisyConfig in layers.
+
+## 1. Replace raw YAML access
 
 - raw `getString(...)` lookups
 - manual nested-section traversal
-- plugin-local reload code
-- one-off DaisyCore text adapters
 
 With:
 
 - typed codecs
 - `DaisyConfigHandle<T>`
 - `yamlConfigHandle(...)`
-- `DaisyTextConfig` plus `asDaisyTextSource()`
 
+## 2. Replace manual reload logic
+
+Before:
+
+- reload file
+- decode manually
+- hope the runtime does not switch to a half-valid state
+
+After:
+
+- `DaisyConfigHandle<T>`
+- `DaisyManagedConfigHandle<T>`
+- `DaisyModuleHandle<S>`
+
+All keep the last good runtime value live on failure.
+
+## 3. Replace manual `saveResource(...)`
+
+Before:
+
+- copy defaults on first startup
+- keep helper code for every config file
+
+After:
+
+- unmanaged: `ensureDefaultConfigResource(...)`
+- managed: let `DaisyManagedYamlFile<T>` create the file from bundled defaults automatically
+
+## 4. Replace manual `config_version` bumping
+
+Before:
+
+- read an integer manually
+- special-case missing versions
+- rename and remove keys yourself
+
+After:
+
+- `currentVersion`
+- `versionKey`
+- `DaisyYamlMigrations.rename(...)`
+- `move(...)`
+- `remove(...)`
+- `setDefault(...)`
+
+Absent `config_version` is treated as version `1`.
+
+## 5. Replace plugin-local module file maps
+
+Before:
+
+- `Map<String, File>` for settings
+- another map for lang
+- plugin-local category/module conventions
+
+After:
+
+- `DaisyModules.load(...)`
+- `DaisyModuleDefinition<S>`
+- `DaisyModuleRegistry`
+
+## 6. Replace local `settings.yml` plus `lang.yml` pairing
+
+Before:
+
+- two separate reload calls
+- plugin-local bundling logic
+
+After:
+
+- one `DaisyModuleHandle<S>`
+- one `current.settings`
+- one `textSource`
+
+## 7. Replace local migration code with `DaisyYamlMigrations`
+
+Use a managed file:
+
+```kotlin
+val spawnSettings =
+    DaisyManagedYamlFile(
+        id = "commands/spawn/settings",
+        path = "modules/commands/spawn/settings.yml",
+        codec = spawnSettingsCodec,
+        currentVersion = 2,
+        migrations = listOf(
+            DaisyYamlMigrations.move(1, 2, "spawn-delay", "spawn.delay"),
+        ),
+    )
+```
+
+That replaces plugin-local code for:
+
+- missing-key merge
+- version upgrades
+- rename/remove/default migrations
+- change reporting
+
+The goal is practical: remove the local config service and let DaisyConfig own the config lifecycle directly.

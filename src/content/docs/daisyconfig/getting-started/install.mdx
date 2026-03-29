@@ -1,17 +1,19 @@
 ---
 title: Install DaisyConfig
-description: Add DaisyConfig to a modern Paper plugin project.
+description: Add DaisyConfig to a modern Paper plugin project and choose the right module level for your config needs.
 ---
 
 # Install DaisyConfig
 
-DaisyConfig is the typed config layer in the Daisy ecosystem.
+DaisyConfig is the typed YAML and config lifecycle layer in the Daisy ecosystem.
 
 Use it when you want:
 
 - typed YAML config objects
-- reload-safe config handles
-- validation with useful path errors
+- reload-safe handles
+- managed file lifecycle and `config_version`
+- missing-key merge and ordered migrations
+- module bundles for `settings.yml` plus `lang.yml`
 - DaisySeries-backed value codecs
 - DaisyCore-friendly config-backed text sources
 
@@ -31,19 +33,34 @@ repositories {
 }
 
 dependencies {
-    implementation("cat.daisy:DaisyConfig:0.1.0-SNAPSHOT")
+    implementation("cat.daisy:config-all:0.1.0-SNAPSHOT")
 }
 ```
+
+`config-all` is the normal install for real plugins because it already includes:
+
+- `config-base`
+- `config-yaml`
+- `config-managed`
+- `config-modules`
+- `config-daisycore`
 
 ## Narrower installs
 
 ```kotlin
 implementation("cat.daisy:config-base:0.1.0-SNAPSHOT")
 implementation("cat.daisy:config-yaml:0.1.0-SNAPSHOT")
+implementation("cat.daisy:config-managed:0.1.0-SNAPSHOT")
+implementation("cat.daisy:config-modules:0.1.0-SNAPSHOT")
 implementation("cat.daisy:config-daisycore:0.1.0-SNAPSHOT")
 ```
 
+Use narrower modules only when you know you want a smaller surface:
+
+- `config-yaml` for simple unmanaged file loading
+- `config-managed` when you need versioning and migration but not module conventions
+- `config-modules` when your plugin already uses `modules/<category>/<module>/settings.yml`
+
 ## Next step
 
-Build your first typed YAML config with [First Config](/daisyconfig/getting-started/first-config/).
-
+Build your first typed YAML config with [First Config](/daisyconfig/getting-started/first-config/), then move to [Managed YAML Files](/daisyconfig/guides/managed-yaml-files/) when file lifecycle becomes part of the problem.

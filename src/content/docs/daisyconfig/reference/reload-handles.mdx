@@ -1,6 +1,6 @@
 ---
 title: Reload Handles
-description: DaisyConfig reload handles keep the last valid config loaded when a refresh fails.
+description: DaisyConfig reload handles keep the last valid config loaded across simple files, managed files, and module bundles.
 ---
 
 import ReferenceTable from '@components/ReferenceTable.astro'
@@ -9,14 +9,27 @@ import ReferenceTable from '@components/ReferenceTable.astro'
 
 <div class="doc-lead">
   <span class="eyebrow">Reference</span>
-  <h3>Reload handles let you refresh config safely without discarding the last valid runtime state.</h3>
+  <h3>Reload handles let you refresh config safely without discarding the last valid runtime state, even when the file also merges defaults or runs migrations.</h3>
 </div>
 
 <ReferenceTable
   filterable={false}
   rows={[
-    { name: 'yamlConfigHandle', type: 'object', description: 'Creates a reloadable handle for one typed YAML file.', required: true },
-    { name: 'current', type: 'object', description: 'Returns the last valid decoded config object.', required: true },
-    { name: 'reload', type: 'object', description: 'Attempts a fresh decode while preserving the last valid state on failure.', required: true },
+    { name: 'DaisyConfigHandle<T>', type: 'object', description: 'Simple unmanaged reload handle for one typed YAML file.', required: true },
+    { name: 'DaisyConfigBundleHandle<T>', type: 'object', description: 'Simple unmanaged bundle handle across multiple files.', required: false },
+    { name: 'DaisyManagedConfigHandle<T>', type: 'object', description: 'Managed reload handle with merge, migration, and metadata.', required: true },
+    { name: 'DaisyModuleHandle<S>', type: 'object', description: 'Managed bundle handle for module settings plus optional lang.', required: false },
+    { name: 'current', type: 'object', description: 'Returns the last valid decoded runtime value.', required: true },
+    { name: 'reload()', type: 'object', description: 'Reloads the handle while preserving the previous good runtime value on failure.', required: true },
+    { name: 'migrate()', type: 'object', description: 'Managed handle operation that reloads, merges, migrates, and returns reports.', required: false },
   ]}
 />
+
+Simple reload results use `DaisyReloadResult<T>`.
+
+Managed reload results use:
+
+- `DaisyManagedReloadResult<T>`
+- `DaisyManagedBundleReloadResult<T>`
+
+Those managed result types add migration reports because the managed path can create files, merge missing keys, and advance `config_version` before decoding.

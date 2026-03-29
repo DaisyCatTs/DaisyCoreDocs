@@ -1,0 +1,53 @@
+---
+title: YAML Migrations
+description: Reference DaisyConfig YAML migrations, mutable YAML nodes, and version-chain rules.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# YAML Migrations
+
+YAML migrations let DaisyConfig update old disk schemas into the current typed shape before decode.
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'DaisyYamlMigration', type: 'object', description: 'Version-aware migration contract from one schema version to the next.', required: true },
+    { name: 'DaisyYamlMigrationResult', type: 'object', description: 'Warnings plus renamed and removed key reporting from one migration step.', required: true },
+    { name: 'DaisyMutableYamlNode', type: 'object', description: 'Mutable YAML tree abstraction used during managed migration.', required: true },
+    { name: 'DaisyYamlMigrations.rename', type: 'object', description: 'Helper for simple rename operations.', required: false },
+    { name: 'DaisyYamlMigrations.move', type: 'object', description: 'Moves one path to another and records the rename pair.', required: false },
+    { name: 'DaisyYamlMigrations.remove', type: 'object', description: 'Removes one explicit path from the YAML tree.', required: false },
+    { name: 'DaisyYamlMigrations.setDefault', type: 'object', description: 'Adds a default value if the target path is missing.', required: false },
+  ]}
+/>
+
+## Chain validation rules
+
+Managed migration chains are rejected when they:
+
+- skip versions
+- duplicate one `fromVersion`
+- use `toVersion <= fromVersion`
+- fail to advance exactly one version step
+- fail to reach `currentVersion`
+
+## Version behavior
+
+- absent `config_version` means version `1`
+- DaisyConfig writes the final `config_version` back when changes occurred
+- unknown keys are preserved unless an explicit migration removes them
+- disk writes happen only when something actually changed
+
+## Mutable node operations
+
+`DaisyMutableYamlNode` supports:
+
+- `get(path)`
+- `set(path, value)`
+- `remove(path)`
+- `contains(path)`
+- `keys(deep = true)`
+- `asMap()`
+
+That API exists so migrations can rename, move, remove, and default keys without dropping to plugin-local YAML mutation code.

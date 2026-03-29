@@ -1,51 +1,57 @@
 ---
 title: DaisyConfig
-description: The typed YAML config layer for modern Paper plugins, with reload-safe handles, DaisySeries-aware codecs, and DaisyCore-friendly text integration.
+description: The typed YAML and managed config lifecycle layer for modern Paper plugins, with module bundles, DaisySeries-aware codecs, and DaisyCore-friendly text integration.
 ---
 
 import CrossProductCallout from '@components/CrossProductCallout.astro'
 import ProductLandingHero from '@components/ProductLandingHero.astro'
 import StepCard from '@components/StepCard.astro'
 
-# DaisyConfig
-
 <ProductLandingHero
   product="config"
-  title="DaisyConfig owns typed YAML, reload safety, and config-backed text storage."
-  description="Use DaisyConfig when config shape, reload behavior, shared text ownership, and typed DaisySeries-backed values are the real problem."
+  title="DaisyConfig owns typed YAML, managed config lifecycle, and first-class module bundles."
+  description="Use DaisyConfig when config shape, versioning, missing-key merge, reload safety, and shared settings-plus-lang ownership are the real problem."
   primaryCta={{ label: 'Install DaisyConfig', href: '/daisyconfig/getting-started/install/' }}
-  secondaryCta={{ label: 'First Config', href: '/daisyconfig/getting-started/first-config/' }}
+  secondaryCta={{ label: 'Managed YAML Files', href: '/daisyconfig/guides/managed-yaml-files/' }}
   dependsOn={['series', 'core']}
 />
 
 <div class="value-strip">
   <div class="value-pill"><strong>Typed mapping</strong><span>Replace scattered getters with codec-driven config objects.</span></div>
-  <div class="value-pill"><strong>Reload safety</strong><span>Keep the last valid config when a reload fails instead of destabilizing runtime state.</span></div>
-  <div class="value-pill"><strong>DaisySeries-aware codecs</strong><span>Decode canonical values from DaisySeries without copying parser logic.</span></div>
+  <div class="value-pill"><strong>Managed lifecycle</strong><span>Create defaults, merge missing keys, and run ordered schema migrations with version-aware writeback.</span></div>
+  <div class="value-pill"><strong>Module bundles</strong><span>Own `settings.yml` plus `lang.yml` together through one managed module handle.</span></div>
   <div class="value-pill"><strong>DaisyCore text bridge</strong><span>Store text here, render it there, and keep Placeholder-aware rendering inside DaisyCore.</span></div>
 </div>
 
 ## What DaisyConfig handles
 
 <div class="feature-matrix">
-  <div class="feature-card"><strong>Codec-driven config</strong><p>Map YAML into real objects with explicit shape and path-aware validation.</p></div>
-  <div class="feature-card"><strong>Reload handles</strong><p>Control runtime config replacement without throwing away the last working state.</p></div>
-  <div class="feature-card"><strong>Value decoding</strong><p>Use DaisySeries-backed codecs for materials, sounds, flags, enchantments, and effects.</p></div>
-  <div class="feature-card"><strong>Text storage</strong><p>Store shared text here while leaving rendering, placeholders, and viewer awareness in DaisyCore.</p></div>
+  <div class="feature-card"><strong>Codec-driven config</strong><p>Map YAML into real objects with explicit shape, path-aware validation, and DaisySeries-backed value codecs.</p></div>
+  <div class="feature-card"><strong>Unmanaged YAML</strong><p>Keep the low-level `DaisyYaml` and simple handle path when one file and one codec are enough.</p></div>
+  <div class="feature-card"><strong>Managed YAML</strong><p>Own `config_version`, default-file creation, missing-key merge, ordered migrations, and last-good runtime preservation.</p></div>
+  <div class="feature-card"><strong>Module bundles</strong><p>Load `modules/&lt;category&gt;/&lt;module&gt;/settings.yml` plus `lang.yml` as one typed settings-and-text unit.</p></div>
+</div>
+
+## What DaisyConfig does not handle
+
+<div class="feature-matrix">
+  <div class="feature-card"><strong>No placeholder execution</strong><p>DaisyConfig stores text and config data only. It does not call PlaceholderAPI or run a second render pipeline.</p></div>
+  <div class="feature-card"><strong>No viewer-aware rendering</strong><p>DaisyCore still owns MiniMessage parsing, viewer-aware rendering, and runtime UI behavior.</p></div>
+  <div class="feature-card"><strong>No parser ownership</strong><p>DaisySeries still owns canonical keys, aliases, and value parsing rules for materials, sounds, flags, enchantments, and potions.</p></div>
 </div>
 
 <CrossProductCallout
   product="series"
   label="DaisyConfig depends on DaisySeries for canonical value decoding"
   href="/daisyconfig/guides/use-daisyconfig-with-daisyseries/"
-  description="Do not duplicate enum data or alias rules in DaisyConfig pages when DaisySeries already owns them."
+  description="Managed settings still decode materials, sounds, flags, enchantments, and potions through DaisySeries instead of copying parser rules locally."
 />
 
 <CrossProductCallout
   product="core"
   label="DaisyConfig depends on DaisyCore for runtime rendering"
   href="/daisyconfig/guides/use-daisyconfig-with-daisycore/"
-  description="DaisyConfig stores and loads text. DaisyCore still parses MiniMessage and renders for the viewer."
+  description="Managed lang files are still data. DaisyCore still parses MiniMessage, resolves viewers, and renders the final output."
 />
 
 ## Onboarding path
@@ -54,16 +60,19 @@ import StepCard from '@components/StepCard.astro'
   <p>Start with <a href="/daisyconfig/getting-started/install/">Install DaisyConfig</a> and then build <a href="/daisyconfig/getting-started/first-config/">your first typed config</a>.</p>
 </StepCard>
 
-<StepCard step={2} title="Separate storage from rendering" product="config" dependency="DaisyCore">
-  <p>Use direct MiniMessage strings first, then move to config-backed text only when you want shared or admin-editable wording.</p>
+<StepCard step={2} title="Move to managed YAML when file lifecycle becomes real" product="config">
+  <p>Use <a href="/daisyconfig/guides/managed-yaml-files/">Managed YAML Files</a> when config versioning, missing-key merge, or startup migration safety matter more than raw file loading.</p>
 </StepCard>
 
-<StepCard step={3} title="Pull DaisySeries in when config values stop being primitive" product="config" dependency="DaisySeries">
-  <p>Use DaisySeries codecs instead of rebuilding canonical value parsing in your plugin.</p>
+<StepCard step={3} title="Adopt module bundles when settings and lang already travel together" product="config">
+  <p>Use <a href="/daisyconfig/guides/module-bundles/">Module Bundles</a> for `modules/&lt;category&gt;/&lt;module&gt;/settings.yml` plus `lang.yml`, with one reload/migrate path and one text source.</p>
 </StepCard>
 
 ## Quick links
 
 - Start here: [Install DaisyConfig](/daisyconfig/getting-started/install/)
-- Main guide: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
-- Reference: [Config Codecs](/daisyconfig/reference/config-codecs/)
+- Managed path: [Managed YAML Files](/daisyconfig/guides/managed-yaml-files/)
+- Migrations: [YAML Migrations](/daisyconfig/reference/yaml-migrations/)
+- Registry: [Module Registry](/daisyconfig/reference/module-registry/)
+- DaisyCore bridge: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
+- Migration guide: [From Plugin-Local Config Loaders](/daisyconfig/migration/from-plugin-local-config-loaders/)

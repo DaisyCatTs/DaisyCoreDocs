@@ -1,0 +1,55 @@
+---
+title: Module Registry
+description: Reference DaisyConfig module definitions, module handles, and registry-wide reload and migration operations.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Module Registry
+
+The module registry is DaisyConfig's first-class API for:
+
+- `modules/<category>/<module>/settings.yml`
+- `modules/<category>/<module>/lang.yml`
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'DaisyModuleDefinition<S>', type: 'object', description: 'Declares one category/module pair and its managed settings and lang files.', required: true },
+    { name: 'DaisyModuleConfig<S>', type: 'object', description: 'Typed module runtime value containing settings and optional lang.', required: true },
+    { name: 'DaisyModuleHandle<S>', type: 'object', description: 'Managed module handle exposing current settings and a DaisyCore text source.', required: true },
+    { name: 'DaisyModuleRegistry', type: 'object', description: 'Lookup and reload surface for all registered modules.', required: true },
+    { name: 'DaisyModules.load', type: 'object', description: 'Loads the registry from plugin-managed module definitions.', required: true },
+    { name: 'require(category, module)', type: 'object', description: 'Fetches one typed module handle by category and module name.', required: true },
+    { name: 'reloadAll()', type: 'object', description: 'Reloads all registered modules while preserving last-good state on failure.', required: true },
+    { name: 'migrateAll()', type: 'object', description: 'Runs managed merge and migration across all modules and aggregates reports.', required: true },
+  ]}
+/>
+
+## Lookup example
+
+```kotlin
+val spawn = registry.require<SpawnSettings>("commands", "spawn")
+val delay = spawn.current.settings.delaySeconds
+```
+
+## Reload example
+
+```kotlin
+when (val result = registry.reloadAll()) {
+    is DaisyManagedBundleReloadResult.Success -> logger.info("Reloaded ${result.value.size} modules.")
+    is DaisyManagedBundleReloadResult.Failure -> logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+}
+```
+
+## What a module handle owns
+
+One `DaisyModuleHandle<S>` gives you:
+
+- `definition`
+- `current.settings`
+- `current.lang`
+- `textSource`
+- `migrate()`
+
+That makes module lang/settings pairing a first-class DaisyConfig concern instead of a plugin-local convention.

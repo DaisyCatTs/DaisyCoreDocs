@@ -1,17 +1,19 @@
 ---
 title: Reload-Safe Configs
-description: Use DaisyConfig handles to keep the last good config live when a reload fails.
+description: Use DaisyConfig handles to keep the last good config live across simple reloads, managed migrations, and module bundle refreshes.
 ---
 
 # Reload-Safe Configs
 
-`DaisyConfigHandle<T>` exists so config reloads stay production-safe.
+DaisyConfig has the same runtime safety rule across every handle layer:
 
-## The rule
+- `current` always exposes the last good typed value
+- a successful reload replaces it
+- a failed reload keeps the previous good value live
 
-- `current` always exposes the last good config
-- successful reload replaces it
-- failed reload keeps the previous good value live
+## Simple handles
+
+`DaisyConfigHandle<T>` is the simple unmanaged path:
 
 ```kotlin
 when (val result = profileConfig.reload()) {
@@ -20,5 +22,58 @@ when (val result = profileConfig.reload()) {
 }
 ```
 
-That is the default because a typo in YAML should not put your runtime into a half-decoded state.
+That protects a single file without adding versioning or migration semantics.
 
+## Managed handles
+
+`DaisyManagedConfigHandle<T>` keeps the same last-good guarantee, but adds:
+
+- `config_version`
+- default-file creation
+- missing-key merge
+- ordered migrations
+- migration reports
+
+```kotlin
+when (val result = settingsHandle.migrate()) {
+    is DaisyManagedReloadResult.Success -> {
+        logger.info("Version ${result.report.versionBefore ?: 1} -> ${result.report.versionAfter}")
+    }
+    is DaisyManagedReloadResult.Failure -> {
+        logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+    }
+}
+```
+
+## Managed module bundles
+
+`DaisyModuleHandle<S>` applies the same safety rule to:
+
+- typed settings
+- optional lang
+- one module text source
+
+That means `settings.yml` and `lang.yml` move together as one runtime unit.
+
+```kotlin
+when (val result = spawnModule.migrate()) {
+    is DaisyManagedBundleReloadResult.Success -> logger.info("Spawn module migrated.")
+    is DaisyManagedBundleReloadResult.Failure -> logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+}
+```
+
+## Broken-file scenario
+
+If a live file becomes invalid during reload:
+
+- decode fails
+- errors are returned
+- the previous good typed value stays active
+
+That rule is the same for:
+
+- `DaisyConfigHandle<T>`
+- `DaisyManagedConfigHandle<T>`
+- `DaisyModuleHandle<S>`
+
+Because a typo in YAML should not switch runtime state to a half-decoded config.

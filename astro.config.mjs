@@ -151,12 +151,14 @@ export default defineConfig({
               items: [
                 { label: 'Install DaisyConfig', slug: 'daisyconfig/getting-started/install' },
                 { label: 'First Config', slug: 'daisyconfig/getting-started/first-config' },
+                { label: 'Managed YAML Files', slug: 'daisyconfig/guides/managed-yaml-files' },
               ],
             },
             {
               label: 'Guides',
               items: [
                 { label: 'Reload-Safe Configs', slug: 'daisyconfig/guides/reload-safe-configs' },
+                { label: 'Module Bundles', slug: 'daisyconfig/guides/module-bundles' },
                 { label: 'Use DaisyConfig with DaisyCore', slug: 'daisyconfig/guides/use-daisyconfig-with-daisycore' },
                 { label: 'Use DaisyConfig with DaisySeries', slug: 'daisyconfig/guides/use-daisyconfig-with-daisyseries' },
                 { label: 'Config Text vs Direct MiniMessage', slug: 'daisyconfig/guides/when-to-use-config-text-vs-direct-minimessage' },
@@ -168,7 +170,10 @@ export default defineConfig({
               items: [
                 { label: 'Config Codecs', slug: 'daisyconfig/reference/config-codecs' },
                 { label: 'YAML Loading', slug: 'daisyconfig/reference/yaml-loading' },
+                { label: 'Managed YAML', slug: 'daisyconfig/reference/managed-yaml' },
+                { label: 'YAML Migrations', slug: 'daisyconfig/reference/yaml-migrations' },
                 { label: 'Reload Handles', slug: 'daisyconfig/reference/reload-handles' },
+                { label: 'Module Registry', slug: 'daisyconfig/reference/module-registry' },
                 { label: 'Text Bridge', slug: 'daisyconfig/reference/text-bridge' },
               ],
             },
@@ -176,7 +181,7 @@ export default defineConfig({
               label: 'Migration',
               items: [
                 { label: 'Why DaisyConfig Is Separate', slug: 'daisyconfig/explanation/why-daisyconfig-is-separate' },
-                { label: 'Migration', slug: 'daisyconfig/migration/from-plugin-local-config-loaders' },
+                { label: 'From Plugin-Local Config Loaders', slug: 'daisyconfig/migration/from-plugin-local-config-loaders' },
               ],
             },
           ],

@@ -1,0 +1,67 @@
+---
+title: Managed YAML
+description: Reference the DaisyConfig managed YAML file model, metadata, reload results, and merge policy.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Managed YAML
+
+Managed YAML is the higher-level DaisyConfig file model for versioned config ownership.
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'id', type: 'string', description: 'Stable identifier for the managed file.', required: true },
+    { name: 'path', type: 'string', description: 'Disk path relative to the plugin data folder.', required: true },
+    { name: 'resourcePath', type: 'string', description: 'Bundled resource path used for first-run creation and default merge.', required: false },
+    { name: 'codec', type: 'object', description: 'Typed decode shape for the managed file.', required: true },
+    { name: 'versionKey', type: 'string', description: 'YAML key that stores the schema version. Defaults to config_version.', required: false },
+    { name: 'currentVersion', type: 'number', description: 'Current schema version expected by the codec.', required: true },
+    { name: 'migrations', type: 'object', description: 'Ordered list of migrations used to reach currentVersion.', required: false },
+    { name: 'mergePolicy', type: 'enum', description: 'Controls whether missing keys are merged from bundled defaults.', required: false },
+  ]}
+/>
+
+## Core types
+
+- `DaisyManagedYamlFile<T>`
+- `DaisyManagedConfigHandle<T>`
+- `DaisyManagedConfigMetadata`
+- `DaisyManagedReloadResult<T>`
+- `DaisyManagedMigrationReport`
+- `DaisyYamlMergePolicy`
+
+## Metadata
+
+`DaisyManagedConfigMetadata` exposes:
+
+- `path`
+- `versionKey`
+- `currentVersion`
+- `diskVersion`
+
+Use it when you want to log the currently observed file version or expose admin diagnostics.
+
+## Reports
+
+`DaisyManagedMigrationReport` records:
+
+- whether the file was created from defaults
+- which keys were merged
+- which keys were removed
+- which keys were renamed or moved
+- version before and after
+- whether the file was written back
+
+## Merge policy
+
+`DaisyYamlMergePolicy.AddMissingKeys` is the default and recommended behavior.
+
+It:
+
+- copies only missing deep keys
+- does not overwrite user values
+- does not remove unknown user keys
+
+Use `None` only when you explicitly do not want bundled defaults merged into disk files.

@@ -54,7 +54,7 @@ Install a shared text source when you want:
 
 ## Preferred ecosystem path: DaisyConfig
 
-The cleanest path now is to let DaisyConfig load text and hand it into DaisyCore:
+The cleanest path now is to let DaisyConfig load text and hand it into DaisyCore, whether that text came from a simple `lang.yml` or a managed module bundle:
 
 ```kotlin
 val langHandle = yamlTextConfigHandle(this, "lang.yml")

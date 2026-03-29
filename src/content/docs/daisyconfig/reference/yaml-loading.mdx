@@ -1,6 +1,6 @@
 ---
 title: YAML Loading
-description: The normal DaisyConfig YAML loading entrypoints.
+description: The unmanaged and managed DaisyConfig YAML loading entrypoints.
 ---
 
 import ReferenceTable from '@components/ReferenceTable.astro'
@@ -9,14 +9,33 @@ import ReferenceTable from '@components/ReferenceTable.astro'
 
 <div class="doc-lead">
   <span class="eyebrow">Reference</span>
-  <h3>Load typed YAML once, then work against decoded config objects instead of raw getters.</h3>
+  <h3>Load typed YAML once, then work against decoded config objects instead of raw getters. DaisyConfig keeps both the simple unmanaged path and the higher-level managed path.</h3>
 </div>
+
+## Simple / unmanaged
 
 <ReferenceTable
   filterable={false}
   rows={[
+    { name: 'DaisyYaml.load', type: 'object', description: 'Loads one typed YAML file without creating a live handle.', required: true },
+    { name: 'DaisyYaml.handle', type: 'object', description: 'Creates a reloadable unmanaged handle for one typed YAML file.', required: true },
     { name: 'yamlConfigHandle', type: 'object', description: 'Loads one YAML file into a typed reload handle.', required: true },
+    { name: 'yamlConfigBundleHandle', type: 'object', description: 'Creates one logical handle across many unmanaged YAML files.', required: false },
     { name: 'ensureDefaultConfigResource', type: 'string', description: 'Copies the default YAML resource into the plugin data folder when missing.', required: false },
     { name: 'codec', type: 'object', description: 'Supplies the decoding shape used when the YAML file is loaded.', required: true },
   ]}
 />
+
+## Managed
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'DaisyManagedYaml.load', type: 'object', description: 'Loads a managed YAML file with merge, migration, and reporting.', required: true },
+    { name: 'DaisyManagedYaml.handle', type: 'object', description: 'Creates a managed reload handle for one versioned YAML file.', required: true },
+    { name: 'managedYamlConfigHandle', type: 'object', description: 'Plugin helper that creates a managed handle from DaisyManagedYamlFile<T>.', required: true },
+    { name: 'DaisyManagedYamlFile<T>', type: 'object', description: 'Describes one managed file, its codec, merge policy, and migration chain.', required: true },
+  ]}
+/>
+
+The unmanaged APIs are still supported and intentionally preserved. Use them when one file and one codec are enough. Move to managed YAML when versioning, missing-key merge, or module conventions become part of the problem.

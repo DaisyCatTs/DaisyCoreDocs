@@ -9,7 +9,7 @@ import StepCard from '@components/StepCard.astro'
 <div class="home-hero">
   <span class="home-kicker">Kotlin-First Paper Tooling</span>
   <h2>One Daisy suite for modern Paper plugins: DaisyCore runs runtime systems, DaisySeries owns canonical values, and DaisyConfig owns typed YAML.</h2>
-  <p>One docs surface for the whole suite: runtime ownership in DaisyCore, parser-safe values in DaisySeries, and typed config plus shared text storage in DaisyConfig.</p>
+  <p>One docs surface for the whole suite: runtime ownership in DaisyCore, parser-safe values in DaisySeries, and typed config plus managed lifecycle and module bundles in DaisyConfig.</p>
   <p class="dependency-chain"><strong>Normal flow:</strong> <strong>DaisySeries</strong> parses values -> <strong>DaisyConfig</strong> stores typed config -> <strong>DaisyCore</strong> renders and runs the feature.</p>
 
   <div class="home-actions">
@@ -21,14 +21,14 @@ import StepCard from '@components/StepCard.astro'
 <div class="value-strip">
   <div class="value-pill"><strong>DaisyCore</strong><span>Commands, menus, sidebars, tablists, MiniMessage text, placeholders, items, and lifecycle ownership.</span></div>
   <div class="value-pill"><strong>DaisySeries</strong><span>Canonical keys, aliases, and parser-safe materials, sounds, enchantments, item flags, and potions.</span></div>
-  <div class="value-pill"><strong>DaisyConfig</strong><span>Typed YAML codecs, reload-safe handles, DaisySeries-backed decoding, and DaisyCore text bridging.</span></div>
+  <div class="value-pill"><strong>DaisyConfig</strong><span>Typed YAML codecs, managed lifecycle, module bundles, DaisySeries-backed decoding, and DaisyCore text bridging.</span></div>
 </div>
 
 ## What can you build?
 
 <div class="feature-matrix">
   <div class="feature-card"><strong>Profile runtime flow</strong><p>Use DaisyCore when one feature spans a command, menu, sidebar, and tablist in one runtime-owned flow.</p></div>
-  <div class="feature-card"><strong>Config-heavy plugin data</strong><p>Use DaisyConfig when YAML shape, reload safety, and shared text ownership become the real maintenance problem.</p></div>
+  <div class="feature-card"><strong>Config-heavy plugin data</strong><p>Use DaisyConfig when YAML shape, migration safety, module bundles, and shared text ownership become the real maintenance problem.</p></div>
   <div class="feature-card"><strong>Canonical parser layer</strong><p>Use DaisySeries when materials, sounds, flags, enchantments, or effects should stop leaking enum helpers through plugin code.</p></div>
   <div class="feature-card"><strong>Full stack plugin</strong><p>Use all three together when config ownership, canonical values, and runtime systems all matter in the same plugin.</p></div>
 </div>
@@ -51,7 +51,7 @@ import StepCard from '@components/StepCard.astro'
   product="config"
   label="DaisyConfig turns DaisySeries values into typed config state"
   href="/daisyconfig/"
-  description="Use DaisyConfig when those canonical values live in YAML and need reload-safe ownership."
+  description="Use DaisyConfig when those canonical values live in YAML and need managed lifecycle, module bundles, and reload-safe ownership."
 />
 
 ## Start the normal path
@@ -65,5 +65,5 @@ import StepCard from '@components/StepCard.astro'
 </StepCard>
 
 <StepCard step={3} title="Move to DaisyConfig when YAML ownership becomes the maintenance problem" product="config">
-  <p>Use <a href="/daisyconfig/getting-started/install/">Install DaisyConfig</a> when config shape, reload safety, and shared text ownership matter more than parser or runtime concerns alone.</p>
+  <p>Use <a href="/daisyconfig/getting-started/install/">Install DaisyConfig</a> when config shape, versioning, module bundles, and shared text ownership matter more than parser or runtime concerns alone.</p>
 </StepCard>

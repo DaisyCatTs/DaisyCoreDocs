@@ -1,0 +1,113 @@
+---
+title: Managed YAML Files
+description: Use DaisyConfig managed YAML files when config lifecycle, versioning, missing-key merge, and migration safety matter.
+---
+
+# Managed YAML Files
+
+Managed YAML is the higher-level DaisyConfig layer for real plugin config ownership.
+
+Use it when you need:
+
+- `config_version`
+- startup creation from bundled defaults
+- missing-key merge without overwriting user values
+- ordered schema migrations
+- reload-safe reporting on what changed
+
+## The managed file model
+
+```kotlin
+val spawnSettingsFile =
+    DaisyManagedYamlFile(
+        id = "commands/spawn/settings",
+        path = "modules/commands/spawn/settings.yml",
+        codec = spawnSettingsCodec,
+        currentVersion = 2,
+        migrations = listOf(
+            DaisyYamlMigrations.move(1, 2, "spawn-delay", "spawn.delay"),
+        ),
+    )
+```
+
+## What happens on startup or reload
+
+Managed load does this in order:
+
+1. create the file from bundled defaults if it does not exist
+2. load the bundled default YAML tree
+3. merge missing deep keys if `mergePolicy` is `AddMissingKeys`
+4. treat missing `config_version` as version `1`
+5. validate and run ordered migrations to `currentVersion`
+6. write the file only if something actually changed
+7. decode into the typed runtime value
+
+## Example handle
+
+```kotlin
+class SpawnPlugin : JavaPlugin() {
+    lateinit var spawnSettings: DaisyManagedConfigHandle<SpawnSettings>
+        private set
+
+    override fun onEnable() {
+        spawnSettings = managedYamlConfigHandle(spawnSettingsFile)
+    }
+}
+```
+
+## Reload with reporting
+
+```kotlin
+when (val result = spawnSettings.migrate()) {
+    is DaisyManagedReloadResult.Success -> {
+        logger.info("Version ${result.report.versionBefore ?: 1} -> ${result.report.versionAfter}")
+        logger.info("Merged keys: ${result.report.mergedMissingKeys}")
+        logger.info("Renamed keys: ${result.report.renamedKeys}")
+    }
+    is DaisyManagedReloadResult.Failure -> {
+        result.errors.forEach { error ->
+            logger.warning("${error.path}: ${error.message}")
+        }
+    }
+}
+```
+
+## Behavior guarantees
+
+- missing `config_version` is treated as version `1`
+- user values are preserved
+- unknown keys are preserved
+- missing default keys are merged in
+- writes only happen when the file actually changed
+- on failure, the previous good typed value stays live
+
+## Example YAML
+
+Old file:
+
+```yaml
+spawn-delay: 3
+config_version: 1
+```
+
+New bundled shape:
+
+```yaml
+config_version: 2
+spawn:
+  delay: 3
+  bypass_permission: example.spawn.bypass
+```
+
+Managed YAML moves the old key, adds the missing default key, writes the updated version, and then decodes the new runtime shape.
+
+## When to stay simple instead
+
+Stick to `DaisyYaml` or `yamlConfigHandle(...)` when:
+
+- one file is enough
+- you do not need version-aware migration
+- you do not need missing-key merge
+- the plugin is still at the simple first-config stage
+
+Move to module bundles next when your settings and lang files already travel together.

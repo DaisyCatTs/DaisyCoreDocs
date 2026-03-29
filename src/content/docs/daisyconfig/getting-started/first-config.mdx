@@ -5,7 +5,7 @@ description: Build your first typed YAML config with DaisyConfig.
 
 # First Config
 
-This is the normal DaisyConfig flow:
+This is the normal DaisyConfig starting flow:
 
 1. define a typed config class
 2. define a codec
@@ -52,3 +52,23 @@ class MyPlugin : JavaPlugin() {
 - Pair it with DaisyCore: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
 - Learn the codec surface: [Config Codecs](/daisyconfig/reference/config-codecs/)
 
+## When to move beyond the simple path
+
+Keep this unmanaged flow when:
+
+- one file is enough
+- you do not need version-aware migration
+- you do not need missing-key merge
+- your plugin does not use module-style config bundles
+
+Move to the Phase 3 path when:
+
+- files need `config_version`
+- bundled defaults add keys over time
+- old keys need rename/remove migrations
+- your plugin uses `modules/<category>/<module>/settings.yml` and `lang.yml`
+
+Next:
+
+- [Managed YAML Files](/daisyconfig/guides/managed-yaml-files/)
+- [Module Bundles](/daisyconfig/guides/module-bundles/)

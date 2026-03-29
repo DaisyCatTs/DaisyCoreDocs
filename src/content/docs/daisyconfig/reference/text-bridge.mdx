@@ -17,6 +17,7 @@ import ReferenceTable from '@components/ReferenceTable.astro'
   rows={[
     { name: 'yamlTextConfigHandle', type: 'object', description: 'Loads a config-backed text source from YAML.', required: true },
     { name: 'asDaisyTextSource', type: 'object', description: 'Exposes the loaded text data in the shape DaisyCore expects.', required: true },
+    { name: 'textSource', type: 'object', description: 'Exposes module-backed lang data from DaisyModuleHandle<S>.', required: false },
     { name: 'messages', type: 'object', description: 'Installs the text source into DaisyCore for viewer-aware rendering.', required: true },
     { name: 'textLang', type: 'string', description: 'Resolves shared language keys through DaisyCore once the text source is installed.', required: false },
   ]}
@@ -30,3 +31,5 @@ val daisy =
         messages(langHandle.current.asDaisyTextSource())
     }
 ```
+
+Managed lang files are still data. Placeholder-aware rendering still happens in DaisyCore, not DaisyConfig.

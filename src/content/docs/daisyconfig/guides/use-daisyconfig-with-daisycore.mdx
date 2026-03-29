@@ -22,10 +22,10 @@ import StepCard from '@components/StepCard.astro'
 />
 
 <StepCard step={1} title="Treat DaisyConfig as the storage layer" product="config">
-  <p>DaisyConfig owns typed YAML values, reload-safe handles, and config-backed text storage. It does not become a second rendering runtime.</p>
+  <p>DaisyConfig owns typed YAML values, managed file lifecycle, reload-safe handles, and config-backed text storage. It does not become a second rendering runtime.</p>
 </StepCard>
 
-<StepCard step={2} title="Install the DaisyConfig text source into DaisyCore" product="core" dependency="DaisyConfig">
+<StepCard step={2} title="Install a simple DaisyConfig text source into DaisyCore" product="core" dependency="DaisyConfig">
 ```kotlin
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
 
@@ -40,11 +40,38 @@ val daisy =
 ```
 </StepCard>
 
-<StepCard step={3} title="Keep MiniMessage parsing and placeholders inside DaisyCore" product="core">
-  <p>Even when the text comes from config, DaisyCore still owns MiniMessage parsing, viewer-aware rendering, PlaceholderAPI integration, and fallback behavior.</p>
+<StepCard step={3} title="Use module text sources when lang and settings already move together" product="config">
+```kotlin
+val registry =
+    DaisyModules.load(plugin) {
+        module(
+            DaisyModuleDefinition(
+                category = "commands",
+                module = "spawn",
+                settings = spawnSettingsFile,
+                lang = spawnLangFile,
+            ),
+        )
+    }
+
+val spawn = registry.require<SpawnSettings>("commands", "spawn")
+
+val daisy =
+    DaisyPlatform.create(plugin) {
+        messages(spawn.textSource)
+        commands()
+        menus()
+        scoreboards()
+        tablists()
+    }
+```
 </StepCard>
 
-<StepCard step={4} title="Use config-backed text only when you need shared wording" product="config">
+<StepCard step={4} title="Keep MiniMessage parsing and placeholders inside DaisyCore" product="core">
+  <p>Even when the text comes from a managed lang file or module bundle, DaisyCore still owns MiniMessage parsing, viewer-aware rendering, PlaceholderAPI integration, and fallback behavior.</p>
+</StepCard>
+
+<StepCard step={5} title="Use config-backed text only when you need shared wording" product="config">
 ```kotlin
 val profileHandle = yamlConfigHandle("profile-ui.yml", profileUiCodec)
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
@@ -77,5 +104,5 @@ val sidebar =
 
 <div class="premium-callout info">
   <h3>You've separated storage from rendering</h3>
-  <p>Next read <a href="/daisyconfig/guides/safe-placeholder-aware-text/">Safe Placeholder-Aware Text</a> or jump to <a href="/daisyconfig/reference/text-bridge/">Text Bridge</a> for the low-level integration details.</p>
+  <p>Managed YAML and module bundles do not turn DaisyConfig into a rendering system. Next read <a href="/daisyconfig/guides/safe-placeholder-aware-text/">Safe Placeholder-Aware Text</a> or jump to <a href="/daisyconfig/reference/text-bridge/">Text Bridge</a> for the low-level integration details.</p>
 </div>

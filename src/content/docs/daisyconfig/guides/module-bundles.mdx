@@ -1,0 +1,128 @@
+---
+title: Module Bundles
+description: Use DaisyConfig module bundles for settings.yml plus lang.yml with one managed registry and one reload/migrate surface.
+---
+
+# Module Bundles
+
+Phase 3 makes module bundles first-class.
+
+The intended layout is:
+
+```text
+modules/<category>/<module>/settings.yml
+modules/<category>/<module>/lang.yml
+```
+
+## Why module bundles exist
+
+Real plugins often already pair:
+
+- typed settings
+- lang text
+- one category/module identity
+- one reload path
+
+Module bundles let DaisyConfig own that shape directly instead of leaving it to a plugin-local `ConfigService`.
+
+## The module definition
+
+```kotlin
+module(
+    DaisyModuleDefinition(
+        category = "commands",
+        module = "spawn",
+        settings = spawnSettingsFile,
+        lang = spawnLangFile,
+    ),
+)
+```
+
+## Registry load
+
+```kotlin
+val registry =
+    DaisyModules.load(plugin) {
+        module(
+            DaisyModuleDefinition(
+                category = "commands",
+                module = "spawn",
+                settings = spawnSettingsFile,
+                lang = spawnLangFile,
+            ),
+        )
+        module(
+            DaisyModuleDefinition(
+                category = "commands",
+                module = "warp",
+                settings = warpSettingsFile,
+                lang = warpLangFile,
+            ),
+        )
+        module(
+            DaisyModuleDefinition(
+                category = "guis",
+                module = "store",
+                settings = storeSettingsFile,
+                lang = storeLangFile,
+            ),
+        )
+    }
+```
+
+That mirrors the current DaisyConfig example plugin:
+
+- `commands/spawn`
+- `commands/warp`
+- `guis/store`
+
+## What one module handle gives you
+
+```kotlin
+val spawn = registry.require<SpawnSettings>("commands", "spawn")
+
+val settings = spawn.current.settings
+val lang = spawn.current.lang
+val textSource = spawn.textSource
+```
+
+That means:
+
+- settings remain typed config data
+- lang remains `DaisyTextConfig`
+- `textSource` is the DaisyCore-facing text bridge
+- one module handle owns both files together
+
+## Reload and migrate
+
+```kotlin
+when (val result = registry.reloadAll()) {
+    is DaisyManagedBundleReloadResult.Success -> logger.info("Reloaded ${result.value.size} bundles.")
+    is DaisyManagedBundleReloadResult.Failure -> logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+}
+```
+
+```kotlin
+when (val result = registry.migrateAll()) {
+    is DaisyManagedBundleReloadResult.Success -> logger.info("Migration reports: ${result.reports.size}")
+    is DaisyManagedBundleReloadResult.Failure -> logger.warning(result.errors.joinToString { "${it.path}: ${it.message}" })
+}
+```
+
+## Safety model
+
+Module bundle reload preserves previous good module state.
+
+If `settings.yml` or `lang.yml` becomes invalid:
+
+- the reload fails
+- errors are returned
+- the previous good module value stays active
+
+## Ownership boundary
+
+Module bundles do not change product boundaries:
+
+- DaisyConfig owns settings/lang file lifecycle
+- DaisySeries still owns parser rules inside settings codecs
+- DaisyCore still renders text through `textSource`

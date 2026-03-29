@@ -8,6 +8,7 @@ description: Use DaisySeries-backed codecs inside DaisyConfig instead of rebuild
 DaisyConfig and DaisySeries are meant to fit together.
 
 Use DaisySeries-backed codecs for values like:
+
 - materials
 - sounds
 - item flags
@@ -28,3 +29,43 @@ val profileUiCodec =
     }
 ```
 
+That same codec surface is valid in all three DaisyConfig layers:
+
+- one-file unmanaged handles
+- managed YAML files with `config_version`
+- module settings bundles under `modules/<category>/<module>/settings.yml`
+
+## Managed settings example
+
+```kotlin
+val storeSettings =
+    DaisyManagedYamlFile(
+        id = "guis/store/settings",
+        path = "modules/guis/store/settings.yml",
+        codec = storeModuleConfigCodec,
+        currentVersion = 2,
+    )
+```
+
+If the managed file contains:
+
+```yaml
+config_version: 2
+store:
+  icon: emerald
+  open_sound: block_ender_chest_open
+```
+
+then DaisyConfig is still decoding those values through DaisySeries-owned parser rules.
+
+## Ownership boundary
+
+DaisyConfig does not re-own parser logic.
+
+It uses DaisySeries so:
+
+- canonical keys stay stable
+- aliases stay centralized
+- managed migrations do not need plugin-local parser wrappers
+
+When config values stop being primitive, DaisySeries remains the parser owner even inside the managed and module layers.
