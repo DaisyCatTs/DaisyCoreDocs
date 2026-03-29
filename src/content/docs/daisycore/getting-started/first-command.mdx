@@ -1,6 +1,6 @@
 ---
 title: First Command
-description: Create your first DaisyCore command provider and let DaisyCore auto-load it at startup.
+description: Create your first DaisyCore command with plain strings first, then layer in MiniMessage or config-backed text when you actually need it.
 ---
 
 # First Command
@@ -9,14 +9,18 @@ This page shows the normal DaisyCore command workflow: define a command group, a
 
 ## What this page assumes
 
-- you have already completed [Install DaisyCore](/daisycore/getting-started/install/)
+- you already completed [Install DaisyCore](/daisycore/getting-started/install/)
 - your plugin already creates a `DaisyPlatform` like the one shown in [First Plugin](/daisycore/getting-started/first-plugin/)
 
-## What you'll build
+## Start simple
 
-You will create a `/profile` command that only players can run.
+You do not need `replyLang(...)` for basic messages.
 
-This page assumes your plugin already installs a shared `DaisyTextSource` during platform bootstrap.
+Use:
+
+- `reply("...")` for plain strings
+- `replyMm("...")` for MiniMessage strings
+- `replyLang("...")` when the text lives in config or lang files
 
 ## Step 1: create a command group
 
@@ -32,13 +36,41 @@ object ProfileCommands : DaisyCommandGroup({
         description("Open your profile tools")
 
         player {
-            replyLang("messages.profile.opening")
+            reply("Opening your profile.")
         }
     }
 })
 ```
 
-## Step 2: add a subcommand
+## Step 2: add MiniMessage when you want formatting
+
+```kotlin
+command("profile") {
+    description("Open your profile tools")
+
+    player {
+        replyMm("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
+    }
+}
+```
+
+## Step 3: use config-backed text when your plugin already stores messages there
+
+If your plugin has a config or lang file, that is when `replyLang(...)` starts paying off.
+
+```kotlin
+command("profile") {
+    description("Open your profile tools")
+
+    player {
+        replyLang("messages.profile.opening", "player" to player.name)
+    }
+}
+```
+
+The key itself is just your plugin's own config path. DaisyCore is not forcing a special naming system. `messages.profile.opening` and `tablist.profile.header` are only examples of keys a config-driven plugin might already use.
+
+## Step 4: add a subcommand
 
 ```kotlin
 command("profile") {
@@ -46,31 +78,15 @@ command("profile") {
 
     subcommand("open") {
         player {
-            replyLang("messages.profile.opened")
+            reply("Profile opened.")
         }
     }
 }
 ```
 
-`command(...)`, `subcommand(...)`, and `player { ... }` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so the library ownership is obvious.
+`command(...)`, `subcommand(...)`, and `player { ... }` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so library ownership is still obvious.
 
-## Step 3: use startup availability
-
-Use `enabled { ... }` when a command should depend on config or plugin state at startup.
-
-```kotlin
-sub("debug") {
-    enabled { plugin.config.getBoolean("commands.profile.debug") }
-
-    executePlayer {
-        reply("Debug mode.")
-    }
-}
-```
-
-Use `ignore(true)` if you want a simple hard off switch.
-
-## Step 4: keep async replies clean
+## Step 5: keep async replies clean
 
 ```kotlin
 subcommand("sync") {
@@ -80,7 +96,7 @@ subcommand("sync") {
         profileService.sync(player.uniqueId).replyResult(
             context = this,
             success = {
-                replyLang("messages.profile.synced", "player" to player.name)
+                replyMm("<green>Profile synced for <white>${player.name}</white>.</green>")
             },
             failure = { error ->
                 failLang("messages.profile.error", "error" to error.message.orEmpty())
@@ -100,7 +116,7 @@ That means you do not manually register this provider in normal usage.
 
 ## Next steps
 
-- Learn the discovery model: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
 - Open a UI from a command: [First Menu](/daisycore/getting-started/first-menu/)
+- Learn the shared config/lang text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
 - Jump to API details: [Command DSL](/daisycore/reference/command-dsl/)
 </div>

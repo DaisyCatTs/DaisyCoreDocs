@@ -1,46 +1,32 @@
 ---
 title: First Scoreboard
-description: Show a simple DaisyCore sidebar and understand keyed lines and session refreshes.
+description: Show a simple DaisyCore sidebar with plain strings first, then add keyed lang-backed rendering when your plugin needs config-driven text.
 ---
 
 # First Scoreboard
 
-This page shows the modern DaisyCore sidebar path: keyed lines, shared text-source rendering, and clean session ownership.
+This page shows the modern DaisyCore sidebar path: keyed lines, session ownership, and text that can be plain, MiniMessage, or config-backed.
 
 ## What this page assumes
 
 <div class="premium-callout note">
 
 - your plugin has a `DaisyPlatform`
-- you enabled `messages(...)` and `scoreboards()`
+- you enabled `scoreboards()`
 - you want a simple sidebar for one player-facing feature
 </div>
 
-## What you'll build
-
-<div class="doc-section">
-You will create a small profile sidebar and show it to a player.
-</div>
-
-## Step 1: define a sidebar
+## Step 1: start with plain strings or MiniMessage strings
 
 ```kotlin
 fun profileSidebar(player: Player) =
     sidebar {
-        titleLang("sidebar.profile.title", viewer = player)
+        title("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>")
         line("name") {
-            textLang("sidebar.profile.name", viewer = player, "player" to player.name)
-        }
-        line("rank") {
-            textLang("sidebar.profile.rank", viewer = player)
+            text("<white>${player.name}</white>")
         }
         line("coins") {
-            textLang("sidebar.profile.coins", viewer = player, "coins" to "1,250")
-        }
-        blank()
-        line("online") {
-            visible { it.player.isOnline }
-            lang("sidebar.profile.online", viewer = player)
+            text("<gray>Coins: <white>1,250</white>")
         }
     }
 ```
@@ -53,7 +39,7 @@ val session = daisy.scoreboards?.show(player, profileSidebar(player))
 
 ## Why keys matter
 
-Each line has a key like `rank` or `coins`. DaisyCore uses those keys so a session can refresh specific lines instead of rebuilding everything blindly.
+Each line has a key like `name` or `coins`. DaisyCore uses those keys so a session can refresh specific lines instead of rebuilding everything blindly.
 
 This is why `line(key) { ... }` is the normal path instead of relying on anonymous lines only.
 
@@ -66,11 +52,25 @@ session?.refreshNow()
 
 Use `invalidate("coins")` when one keyed line changed. Use `refreshNow()` when you want a full recompute immediately.
 
+## Step 4: switch to shared config/lang text only when it helps
+
+```kotlin
+fun profileSidebar(player: Player) =
+    sidebar {
+        titleLang("sidebar.profile.title", viewer = player)
+        line("coins") {
+            textLang("sidebar.profile.coins", viewer = player, "coins" to "1,250")
+        }
+    }
+```
+
+Again, `sidebar.profile.title` is not a Daisy-only concept. It is just a config key path if your plugin stores text outside code.
+
 ## What the current implementation focuses on
 
 - title rendering
 - keyed lines
-- lang-based rendering through `messages(...)`
+- plain strings, MiniMessage strings, or config-backed lang text
 - blank line support
 - targeted invalidation
 - safe cleanup when the player quits or the platform closes

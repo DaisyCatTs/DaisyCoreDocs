@@ -18,6 +18,8 @@ Use DaisySeries when those same flows also need config-heavy values like:
 ```kotlin
 val icon = DaisyMaterials.parse(config.icon)
 val clickSound = DaisySounds.parse(config.sound)
+val enchantment = DaisyEnchantments.parse(config.enchantment)
+val effect = DaisyPotions.parse(config.effect)
 
 player.openMenu("Profile", rows = 3) {
     background(Material.GRAY_STAINED_GLASS_PANE) {
@@ -30,6 +32,13 @@ player.openMenu("Profile", rows = 3) {
 
 - DaisyCore owns runtime, lifecycle, and UI
 - DaisySeries owns enum parsing, canonical keys, and friendly names
+
+## Typical real-world flow
+
+- DaisySeries parses config-heavy values like item materials, sounds, enchantments, and potion effects
+- DaisyCore handles commands, menus, sidebars, tablists, and shared text rendering
+- MiniMessage and components stay in DaisyCore-facing UI code
+- config value normalization stays in DaisySeries instead of leaking into feature files
 
 ## Related DaisyCore guides
 

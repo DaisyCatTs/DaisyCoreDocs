@@ -7,6 +7,13 @@ description: Parse your first material, sound, and item-flag values with DaisySe
 
 Use DaisySeries when config-like input needs to become real Bukkit values without a pile of plugin-local helpers.
 
+This is the exact kind of plugin data DaisySeries is meant for:
+
+- config strings
+- admin-editable YAML
+- loadout/setup files
+- text values that later become real Bukkit or Paper types
+
 ```kotlin
 val icon = DaisyMaterials.parse("diamond sword")
 val sound = DaisySounds.parse("entity player levelup")
@@ -27,6 +34,17 @@ logger.info("Effect: ${DaisyPotions.displayName(effect)}")
 - nullable `parseOrNull(...)`
 - canonical `key(...)`
 - UI-friendly `displayName(...)`
+
+## Why this matters
+
+The goal is not just parsing. The goal is replacing all the repetitive plugin-local helpers like:
+
+- `Material.valueOf(...)` wrappers
+- lowercase normalization
+- kebab-case handling
+- ad hoc alias maps
+- hand-written display-name formatting
+- scattered serialization key logic
 
 ## Next steps
 

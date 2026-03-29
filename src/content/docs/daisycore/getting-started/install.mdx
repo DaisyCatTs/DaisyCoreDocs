@@ -7,6 +7,11 @@ description: Add DaisyCore to a modern Paper plugin project.
 
 DaisyCore is meant to be the one dependency for normal plugin projects. You should not need to pull in `platform-command`, `platform-menu`, or the other internal modules directly.
 
+<div class="premium-callout current">
+  <h3>What DaisyCore does not require</h3>
+  <p>You do not need a config-key text system just to get started. Plain strings, MiniMessage strings, and components all work before you ever install <code>messages(...)</code>.</p>
+</div>
+
 ## Requirements
 
 - Java 21
@@ -37,6 +42,14 @@ dependencies {
 - Placeholders
 - Items
 - Shared runtime plumbing
+
+## Normal first-run style
+
+Most plugins start like this:
+
+- plain strings for local messages and titles
+- MiniMessage strings for rich formatting
+- shared text keys later, when the plugin already stores text in config or lang files
 
 ## Pair it with DaisySeries when parsing gets config-heavy
 

@@ -1,6 +1,6 @@
 ---
 title: Build a Plugin Flow
-description: Connect commands, menus, sidebars, and tablists in one small DaisyCore-powered plugin feature.
+description: Connect commands, menus, sidebars, and tablists in one believable DaisyCore plugin flow without forcing config keys for every single message.
 ---
 
 # Build a Plugin Flow
@@ -21,8 +21,14 @@ A `/profile` flow:
 
 - `/profile` opens a menu
 - the menu acts as the player's profile hub
-- a sidebar mirrors a few profile stats
+- a sidebar mirrors a few player stats
 - a tablist shows a simple welcome header and footer
+
+## Important rule before you start
+
+You can build this entire flow with plain strings and MiniMessage strings.
+
+Shared key-backed text is the scaling path for plugins that already keep messages in config or lang files. It is not a requirement for small or local UI text.
 
 ## Step 1: bootstrap DaisyCore once
 
@@ -34,7 +40,6 @@ class ProfilePlugin : JavaPlugin() {
     override fun onEnable() {
         daisy =
             DaisyPlatform.create(this) {
-                messages(ProfileText)
                 commands()
                 menus()
                 scoreboards()
@@ -48,48 +53,25 @@ class ProfilePlugin : JavaPlugin() {
 }
 ```
 
-## Step 2: define one shared text source
-
-```kotlin
-object ProfileText : DaisyTextSource {
-    override fun text(key: String): String? =
-        when (key) {
-            "menus.profile.title" -> "<#f38ba8><bold>Profile</bold></#f38ba8>"
-            "menus.profile.card.name" -> "<#f38ba8><bold>{player}</bold></#f38ba8>"
-            "sidebar.profile.title" -> "<#f38ba8><bold>Profile</bold></#f38ba8>"
-            "sidebar.profile.coins" -> "<white>Coins: <#f38ba8>{coins}</#f38ba8>"
-            "tablist.profile.header" -> "<#f38ba8><bold>Welcome back</bold></#f38ba8>\n<white>{player}</white>"
-            "tablist.profile.footer" -> "<gray>Coins: <white>{coins}</white>"
-            else -> null
-        }
-
-    override fun textList(key: String): List<String> =
-        when (key) {
-            "menus.profile.card.lore" -> listOf("<gray>Inline Daisy menu flow", "<white>Built for {player}")
-            else -> emptyList()
-        }
-}
-```
-
-## Step 3: define the sidebar and tablist
+## Step 2: build the flow with plain strings first
 
 ```kotlin
 fun profileSidebar(player: Player) =
     sidebar {
-        titleLang("sidebar.profile.title", viewer = player)
+        title("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>")
         line("coins") {
-            textLang("sidebar.profile.coins", viewer = player, "coins" to "1,250")
+            text("<gray>Coins: <white>1,250</white>")
         }
     }
 
 fun profileTablist(player: Player) =
     tablist {
-        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
-        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
+        header("<gradient:#7dd3fc:#c4b5fd>Welcome back</gradient>\n<white>${player.name}</white>")
+        footer("<gray>Coins: <white>1,250</white>")
     }
 ```
 
-## Step 4: connect everything in one command group
+## Step 3: connect everything in one command group
 
 ```kotlin
 @DaisyCommandSet
@@ -98,16 +80,24 @@ object ProfileCommands : DaisyCommandGroup({
         description("Open your profile tools")
 
         player {
-            player.openMenu(lang("menus.profile.title"), rows = 3) {
+            replyMm("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
+
+            player.openMenu("Profile", rows = 3) {
                 background(Material.GRAY_STAINED_GLASS_PANE) {
                     name(" ")
                 }
 
                 slot(13) {
                     item(Material.PLAYER_HEAD) {
-                        nameLang("menus.profile.card.name", viewer = player, "player" to player.name)
-                        loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
+                        name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+                        lore(
+                            "<gray>Inline Daisy menu flow",
+                            "<white>Built for ${player.name}",
+                        )
                     }
+
+                    messageMm("<gray>Clicked the profile card.</gray>")
+                    closeOnClick()
                 }
             }
 
@@ -118,26 +108,36 @@ object ProfileCommands : DaisyCommandGroup({
 })
 ```
 
+## Step 4: switch to shared text only when your plugin is config-heavy
+
+If your plugin keeps titles, lore, sidebars, and tablist text in config or lang files, install one shared `DaisyTextSource` and swap the local strings for `lang(...)`, `replyLang(...)`, `nameLang(...)`, `titleLang(...)`, `headerLang(...)`, and the related helpers.
+
+That is when example keys like:
+
+- `messages.profile.opening`
+- `menus.profile.title`
+- `sidebar.profile.title`
+- `tablist.profile.header`
+
+become useful. They are config paths, not required Daisy naming.
+
 <div class="premium-callout current">
-  <h3>Why this version is cleaner</h3>
-  <p>The same installed text source now drives commands, menus, sidebars, and tablists. You do not need plugin-local lang wrappers for each system anymore.</p>
+  <h3>Why this matters</h3>
+  <p>The same DaisyCore systems support both styles: local MiniMessage strings for quick feature code, and shared key-backed text for config-heavy plugins.</p>
 </div>
 
-## Why this example matters
+## When to choose each style
 
-The point is not that DaisyCore forces these systems together. The point is that they can work together cleanly because they share one platform owner, one lifecycle model, and one general API style.
-
-## What to do next in a real plugin
-
-- move shared UI definitions into dedicated files
-- replace hard-coded values with placeholder-backed renderers
-- only enable the systems your plugin actually needs
+- use local strings for fast feature work and small plugins
+- use MiniMessage strings when you want rich formatting inline
+- use shared text keys when your plugin already stores text in config or lang files
+- use `Component` values when your plugin is already component-first
 
 <div class="page-next">
 
 ## Next steps
 
+- Learn the shared config/lang path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
 - Deepen the architecture view: [Why DaisyCore Is One Library](/daisycore/explanation/why-daisycore-is-one-library/)
-- Revisit command discovery: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
 - Jump to the APIs: [Bootstrap API](/daisycore/reference/bootstrap-api/)
 </div>

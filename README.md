@@ -22,7 +22,17 @@ npm run dev
 npm run build
 ```
 
-## Deploy
+## IntelliJ Workflow
+
+- Open the repo as a normal Node project in IntelliJ IDEA.
+- Run `npm install` once.
+- Use `npm run dev` for local docs work.
+- Use `npm run build` before pushing docs changes.
+- IntelliJ's built-in terminal is enough for normal docs work.
+
+## Deployment
+
+Docs deployment is a maintainer workflow, not part of the normal reader-facing docs experience.
 
 ```bash
 npm run build

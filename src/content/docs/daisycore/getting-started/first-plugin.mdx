@@ -1,38 +1,38 @@
 ---
 title: First Plugin
-description: Bootstrap DaisyCore in a Paper plugin.
+description: Bootstrap DaisyCore the simple way, then add shared text only when your plugin actually needs config-backed messages.
 ---
 
 # First Plugin
 
-This is the simplest good starting point when you want DaisyCore to own your plugin runtime.
+This page starts with the lowest-friction DaisyCore bootstrap.
+
+You do **not** need a text key system just to use DaisyCore. Plain strings work immediately. Shared text keys become useful later when your plugin already stores messages, titles, lore, and tab text in config or lang files.
+
+<div class="premium-callout current">
+  <h3>Current default</h3>
+  <p>Start with plain strings. Add <code>messages(...)</code> when you want one shared config-backed text source across commands, menus, sidebars, and tablists.</p>
+</div>
 
 ## What you'll build
 
 <div class="doc-section">
-By the end of this page, you will have a Paper plugin that creates a `DaisyPlatform` during startup and closes it during shutdown.
+By the end of this page, you will have a Paper plugin that creates a <code>DaisyPlatform</code> during startup and closes it during shutdown.
 </div>
 
+## Step 1: bootstrap DaisyCore
+
 ```kotlin
-object MyTextSource : DaisyTextSource {
-    override fun text(key: String): String? =
-        when (key) {
-            "messages.ready" -> "<#f38ba8>Daisy is ready."
-            else -> null
-        }
-
-    override fun textList(key: String): List<String> = emptyList()
-}
-
 class MyPlugin : JavaPlugin() {
     private lateinit var daisy: DaisyPlatform
 
     override fun onEnable() {
         daisy =
             DaisyPlatform.create(this) {
-                messages(MyTextSource)
                 commands()
                 menus()
+                scoreboards()
+                tablists()
             }
     }
 
@@ -42,28 +42,86 @@ class MyPlugin : JavaPlugin() {
 }
 ```
 
-## What this bootstrap does
+## Step 2: understand what this gives you
 
-- creates the shared DaisyCore runtime
-- installs one shared Daisy text source for commands and menus
-- auto-loads command providers by scanning your plugin jar for `@DaisyCommandSet`
-- enables menu services
+- one shared DaisyCore runtime owner
+- command discovery
+- menu services
+- scoreboard services
+- tablist services
+- safe shutdown cleanup through `daisy.close()`
 
-## Why this matters
+## Step 3: add shared text only when you want config-backed strings
 
-`DaisyPlatform` is the object that owns the DaisyCore systems you enabled. It is responsible for lifecycle cleanup, so closing it during plugin shutdown is not optional boilerplate. It is how your menus, sidebars, tablists, and command runtime get cleaned up safely.
+If your plugin already keeps text in a config or lang file, install one shared `DaisyTextSource` and let DaisyCore reuse it everywhere.
 
-<div class="premium-callout current">
-  <h3>Current behavior</h3>
-  <p>The platform builder is the one public bootstrap path DaisyCore wants plugin users to learn first. It keeps lifecycle ownership and service initialization in one place.</p>
-</div>
+```kotlin
+object PluginText : DaisyTextSource {
+    override fun text(key: String): String? = pluginConfig.getString(key)
+
+    override fun textList(key: String): List<String> = pluginConfig.getStringList(key)
+}
+
+class MyPlugin : JavaPlugin() {
+    private lateinit var daisy: DaisyPlatform
+
+    override fun onEnable() {
+        daisy =
+            DaisyPlatform.create(this) {
+                messages(PluginText)
+                commands()
+                menus()
+                scoreboards()
+                tablists()
+            }
+    }
+
+    override fun onDisable() {
+        daisy.close()
+    }
+}
+```
+
+That `PluginText` object is not a special Daisy format. It is just the adapter layer between your existing config/lang storage and DaisyCore.
+
+## Plain strings, MiniMessage strings, and components
+
+DaisyCore is meant to feel natural in plugin code:
+
+- use normal strings when that is enough
+- use MiniMessage strings when you want formatting
+- use shared text keys when you want config-backed content
+- use `Component` values when you already work component-first
+
+Examples:
+
+```kotlin
+reply("Profile opened.")
+replyMm("<gradient:#7dd3fc:#c4b5fd>Profile opened.</gradient>")
+
+player.openMenu("Profile", rows = 3) { }
+
+sidebar {
+    title("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>")
+}
+
+tablist {
+    header("<gradient:#7dd3fc:#c4b5fd>Welcome back</gradient>")
+    footer("<gray>Enjoy your stay</gray>")
+}
+```
+
+## Why lifecycle ownership matters
+
+`DaisyPlatform` is the object that owns the DaisyCore systems you enabled. Closing it during plugin shutdown is part of the normal runtime lifecycle, not optional cleanup boilerplate.
+
+That is how menu sessions, sidebar sessions, tablist sessions, and command runtime services get cleaned up safely.
 
 <div class="page-next">
 
 ## Next steps
 
-- Create your first auto-loaded command: [First Command](/daisycore/getting-started/first-command/)
-- Learn the shared text flow: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
-- Learn how command discovery works: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
+- Create your first command with plain strings first: [First Command](/daisycore/getting-started/first-command/)
+- Learn the shared config/lang text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
 - Understand platform ownership: [Runtime and Shutdown](/daisycore/explanation/runtime-and-shutdown/)
 </div>

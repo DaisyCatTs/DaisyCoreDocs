@@ -1,36 +1,34 @@
 ---
 title: First Tablist
-description: Show a simple DaisyCore tablist with a header and footer and understand the current scope of the API.
+description: Show a simple DaisyCore tablist with plain strings first, then use config-backed text only when your plugin already stores it that way.
 ---
 
 # First Tablist
 
-This page shows the modern DaisyCore tablist path: per-player header and footer sessions that can reuse the same shared text source as commands, menus, and sidebars.
+This page shows the modern DaisyCore tablist path: per-player header and footer sessions with plain strings, MiniMessage strings, `Component` values, or shared config-backed text.
 
 ## What this page assumes
 
 <div class="premium-callout note">
 
 - you already have a `DaisyPlatform`
-- you enabled `messages(...)` and `tablists()`
+- you enabled `tablists()`
 - you want a simple player-facing header and footer
 </div>
 
-## What you'll build
+## Start simple
 
-<div class="doc-section">
-You will create a small profile tablist with a welcome header and server footer.
-</div>
-
-## Step 1: define the tablist
+The easiest path is just `header("...")` and `footer("...")`.
 
 ```kotlin
 fun profileTablist(player: Player) =
     tablist {
-        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
-        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
+        header("<gradient:#7dd3fc:#c4b5fd>Welcome back</gradient>\n<white>${player.name}</white>")
+        footer("<gray>Coins: <white>1,250</white>")
     }
 ```
+
+Those strings are good when your text is small and local to the feature.
 
 ## Step 2: show it to a player
 
@@ -44,6 +42,22 @@ val session = daisy.tablists?.show(player, profileTablist(player))
 session?.refreshNow()
 session?.close()
 ```
+
+## Step 4: use shared config/lang text when your plugin already stores header/footer there
+
+```kotlin
+fun profileTablist(player: Player) =
+    tablist {
+        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
+        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
+    }
+```
+
+`tablist.profile.header` is just an example config path. If your plugin keeps all player-facing strings in a lang or config file, this is the clean shared path. If not, the plain-string version is still the right default.
+
+## Components also work
+
+If your plugin is already component-first, the tablist builder also accepts `Component` values directly.
 
 ## Current scope
 

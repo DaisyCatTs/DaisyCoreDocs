@@ -1,6 +1,6 @@
 ---
 title: First Menu
-description: Open a simple DaisyCore menu from a command and understand what a menu session is.
+description: Open a simple DaisyCore menu with plain strings first, then use MiniMessage strings or lang-backed text when your plugin needs it.
 ---
 
 # First Menu
@@ -15,11 +15,16 @@ This page shows the smallest useful menu flow: open a menu inline for a player, 
 - you are comfortable with the command flow from [First Command](/daisycore/getting-started/first-command/)
 </div>
 
-## What you'll build
+## Start simple
 
-<div class="doc-section">
-You will create a simple profile menu that opens from your `/profile` command.
-</div>
+Menus do not require lang keys.
+
+Use:
+
+- `player.openMenu("Title", rows = ...)` for plain text titles
+- `messageMm("...")` when you want MiniMessage click feedback
+- `name("...")` and `lore(...)` when plain strings are enough
+- `nameLang(...)` and `loreLang(...)` when the text comes from config/lang storage
 
 ## Step 1: open a menu inline
 
@@ -31,8 +36,29 @@ player.openMenu("Profile", rows = 3) {
 
     slot(13) {
         item(Material.PLAYER_HEAD) {
-            nameLang("menus.profile.card.name", viewer = player)
-            loreLang("menus.profile.card.lore", viewer = player)
+            name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+            lore(
+                "<gray>Inline Daisy menu flow",
+                "<white>Built for ${player.name}",
+            )
+        }
+
+        messageMm("<gray>Clicked the profile card.</gray>")
+        closeOnClick()
+    }
+}
+```
+
+Inline opening is the main ergonomic path for quick plugin UI flows.
+
+## Step 2: switch to config-backed text only when you want it
+
+```kotlin
+player.openMenu(lang("menus.profile.title"), rows = 3) {
+    slot(13) {
+        item(Material.PLAYER_HEAD) {
+            nameLang("menus.profile.card.name", viewer = player, "player" to player.name)
+            loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
         }
 
         messageLang("messages.profile.clicked", "player" to player.name)
@@ -41,9 +67,9 @@ player.openMenu("Profile", rows = 3) {
 }
 ```
 
-Inline opening is the main ergonomic path for quick plugin UI flows.
+Those keys are just config paths. If your plugin keeps all text in config files, this becomes the cleaner long-term path. If not, plain strings are still fine.
 
-## Step 2: open it from a command
+## Step 3: open it from a command
 
 ```kotlin
 command("profile") {
@@ -51,7 +77,7 @@ command("profile") {
         player.openMenu("Profile", rows = 3) {
             slot(13) {
                 item(Material.PLAYER_HEAD) {
-                    nameLang("menus.profile.card.name", viewer = player)
+                    name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
                 }
             }
         }
@@ -69,13 +95,6 @@ For quick flows, inline opening is usually enough. DaisyCore still handles the s
   <h3>Current behavior</h3>
   <p>Menu definitions stay reusable while runtime state stays session-specific. That separation is one of the main reasons DaisyCore menus stay clean in plugin code.</p>
 </div>
-
-## What to keep in mind
-
-- menu definitions are meant to stay reusable
-- per-player runtime state lives in sessions
-- DaisyCore cleans up sessions when the platform shuts down
-- shared lang/config text can be installed once through `DaisyPlatform`
 
 <div class="page-next">
 

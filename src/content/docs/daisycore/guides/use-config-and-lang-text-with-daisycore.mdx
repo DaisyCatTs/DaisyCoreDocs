@@ -1,19 +1,33 @@
 ---
 title: Config and Lang Text
-description: Install one Daisy text source and use it cleanly across commands, menus, and item rendering.
+description: Use plain strings and MiniMessage by default, then install one shared Daisy text source when your plugin already keeps text in config or lang files.
 ---
 
 # Config and Lang Text
 
-This guide shows the intended DaisyCore workflow for config-heavy plugins: install one shared text source, then use Daisy helpers everywhere else.
+This guide shows the intended DaisyCore workflow for config-heavy plugins.
+
+But first, the important rule:
+
+<div class="premium-callout current">
+  <h3>Start simple</h3>
+  <p>You do not need keys for basic messages. DaisyCore already supports plain strings, MiniMessage strings, and components. Shared text keys are the clean scaling path for plugins that already store text in config or lang files.</p>
+</div>
+
+## What to use when
+
+- use `reply("...")` for plain command messages
+- use `replyMm("...")` for MiniMessage command messages
+- use plain strings in menu, sidebar, and tablist builders when the text is local
+- use shared lang keys when the text lives outside code
 
 ## Step 1: install a shared text source
 
 ```kotlin
 object PluginText : DaisyTextSource {
-    override fun text(key: String): String? = config.getString(key)
+    override fun text(key: String): String? = pluginConfig.getString(key)
 
-    override fun textList(key: String): List<String> = config.getStringList(key)
+    override fun textList(key: String): List<String> = pluginConfig.getStringList(key)
 }
 
 class MyPlugin : JavaPlugin() {
@@ -25,12 +39,43 @@ class MyPlugin : JavaPlugin() {
                 messages(PluginText)
                 commands()
                 menus()
+                scoreboards()
+                tablists()
             }
     }
 }
 ```
 
-## Step 2: use it in commands
+That object is just the adapter between your plugin config and DaisyCore. If you already keep text in YAML, JSON, TOML, or some lang system, this is where you connect it.
+
+## Step 2: use plain strings and MiniMessage when the text is local
+
+```kotlin
+command("profile") {
+    player {
+        reply("Opening your profile.")
+        replyMm("<gradient:#7dd3fc:#c4b5fd>Ready.</gradient>")
+    }
+}
+
+player.openMenu("Profile", rows = 3) {
+    slot(13) {
+        item(Material.PLAYER_HEAD) {
+            name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+        }
+    }
+}
+
+sidebar {
+    title("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>")
+}
+
+tablist {
+    header("<gradient:#7dd3fc:#c4b5fd>Welcome back</gradient>")
+}
+```
+
+## Step 3: use shared keys when your plugin text already lives in config or lang files
 
 ```kotlin
 @DaisyCommandSet
@@ -59,8 +104,6 @@ object ProfileCommands : DaisyCommandGroup({
 })
 ```
 
-## Step 3: use it in menus and items
-
 ```kotlin
 player.openMenu(lang("menus.profile.title"), rows = 3) {
     background(Material.GRAY_STAINED_GLASS_PANE) {
@@ -85,11 +128,24 @@ player.openMenu(lang("menus.profile.title"), rows = 3) {
 - placeholder replacement with `Pair<String, Any?>`
 - MiniMessage parsing
 - viewer-aware PlaceholderAPI rendering when a player is available
-- shared command and menu text style without plugin-local wrapper utilities
+- shared text style across commands, menus, sidebars, and tablists
+
+## What those keys actually are
+
+Keys like:
+
+- `messages.profile.opening`
+- `menus.profile.title`
+- `sidebar.profile.title`
+- `tablist.profile.header`
+
+are only example config paths.
+
+They are not a DaisyCore requirement. They only make sense if your plugin already stores text by key. If your plugin does not, keep using local strings or components.
 
 ## When DaisySeries belongs in the same plugin
 
-If your text flow also needs to parse materials, sounds, or item flags from config-heavy input, add [DaisySeries](/daisyseries/) beside DaisyCore instead of rebuilding enum parsing helpers locally.
+If your text flow also needs to parse materials, sounds, item flags, enchantments, or potion effects from config-heavy input, add [DaisySeries](/daisyseries/) beside DaisyCore instead of rebuilding parsing helpers locally.
 
 ## Next step
 

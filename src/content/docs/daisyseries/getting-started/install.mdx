@@ -7,6 +7,11 @@ description: Add DaisySeries to a modern Paper plugin project.
 
 DaisySeries is a lightweight utility library. Use it when you want config-safe parsing helpers without adopting a full runtime platform.
 
+<div class="premium-callout current">
+  <h3>Best fit</h3>
+  <p>DaisySeries is for plugins that already have config-heavy values like materials, sounds, item flags, enchantments, or potion effects and want clean parsing without rebuilding helper utilities.</p>
+</div>
+
 ## Requirements
 
 - Java 21
@@ -33,9 +38,10 @@ dependencies {
 implementation("cat.daisy:series-material:0.1.0-SNAPSHOT")
 implementation("cat.daisy:series-sound:0.1.0-SNAPSHOT")
 implementation("cat.daisy:series-itemflag:0.1.0-SNAPSHOT")
+implementation("cat.daisy:series-enchantment:0.1.0-SNAPSHOT")
+implementation("cat.daisy:series-potion:0.1.0-SNAPSHOT")
 ```
 
 ## Next step
 
 Parse your first config-heavy values with [First Parse](/daisyseries/getting-started/first-parse/).
-

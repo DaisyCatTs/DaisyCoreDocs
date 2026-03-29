@@ -1,71 +1,84 @@
 ---
 title: DaisySeries
-description: Lightweight Kotlin-first parsing utilities for materials, sounds, item flags, canonical keys, and friendly names.
+description: The lightweight parser toolkit for modern Paper plugins that need config-safe values, canonical keys, and cleaner enum handling.
 ---
 
 # DaisySeries
 
 <div class="home-hero">
   <span class="home-kicker">The Lightweight Utility Toolkit</span>
-  <h2>Modern Paper-first enum parsing without dragging in a full platform.</h2>
-  <p>DaisySeries gives you clean config-safe parsing, canonical lowercase keys, friendly display names, and curated aliases for the values plugins constantly touch.</p>
-
-```kotlin
-dependencies {
-    implementation("cat.daisy:DaisySeries:0.1.0-SNAPSHOT")
-}
-```
+  <h2>Modern Paper-first parsing for plugins that need clean values without adopting a full runtime framework.</h2>
+  <p>DaisySeries turns repeated enum-helper glue into one small consistent contract: parse input, fail cleanly, store canonical keys, and show friendly names in UI.</p>
 
   <div class="home-actions">
-    <a class="home-button" href="/daisyseries/getting-started/install/">Start Here</a>
-    <a class="home-button-secondary" href="/daisyseries/reference/material-api/">Read the API</a>
+    <a class="home-button" href="/daisyseries/getting-started/install/">Install DaisySeries</a>
+    <a class="home-button-secondary" href="/daisyseries/getting-started/first-parse/">Parse the First Values</a>
   </div>
 </div>
 
 <div class="value-strip">
-  <div class="value-pill"><strong>Starter pack</strong><span>Materials, sounds, and item flags ship first because they remove the most repeated plugin boilerplate immediately.</span></div>
-  <div class="value-pill"><strong>Config-safe</strong><span>Use lowercase keys for storage, display names for UI, and curated aliases for practical plugin input.</span></div>
-  <div class="value-pill"><strong>Works alone or with DaisyCore</strong><span>Use it as a standalone utility library or pair it with DaisyCore when your plugin also needs runtime systems.</span></div>
+  <div class="value-pill"><strong>Config-safe</strong><span>Accept practical input, return stable keys, and remove plugin-local parser boilerplate.</span></div>
+  <div class="value-pill"><strong>Tiny contract</strong><span>Every module follows the same parse, parseOrNull, key, displayName, and aliases pattern.</span></div>
+  <div class="value-pill"><strong>Standalone or paired</strong><span>Use DaisySeries alone, or pair it with DaisyCore when your plugin also needs runtime systems.</span></div>
+</div>
+
+<div class="doc-shell">
+  <div class="doc-lead">
+    <span class="eyebrow">What it removes</span>
+    <h3>No more local <code>valueOf(...)</code> wrappers, alias maps, or friendly-name helpers.</h3>
+    <p>DaisySeries exists to standardize the boring but important parsing layer that otherwise gets reimplemented across every Paper plugin repo.</p>
+  </div>
+  <div class="doc-rail">
+    <span class="eyebrow">Current module family</span>
+    <ul>
+      <li>materials</li>
+      <li>sounds</li>
+      <li>item flags</li>
+      <li>enchantments</li>
+      <li>potions</li>
+    </ul>
+  </div>
 </div>
 
 ## What DaisySeries includes
 
-<div class="home-grid">
-  <div class="home-card">
-    <h3>Materials</h3>
-    <p>Parse config-friendly material names, get canonical keys, and render clean display names for UI.</p>
+<div class="feature-matrix">
+  <div class="feature-card"><strong>Materials</strong><p>Config-friendly parsing, canonical material keys, and clean display names for UI and logs.</p></div>
+  <div class="feature-card"><strong>Sounds</strong><p>Modern Paper-first sound parsing from lowercase, spaced, kebab-case, or canonical input.</p></div>
+  <div class="feature-card"><strong>Item Flags</strong><p>Single-value parsing plus list parsing for item config blocks.</p></div>
+  <div class="feature-card"><strong>Enchantments</strong><p>Live-registry-backed runtime parsing with canonical suggestions and stable key rules.</p></div>
+  <div class="feature-card"><strong>Potions</strong><p>Potion-effect parsing centered on `PotionEffectType`, not brewing-oriented item concepts.</p></div>
+</div>
+
+## Start the normal path
+
+<div class="doc-journey">
+  <div class="step-card">
+    <span class="eyebrow">Step 1</span>
+    <h3>Install the full toolkit or just one module</h3>
+    <p>Start with <a href="/daisyseries/getting-started/install/">Install DaisySeries</a> and decide whether you want the umbrella artifact or a narrower package.</p>
   </div>
-  <div class="home-card">
-    <h3>Sounds</h3>
-    <p>Resolve modern Paper sound names from spaced, kebab-case, lowercase, or canonical inputs.</p>
+  <div class="step-card">
+    <span class="eyebrow">Step 2</span>
+    <h3>Learn the contract through one config-heavy example</h3>
+    <p>Use <a href="/daisyseries/getting-started/first-parse/">First Parse</a> to see all the main module concepts in one believable plugin flow.</p>
   </div>
-  <div class="home-card">
-    <h3>Item Flags</h3>
-    <p>Parse single flags or config lists and keep canonical output stable for serialization.</p>
+  <div class="step-card">
+    <span class="eyebrow">Step 3</span>
+    <h3>Pair it with DaisyCore when runtime systems enter the picture</h3>
+    <p>Use <a href="/daisyseries/guides/use-daisyseries-with-daisycore/">Use DaisySeries with DaisyCore</a> when parsing and runtime ownership should stay separate.</p>
   </div>
 </div>
 
-## Start here
-
-<div class="path-grid">
-  <a class="home-card" href="/daisyseries/getting-started/install/">
-    <div class="path-step"><strong>1</strong><div><h3>Install</h3><p>Add DaisySeries as a lightweight utility dependency.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyseries/getting-started/first-parse/">
-    <div class="path-step"><strong>2</strong><div><h3>First Parse</h3><p>Parse materials, sounds, and item flags from config-like input.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyseries/guides/use-daisyseries-with-daisycore/">
-    <div class="path-step"><strong>3</strong><div><h3>Use with DaisyCore</h3><p>Keep runtime systems in DaisyCore and parsing helpers in DaisySeries.</p></div></div>
-  </a>
-  <a class="home-card" href="/daisyseries/migration/from-plugin-local-enum-helpers/">
-    <div class="path-step"><strong>4</strong><div><h3>Migrate Helpers</h3><p>Replace local enum wrappers with one consistent parser layer.</p></div></div>
-  </a>
+<div class="premium-callout current">
+  <h3>Runtime note</h3>
+  <p>Materials, sounds, and item flags are straightforward. Enchantments and potion effects are more registry-sensitive, so the docs stay explicit about what is unit-test-safe and what resolves against a live Paper runtime.</p>
 </div>
 
-## Current scope
+## Best next pages
 
-<div class="api-note">
-  <p><strong>Modern Paper first:</strong> DaisySeries does not try to be a giant legacy compatibility layer in v1.</p>
-  <p><strong>Alias policy:</strong> aliases are curated and practical, not fuzzy magic or exhaustive synonym maps.</p>
-</div>
-
+- Installation: [Install DaisySeries](/daisyseries/getting-started/install/)
+- One real example: [First Parse](/daisyseries/getting-started/first-parse/)
+- Use it in config-heavy plugins: [Config-Driven Plugins](/daisyseries/guides/use-daisyseries-in-config-driven-plugins/)
+- Pair it with DaisyCore: [Use DaisySeries with DaisyCore](/daisyseries/guides/use-daisyseries-with-daisycore/)
+- API reference: [Material API](/daisyseries/reference/material-api/) and [Enchantment API](/daisyseries/reference/enchantment-api/)
