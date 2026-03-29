@@ -9,7 +9,7 @@ description: The current Daisy ecosystem roadmap across DaisyCore, DaisySeries, 
 
 - **DaisyCore**: the runtime/platform product
 - **DaisySeries**: the parser/reference utility product
-- **DaisyConfig**: the typed YAML and reload-safe config product
+- **DaisyConfig**: the typed YAML, managed lifecycle, and module bundle product
 
 ## Current ecosystem priority
 
@@ -20,8 +20,9 @@ The current priority is ecosystem polish:
 - clearer docs
 - stronger cross-product examples
 - better reference coverage
+- one obvious end-to-end Daisy stack path
 
-That work comes before another large new runtime subsystem.
+That work comes before the next new Daisy library.
 
 ## DaisyCore
 
@@ -54,7 +55,8 @@ See the utility docs: [DaisySeries Overview](/daisyseries/)
 DaisyConfig currently ships:
 
 - typed YAML mapping
-- reload-safe config handles
+- managed YAML lifecycle
+- module bundles
 - DaisySeries-backed codecs
 - DaisyCore-friendly text bridging
 
@@ -62,12 +64,20 @@ See the config docs: [DaisyConfig Overview](/daisyconfig/)
 
 ## Next major project after the current polish pass
 
-The recommended next large initiative is **DaisyConfig Phase 2**.
+The current recommendation is:
 
-That should focus on:
+1. finish the suite integration and polish pass
+2. then choose the next large library based on the strongest repeated problem
 
-- richer validation helpers
-- stronger object/schema ergonomics
-- better config composition
-- stronger full-stack Daisy examples
-- cleaner admin-editable text/config workflows
+The leading candidates after this polish phase are:
+
+- **DaisyData** for persistence, repositories, caches, and player data lifecycle
+- **DaisyEffects** for particles, sounds, titles, action bars, and display-effect composition
+
+The gate before starting either one is simple:
+
+- the public roadmap is current
+- the three shipped products have one coherent story
+- one canonical full-stack guide exists
+- install/version guidance is internally consistent
+- migration paths are practical for real plugin authors

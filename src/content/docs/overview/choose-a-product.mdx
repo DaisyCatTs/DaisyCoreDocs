@@ -36,6 +36,8 @@ import DecisionMatrix from '@components/DecisionMatrix.astro'
 
 <p>The Daisy suite has three separate ownership layers: DaisyCore owns runtime systems, DaisySeries owns canonical values, and DaisyConfig owns typed YAML plus shared config state. The dependency chain still matters, but the first question is which product actually owns your problem.</p>
 
+<p>If your plugin needs all three layers together, skip the guesswork and follow <a href="/overview/build-the-normal-stack/">Build the Normal Stack</a>.</p>
+
 <CrossProductCallout
   product="core"
   label="Use DaisyCore when runtime systems are the problem"

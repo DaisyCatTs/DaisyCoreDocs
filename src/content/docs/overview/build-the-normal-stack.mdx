@@ -1,0 +1,228 @@
+---
+title: Build the Normal Stack
+description: "The intended Daisy stack for modern Paper plugins: DaisySeries parses values, DaisyConfig owns typed YAML and module lifecycle, and DaisyCore runs the runtime flow."
+---
+
+# Build the Normal Stack
+
+This is the intended full Daisy path for a real modern Paper plugin:
+
+1. **DaisySeries** owns canonical values and parsing
+2. **DaisyConfig** owns typed YAML, managed lifecycle, and module bundles
+3. **DaisyCore** owns commands, UI, text rendering, and runtime systems
+
+If your plugin only needs one layer, stop at that layer. Use the full stack when all three problems are real at once.
+
+## What this example builds
+
+One `spawn` module with:
+
+- `settings.yml`
+- `lang.yml`
+- DaisySeries-backed values in typed config
+- DaisyConfig-managed lifecycle
+- DaisyCore command output through the same shared text source
+
+## 1. Install the three products
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation("cat.daisy:DaisySeries:0.1.0-SNAPSHOT")
+    implementation("cat.daisy:config-all:0.2.0")
+    implementation("cat.daisy:DaisyCore:0.1.0-SNAPSHOT")
+}
+```
+
+Current suite release state:
+
+- DaisyConfig is released as `0.2.0`
+- DaisyCore and DaisySeries are still intentional snapshots during the suite polish phase
+
+## 2. Define a typed config shape with DaisySeries-backed fields
+
+```kotlin
+data class SpawnSettings(
+    val delaySeconds: Int,
+    val icon: Material,
+    val readySound: Sound,
+)
+
+val spawnSettingsCodec =
+    objectCodec {
+        SpawnSettings(
+            delaySeconds = defaulted("spawn.delay", intCodec(), 3),
+            icon = required("spawn.icon", materialCodec()),
+            readySound = required("spawn.ready_sound", soundCodec()),
+        )
+    }
+```
+
+Ownership here:
+
+- DaisySeries codecs parse `Material` and `Sound`
+- DaisyConfig owns the file and typed decode
+- DaisyCore is not involved yet
+
+## 3. Put the data in managed module files
+
+```yaml
+# modules/commands/spawn/settings.yml
+config_version: 2
+spawn:
+  delay: 3
+  icon: compass
+  ready_sound: entity_player_levelup
+```
+
+```yaml
+# modules/commands/spawn/lang.yml
+config_version: 1
+messages:
+  spawn:
+    ready: "<green>Spawn ready in %delay%s.</green>"
+```
+
+## 4. Load the module with DaisyConfig
+
+```kotlin
+class SpawnModuleRegistry(
+    plugin: JavaPlugin,
+) {
+    private val registry =
+        DaisyModules.load(plugin) {
+            module(
+                DaisyModuleDefinition(
+                    category = "commands",
+                    module = "spawn",
+                    settings =
+                        DaisyManagedYamlFile(
+                            id = "commands/spawn/settings",
+                            path = "modules/commands/spawn/settings.yml",
+                            codec = spawnSettingsCodec,
+                            currentVersion = 2,
+                            migrations = listOf(
+                                DaisyYamlMigrations.move(1, 2, "spawn-delay", "spawn.delay"),
+                            ),
+                        ),
+                    lang =
+                        DaisyManagedYamlFile(
+                            id = "commands/spawn/lang",
+                            path = "modules/commands/spawn/lang.yml",
+                            codec = daisyTextConfigCodec(),
+                        ),
+                ),
+            )
+        }
+
+    val spawn: DaisyModuleHandle<SpawnSettings>
+        get() = registry.require("commands", "spawn")
+}
+```
+
+Ownership here:
+
+- DaisyConfig creates missing files
+- DaisyConfig merges missing keys
+- DaisyConfig runs ordered migrations
+- DaisyConfig exposes one typed module handle
+
+## 5. Hand the lang source into DaisyCore
+
+```kotlin
+class SpawnPlugin : JavaPlugin() {
+    private lateinit var daisy: DaisyPlatform
+    private lateinit var modules: SpawnModuleRegistry
+
+    override fun onEnable() {
+        modules = SpawnModuleRegistry(this)
+
+        daisy =
+            DaisyPlatform.create(this) {
+                messages(modules.spawn.textSource)
+                commands()
+                menus()
+                scoreboards()
+                tablists()
+            }
+    }
+
+    override fun onDisable() {
+        daisy.close()
+    }
+}
+```
+
+This boundary matters:
+
+- DaisyConfig stores and reloads the text
+- DaisyCore still renders it
+
+## 6. Use the typed settings in runtime code
+
+```kotlin
+@DaisyCommandSet
+class SpawnCommands(
+    private val plugin: SpawnPlugin,
+) : DaisyCommandGroup({
+    command("spawn") {
+        description("Open the spawn flow")
+
+        player {
+            val settings = plugin.modules.spawn.current.settings
+            val text =
+                plugin.modules.spawn.textSource.text("messages.spawn.ready")
+                    ?.replace("%delay%", settings.delaySeconds.toString())
+                    ?: "<green>Spawn ready in ${settings.delaySeconds}s.</green>"
+
+            reply(text)
+
+            player.openMenu("Spawn", rows = 3) {
+                slot(13) {
+                    item(settings.icon) {
+                        name("<gradient:#7dd3fc:#c4b5fd>Spawn</gradient>")
+                    }
+                }
+            }
+
+            player.playSound(player.location, settings.readySound, 1f, 1f)
+        }
+    }
+})
+```
+
+Ownership here:
+
+- DaisySeries already normalized the values
+- DaisyConfig already decoded and preserved runtime-safe state
+- DaisyCore runs the command, menu, and text rendering
+
+## 7. Adopt incrementally if you need to
+
+You do not need the whole stack on day one.
+
+- use only DaisyCore when the problem is pure runtime/UI
+- add DaisySeries when parser glue starts leaking through config or command code
+- add DaisyConfig when file lifecycle, versioning, and shared text ownership become the maintenance problem
+
+## Why this is the normal Daisy stack
+
+It keeps the suite boundaries honest:
+
+- **DaisySeries** is the value layer
+- **DaisyConfig** is the config lifecycle layer
+- **DaisyCore** is the runtime layer
+
+That is the intended stack for modern Minecraft plugin work.
+
+## Next steps
+
+- Choose the right entrypoint first: [Which product do I need?](/overview/choose-a-product/)
+- Start with parsing only: [DaisySeries](/daisyseries/)
+- Start with typed config only: [DaisyConfig](/daisyconfig/)
+- Start with runtime only: [DaisyCore](/daisycore/)

@@ -74,6 +74,12 @@ That keeps the product boundaries clean:
 - DaisyConfig stores and loads text
 - DaisyCore renders it
 
+You do not need the whole suite at once.
+
+- stay in DaisyCore only when local strings are enough
+- add DaisyConfig when text becomes shared and reloadable
+- add DaisySeries too when config-backed values need canonical parsing
+
 ## What shared keys look like
 
 ```kotlin
@@ -123,6 +129,7 @@ That safety boundary does not change just because the text came from config.
 ## Next steps
 
 - Learn the DaisyConfig side of the bridge: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
+- See the full intended stack: [Build the Normal Stack](/overview/build-the-normal-stack/)
 - See the full stack together: [Full Ecosystem Example](/overview/full-ecosystem-example/)
 - Jump to runtime text details: [Text Bridge](/daisyconfig/reference/text-bridge/)
 </div>

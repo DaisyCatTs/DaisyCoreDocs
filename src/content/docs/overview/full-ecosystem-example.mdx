@@ -50,7 +50,21 @@ val profileUiCodec =
     }
 ```
 
-## 2. Runtime bootstrap with DaisyCore
+## 2. Managed config ownership with DaisyConfig
+
+```kotlin
+val profileModule =
+    DaisyManagedYamlFile(
+        id = "commands/profile/settings",
+        path = "modules/commands/profile/settings.yml",
+        codec = profileUiCodec,
+        currentVersion = 2,
+    )
+```
+
+Managed files are the preferred path once config lifecycle and reload safety are real plugin concerns.
+
+## 3. Runtime bootstrap with DaisyCore
 
 ```kotlin
 class ProfilePlugin : JavaPlugin() {
@@ -79,7 +93,7 @@ class ProfilePlugin : JavaPlugin() {
 }
 ```
 
-## 3. Values come from DaisySeries-backed codecs
+## 4. Values come from DaisySeries-backed codecs
 
 ```yaml
 icon: diamond_sword
@@ -99,7 +113,7 @@ That means:
 - aliases remain accepted where supported
 - value parsing logic is not rebuilt in your plugin
 
-## 4. Command, menu, sidebar, and tablist in one flow
+## 5. Command, menu, sidebar, and tablist in one flow
 
 ```kotlin
 @DaisyCommandSet
@@ -149,7 +163,7 @@ object ProfileCommands : DaisyCommandGroup({
 })
 ```
 
-## 5. The safety boundary
+## 6. The safety boundary
 
 This is the important production rule:
 
@@ -174,6 +188,7 @@ The result is one believable plugin architecture instead of three disconnected l
 
 ## Next steps
 
+- Follow the intended stack path: [Build the Normal Stack](/overview/build-the-normal-stack/)
 - Start with the runtime platform: [DaisyCore](/daisycore/)
 - See parser modules and values: [DaisySeries](/daisyseries/)
 - Learn the typed config layer: [DaisyConfig](/daisyconfig/)

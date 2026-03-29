@@ -35,6 +35,7 @@ export default defineConfig({
             { label: 'Getting Started', slug: 'index' },
             { label: 'Which product do I need?', slug: 'overview/choose-a-product' },
             { label: 'Ecosystem Example', slug: 'overview/full-ecosystem-example' },
+            { label: 'Build the Normal Stack', slug: 'overview/build-the-normal-stack' },
             { label: 'Roadmap', slug: 'overview/roadmap' },
           ],
         },

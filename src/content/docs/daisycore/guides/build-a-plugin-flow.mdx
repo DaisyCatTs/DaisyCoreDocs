@@ -112,7 +112,14 @@ object ProfileCommands : DaisyCommandGroup({
   description="DaisyConfig stores and loads the text source, and now also owns managed YAML and module bundle lifecycle. DaisyCore still renders it."
 />
 
+<CrossProductCallout
+  product="series"
+  label="Use DaisySeries when values start leaking parser glue into runtime code"
+  href="/daisyseries/guides/use-daisyseries-with-daisycore/"
+  description="Keep materials, sounds, flags, enchantments, and potions in the parser layer instead of rebuilding alias maps inside DaisyCore features."
+/>
+
 <div class="premium-callout info">
   <h3>You've built the runtime flow</h3>
-  <p>Next read <a href="/daisycore/guides/use-config-and-lang-text-with-daisycore/">Config and Lang Text</a> if the feature is becoming config-heavy, or jump to <a href="/daisycore/reference/bootstrap-api/">Bootstrap API</a> for the lower-level surface.</p>
+  <p>Next read <a href="/daisycore/guides/use-config-and-lang-text-with-daisycore/">Config and Lang Text</a> if the feature is becoming config-heavy, or use <a href="/overview/build-the-normal-stack/">Build the Normal Stack</a> when parser values, managed YAML, and runtime UI all matter in the same plugin.</p>
 </div>

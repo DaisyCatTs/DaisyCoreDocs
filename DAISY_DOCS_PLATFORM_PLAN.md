@@ -10,10 +10,10 @@ Current first-class products:
 
 - `DaisyCore`
 - `DaisySeries`
+- `DaisyConfig`
 
 Potential future products:
 
-- `DaisyConfig`
 - `DaisyData`
 - `DaisyEffects`
 
@@ -23,6 +23,7 @@ The docs platform should keep explicit product prefixes:
 
 - `/daisycore/...`
 - `/daisyseries/...`
+- `/daisyconfig/...`
 
 This keeps:
 
@@ -37,7 +38,8 @@ The docs homepage should answer:
 - what Daisy is
 - when to choose DaisyCore
 - when to choose DaisySeries
-- when to use both together
+- when to choose DaisyConfig
+- when to use the full stack together
 
 ## Content Standard
 
