@@ -21,6 +21,7 @@ import StepCard from '@components/StepCard.astro'
   <div class="value-pill"><strong>Canonical keys</strong><span>Serialize stable lowercase keys instead of plugin-local enum formatting.</span></div>
   <div class="value-pill"><strong>Curated aliases</strong><span>Accept practical real-world input without writing your own alias maps.</span></div>
   <div class="value-pill"><strong>Tiny contract</strong><span>Parse, key, display name, and aliases stay consistent across modules.</span></div>
+  <div class="value-pill"><strong>Selective growth</strong><span>DaisySeries grows only where modern plugin authors repeatedly benefit from canonical keys and normalization.</span></div>
   <div class="value-pill"><strong>Modern replacement</strong><span>Use DaisySeries as the modern Paper-first alternative to local enum helpers and legacy XSeries-style parser glue.</span></div>
   <div class="value-pill"><strong>Standalone or paired</strong><span>Use DaisySeries alone, or feed its values into DaisyConfig and DaisyCore when config or runtime layers need them.</span></div>
 </div>
@@ -34,6 +35,15 @@ import StepCard from '@components/StepCard.astro'
   <div class="feature-card"><strong>Biomes, professions, attributes, difficulties, faces, damage causes, operations, pattern types, entities, game modes, particles, and statistics</strong><p>Expand the same canonical contract into more of the modern Paper surface plugin authors actually hit in config-heavy work.</p></div>
   <div class="feature-card"><strong>Dictionary lookups</strong><p>Static committed dictionaries so values stay searchable and linkable in docs.</p></div>
 </div>
+
+## What DaisySeries will not do
+
+- wrap every Bukkit or Paper enum family
+- become a legacy compatibility museum
+- add giant alias maps just to claim broader coverage
+- own config loading or runtime systems
+
+The inclusion bar is repeated real modern-plugin usefulness, not raw module count.
 
 <CrossProductCallout
   product="config"

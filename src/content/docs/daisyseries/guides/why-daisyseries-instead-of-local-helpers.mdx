@@ -37,6 +37,18 @@ It does **not** mean:
 
 That is the point of the product boundary: DaisySeries should be the modern Paper-first alternative to XSeries-style parsing glue, not a maximal clone of every helper category older compatibility libraries accumulated.
 
+## Why DaisySeries does not add everything
+
+DaisySeries should only grow where plugin authors repeatedly benefit from:
+
+- normalized input
+- canonical keys
+- curated aliases
+- stable display names
+- cleaner config and serialization boundaries
+
+If a family is niche, mostly hardcoded, mostly runtime-owned, or only useful once, wrapping it does not make DaisySeries better. It just makes the product noisier.
+
 ## What you stop writing locally
 
 Instead of this:
