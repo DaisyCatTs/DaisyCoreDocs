@@ -1,0 +1,1646 @@
+---
+title: Sounds Dictionary
+description: Canonical DaisySeries sound keys, display names, and accepted aliases.
+---
+
+# Sounds Dictionary
+
+Use these values for feedback sounds, config-driven audio cues, and lightweight sound selection.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `entity_player_levelup`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs are normalized when the DaisySeries sound parser accepts them.
+
+## Quick config example
+
+```yaml
+feedback_sound: ambient_basalt_deltas_additions
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisySounds.parse(config.feedback_sound)
+val key = DaisySounds.key(value)
+val label = DaisySounds.displayName(value)
+
+val typed = required("feedback_sound", soundCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``ambient_basalt_deltas_additions`` | Ambient Basalt Deltas Additions | - |
+| ``ambient_basalt_deltas_loop`` | Ambient Basalt Deltas Loop | - |
+| ``ambient_basalt_deltas_mood`` | Ambient Basalt Deltas Mood | - |
+| ``ambient_cave`` | Ambient Cave | - |
+| ``ambient_crimson_forest_additions`` | Ambient Crimson Forest Additions | - |
+| ``ambient_crimson_forest_loop`` | Ambient Crimson Forest Loop | - |
+| ``ambient_crimson_forest_mood`` | Ambient Crimson Forest Mood | - |
+| ``ambient_nether_wastes_additions`` | Ambient Nether Wastes Additions | - |
+| ``ambient_nether_wastes_loop`` | Ambient Nether Wastes Loop | - |
+| ``ambient_nether_wastes_mood`` | Ambient Nether Wastes Mood | - |
+| ``ambient_soul_sand_valley_additions`` | Ambient Soul Sand Valley Additions | - |
+| ``ambient_soul_sand_valley_loop`` | Ambient Soul Sand Valley Loop | - |
+| ``ambient_soul_sand_valley_mood`` | Ambient Soul Sand Valley Mood | - |
+| ``ambient_underwater_enter`` | Ambient Underwater Enter | - |
+| ``ambient_underwater_exit`` | Ambient Underwater Exit | - |
+| ``ambient_underwater_loop`` | Ambient Underwater Loop | - |
+| ``ambient_underwater_loop_additions`` | Ambient Underwater Loop Additions | - |
+| ``ambient_underwater_loop_additions_rare`` | Ambient Underwater Loop Additions Rare | - |
+| ``ambient_underwater_loop_additions_ultra_rare`` | Ambient Underwater Loop Additions Ultra Rare | - |
+| ``ambient_warped_forest_additions`` | Ambient Warped Forest Additions | - |
+| ``ambient_warped_forest_loop`` | Ambient Warped Forest Loop | - |
+| ``ambient_warped_forest_mood`` | Ambient Warped Forest Mood | - |
+| ``block_amethyst_block_break`` | Block Amethyst Block Break | - |
+| ``block_amethyst_block_chime`` | Block Amethyst Block Chime | - |
+| ``block_amethyst_block_fall`` | Block Amethyst Block Fall | - |
+| ``block_amethyst_block_hit`` | Block Amethyst Block Hit | - |
+| ``block_amethyst_block_place`` | Block Amethyst Block Place | - |
+| ``block_amethyst_block_resonate`` | Block Amethyst Block Resonate | - |
+| ``block_amethyst_block_step`` | Block Amethyst Block Step | - |
+| ``block_amethyst_cluster_break`` | Block Amethyst Cluster Break | - |
+| ``block_amethyst_cluster_fall`` | Block Amethyst Cluster Fall | - |
+| ``block_amethyst_cluster_hit`` | Block Amethyst Cluster Hit | - |
+| ``block_amethyst_cluster_place`` | Block Amethyst Cluster Place | - |
+| ``block_amethyst_cluster_step`` | Block Amethyst Cluster Step | - |
+| ``block_ancient_debris_break`` | Block Ancient Debris Break | - |
+| ``block_ancient_debris_fall`` | Block Ancient Debris Fall | - |
+| ``block_ancient_debris_hit`` | Block Ancient Debris Hit | - |
+| ``block_ancient_debris_place`` | Block Ancient Debris Place | - |
+| ``block_ancient_debris_step`` | Block Ancient Debris Step | - |
+| ``block_anvil_break`` | Block Anvil Break | - |
+| ``block_anvil_destroy`` | Block Anvil Destroy | - |
+| ``block_anvil_fall`` | Block Anvil Fall | - |
+| ``block_anvil_hit`` | Block Anvil Hit | - |
+| ``block_anvil_land`` | Block Anvil Land | - |
+| ``block_anvil_place`` | Block Anvil Place | - |
+| ``block_anvil_step`` | Block Anvil Step | - |
+| ``block_anvil_use`` | Block Anvil Use | - |
+| ``block_azalea_break`` | Block Azalea Break | - |
+| ``block_azalea_fall`` | Block Azalea Fall | - |
+| ``block_azalea_hit`` | Block Azalea Hit | - |
+| ``block_azalea_leaves_break`` | Block Azalea Leaves Break | - |
+| ``block_azalea_leaves_fall`` | Block Azalea Leaves Fall | - |
+| ``block_azalea_leaves_hit`` | Block Azalea Leaves Hit | - |
+| ``block_azalea_leaves_place`` | Block Azalea Leaves Place | - |
+| ``block_azalea_leaves_step`` | Block Azalea Leaves Step | - |
+| ``block_azalea_place`` | Block Azalea Place | - |
+| ``block_azalea_step`` | Block Azalea Step | - |
+| ``block_bamboo_break`` | Block Bamboo Break | - |
+| ``block_bamboo_fall`` | Block Bamboo Fall | - |
+| ``block_bamboo_hit`` | Block Bamboo Hit | - |
+| ``block_bamboo_place`` | Block Bamboo Place | - |
+| ``block_bamboo_sapling_break`` | Block Bamboo Sapling Break | - |
+| ``block_bamboo_sapling_hit`` | Block Bamboo Sapling Hit | - |
+| ``block_bamboo_sapling_place`` | Block Bamboo Sapling Place | - |
+| ``block_bamboo_step`` | Block Bamboo Step | - |
+| ``block_bamboo_wood_break`` | Block Bamboo Wood Break | - |
+| ``block_bamboo_wood_button_click_off`` | Block Bamboo Wood Button Click Off | - |
+| ``block_bamboo_wood_button_click_on`` | Block Bamboo Wood Button Click On | - |
+| ``block_bamboo_wood_door_close`` | Block Bamboo Wood Door Close | - |
+| ``block_bamboo_wood_door_open`` | Block Bamboo Wood Door Open | - |
+| ``block_bamboo_wood_fall`` | Block Bamboo Wood Fall | - |
+| ``block_bamboo_wood_fence_gate_close`` | Block Bamboo Wood Fence Gate Close | - |
+| ``block_bamboo_wood_fence_gate_open`` | Block Bamboo Wood Fence Gate Open | - |
+| ``block_bamboo_wood_hanging_sign_break`` | Block Bamboo Wood Hanging Sign Break | - |
+| ``block_bamboo_wood_hanging_sign_fall`` | Block Bamboo Wood Hanging Sign Fall | - |
+| ``block_bamboo_wood_hanging_sign_hit`` | Block Bamboo Wood Hanging Sign Hit | - |
+| ``block_bamboo_wood_hanging_sign_place`` | Block Bamboo Wood Hanging Sign Place | - |
+| ``block_bamboo_wood_hanging_sign_step`` | Block Bamboo Wood Hanging Sign Step | - |
+| ``block_bamboo_wood_hit`` | Block Bamboo Wood Hit | - |
+| ``block_bamboo_wood_place`` | Block Bamboo Wood Place | - |
+| ``block_bamboo_wood_pressure_plate_click_off`` | Block Bamboo Wood Pressure Plate Click Off | - |
+| ``block_bamboo_wood_pressure_plate_click_on`` | Block Bamboo Wood Pressure Plate Click On | - |
+| ``block_bamboo_wood_step`` | Block Bamboo Wood Step | - |
+| ``block_bamboo_wood_trapdoor_close`` | Block Bamboo Wood Trapdoor Close | - |
+| ``block_bamboo_wood_trapdoor_open`` | Block Bamboo Wood Trapdoor Open | - |
+| ``block_barrel_close`` | Block Barrel Close | - |
+| ``block_barrel_open`` | Block Barrel Open | - |
+| ``block_basalt_break`` | Block Basalt Break | - |
+| ``block_basalt_fall`` | Block Basalt Fall | - |
+| ``block_basalt_hit`` | Block Basalt Hit | - |
+| ``block_basalt_place`` | Block Basalt Place | - |
+| ``block_basalt_step`` | Block Basalt Step | - |
+| ``block_beacon_activate`` | Block Beacon Activate | - |
+| ``block_beacon_ambient`` | Block Beacon Ambient | - |
+| ``block_beacon_deactivate`` | Block Beacon Deactivate | - |
+| ``block_beacon_power_select`` | Block Beacon Power Select | - |
+| ``block_beehive_drip`` | Block Beehive Drip | - |
+| ``block_beehive_enter`` | Block Beehive Enter | - |
+| ``block_beehive_exit`` | Block Beehive Exit | - |
+| ``block_beehive_shear`` | Block Beehive Shear | - |
+| ``block_beehive_work`` | Block Beehive Work | - |
+| ``block_bell_resonate`` | Block Bell Resonate | - |
+| ``block_bell_use`` | Block Bell Use | - |
+| ``block_big_dripleaf_break`` | Block Big Dripleaf Break | - |
+| ``block_big_dripleaf_fall`` | Block Big Dripleaf Fall | - |
+| ``block_big_dripleaf_hit`` | Block Big Dripleaf Hit | - |
+| ``block_big_dripleaf_place`` | Block Big Dripleaf Place | - |
+| ``block_big_dripleaf_step`` | Block Big Dripleaf Step | - |
+| ``block_big_dripleaf_tilt_down`` | Block Big Dripleaf Tilt Down | - |
+| ``block_big_dripleaf_tilt_up`` | Block Big Dripleaf Tilt Up | - |
+| ``block_blastfurnace_fire_crackle`` | Block Blastfurnace Fire Crackle | - |
+| ``block_bone_block_break`` | Block Bone Block Break | - |
+| ``block_bone_block_fall`` | Block Bone Block Fall | - |
+| ``block_bone_block_hit`` | Block Bone Block Hit | - |
+| ``block_bone_block_place`` | Block Bone Block Place | - |
+| ``block_bone_block_step`` | Block Bone Block Step | - |
+| ``block_brewing_stand_brew`` | Block Brewing Stand Brew | - |
+| ``block_bubble_column_bubble_pop`` | Block Bubble Column Bubble Pop | - |
+| ``block_bubble_column_upwards_ambient`` | Block Bubble Column Upwards Ambient | - |
+| ``block_bubble_column_upwards_inside`` | Block Bubble Column Upwards Inside | - |
+| ``block_bubble_column_whirlpool_ambient`` | Block Bubble Column Whirlpool Ambient | - |
+| ``block_bubble_column_whirlpool_inside`` | Block Bubble Column Whirlpool Inside | - |
+| ``block_cake_add_candle`` | Block Cake Add Candle | - |
+| ``block_calcite_break`` | Block Calcite Break | - |
+| ``block_calcite_fall`` | Block Calcite Fall | - |
+| ``block_calcite_hit`` | Block Calcite Hit | - |
+| ``block_calcite_place`` | Block Calcite Place | - |
+| ``block_calcite_step`` | Block Calcite Step | - |
+| ``block_campfire_crackle`` | Block Campfire Crackle | - |
+| ``block_candle_ambient`` | Block Candle Ambient | - |
+| ``block_candle_break`` | Block Candle Break | - |
+| ``block_candle_extinguish`` | Block Candle Extinguish | - |
+| ``block_candle_fall`` | Block Candle Fall | - |
+| ``block_candle_hit`` | Block Candle Hit | - |
+| ``block_candle_place`` | Block Candle Place | - |
+| ``block_candle_step`` | Block Candle Step | - |
+| ``block_cave_vines_break`` | Block Cave Vines Break | - |
+| ``block_cave_vines_fall`` | Block Cave Vines Fall | - |
+| ``block_cave_vines_hit`` | Block Cave Vines Hit | - |
+| ``block_cave_vines_pick_berries`` | Block Cave Vines Pick Berries | - |
+| ``block_cave_vines_place`` | Block Cave Vines Place | - |
+| ``block_cave_vines_step`` | Block Cave Vines Step | - |
+| ``block_chain_break`` | Block Chain Break | - |
+| ``block_chain_fall`` | Block Chain Fall | - |
+| ``block_chain_hit`` | Block Chain Hit | - |
+| ``block_chain_place`` | Block Chain Place | - |
+| ``block_chain_step`` | Block Chain Step | - |
+| ``block_cherry_leaves_break`` | Block Cherry Leaves Break | - |
+| ``block_cherry_leaves_fall`` | Block Cherry Leaves Fall | - |
+| ``block_cherry_leaves_hit`` | Block Cherry Leaves Hit | - |
+| ``block_cherry_leaves_place`` | Block Cherry Leaves Place | - |
+| ``block_cherry_leaves_step`` | Block Cherry Leaves Step | - |
+| ``block_cherry_sapling_break`` | Block Cherry Sapling Break | - |
+| ``block_cherry_sapling_fall`` | Block Cherry Sapling Fall | - |
+| ``block_cherry_sapling_hit`` | Block Cherry Sapling Hit | - |
+| ``block_cherry_sapling_place`` | Block Cherry Sapling Place | - |
+| ``block_cherry_sapling_step`` | Block Cherry Sapling Step | - |
+| ``block_cherry_wood_break`` | Block Cherry Wood Break | - |
+| ``block_cherry_wood_button_click_off`` | Block Cherry Wood Button Click Off | - |
+| ``block_cherry_wood_button_click_on`` | Block Cherry Wood Button Click On | - |
+| ``block_cherry_wood_door_close`` | Block Cherry Wood Door Close | - |
+| ``block_cherry_wood_door_open`` | Block Cherry Wood Door Open | - |
+| ``block_cherry_wood_fall`` | Block Cherry Wood Fall | - |
+| ``block_cherry_wood_fence_gate_close`` | Block Cherry Wood Fence Gate Close | - |
+| ``block_cherry_wood_fence_gate_open`` | Block Cherry Wood Fence Gate Open | - |
+| ``block_cherry_wood_hanging_sign_break`` | Block Cherry Wood Hanging Sign Break | - |
+| ``block_cherry_wood_hanging_sign_fall`` | Block Cherry Wood Hanging Sign Fall | - |
+| ``block_cherry_wood_hanging_sign_hit`` | Block Cherry Wood Hanging Sign Hit | - |
+| ``block_cherry_wood_hanging_sign_place`` | Block Cherry Wood Hanging Sign Place | - |
+| ``block_cherry_wood_hanging_sign_step`` | Block Cherry Wood Hanging Sign Step | - |
+| ``block_cherry_wood_hit`` | Block Cherry Wood Hit | - |
+| ``block_cherry_wood_place`` | Block Cherry Wood Place | - |
+| ``block_cherry_wood_pressure_plate_click_off`` | Block Cherry Wood Pressure Plate Click Off | - |
+| ``block_cherry_wood_pressure_plate_click_on`` | Block Cherry Wood Pressure Plate Click On | - |
+| ``block_cherry_wood_step`` | Block Cherry Wood Step | - |
+| ``block_cherry_wood_trapdoor_close`` | Block Cherry Wood Trapdoor Close | - |
+| ``block_cherry_wood_trapdoor_open`` | Block Cherry Wood Trapdoor Open | - |
+| ``block_chest_close`` | Block Chest Close | - |
+| ``block_chest_locked`` | Block Chest Locked | - |
+| ``block_chest_open`` | Block Chest Open | - |
+| ``block_chiseled_bookshelf_break`` | Block Chiseled Bookshelf Break | - |
+| ``block_chiseled_bookshelf_fall`` | Block Chiseled Bookshelf Fall | - |
+| ``block_chiseled_bookshelf_hit`` | Block Chiseled Bookshelf Hit | - |
+| ``block_chiseled_bookshelf_insert`` | Block Chiseled Bookshelf Insert | - |
+| ``block_chiseled_bookshelf_insert_enchanted`` | Block Chiseled Bookshelf Insert Enchanted | - |
+| ``block_chiseled_bookshelf_pickup`` | Block Chiseled Bookshelf Pickup | - |
+| ``block_chiseled_bookshelf_pickup_enchanted`` | Block Chiseled Bookshelf Pickup Enchanted | - |
+| ``block_chiseled_bookshelf_place`` | Block Chiseled Bookshelf Place | - |
+| ``block_chiseled_bookshelf_step`` | Block Chiseled Bookshelf Step | - |
+| ``block_chorus_flower_death`` | Block Chorus Flower Death | - |
+| ``block_chorus_flower_grow`` | Block Chorus Flower Grow | - |
+| ``block_cobweb_break`` | Block Cobweb Break | - |
+| ``block_cobweb_fall`` | Block Cobweb Fall | - |
+| ``block_cobweb_hit`` | Block Cobweb Hit | - |
+| ``block_cobweb_place`` | Block Cobweb Place | - |
+| ``block_cobweb_step`` | Block Cobweb Step | - |
+| ``block_comparator_click`` | Block Comparator Click | - |
+| ``block_composter_empty`` | Block Composter Empty | - |
+| ``block_composter_fill`` | Block Composter Fill | - |
+| ``block_composter_fill_success`` | Block Composter Fill Success | - |
+| ``block_composter_ready`` | Block Composter Ready | - |
+| ``block_conduit_activate`` | Block Conduit Activate | - |
+| ``block_conduit_ambient`` | Block Conduit Ambient | - |
+| ``block_conduit_ambient_short`` | Block Conduit Ambient Short | - |
+| ``block_conduit_attack_target`` | Block Conduit Attack Target | - |
+| ``block_conduit_deactivate`` | Block Conduit Deactivate | - |
+| ``block_copper_break`` | Block Copper Break | - |
+| ``block_copper_bulb_break`` | Block Copper Bulb Break | - |
+| ``block_copper_bulb_fall`` | Block Copper Bulb Fall | - |
+| ``block_copper_bulb_hit`` | Block Copper Bulb Hit | - |
+| ``block_copper_bulb_place`` | Block Copper Bulb Place | - |
+| ``block_copper_bulb_step`` | Block Copper Bulb Step | - |
+| ``block_copper_bulb_turn_off`` | Block Copper Bulb Turn Off | - |
+| ``block_copper_bulb_turn_on`` | Block Copper Bulb Turn On | - |
+| ``block_copper_door_close`` | Block Copper Door Close | - |
+| ``block_copper_door_open`` | Block Copper Door Open | - |
+| ``block_copper_fall`` | Block Copper Fall | - |
+| ``block_copper_grate_break`` | Block Copper Grate Break | - |
+| ``block_copper_grate_fall`` | Block Copper Grate Fall | - |
+| ``block_copper_grate_hit`` | Block Copper Grate Hit | - |
+| ``block_copper_grate_place`` | Block Copper Grate Place | - |
+| ``block_copper_grate_step`` | Block Copper Grate Step | - |
+| ``block_copper_hit`` | Block Copper Hit | - |
+| ``block_copper_place`` | Block Copper Place | - |
+| ``block_copper_step`` | Block Copper Step | - |
+| ``block_copper_trapdoor_close`` | Block Copper Trapdoor Close | - |
+| ``block_copper_trapdoor_open`` | Block Copper Trapdoor Open | - |
+| ``block_coral_block_break`` | Block Coral Block Break | - |
+| ``block_coral_block_fall`` | Block Coral Block Fall | - |
+| ``block_coral_block_hit`` | Block Coral Block Hit | - |
+| ``block_coral_block_place`` | Block Coral Block Place | - |
+| ``block_coral_block_step`` | Block Coral Block Step | - |
+| ``block_crafter_craft`` | Block Crafter Craft | - |
+| ``block_crafter_fail`` | Block Crafter Fail | - |
+| ``block_crop_break`` | Block Crop Break | - |
+| ``block_decorated_pot_break`` | Block Decorated Pot Break | - |
+| ``block_decorated_pot_fall`` | Block Decorated Pot Fall | - |
+| ``block_decorated_pot_hit`` | Block Decorated Pot Hit | - |
+| ``block_decorated_pot_insert`` | Block Decorated Pot Insert | - |
+| ``block_decorated_pot_insert_fail`` | Block Decorated Pot Insert Fail | - |
+| ``block_decorated_pot_place`` | Block Decorated Pot Place | - |
+| ``block_decorated_pot_shatter`` | Block Decorated Pot Shatter | - |
+| ``block_decorated_pot_step`` | Block Decorated Pot Step | - |
+| ``block_deepslate_break`` | Block Deepslate Break | - |
+| ``block_deepslate_bricks_break`` | Block Deepslate Bricks Break | - |
+| ``block_deepslate_bricks_fall`` | Block Deepslate Bricks Fall | - |
+| ``block_deepslate_bricks_hit`` | Block Deepslate Bricks Hit | - |
+| ``block_deepslate_bricks_place`` | Block Deepslate Bricks Place | - |
+| ``block_deepslate_bricks_step`` | Block Deepslate Bricks Step | - |
+| ``block_deepslate_fall`` | Block Deepslate Fall | - |
+| ``block_deepslate_hit`` | Block Deepslate Hit | - |
+| ``block_deepslate_place`` | Block Deepslate Place | - |
+| ``block_deepslate_step`` | Block Deepslate Step | - |
+| ``block_deepslate_tiles_break`` | Block Deepslate Tiles Break | - |
+| ``block_deepslate_tiles_fall`` | Block Deepslate Tiles Fall | - |
+| ``block_deepslate_tiles_hit`` | Block Deepslate Tiles Hit | - |
+| ``block_deepslate_tiles_place`` | Block Deepslate Tiles Place | - |
+| ``block_deepslate_tiles_step`` | Block Deepslate Tiles Step | - |
+| ``block_dispenser_dispense`` | Block Dispenser Dispense | - |
+| ``block_dispenser_fail`` | Block Dispenser Fail | - |
+| ``block_dispenser_launch`` | Block Dispenser Launch | - |
+| ``block_dripstone_block_break`` | Block Dripstone Block Break | - |
+| ``block_dripstone_block_fall`` | Block Dripstone Block Fall | - |
+| ``block_dripstone_block_hit`` | Block Dripstone Block Hit | - |
+| ``block_dripstone_block_place`` | Block Dripstone Block Place | - |
+| ``block_dripstone_block_step`` | Block Dripstone Block Step | - |
+| ``block_enchantment_table_use`` | Block Enchantment Table Use | - |
+| ``block_end_gateway_spawn`` | Block End Gateway Spawn | - |
+| ``block_end_portal_frame_fill`` | Block End Portal Frame Fill | - |
+| ``block_end_portal_spawn`` | Block End Portal Spawn | - |
+| ``block_ender_chest_close`` | Block Ender Chest Close | - |
+| ``block_ender_chest_open`` | Block Ender Chest Open | - |
+| ``block_fence_gate_close`` | Block Fence Gate Close | - |
+| ``block_fence_gate_open`` | Block Fence Gate Open | - |
+| ``block_fire_ambient`` | Block Fire Ambient | - |
+| ``block_fire_extinguish`` | Block Fire Extinguish | - |
+| ``block_flowering_azalea_break`` | Block Flowering Azalea Break | - |
+| ``block_flowering_azalea_fall`` | Block Flowering Azalea Fall | - |
+| ``block_flowering_azalea_hit`` | Block Flowering Azalea Hit | - |
+| ``block_flowering_azalea_place`` | Block Flowering Azalea Place | - |
+| ``block_flowering_azalea_step`` | Block Flowering Azalea Step | - |
+| ``block_froglight_break`` | Block Froglight Break | - |
+| ``block_froglight_fall`` | Block Froglight Fall | - |
+| ``block_froglight_hit`` | Block Froglight Hit | - |
+| ``block_froglight_place`` | Block Froglight Place | - |
+| ``block_froglight_step`` | Block Froglight Step | - |
+| ``block_frogspawn_break`` | Block Frogspawn Break | - |
+| ``block_frogspawn_fall`` | Block Frogspawn Fall | - |
+| ``block_frogspawn_hatch`` | Block Frogspawn Hatch | - |
+| ``block_frogspawn_hit`` | Block Frogspawn Hit | - |
+| ``block_frogspawn_place`` | Block Frogspawn Place | - |
+| ``block_frogspawn_step`` | Block Frogspawn Step | - |
+| ``block_fungus_break`` | Block Fungus Break | - |
+| ``block_fungus_fall`` | Block Fungus Fall | - |
+| ``block_fungus_hit`` | Block Fungus Hit | - |
+| ``block_fungus_place`` | Block Fungus Place | - |
+| ``block_fungus_step`` | Block Fungus Step | - |
+| ``block_furnace_fire_crackle`` | Block Furnace Fire Crackle | - |
+| ``block_gilded_blackstone_break`` | Block Gilded Blackstone Break | - |
+| ``block_gilded_blackstone_fall`` | Block Gilded Blackstone Fall | - |
+| ``block_gilded_blackstone_hit`` | Block Gilded Blackstone Hit | - |
+| ``block_gilded_blackstone_place`` | Block Gilded Blackstone Place | - |
+| ``block_gilded_blackstone_step`` | Block Gilded Blackstone Step | - |
+| ``block_glass_break`` | Block Glass Break | - |
+| ``block_glass_fall`` | Block Glass Fall | - |
+| ``block_glass_hit`` | Block Glass Hit | - |
+| ``block_glass_place`` | Block Glass Place | - |
+| ``block_glass_step`` | Block Glass Step | - |
+| ``block_grass_break`` | Block Grass Break | - |
+| ``block_grass_fall`` | Block Grass Fall | - |
+| ``block_grass_hit`` | Block Grass Hit | - |
+| ``block_grass_place`` | Block Grass Place | - |
+| ``block_grass_step`` | Block Grass Step | - |
+| ``block_gravel_break`` | Block Gravel Break | - |
+| ``block_gravel_fall`` | Block Gravel Fall | - |
+| ``block_gravel_hit`` | Block Gravel Hit | - |
+| ``block_gravel_place`` | Block Gravel Place | - |
+| ``block_gravel_step`` | Block Gravel Step | - |
+| ``block_grindstone_use`` | Block Grindstone Use | - |
+| ``block_growing_plant_crop`` | Block Growing Plant Crop | - |
+| ``block_hanging_roots_break`` | Block Hanging Roots Break | - |
+| ``block_hanging_roots_fall`` | Block Hanging Roots Fall | - |
+| ``block_hanging_roots_hit`` | Block Hanging Roots Hit | - |
+| ``block_hanging_roots_place`` | Block Hanging Roots Place | - |
+| ``block_hanging_roots_step`` | Block Hanging Roots Step | - |
+| ``block_hanging_sign_break`` | Block Hanging Sign Break | - |
+| ``block_hanging_sign_fall`` | Block Hanging Sign Fall | - |
+| ``block_hanging_sign_hit`` | Block Hanging Sign Hit | - |
+| ``block_hanging_sign_place`` | Block Hanging Sign Place | - |
+| ``block_hanging_sign_step`` | Block Hanging Sign Step | - |
+| ``block_hanging_sign_waxed_interact_fail`` | Block Hanging Sign Waxed Interact Fail | - |
+| ``block_heavy_core_break`` | Block Heavy Core Break | - |
+| ``block_heavy_core_fall`` | Block Heavy Core Fall | - |
+| ``block_heavy_core_hit`` | Block Heavy Core Hit | - |
+| ``block_heavy_core_place`` | Block Heavy Core Place | - |
+| ``block_heavy_core_step`` | Block Heavy Core Step | - |
+| ``block_honey_block_break`` | Block Honey Block Break | - |
+| ``block_honey_block_fall`` | Block Honey Block Fall | - |
+| ``block_honey_block_hit`` | Block Honey Block Hit | - |
+| ``block_honey_block_place`` | Block Honey Block Place | - |
+| ``block_honey_block_slide`` | Block Honey Block Slide | - |
+| ``block_honey_block_step`` | Block Honey Block Step | - |
+| ``block_iron_door_close`` | Block Iron Door Close | - |
+| ``block_iron_door_open`` | Block Iron Door Open | - |
+| ``block_iron_trapdoor_close`` | Block Iron Trapdoor Close | - |
+| ``block_iron_trapdoor_open`` | Block Iron Trapdoor Open | - |
+| ``block_ladder_break`` | Block Ladder Break | - |
+| ``block_ladder_fall`` | Block Ladder Fall | - |
+| ``block_ladder_hit`` | Block Ladder Hit | - |
+| ``block_ladder_place`` | Block Ladder Place | - |
+| ``block_ladder_step`` | Block Ladder Step | - |
+| ``block_lantern_break`` | Block Lantern Break | - |
+| ``block_lantern_fall`` | Block Lantern Fall | - |
+| ``block_lantern_hit`` | Block Lantern Hit | - |
+| ``block_lantern_place`` | Block Lantern Place | - |
+| ``block_lantern_step`` | Block Lantern Step | - |
+| ``block_large_amethyst_bud_break`` | Block Large Amethyst Bud Break | - |
+| ``block_large_amethyst_bud_place`` | Block Large Amethyst Bud Place | - |
+| ``block_lava_ambient`` | Block Lava Ambient | - |
+| ``block_lava_extinguish`` | Block Lava Extinguish | - |
+| ``block_lava_pop`` | Block Lava Pop | - |
+| ``block_lever_click`` | Block Lever Click | - |
+| ``block_lily_pad_place`` | Block Lily Pad Place | - |
+| ``block_lodestone_break`` | Block Lodestone Break | - |
+| ``block_lodestone_fall`` | Block Lodestone Fall | - |
+| ``block_lodestone_hit`` | Block Lodestone Hit | - |
+| ``block_lodestone_place`` | Block Lodestone Place | - |
+| ``block_lodestone_step`` | Block Lodestone Step | - |
+| ``block_mangrove_roots_break`` | Block Mangrove Roots Break | - |
+| ``block_mangrove_roots_fall`` | Block Mangrove Roots Fall | - |
+| ``block_mangrove_roots_hit`` | Block Mangrove Roots Hit | - |
+| ``block_mangrove_roots_place`` | Block Mangrove Roots Place | - |
+| ``block_mangrove_roots_step`` | Block Mangrove Roots Step | - |
+| ``block_medium_amethyst_bud_break`` | Block Medium Amethyst Bud Break | - |
+| ``block_medium_amethyst_bud_place`` | Block Medium Amethyst Bud Place | - |
+| ``block_metal_break`` | Block Metal Break | - |
+| ``block_metal_fall`` | Block Metal Fall | - |
+| ``block_metal_hit`` | Block Metal Hit | - |
+| ``block_metal_place`` | Block Metal Place | - |
+| ``block_metal_pressure_plate_click_off`` | Block Metal Pressure Plate Click Off | - |
+| ``block_metal_pressure_plate_click_on`` | Block Metal Pressure Plate Click On | - |
+| ``block_metal_step`` | Block Metal Step | - |
+| ``block_moss_break`` | Block Moss Break | - |
+| ``block_moss_carpet_break`` | Block Moss Carpet Break | - |
+| ``block_moss_carpet_fall`` | Block Moss Carpet Fall | - |
+| ``block_moss_carpet_hit`` | Block Moss Carpet Hit | - |
+| ``block_moss_carpet_place`` | Block Moss Carpet Place | - |
+| ``block_moss_carpet_step`` | Block Moss Carpet Step | - |
+| ``block_moss_fall`` | Block Moss Fall | - |
+| ``block_moss_hit`` | Block Moss Hit | - |
+| ``block_moss_place`` | Block Moss Place | - |
+| ``block_moss_step`` | Block Moss Step | - |
+| ``block_mud_break`` | Block Mud Break | - |
+| ``block_mud_bricks_break`` | Block Mud Bricks Break | - |
+| ``block_mud_bricks_fall`` | Block Mud Bricks Fall | - |
+| ``block_mud_bricks_hit`` | Block Mud Bricks Hit | - |
+| ``block_mud_bricks_place`` | Block Mud Bricks Place | - |
+| ``block_mud_bricks_step`` | Block Mud Bricks Step | - |
+| ``block_mud_fall`` | Block Mud Fall | - |
+| ``block_mud_hit`` | Block Mud Hit | - |
+| ``block_mud_place`` | Block Mud Place | - |
+| ``block_mud_step`` | Block Mud Step | - |
+| ``block_muddy_mangrove_roots_break`` | Block Muddy Mangrove Roots Break | - |
+| ``block_muddy_mangrove_roots_fall`` | Block Muddy Mangrove Roots Fall | - |
+| ``block_muddy_mangrove_roots_hit`` | Block Muddy Mangrove Roots Hit | - |
+| ``block_muddy_mangrove_roots_place`` | Block Muddy Mangrove Roots Place | - |
+| ``block_muddy_mangrove_roots_step`` | Block Muddy Mangrove Roots Step | - |
+| ``block_nether_bricks_break`` | Block Nether Bricks Break | - |
+| ``block_nether_bricks_fall`` | Block Nether Bricks Fall | - |
+| ``block_nether_bricks_hit`` | Block Nether Bricks Hit | - |
+| ``block_nether_bricks_place`` | Block Nether Bricks Place | - |
+| ``block_nether_bricks_step`` | Block Nether Bricks Step | - |
+| ``block_nether_gold_ore_break`` | Block Nether Gold Ore Break | - |
+| ``block_nether_gold_ore_fall`` | Block Nether Gold Ore Fall | - |
+| ``block_nether_gold_ore_hit`` | Block Nether Gold Ore Hit | - |
+| ``block_nether_gold_ore_place`` | Block Nether Gold Ore Place | - |
+| ``block_nether_gold_ore_step`` | Block Nether Gold Ore Step | - |
+| ``block_nether_ore_break`` | Block Nether Ore Break | - |
+| ``block_nether_ore_fall`` | Block Nether Ore Fall | - |
+| ``block_nether_ore_hit`` | Block Nether Ore Hit | - |
+| ``block_nether_ore_place`` | Block Nether Ore Place | - |
+| ``block_nether_ore_step`` | Block Nether Ore Step | - |
+| ``block_nether_sprouts_break`` | Block Nether Sprouts Break | - |
+| ``block_nether_sprouts_fall`` | Block Nether Sprouts Fall | - |
+| ``block_nether_sprouts_hit`` | Block Nether Sprouts Hit | - |
+| ``block_nether_sprouts_place`` | Block Nether Sprouts Place | - |
+| ``block_nether_sprouts_step`` | Block Nether Sprouts Step | - |
+| ``block_nether_wart_break`` | Block Nether Wart Break | - |
+| ``block_nether_wood_break`` | Block Nether Wood Break | - |
+| ``block_nether_wood_button_click_off`` | Block Nether Wood Button Click Off | - |
+| ``block_nether_wood_button_click_on`` | Block Nether Wood Button Click On | - |
+| ``block_nether_wood_door_close`` | Block Nether Wood Door Close | - |
+| ``block_nether_wood_door_open`` | Block Nether Wood Door Open | - |
+| ``block_nether_wood_fall`` | Block Nether Wood Fall | - |
+| ``block_nether_wood_fence_gate_close`` | Block Nether Wood Fence Gate Close | - |
+| ``block_nether_wood_fence_gate_open`` | Block Nether Wood Fence Gate Open | - |
+| ``block_nether_wood_hanging_sign_break`` | Block Nether Wood Hanging Sign Break | - |
+| ``block_nether_wood_hanging_sign_fall`` | Block Nether Wood Hanging Sign Fall | - |
+| ``block_nether_wood_hanging_sign_hit`` | Block Nether Wood Hanging Sign Hit | - |
+| ``block_nether_wood_hanging_sign_place`` | Block Nether Wood Hanging Sign Place | - |
+| ``block_nether_wood_hanging_sign_step`` | Block Nether Wood Hanging Sign Step | - |
+| ``block_nether_wood_hit`` | Block Nether Wood Hit | - |
+| ``block_nether_wood_place`` | Block Nether Wood Place | - |
+| ``block_nether_wood_pressure_plate_click_off`` | Block Nether Wood Pressure Plate Click Off | - |
+| ``block_nether_wood_pressure_plate_click_on`` | Block Nether Wood Pressure Plate Click On | - |
+| ``block_nether_wood_step`` | Block Nether Wood Step | - |
+| ``block_nether_wood_trapdoor_close`` | Block Nether Wood Trapdoor Close | - |
+| ``block_nether_wood_trapdoor_open`` | Block Nether Wood Trapdoor Open | - |
+| ``block_netherite_block_break`` | Block Netherite Block Break | - |
+| ``block_netherite_block_fall`` | Block Netherite Block Fall | - |
+| ``block_netherite_block_hit`` | Block Netherite Block Hit | - |
+| ``block_netherite_block_place`` | Block Netherite Block Place | - |
+| ``block_netherite_block_step`` | Block Netherite Block Step | - |
+| ``block_netherrack_break`` | Block Netherrack Break | - |
+| ``block_netherrack_fall`` | Block Netherrack Fall | - |
+| ``block_netherrack_hit`` | Block Netherrack Hit | - |
+| ``block_netherrack_place`` | Block Netherrack Place | - |
+| ``block_netherrack_step`` | Block Netherrack Step | - |
+| ``block_note_block_banjo`` | Block Note Block Banjo | - |
+| ``block_note_block_basedrum`` | Block Note Block Basedrum | - |
+| ``block_note_block_bass`` | Block Note Block Bass | - |
+| ``block_note_block_bell`` | Block Note Block Bell | - |
+| ``block_note_block_bit`` | Block Note Block Bit | - |
+| ``block_note_block_chime`` | Block Note Block Chime | - |
+| ``block_note_block_cow_bell`` | Block Note Block Cow Bell | - |
+| ``block_note_block_didgeridoo`` | Block Note Block Didgeridoo | - |
+| ``block_note_block_flute`` | Block Note Block Flute | - |
+| ``block_note_block_guitar`` | Block Note Block Guitar | - |
+| ``block_note_block_harp`` | Block Note Block Harp | - |
+| ``block_note_block_hat`` | Block Note Block Hat | - |
+| ``block_note_block_imitate_creeper`` | Block Note Block Imitate Creeper | - |
+| ``block_note_block_imitate_ender_dragon`` | Block Note Block Imitate Ender Dragon | - |
+| ``block_note_block_imitate_piglin`` | Block Note Block Imitate Piglin | - |
+| ``block_note_block_imitate_skeleton`` | Block Note Block Imitate Skeleton | - |
+| ``block_note_block_imitate_wither_skeleton`` | Block Note Block Imitate Wither Skeleton | - |
+| ``block_note_block_imitate_zombie`` | Block Note Block Imitate Zombie | - |
+| ``block_note_block_iron_xylophone`` | Block Note Block Iron Xylophone | - |
+| ``block_note_block_pling`` | Block Note Block Pling | - |
+| ``block_note_block_snare`` | Block Note Block Snare | - |
+| ``block_note_block_xylophone`` | Block Note Block Xylophone | - |
+| ``block_nylium_break`` | Block Nylium Break | - |
+| ``block_nylium_fall`` | Block Nylium Fall | - |
+| ``block_nylium_hit`` | Block Nylium Hit | - |
+| ``block_nylium_place`` | Block Nylium Place | - |
+| ``block_nylium_step`` | Block Nylium Step | - |
+| ``block_packed_mud_break`` | Block Packed Mud Break | - |
+| ``block_packed_mud_fall`` | Block Packed Mud Fall | - |
+| ``block_packed_mud_hit`` | Block Packed Mud Hit | - |
+| ``block_packed_mud_place`` | Block Packed Mud Place | - |
+| ``block_packed_mud_step`` | Block Packed Mud Step | - |
+| ``block_pink_petals_break`` | Block Pink Petals Break | - |
+| ``block_pink_petals_fall`` | Block Pink Petals Fall | - |
+| ``block_pink_petals_hit`` | Block Pink Petals Hit | - |
+| ``block_pink_petals_place`` | Block Pink Petals Place | - |
+| ``block_pink_petals_step`` | Block Pink Petals Step | - |
+| ``block_piston_contract`` | Block Piston Contract | - |
+| ``block_piston_extend`` | Block Piston Extend | - |
+| ``block_pointed_dripstone_break`` | Block Pointed Dripstone Break | - |
+| ``block_pointed_dripstone_drip_lava`` | Block Pointed Dripstone Drip Lava | - |
+| ``block_pointed_dripstone_drip_lava_into_cauldron`` | Block Pointed Dripstone Drip Lava Into Cauldron | - |
+| ``block_pointed_dripstone_drip_water`` | Block Pointed Dripstone Drip Water | - |
+| ``block_pointed_dripstone_drip_water_into_cauldron`` | Block Pointed Dripstone Drip Water Into Cauldron | - |
+| ``block_pointed_dripstone_fall`` | Block Pointed Dripstone Fall | - |
+| ``block_pointed_dripstone_hit`` | Block Pointed Dripstone Hit | - |
+| ``block_pointed_dripstone_land`` | Block Pointed Dripstone Land | - |
+| ``block_pointed_dripstone_place`` | Block Pointed Dripstone Place | - |
+| ``block_pointed_dripstone_step`` | Block Pointed Dripstone Step | - |
+| ``block_polished_deepslate_break`` | Block Polished Deepslate Break | - |
+| ``block_polished_deepslate_fall`` | Block Polished Deepslate Fall | - |
+| ``block_polished_deepslate_hit`` | Block Polished Deepslate Hit | - |
+| ``block_polished_deepslate_place`` | Block Polished Deepslate Place | - |
+| ``block_polished_deepslate_step`` | Block Polished Deepslate Step | - |
+| ``block_polished_tuff_break`` | Block Polished Tuff Break | - |
+| ``block_polished_tuff_fall`` | Block Polished Tuff Fall | - |
+| ``block_polished_tuff_hit`` | Block Polished Tuff Hit | - |
+| ``block_polished_tuff_place`` | Block Polished Tuff Place | - |
+| ``block_polished_tuff_step`` | Block Polished Tuff Step | - |
+| ``block_portal_ambient`` | Block Portal Ambient | - |
+| ``block_portal_travel`` | Block Portal Travel | - |
+| ``block_portal_trigger`` | Block Portal Trigger | - |
+| ``block_powder_snow_break`` | Block Powder Snow Break | - |
+| ``block_powder_snow_fall`` | Block Powder Snow Fall | - |
+| ``block_powder_snow_hit`` | Block Powder Snow Hit | - |
+| ``block_powder_snow_place`` | Block Powder Snow Place | - |
+| ``block_powder_snow_step`` | Block Powder Snow Step | - |
+| ``block_pumpkin_carve`` | Block Pumpkin Carve | - |
+| ``block_redstone_torch_burnout`` | Block Redstone Torch Burnout | - |
+| ``block_respawn_anchor_ambient`` | Block Respawn Anchor Ambient | - |
+| ``block_respawn_anchor_charge`` | Block Respawn Anchor Charge | - |
+| ``block_respawn_anchor_deplete`` | Block Respawn Anchor Deplete | - |
+| ``block_respawn_anchor_set_spawn`` | Block Respawn Anchor Set Spawn | - |
+| ``block_rooted_dirt_break`` | Block Rooted Dirt Break | - |
+| ``block_rooted_dirt_fall`` | Block Rooted Dirt Fall | - |
+| ``block_rooted_dirt_hit`` | Block Rooted Dirt Hit | - |
+| ``block_rooted_dirt_place`` | Block Rooted Dirt Place | - |
+| ``block_rooted_dirt_step`` | Block Rooted Dirt Step | - |
+| ``block_roots_break`` | Block Roots Break | - |
+| ``block_roots_fall`` | Block Roots Fall | - |
+| ``block_roots_hit`` | Block Roots Hit | - |
+| ``block_roots_place`` | Block Roots Place | - |
+| ``block_roots_step`` | Block Roots Step | - |
+| ``block_sand_break`` | Block Sand Break | - |
+| ``block_sand_fall`` | Block Sand Fall | - |
+| ``block_sand_hit`` | Block Sand Hit | - |
+| ``block_sand_place`` | Block Sand Place | - |
+| ``block_sand_step`` | Block Sand Step | - |
+| ``block_scaffolding_break`` | Block Scaffolding Break | - |
+| ``block_scaffolding_fall`` | Block Scaffolding Fall | - |
+| ``block_scaffolding_hit`` | Block Scaffolding Hit | - |
+| ``block_scaffolding_place`` | Block Scaffolding Place | - |
+| ``block_scaffolding_step`` | Block Scaffolding Step | - |
+| ``block_sculk_break`` | Block Sculk Break | - |
+| ``block_sculk_catalyst_bloom`` | Block Sculk Catalyst Bloom | - |
+| ``block_sculk_catalyst_break`` | Block Sculk Catalyst Break | - |
+| ``block_sculk_catalyst_fall`` | Block Sculk Catalyst Fall | - |
+| ``block_sculk_catalyst_hit`` | Block Sculk Catalyst Hit | - |
+| ``block_sculk_catalyst_place`` | Block Sculk Catalyst Place | - |
+| ``block_sculk_catalyst_step`` | Block Sculk Catalyst Step | - |
+| ``block_sculk_charge`` | Block Sculk Charge | - |
+| ``block_sculk_fall`` | Block Sculk Fall | - |
+| ``block_sculk_hit`` | Block Sculk Hit | - |
+| ``block_sculk_place`` | Block Sculk Place | - |
+| ``block_sculk_sensor_break`` | Block Sculk Sensor Break | - |
+| ``block_sculk_sensor_clicking`` | Block Sculk Sensor Clicking | - |
+| ``block_sculk_sensor_clicking_stop`` | Block Sculk Sensor Clicking Stop | - |
+| ``block_sculk_sensor_fall`` | Block Sculk Sensor Fall | - |
+| ``block_sculk_sensor_hit`` | Block Sculk Sensor Hit | - |
+| ``block_sculk_sensor_place`` | Block Sculk Sensor Place | - |
+| ``block_sculk_sensor_step`` | Block Sculk Sensor Step | - |
+| ``block_sculk_shrieker_break`` | Block Sculk Shrieker Break | - |
+| ``block_sculk_shrieker_fall`` | Block Sculk Shrieker Fall | - |
+| ``block_sculk_shrieker_hit`` | Block Sculk Shrieker Hit | - |
+| ``block_sculk_shrieker_place`` | Block Sculk Shrieker Place | - |
+| ``block_sculk_shrieker_shriek`` | Block Sculk Shrieker Shriek | - |
+| ``block_sculk_shrieker_step`` | Block Sculk Shrieker Step | - |
+| ``block_sculk_spread`` | Block Sculk Spread | - |
+| ``block_sculk_step`` | Block Sculk Step | - |
+| ``block_sculk_vein_break`` | Block Sculk Vein Break | - |
+| ``block_sculk_vein_fall`` | Block Sculk Vein Fall | - |
+| ``block_sculk_vein_hit`` | Block Sculk Vein Hit | - |
+| ``block_sculk_vein_place`` | Block Sculk Vein Place | - |
+| ``block_sculk_vein_step`` | Block Sculk Vein Step | - |
+| ``block_shroomlight_break`` | Block Shroomlight Break | - |
+| ``block_shroomlight_fall`` | Block Shroomlight Fall | - |
+| ``block_shroomlight_hit`` | Block Shroomlight Hit | - |
+| ``block_shroomlight_place`` | Block Shroomlight Place | - |
+| ``block_shroomlight_step`` | Block Shroomlight Step | - |
+| ``block_shulker_box_close`` | Block Shulker Box Close | - |
+| ``block_shulker_box_open`` | Block Shulker Box Open | - |
+| ``block_sign_waxed_interact_fail`` | Block Sign Waxed Interact Fail | - |
+| ``block_slime_block_break`` | Block Slime Block Break | - |
+| ``block_slime_block_fall`` | Block Slime Block Fall | - |
+| ``block_slime_block_hit`` | Block Slime Block Hit | - |
+| ``block_slime_block_place`` | Block Slime Block Place | - |
+| ``block_slime_block_step`` | Block Slime Block Step | - |
+| ``block_small_amethyst_bud_break`` | Block Small Amethyst Bud Break | - |
+| ``block_small_amethyst_bud_place`` | Block Small Amethyst Bud Place | - |
+| ``block_small_dripleaf_break`` | Block Small Dripleaf Break | - |
+| ``block_small_dripleaf_fall`` | Block Small Dripleaf Fall | - |
+| ``block_small_dripleaf_hit`` | Block Small Dripleaf Hit | - |
+| ``block_small_dripleaf_place`` | Block Small Dripleaf Place | - |
+| ``block_small_dripleaf_step`` | Block Small Dripleaf Step | - |
+| ``block_smithing_table_use`` | Block Smithing Table Use | - |
+| ``block_smoker_smoke`` | Block Smoker Smoke | - |
+| ``block_sniffer_egg_crack`` | Block Sniffer Egg Crack | - |
+| ``block_sniffer_egg_hatch`` | Block Sniffer Egg Hatch | - |
+| ``block_sniffer_egg_plop`` | Block Sniffer Egg Plop | - |
+| ``block_snow_break`` | Block Snow Break | - |
+| ``block_snow_fall`` | Block Snow Fall | - |
+| ``block_snow_hit`` | Block Snow Hit | - |
+| ``block_snow_place`` | Block Snow Place | - |
+| ``block_snow_step`` | Block Snow Step | - |
+| ``block_soul_sand_break`` | Block Soul Sand Break | - |
+| ``block_soul_sand_fall`` | Block Soul Sand Fall | - |
+| ``block_soul_sand_hit`` | Block Soul Sand Hit | - |
+| ``block_soul_sand_place`` | Block Soul Sand Place | - |
+| ``block_soul_sand_step`` | Block Soul Sand Step | - |
+| ``block_soul_soil_break`` | Block Soul Soil Break | - |
+| ``block_soul_soil_fall`` | Block Soul Soil Fall | - |
+| ``block_soul_soil_hit`` | Block Soul Soil Hit | - |
+| ``block_soul_soil_place`` | Block Soul Soil Place | - |
+| ``block_soul_soil_step`` | Block Soul Soil Step | - |
+| ``block_sponge_absorb`` | Block Sponge Absorb | - |
+| ``block_sponge_break`` | Block Sponge Break | - |
+| ``block_sponge_fall`` | Block Sponge Fall | - |
+| ``block_sponge_hit`` | Block Sponge Hit | - |
+| ``block_sponge_place`` | Block Sponge Place | - |
+| ``block_sponge_step`` | Block Sponge Step | - |
+| ``block_spore_blossom_break`` | Block Spore Blossom Break | - |
+| ``block_spore_blossom_fall`` | Block Spore Blossom Fall | - |
+| ``block_spore_blossom_hit`` | Block Spore Blossom Hit | - |
+| ``block_spore_blossom_place`` | Block Spore Blossom Place | - |
+| ``block_spore_blossom_step`` | Block Spore Blossom Step | - |
+| ``block_stem_break`` | Block Stem Break | - |
+| ``block_stem_fall`` | Block Stem Fall | - |
+| ``block_stem_hit`` | Block Stem Hit | - |
+| ``block_stem_place`` | Block Stem Place | - |
+| ``block_stem_step`` | Block Stem Step | - |
+| ``block_stone_break`` | Block Stone Break | - |
+| ``block_stone_button_click_off`` | Block Stone Button Click Off | - |
+| ``block_stone_button_click_on`` | Block Stone Button Click On | - |
+| ``block_stone_fall`` | Block Stone Fall | - |
+| ``block_stone_hit`` | Block Stone Hit | - |
+| ``block_stone_place`` | Block Stone Place | - |
+| ``block_stone_pressure_plate_click_off`` | Block Stone Pressure Plate Click Off | - |
+| ``block_stone_pressure_plate_click_on`` | Block Stone Pressure Plate Click On | - |
+| ``block_stone_step`` | Block Stone Step | - |
+| ``block_suspicious_gravel_break`` | Block Suspicious Gravel Break | - |
+| ``block_suspicious_gravel_fall`` | Block Suspicious Gravel Fall | - |
+| ``block_suspicious_gravel_hit`` | Block Suspicious Gravel Hit | - |
+| ``block_suspicious_gravel_place`` | Block Suspicious Gravel Place | - |
+| ``block_suspicious_gravel_step`` | Block Suspicious Gravel Step | - |
+| ``block_suspicious_sand_break`` | Block Suspicious Sand Break | - |
+| ``block_suspicious_sand_fall`` | Block Suspicious Sand Fall | - |
+| ``block_suspicious_sand_hit`` | Block Suspicious Sand Hit | - |
+| ``block_suspicious_sand_place`` | Block Suspicious Sand Place | - |
+| ``block_suspicious_sand_step`` | Block Suspicious Sand Step | - |
+| ``block_sweet_berry_bush_break`` | Block Sweet Berry Bush Break | - |
+| ``block_sweet_berry_bush_pick_berries`` | Block Sweet Berry Bush Pick Berries | - |
+| ``block_sweet_berry_bush_place`` | Block Sweet Berry Bush Place | - |
+| ``block_trial_spawner_about_to_spawn_item`` | Block Trial Spawner About To Spawn Item | - |
+| ``block_trial_spawner_ambient`` | Block Trial Spawner Ambient | - |
+| ``block_trial_spawner_ambient_ominous`` | Block Trial Spawner Ambient Ominous | - |
+| ``block_trial_spawner_break`` | Block Trial Spawner Break | - |
+| ``block_trial_spawner_close_shutter`` | Block Trial Spawner Close Shutter | - |
+| ``block_trial_spawner_detect_player`` | Block Trial Spawner Detect Player | - |
+| ``block_trial_spawner_eject_item`` | Block Trial Spawner Eject Item | - |
+| ``block_trial_spawner_fall`` | Block Trial Spawner Fall | - |
+| ``block_trial_spawner_hit`` | Block Trial Spawner Hit | - |
+| ``block_trial_spawner_ominous_activate`` | Block Trial Spawner Ominous Activate | - |
+| ``block_trial_spawner_open_shutter`` | Block Trial Spawner Open Shutter | - |
+| ``block_trial_spawner_place`` | Block Trial Spawner Place | - |
+| ``block_trial_spawner_spawn_item`` | Block Trial Spawner Spawn Item | - |
+| ``block_trial_spawner_spawn_item_begin`` | Block Trial Spawner Spawn Item Begin | - |
+| ``block_trial_spawner_spawn_mob`` | Block Trial Spawner Spawn Mob | - |
+| ``block_trial_spawner_step`` | Block Trial Spawner Step | - |
+| ``block_tripwire_attach`` | Block Tripwire Attach | - |
+| ``block_tripwire_click_off`` | Block Tripwire Click Off | - |
+| ``block_tripwire_click_on`` | Block Tripwire Click On | - |
+| ``block_tripwire_detach`` | Block Tripwire Detach | - |
+| ``block_tuff_break`` | Block Tuff Break | - |
+| ``block_tuff_bricks_break`` | Block Tuff Bricks Break | - |
+| ``block_tuff_bricks_fall`` | Block Tuff Bricks Fall | - |
+| ``block_tuff_bricks_hit`` | Block Tuff Bricks Hit | - |
+| ``block_tuff_bricks_place`` | Block Tuff Bricks Place | - |
+| ``block_tuff_bricks_step`` | Block Tuff Bricks Step | - |
+| ``block_tuff_fall`` | Block Tuff Fall | - |
+| ``block_tuff_hit`` | Block Tuff Hit | - |
+| ``block_tuff_place`` | Block Tuff Place | - |
+| ``block_tuff_step`` | Block Tuff Step | - |
+| ``block_vault_activate`` | Block Vault Activate | - |
+| ``block_vault_ambient`` | Block Vault Ambient | - |
+| ``block_vault_break`` | Block Vault Break | - |
+| ``block_vault_close_shutter`` | Block Vault Close Shutter | - |
+| ``block_vault_deactivate`` | Block Vault Deactivate | - |
+| ``block_vault_eject_item`` | Block Vault Eject Item | - |
+| ``block_vault_fall`` | Block Vault Fall | - |
+| ``block_vault_hit`` | Block Vault Hit | - |
+| ``block_vault_insert_item`` | Block Vault Insert Item | - |
+| ``block_vault_insert_item_fail`` | Block Vault Insert Item Fail | - |
+| ``block_vault_open_shutter`` | Block Vault Open Shutter | - |
+| ``block_vault_place`` | Block Vault Place | - |
+| ``block_vault_reject_rewarded_player`` | Block Vault Reject Rewarded Player | - |
+| ``block_vault_step`` | Block Vault Step | - |
+| ``block_vine_break`` | Block Vine Break | - |
+| ``block_vine_fall`` | Block Vine Fall | - |
+| ``block_vine_hit`` | Block Vine Hit | - |
+| ``block_vine_place`` | Block Vine Place | - |
+| ``block_vine_step`` | Block Vine Step | - |
+| ``block_wart_block_break`` | Block Wart Block Break | - |
+| ``block_wart_block_fall`` | Block Wart Block Fall | - |
+| ``block_wart_block_hit`` | Block Wart Block Hit | - |
+| ``block_wart_block_place`` | Block Wart Block Place | - |
+| ``block_wart_block_step`` | Block Wart Block Step | - |
+| ``block_water_ambient`` | Block Water Ambient | - |
+| ``block_weeping_vines_break`` | Block Weeping Vines Break | - |
+| ``block_weeping_vines_fall`` | Block Weeping Vines Fall | - |
+| ``block_weeping_vines_hit`` | Block Weeping Vines Hit | - |
+| ``block_weeping_vines_place`` | Block Weeping Vines Place | - |
+| ``block_weeping_vines_step`` | Block Weeping Vines Step | - |
+| ``block_wet_grass_break`` | Block Wet Grass Break | - |
+| ``block_wet_grass_fall`` | Block Wet Grass Fall | - |
+| ``block_wet_grass_hit`` | Block Wet Grass Hit | - |
+| ``block_wet_grass_place`` | Block Wet Grass Place | - |
+| ``block_wet_grass_step`` | Block Wet Grass Step | - |
+| ``block_wet_sponge_break`` | Block Wet Sponge Break | - |
+| ``block_wet_sponge_dries`` | Block Wet Sponge Dries | - |
+| ``block_wet_sponge_fall`` | Block Wet Sponge Fall | - |
+| ``block_wet_sponge_hit`` | Block Wet Sponge Hit | - |
+| ``block_wet_sponge_place`` | Block Wet Sponge Place | - |
+| ``block_wet_sponge_step`` | Block Wet Sponge Step | - |
+| ``block_wood_break`` | Block Wood Break | - |
+| ``block_wood_fall`` | Block Wood Fall | - |
+| ``block_wood_hit`` | Block Wood Hit | - |
+| ``block_wood_place`` | Block Wood Place | - |
+| ``block_wood_step`` | Block Wood Step | - |
+| ``block_wooden_button_click_off`` | Block Wooden Button Click Off | - |
+| ``block_wooden_button_click_on`` | Block Wooden Button Click On | - |
+| ``block_wooden_door_close`` | Block Wooden Door Close | - |
+| ``block_wooden_door_open`` | Block Wooden Door Open | - |
+| ``block_wooden_pressure_plate_click_off`` | Block Wooden Pressure Plate Click Off | - |
+| ``block_wooden_pressure_plate_click_on`` | Block Wooden Pressure Plate Click On | - |
+| ``block_wooden_trapdoor_close`` | Block Wooden Trapdoor Close | - |
+| ``block_wooden_trapdoor_open`` | Block Wooden Trapdoor Open | - |
+| ``block_wool_break`` | Block Wool Break | - |
+| ``block_wool_fall`` | Block Wool Fall | - |
+| ``block_wool_hit`` | Block Wool Hit | - |
+| ``block_wool_place`` | Block Wool Place | - |
+| ``block_wool_step`` | Block Wool Step | - |
+| ``enchant_thorns_hit`` | Enchant Thorns Hit | - |
+| ``entity_allay_ambient_with_item`` | Entity Allay Ambient With Item | - |
+| ``entity_allay_ambient_without_item`` | Entity Allay Ambient Without Item | - |
+| ``entity_allay_death`` | Entity Allay Death | - |
+| ``entity_allay_hurt`` | Entity Allay Hurt | - |
+| ``entity_allay_item_given`` | Entity Allay Item Given | - |
+| ``entity_allay_item_taken`` | Entity Allay Item Taken | - |
+| ``entity_allay_item_thrown`` | Entity Allay Item Thrown | - |
+| ``entity_armadillo_ambient`` | Entity Armadillo Ambient | - |
+| ``entity_armadillo_brush`` | Entity Armadillo Brush | - |
+| ``entity_armadillo_death`` | Entity Armadillo Death | - |
+| ``entity_armadillo_eat`` | Entity Armadillo Eat | - |
+| ``entity_armadillo_hurt`` | Entity Armadillo Hurt | - |
+| ``entity_armadillo_hurt_reduced`` | Entity Armadillo Hurt Reduced | - |
+| ``entity_armadillo_land`` | Entity Armadillo Land | - |
+| ``entity_armadillo_peek`` | Entity Armadillo Peek | - |
+| ``entity_armadillo_roll`` | Entity Armadillo Roll | - |
+| ``entity_armadillo_scute_drop`` | Entity Armadillo Scute Drop | - |
+| ``entity_armadillo_step`` | Entity Armadillo Step | - |
+| ``entity_armadillo_unroll_finish`` | Entity Armadillo Unroll Finish | - |
+| ``entity_armadillo_unroll_start`` | Entity Armadillo Unroll Start | - |
+| ``entity_armor_stand_break`` | Entity Armor Stand Break | - |
+| ``entity_armor_stand_fall`` | Entity Armor Stand Fall | - |
+| ``entity_armor_stand_hit`` | Entity Armor Stand Hit | - |
+| ``entity_armor_stand_place`` | Entity Armor Stand Place | - |
+| ``entity_arrow_hit`` | Entity Arrow Hit | - |
+| ``entity_arrow_hit_player`` | Entity Arrow Hit Player | - |
+| ``entity_arrow_shoot`` | Entity Arrow Shoot | - |
+| ``entity_axolotl_attack`` | Entity Axolotl Attack | - |
+| ``entity_axolotl_death`` | Entity Axolotl Death | - |
+| ``entity_axolotl_hurt`` | Entity Axolotl Hurt | - |
+| ``entity_axolotl_idle_air`` | Entity Axolotl Idle Air | - |
+| ``entity_axolotl_idle_water`` | Entity Axolotl Idle Water | - |
+| ``entity_axolotl_splash`` | Entity Axolotl Splash | - |
+| ``entity_axolotl_swim`` | Entity Axolotl Swim | - |
+| ``entity_bat_ambient`` | Entity Bat Ambient | - |
+| ``entity_bat_death`` | Entity Bat Death | - |
+| ``entity_bat_hurt`` | Entity Bat Hurt | - |
+| ``entity_bat_loop`` | Entity Bat Loop | - |
+| ``entity_bat_takeoff`` | Entity Bat Takeoff | - |
+| ``entity_bee_death`` | Entity Bee Death | - |
+| ``entity_bee_hurt`` | Entity Bee Hurt | - |
+| ``entity_bee_loop`` | Entity Bee Loop | - |
+| ``entity_bee_loop_aggressive`` | Entity Bee Loop Aggressive | - |
+| ``entity_bee_pollinate`` | Entity Bee Pollinate | - |
+| ``entity_bee_sting`` | Entity Bee Sting | - |
+| ``entity_blaze_ambient`` | Entity Blaze Ambient | - |
+| ``entity_blaze_burn`` | Entity Blaze Burn | - |
+| ``entity_blaze_death`` | Entity Blaze Death | - |
+| ``entity_blaze_hurt`` | Entity Blaze Hurt | - |
+| ``entity_blaze_shoot`` | Entity Blaze Shoot | - |
+| ``entity_boat_paddle_land`` | Entity Boat Paddle Land | - |
+| ``entity_boat_paddle_water`` | Entity Boat Paddle Water | - |
+| ``entity_bogged_ambient`` | Entity Bogged Ambient | - |
+| ``entity_bogged_death`` | Entity Bogged Death | - |
+| ``entity_bogged_hurt`` | Entity Bogged Hurt | - |
+| ``entity_bogged_shear`` | Entity Bogged Shear | - |
+| ``entity_bogged_step`` | Entity Bogged Step | - |
+| ``entity_breeze_charge`` | Entity Breeze Charge | - |
+| ``entity_breeze_death`` | Entity Breeze Death | - |
+| ``entity_breeze_deflect`` | Entity Breeze Deflect | - |
+| ``entity_breeze_hurt`` | Entity Breeze Hurt | - |
+| ``entity_breeze_idle_air`` | Entity Breeze Idle Air | - |
+| ``entity_breeze_idle_ground`` | Entity Breeze Idle Ground | - |
+| ``entity_breeze_inhale`` | Entity Breeze Inhale | - |
+| ``entity_breeze_jump`` | Entity Breeze Jump | - |
+| ``entity_breeze_land`` | Entity Breeze Land | - |
+| ``entity_breeze_shoot`` | Entity Breeze Shoot | - |
+| ``entity_breeze_slide`` | Entity Breeze Slide | - |
+| ``entity_breeze_whirl`` | Entity Breeze Whirl | - |
+| ``entity_breeze_wind_burst`` | Entity Breeze Wind Burst | - |
+| ``entity_camel_ambient`` | Entity Camel Ambient | - |
+| ``entity_camel_dash`` | Entity Camel Dash | - |
+| ``entity_camel_dash_ready`` | Entity Camel Dash Ready | - |
+| ``entity_camel_death`` | Entity Camel Death | - |
+| ``entity_camel_eat`` | Entity Camel Eat | - |
+| ``entity_camel_hurt`` | Entity Camel Hurt | - |
+| ``entity_camel_saddle`` | Entity Camel Saddle | - |
+| ``entity_camel_sit`` | Entity Camel Sit | - |
+| ``entity_camel_stand`` | Entity Camel Stand | - |
+| ``entity_camel_step`` | Entity Camel Step | - |
+| ``entity_camel_step_sand`` | Entity Camel Step Sand | - |
+| ``entity_cat_ambient`` | Entity Cat Ambient | - |
+| ``entity_cat_beg_for_food`` | Entity Cat Beg For Food | - |
+| ``entity_cat_death`` | Entity Cat Death | - |
+| ``entity_cat_eat`` | Entity Cat Eat | - |
+| ``entity_cat_hiss`` | Entity Cat Hiss | - |
+| ``entity_cat_hurt`` | Entity Cat Hurt | - |
+| ``entity_cat_purr`` | Entity Cat Purr | - |
+| ``entity_cat_purreow`` | Entity Cat Purreow | - |
+| ``entity_cat_stray_ambient`` | Entity Cat Stray Ambient | - |
+| ``entity_chicken_ambient`` | Entity Chicken Ambient | - |
+| ``entity_chicken_death`` | Entity Chicken Death | - |
+| ``entity_chicken_egg`` | Entity Chicken Egg | - |
+| ``entity_chicken_hurt`` | Entity Chicken Hurt | - |
+| ``entity_chicken_step`` | Entity Chicken Step | - |
+| ``entity_cod_ambient`` | Entity Cod Ambient | - |
+| ``entity_cod_death`` | Entity Cod Death | - |
+| ``entity_cod_flop`` | Entity Cod Flop | - |
+| ``entity_cod_hurt`` | Entity Cod Hurt | - |
+| ``entity_cow_ambient`` | Entity Cow Ambient | - |
+| ``entity_cow_death`` | Entity Cow Death | - |
+| ``entity_cow_hurt`` | Entity Cow Hurt | - |
+| ``entity_cow_milk`` | Entity Cow Milk | - |
+| ``entity_cow_step`` | Entity Cow Step | - |
+| ``entity_creeper_death`` | Entity Creeper Death | - |
+| ``entity_creeper_hurt`` | Entity Creeper Hurt | - |
+| ``entity_creeper_primed`` | Entity Creeper Primed | - |
+| ``entity_dolphin_ambient`` | Entity Dolphin Ambient | - |
+| ``entity_dolphin_ambient_water`` | Entity Dolphin Ambient Water | - |
+| ``entity_dolphin_attack`` | Entity Dolphin Attack | - |
+| ``entity_dolphin_death`` | Entity Dolphin Death | - |
+| ``entity_dolphin_eat`` | Entity Dolphin Eat | - |
+| ``entity_dolphin_hurt`` | Entity Dolphin Hurt | - |
+| ``entity_dolphin_jump`` | Entity Dolphin Jump | - |
+| ``entity_dolphin_play`` | Entity Dolphin Play | - |
+| ``entity_dolphin_splash`` | Entity Dolphin Splash | - |
+| ``entity_dolphin_swim`` | Entity Dolphin Swim | - |
+| ``entity_donkey_ambient`` | Entity Donkey Ambient | - |
+| ``entity_donkey_angry`` | Entity Donkey Angry | - |
+| ``entity_donkey_chest`` | Entity Donkey Chest | - |
+| ``entity_donkey_death`` | Entity Donkey Death | - |
+| ``entity_donkey_eat`` | Entity Donkey Eat | - |
+| ``entity_donkey_hurt`` | Entity Donkey Hurt | - |
+| ``entity_donkey_jump`` | Entity Donkey Jump | - |
+| ``entity_dragon_fireball_explode`` | Entity Dragon Fireball Explode | - |
+| ``entity_drowned_ambient`` | Entity Drowned Ambient | - |
+| ``entity_drowned_ambient_water`` | Entity Drowned Ambient Water | - |
+| ``entity_drowned_death`` | Entity Drowned Death | - |
+| ``entity_drowned_death_water`` | Entity Drowned Death Water | - |
+| ``entity_drowned_hurt`` | Entity Drowned Hurt | - |
+| ``entity_drowned_hurt_water`` | Entity Drowned Hurt Water | - |
+| ``entity_drowned_shoot`` | Entity Drowned Shoot | - |
+| ``entity_drowned_step`` | Entity Drowned Step | - |
+| ``entity_drowned_swim`` | Entity Drowned Swim | - |
+| ``entity_egg_throw`` | Entity Egg Throw | - |
+| ``entity_elder_guardian_ambient`` | Entity Elder Guardian Ambient | - |
+| ``entity_elder_guardian_ambient_land`` | Entity Elder Guardian Ambient Land | - |
+| ``entity_elder_guardian_curse`` | Entity Elder Guardian Curse | - |
+| ``entity_elder_guardian_death`` | Entity Elder Guardian Death | - |
+| ``entity_elder_guardian_death_land`` | Entity Elder Guardian Death Land | - |
+| ``entity_elder_guardian_flop`` | Entity Elder Guardian Flop | - |
+| ``entity_elder_guardian_hurt`` | Entity Elder Guardian Hurt | - |
+| ``entity_elder_guardian_hurt_land`` | Entity Elder Guardian Hurt Land | - |
+| ``entity_ender_dragon_ambient`` | Entity Ender Dragon Ambient | - |
+| ``entity_ender_dragon_death`` | Entity Ender Dragon Death | - |
+| ``entity_ender_dragon_flap`` | Entity Ender Dragon Flap | - |
+| ``entity_ender_dragon_growl`` | Entity Ender Dragon Growl | - |
+| ``entity_ender_dragon_hurt`` | Entity Ender Dragon Hurt | - |
+| ``entity_ender_dragon_shoot`` | Entity Ender Dragon Shoot | - |
+| ``entity_ender_eye_death`` | Entity Ender Eye Death | - |
+| ``entity_ender_eye_launch`` | Entity Ender Eye Launch | - |
+| ``entity_ender_pearl_throw`` | Entity Ender Pearl Throw | - |
+| ``entity_enderman_ambient`` | Entity Enderman Ambient | - |
+| ``entity_enderman_death`` | Entity Enderman Death | - |
+| ``entity_enderman_hurt`` | Entity Enderman Hurt | - |
+| ``entity_enderman_scream`` | Entity Enderman Scream | - |
+| ``entity_enderman_stare`` | Entity Enderman Stare | - |
+| ``entity_enderman_teleport`` | Entity Enderman Teleport | - |
+| ``entity_endermite_ambient`` | Entity Endermite Ambient | - |
+| ``entity_endermite_death`` | Entity Endermite Death | - |
+| ``entity_endermite_hurt`` | Entity Endermite Hurt | - |
+| ``entity_endermite_step`` | Entity Endermite Step | - |
+| ``entity_evoker_ambient`` | Entity Evoker Ambient | - |
+| ``entity_evoker_cast_spell`` | Entity Evoker Cast Spell | - |
+| ``entity_evoker_celebrate`` | Entity Evoker Celebrate | - |
+| ``entity_evoker_death`` | Entity Evoker Death | - |
+| ``entity_evoker_fangs_attack`` | Entity Evoker Fangs Attack | - |
+| ``entity_evoker_hurt`` | Entity Evoker Hurt | - |
+| ``entity_evoker_prepare_attack`` | Entity Evoker Prepare Attack | - |
+| ``entity_evoker_prepare_summon`` | Entity Evoker Prepare Summon | - |
+| ``entity_evoker_prepare_wololo`` | Entity Evoker Prepare Wololo | - |
+| ``entity_experience_bottle_throw`` | Entity Experience Bottle Throw | - |
+| ``entity_experience_orb_pickup`` | Entity Experience Orb Pickup | ``xp_pickup`` |
+| ``entity_firework_rocket_blast`` | Entity Firework Rocket Blast | - |
+| ``entity_firework_rocket_blast_far`` | Entity Firework Rocket Blast Far | - |
+| ``entity_firework_rocket_large_blast`` | Entity Firework Rocket Large Blast | - |
+| ``entity_firework_rocket_large_blast_far`` | Entity Firework Rocket Large Blast Far | - |
+| ``entity_firework_rocket_launch`` | Entity Firework Rocket Launch | - |
+| ``entity_firework_rocket_shoot`` | Entity Firework Rocket Shoot | - |
+| ``entity_firework_rocket_twinkle`` | Entity Firework Rocket Twinkle | - |
+| ``entity_firework_rocket_twinkle_far`` | Entity Firework Rocket Twinkle Far | - |
+| ``entity_fish_swim`` | Entity Fish Swim | - |
+| ``entity_fishing_bobber_retrieve`` | Entity Fishing Bobber Retrieve | - |
+| ``entity_fishing_bobber_splash`` | Entity Fishing Bobber Splash | - |
+| ``entity_fishing_bobber_throw`` | Entity Fishing Bobber Throw | - |
+| ``entity_fox_aggro`` | Entity Fox Aggro | - |
+| ``entity_fox_ambient`` | Entity Fox Ambient | - |
+| ``entity_fox_bite`` | Entity Fox Bite | - |
+| ``entity_fox_death`` | Entity Fox Death | - |
+| ``entity_fox_eat`` | Entity Fox Eat | - |
+| ``entity_fox_hurt`` | Entity Fox Hurt | - |
+| ``entity_fox_screech`` | Entity Fox Screech | - |
+| ``entity_fox_sleep`` | Entity Fox Sleep | - |
+| ``entity_fox_sniff`` | Entity Fox Sniff | - |
+| ``entity_fox_spit`` | Entity Fox Spit | - |
+| ``entity_fox_teleport`` | Entity Fox Teleport | - |
+| ``entity_frog_ambient`` | Entity Frog Ambient | - |
+| ``entity_frog_death`` | Entity Frog Death | - |
+| ``entity_frog_eat`` | Entity Frog Eat | - |
+| ``entity_frog_hurt`` | Entity Frog Hurt | - |
+| ``entity_frog_lay_spawn`` | Entity Frog Lay Spawn | - |
+| ``entity_frog_long_jump`` | Entity Frog Long Jump | - |
+| ``entity_frog_step`` | Entity Frog Step | - |
+| ``entity_frog_tongue`` | Entity Frog Tongue | - |
+| ``entity_generic_big_fall`` | Entity Generic Big Fall | - |
+| ``entity_generic_burn`` | Entity Generic Burn | - |
+| ``entity_generic_death`` | Entity Generic Death | - |
+| ``entity_generic_drink`` | Entity Generic Drink | - |
+| ``entity_generic_eat`` | Entity Generic Eat | - |
+| ``entity_generic_explode`` | Entity Generic Explode | - |
+| ``entity_generic_extinguish_fire`` | Entity Generic Extinguish Fire | - |
+| ``entity_generic_hurt`` | Entity Generic Hurt | - |
+| ``entity_generic_small_fall`` | Entity Generic Small Fall | - |
+| ``entity_generic_splash`` | Entity Generic Splash | - |
+| ``entity_generic_swim`` | Entity Generic Swim | - |
+| ``entity_ghast_ambient`` | Entity Ghast Ambient | - |
+| ``entity_ghast_death`` | Entity Ghast Death | - |
+| ``entity_ghast_hurt`` | Entity Ghast Hurt | - |
+| ``entity_ghast_scream`` | Entity Ghast Scream | - |
+| ``entity_ghast_shoot`` | Entity Ghast Shoot | - |
+| ``entity_ghast_warn`` | Entity Ghast Warn | - |
+| ``entity_glow_item_frame_add_item`` | Entity Glow Item Frame Add Item | - |
+| ``entity_glow_item_frame_break`` | Entity Glow Item Frame Break | - |
+| ``entity_glow_item_frame_place`` | Entity Glow Item Frame Place | - |
+| ``entity_glow_item_frame_remove_item`` | Entity Glow Item Frame Remove Item | - |
+| ``entity_glow_item_frame_rotate_item`` | Entity Glow Item Frame Rotate Item | - |
+| ``entity_glow_squid_ambient`` | Entity Glow Squid Ambient | - |
+| ``entity_glow_squid_death`` | Entity Glow Squid Death | - |
+| ``entity_glow_squid_hurt`` | Entity Glow Squid Hurt | - |
+| ``entity_glow_squid_squirt`` | Entity Glow Squid Squirt | - |
+| ``entity_goat_ambient`` | Entity Goat Ambient | - |
+| ``entity_goat_death`` | Entity Goat Death | - |
+| ``entity_goat_eat`` | Entity Goat Eat | - |
+| ``entity_goat_horn_break`` | Entity Goat Horn Break | - |
+| ``entity_goat_hurt`` | Entity Goat Hurt | - |
+| ``entity_goat_long_jump`` | Entity Goat Long Jump | - |
+| ``entity_goat_milk`` | Entity Goat Milk | - |
+| ``entity_goat_prepare_ram`` | Entity Goat Prepare Ram | - |
+| ``entity_goat_ram_impact`` | Entity Goat Ram Impact | - |
+| ``entity_goat_screaming_ambient`` | Entity Goat Screaming Ambient | - |
+| ``entity_goat_screaming_death`` | Entity Goat Screaming Death | - |
+| ``entity_goat_screaming_eat`` | Entity Goat Screaming Eat | - |
+| ``entity_goat_screaming_horn_break`` | Entity Goat Screaming Horn Break | - |
+| ``entity_goat_screaming_hurt`` | Entity Goat Screaming Hurt | - |
+| ``entity_goat_screaming_long_jump`` | Entity Goat Screaming Long Jump | - |
+| ``entity_goat_screaming_milk`` | Entity Goat Screaming Milk | - |
+| ``entity_goat_screaming_prepare_ram`` | Entity Goat Screaming Prepare Ram | - |
+| ``entity_goat_screaming_ram_impact`` | Entity Goat Screaming Ram Impact | - |
+| ``entity_goat_step`` | Entity Goat Step | - |
+| ``entity_guardian_ambient`` | Entity Guardian Ambient | - |
+| ``entity_guardian_ambient_land`` | Entity Guardian Ambient Land | - |
+| ``entity_guardian_attack`` | Entity Guardian Attack | - |
+| ``entity_guardian_death`` | Entity Guardian Death | - |
+| ``entity_guardian_death_land`` | Entity Guardian Death Land | - |
+| ``entity_guardian_flop`` | Entity Guardian Flop | - |
+| ``entity_guardian_hurt`` | Entity Guardian Hurt | - |
+| ``entity_guardian_hurt_land`` | Entity Guardian Hurt Land | - |
+| ``entity_hoglin_ambient`` | Entity Hoglin Ambient | - |
+| ``entity_hoglin_angry`` | Entity Hoglin Angry | - |
+| ``entity_hoglin_attack`` | Entity Hoglin Attack | - |
+| ``entity_hoglin_converted_to_zombified`` | Entity Hoglin Converted To Zombified | - |
+| ``entity_hoglin_death`` | Entity Hoglin Death | - |
+| ``entity_hoglin_hurt`` | Entity Hoglin Hurt | - |
+| ``entity_hoglin_retreat`` | Entity Hoglin Retreat | - |
+| ``entity_hoglin_step`` | Entity Hoglin Step | - |
+| ``entity_horse_ambient`` | Entity Horse Ambient | - |
+| ``entity_horse_angry`` | Entity Horse Angry | - |
+| ``entity_horse_armor`` | Entity Horse Armor | - |
+| ``entity_horse_breathe`` | Entity Horse Breathe | - |
+| ``entity_horse_death`` | Entity Horse Death | - |
+| ``entity_horse_eat`` | Entity Horse Eat | - |
+| ``entity_horse_gallop`` | Entity Horse Gallop | - |
+| ``entity_horse_hurt`` | Entity Horse Hurt | - |
+| ``entity_horse_jump`` | Entity Horse Jump | - |
+| ``entity_horse_land`` | Entity Horse Land | - |
+| ``entity_horse_saddle`` | Entity Horse Saddle | - |
+| ``entity_horse_step`` | Entity Horse Step | - |
+| ``entity_horse_step_wood`` | Entity Horse Step Wood | - |
+| ``entity_hostile_big_fall`` | Entity Hostile Big Fall | - |
+| ``entity_hostile_death`` | Entity Hostile Death | - |
+| ``entity_hostile_hurt`` | Entity Hostile Hurt | - |
+| ``entity_hostile_small_fall`` | Entity Hostile Small Fall | - |
+| ``entity_hostile_splash`` | Entity Hostile Splash | - |
+| ``entity_hostile_swim`` | Entity Hostile Swim | - |
+| ``entity_husk_ambient`` | Entity Husk Ambient | - |
+| ``entity_husk_converted_to_zombie`` | Entity Husk Converted To Zombie | - |
+| ``entity_husk_death`` | Entity Husk Death | - |
+| ``entity_husk_hurt`` | Entity Husk Hurt | - |
+| ``entity_husk_step`` | Entity Husk Step | - |
+| ``entity_illusioner_ambient`` | Entity Illusioner Ambient | - |
+| ``entity_illusioner_cast_spell`` | Entity Illusioner Cast Spell | - |
+| ``entity_illusioner_death`` | Entity Illusioner Death | - |
+| ``entity_illusioner_hurt`` | Entity Illusioner Hurt | - |
+| ``entity_illusioner_mirror_move`` | Entity Illusioner Mirror Move | - |
+| ``entity_illusioner_prepare_blindness`` | Entity Illusioner Prepare Blindness | - |
+| ``entity_illusioner_prepare_mirror`` | Entity Illusioner Prepare Mirror | - |
+| ``entity_iron_golem_attack`` | Entity Iron Golem Attack | - |
+| ``entity_iron_golem_damage`` | Entity Iron Golem Damage | - |
+| ``entity_iron_golem_death`` | Entity Iron Golem Death | - |
+| ``entity_iron_golem_hurt`` | Entity Iron Golem Hurt | - |
+| ``entity_iron_golem_repair`` | Entity Iron Golem Repair | - |
+| ``entity_iron_golem_step`` | Entity Iron Golem Step | - |
+| ``entity_item_break`` | Entity Item Break | - |
+| ``entity_item_frame_add_item`` | Entity Item Frame Add Item | - |
+| ``entity_item_frame_break`` | Entity Item Frame Break | - |
+| ``entity_item_frame_place`` | Entity Item Frame Place | - |
+| ``entity_item_frame_remove_item`` | Entity Item Frame Remove Item | - |
+| ``entity_item_frame_rotate_item`` | Entity Item Frame Rotate Item | - |
+| ``entity_item_pickup`` | Entity Item Pickup | - |
+| ``entity_leash_knot_break`` | Entity Leash Knot Break | - |
+| ``entity_leash_knot_place`` | Entity Leash Knot Place | - |
+| ``entity_lightning_bolt_impact`` | Entity Lightning Bolt Impact | - |
+| ``entity_lightning_bolt_thunder`` | Entity Lightning Bolt Thunder | - |
+| ``entity_lingering_potion_throw`` | Entity Lingering Potion Throw | - |
+| ``entity_llama_ambient`` | Entity Llama Ambient | - |
+| ``entity_llama_angry`` | Entity Llama Angry | - |
+| ``entity_llama_chest`` | Entity Llama Chest | - |
+| ``entity_llama_death`` | Entity Llama Death | - |
+| ``entity_llama_eat`` | Entity Llama Eat | - |
+| ``entity_llama_hurt`` | Entity Llama Hurt | - |
+| ``entity_llama_spit`` | Entity Llama Spit | - |
+| ``entity_llama_step`` | Entity Llama Step | - |
+| ``entity_llama_swag`` | Entity Llama Swag | - |
+| ``entity_magma_cube_death`` | Entity Magma Cube Death | - |
+| ``entity_magma_cube_death_small`` | Entity Magma Cube Death Small | - |
+| ``entity_magma_cube_hurt`` | Entity Magma Cube Hurt | - |
+| ``entity_magma_cube_hurt_small`` | Entity Magma Cube Hurt Small | - |
+| ``entity_magma_cube_jump`` | Entity Magma Cube Jump | - |
+| ``entity_magma_cube_squish`` | Entity Magma Cube Squish | - |
+| ``entity_magma_cube_squish_small`` | Entity Magma Cube Squish Small | - |
+| ``entity_minecart_inside`` | Entity Minecart Inside | - |
+| ``entity_minecart_inside_underwater`` | Entity Minecart Inside Underwater | - |
+| ``entity_minecart_riding`` | Entity Minecart Riding | - |
+| ``entity_mooshroom_convert`` | Entity Mooshroom Convert | - |
+| ``entity_mooshroom_eat`` | Entity Mooshroom Eat | - |
+| ``entity_mooshroom_milk`` | Entity Mooshroom Milk | - |
+| ``entity_mooshroom_shear`` | Entity Mooshroom Shear | - |
+| ``entity_mooshroom_suspicious_milk`` | Entity Mooshroom Suspicious Milk | - |
+| ``entity_mule_ambient`` | Entity Mule Ambient | - |
+| ``entity_mule_angry`` | Entity Mule Angry | - |
+| ``entity_mule_chest`` | Entity Mule Chest | - |
+| ``entity_mule_death`` | Entity Mule Death | - |
+| ``entity_mule_eat`` | Entity Mule Eat | - |
+| ``entity_mule_hurt`` | Entity Mule Hurt | - |
+| ``entity_mule_jump`` | Entity Mule Jump | - |
+| ``entity_ocelot_ambient`` | Entity Ocelot Ambient | - |
+| ``entity_ocelot_death`` | Entity Ocelot Death | - |
+| ``entity_ocelot_hurt`` | Entity Ocelot Hurt | - |
+| ``entity_painting_break`` | Entity Painting Break | - |
+| ``entity_painting_place`` | Entity Painting Place | - |
+| ``entity_panda_aggressive_ambient`` | Entity Panda Aggressive Ambient | - |
+| ``entity_panda_ambient`` | Entity Panda Ambient | - |
+| ``entity_panda_bite`` | Entity Panda Bite | - |
+| ``entity_panda_cant_breed`` | Entity Panda Cant Breed | - |
+| ``entity_panda_death`` | Entity Panda Death | - |
+| ``entity_panda_eat`` | Entity Panda Eat | - |
+| ``entity_panda_hurt`` | Entity Panda Hurt | - |
+| ``entity_panda_pre_sneeze`` | Entity Panda Pre Sneeze | - |
+| ``entity_panda_sneeze`` | Entity Panda Sneeze | - |
+| ``entity_panda_step`` | Entity Panda Step | - |
+| ``entity_panda_worried_ambient`` | Entity Panda Worried Ambient | - |
+| ``entity_parrot_ambient`` | Entity Parrot Ambient | - |
+| ``entity_parrot_death`` | Entity Parrot Death | - |
+| ``entity_parrot_eat`` | Entity Parrot Eat | - |
+| ``entity_parrot_fly`` | Entity Parrot Fly | - |
+| ``entity_parrot_hurt`` | Entity Parrot Hurt | - |
+| ``entity_parrot_imitate_blaze`` | Entity Parrot Imitate Blaze | - |
+| ``entity_parrot_imitate_bogged`` | Entity Parrot Imitate Bogged | - |
+| ``entity_parrot_imitate_breeze`` | Entity Parrot Imitate Breeze | - |
+| ``entity_parrot_imitate_creeper`` | Entity Parrot Imitate Creeper | - |
+| ``entity_parrot_imitate_drowned`` | Entity Parrot Imitate Drowned | - |
+| ``entity_parrot_imitate_elder_guardian`` | Entity Parrot Imitate Elder Guardian | - |
+| ``entity_parrot_imitate_ender_dragon`` | Entity Parrot Imitate Ender Dragon | - |
+| ``entity_parrot_imitate_endermite`` | Entity Parrot Imitate Endermite | - |
+| ``entity_parrot_imitate_evoker`` | Entity Parrot Imitate Evoker | - |
+| ``entity_parrot_imitate_ghast`` | Entity Parrot Imitate Ghast | - |
+| ``entity_parrot_imitate_guardian`` | Entity Parrot Imitate Guardian | - |
+| ``entity_parrot_imitate_hoglin`` | Entity Parrot Imitate Hoglin | - |
+| ``entity_parrot_imitate_husk`` | Entity Parrot Imitate Husk | - |
+| ``entity_parrot_imitate_illusioner`` | Entity Parrot Imitate Illusioner | - |
+| ``entity_parrot_imitate_magma_cube`` | Entity Parrot Imitate Magma Cube | - |
+| ``entity_parrot_imitate_phantom`` | Entity Parrot Imitate Phantom | - |
+| ``entity_parrot_imitate_piglin`` | Entity Parrot Imitate Piglin | - |
+| ``entity_parrot_imitate_piglin_brute`` | Entity Parrot Imitate Piglin Brute | - |
+| ``entity_parrot_imitate_pillager`` | Entity Parrot Imitate Pillager | - |
+| ``entity_parrot_imitate_ravager`` | Entity Parrot Imitate Ravager | - |
+| ``entity_parrot_imitate_shulker`` | Entity Parrot Imitate Shulker | - |
+| ``entity_parrot_imitate_silverfish`` | Entity Parrot Imitate Silverfish | - |
+| ``entity_parrot_imitate_skeleton`` | Entity Parrot Imitate Skeleton | - |
+| ``entity_parrot_imitate_slime`` | Entity Parrot Imitate Slime | - |
+| ``entity_parrot_imitate_spider`` | Entity Parrot Imitate Spider | - |
+| ``entity_parrot_imitate_stray`` | Entity Parrot Imitate Stray | - |
+| ``entity_parrot_imitate_vex`` | Entity Parrot Imitate Vex | - |
+| ``entity_parrot_imitate_vindicator`` | Entity Parrot Imitate Vindicator | - |
+| ``entity_parrot_imitate_warden`` | Entity Parrot Imitate Warden | - |
+| ``entity_parrot_imitate_witch`` | Entity Parrot Imitate Witch | - |
+| ``entity_parrot_imitate_wither`` | Entity Parrot Imitate Wither | - |
+| ``entity_parrot_imitate_wither_skeleton`` | Entity Parrot Imitate Wither Skeleton | - |
+| ``entity_parrot_imitate_zoglin`` | Entity Parrot Imitate Zoglin | - |
+| ``entity_parrot_imitate_zombie`` | Entity Parrot Imitate Zombie | - |
+| ``entity_parrot_imitate_zombie_villager`` | Entity Parrot Imitate Zombie Villager | - |
+| ``entity_parrot_step`` | Entity Parrot Step | - |
+| ``entity_phantom_ambient`` | Entity Phantom Ambient | - |
+| ``entity_phantom_bite`` | Entity Phantom Bite | - |
+| ``entity_phantom_death`` | Entity Phantom Death | - |
+| ``entity_phantom_flap`` | Entity Phantom Flap | - |
+| ``entity_phantom_hurt`` | Entity Phantom Hurt | - |
+| ``entity_phantom_swoop`` | Entity Phantom Swoop | - |
+| ``entity_pig_ambient`` | Entity Pig Ambient | - |
+| ``entity_pig_death`` | Entity Pig Death | - |
+| ``entity_pig_hurt`` | Entity Pig Hurt | - |
+| ``entity_pig_saddle`` | Entity Pig Saddle | - |
+| ``entity_pig_step`` | Entity Pig Step | - |
+| ``entity_piglin_admiring_item`` | Entity Piglin Admiring Item | - |
+| ``entity_piglin_ambient`` | Entity Piglin Ambient | - |
+| ``entity_piglin_angry`` | Entity Piglin Angry | - |
+| ``entity_piglin_brute_ambient`` | Entity Piglin Brute Ambient | - |
+| ``entity_piglin_brute_angry`` | Entity Piglin Brute Angry | - |
+| ``entity_piglin_brute_converted_to_zombified`` | Entity Piglin Brute Converted To Zombified | - |
+| ``entity_piglin_brute_death`` | Entity Piglin Brute Death | - |
+| ``entity_piglin_brute_hurt`` | Entity Piglin Brute Hurt | - |
+| ``entity_piglin_brute_step`` | Entity Piglin Brute Step | - |
+| ``entity_piglin_celebrate`` | Entity Piglin Celebrate | - |
+| ``entity_piglin_converted_to_zombified`` | Entity Piglin Converted To Zombified | - |
+| ``entity_piglin_death`` | Entity Piglin Death | - |
+| ``entity_piglin_hurt`` | Entity Piglin Hurt | - |
+| ``entity_piglin_jealous`` | Entity Piglin Jealous | - |
+| ``entity_piglin_retreat`` | Entity Piglin Retreat | - |
+| ``entity_piglin_step`` | Entity Piglin Step | - |
+| ``entity_pillager_ambient`` | Entity Pillager Ambient | - |
+| ``entity_pillager_celebrate`` | Entity Pillager Celebrate | - |
+| ``entity_pillager_death`` | Entity Pillager Death | - |
+| ``entity_pillager_hurt`` | Entity Pillager Hurt | - |
+| ``entity_player_attack_crit`` | Entity Player Attack Crit | - |
+| ``entity_player_attack_knockback`` | Entity Player Attack Knockback | - |
+| ``entity_player_attack_nodamage`` | Entity Player Attack Nodamage | - |
+| ``entity_player_attack_strong`` | Entity Player Attack Strong | - |
+| ``entity_player_attack_sweep`` | Entity Player Attack Sweep | - |
+| ``entity_player_attack_weak`` | Entity Player Attack Weak | - |
+| ``entity_player_big_fall`` | Entity Player Big Fall | - |
+| ``entity_player_breath`` | Entity Player Breath | - |
+| ``entity_player_burp`` | Entity Player Burp | - |
+| ``entity_player_death`` | Entity Player Death | - |
+| ``entity_player_hurt`` | Entity Player Hurt | - |
+| ``entity_player_hurt_drown`` | Entity Player Hurt Drown | - |
+| ``entity_player_hurt_freeze`` | Entity Player Hurt Freeze | - |
+| ``entity_player_hurt_on_fire`` | Entity Player Hurt On Fire | - |
+| ``entity_player_hurt_sweet_berry_bush`` | Entity Player Hurt Sweet Berry Bush | - |
+| ``entity_player_levelup`` | Entity Player Levelup | ``levelup`` |
+| ``entity_player_small_fall`` | Entity Player Small Fall | - |
+| ``entity_player_splash`` | Entity Player Splash | - |
+| ``entity_player_splash_high_speed`` | Entity Player Splash High Speed | - |
+| ``entity_player_swim`` | Entity Player Swim | - |
+| ``entity_player_teleport`` | Entity Player Teleport | - |
+| ``entity_polar_bear_ambient`` | Entity Polar Bear Ambient | - |
+| ``entity_polar_bear_ambient_baby`` | Entity Polar Bear Ambient Baby | - |
+| ``entity_polar_bear_death`` | Entity Polar Bear Death | - |
+| ``entity_polar_bear_hurt`` | Entity Polar Bear Hurt | - |
+| ``entity_polar_bear_step`` | Entity Polar Bear Step | - |
+| ``entity_polar_bear_warning`` | Entity Polar Bear Warning | - |
+| ``entity_puffer_fish_ambient`` | Entity Puffer Fish Ambient | - |
+| ``entity_puffer_fish_blow_out`` | Entity Puffer Fish Blow Out | - |
+| ``entity_puffer_fish_blow_up`` | Entity Puffer Fish Blow Up | - |
+| ``entity_puffer_fish_death`` | Entity Puffer Fish Death | - |
+| ``entity_puffer_fish_flop`` | Entity Puffer Fish Flop | - |
+| ``entity_puffer_fish_hurt`` | Entity Puffer Fish Hurt | - |
+| ``entity_puffer_fish_sting`` | Entity Puffer Fish Sting | - |
+| ``entity_rabbit_ambient`` | Entity Rabbit Ambient | - |
+| ``entity_rabbit_attack`` | Entity Rabbit Attack | - |
+| ``entity_rabbit_death`` | Entity Rabbit Death | - |
+| ``entity_rabbit_hurt`` | Entity Rabbit Hurt | - |
+| ``entity_rabbit_jump`` | Entity Rabbit Jump | - |
+| ``entity_ravager_ambient`` | Entity Ravager Ambient | - |
+| ``entity_ravager_attack`` | Entity Ravager Attack | - |
+| ``entity_ravager_celebrate`` | Entity Ravager Celebrate | - |
+| ``entity_ravager_death`` | Entity Ravager Death | - |
+| ``entity_ravager_hurt`` | Entity Ravager Hurt | - |
+| ``entity_ravager_roar`` | Entity Ravager Roar | - |
+| ``entity_ravager_step`` | Entity Ravager Step | - |
+| ``entity_ravager_stunned`` | Entity Ravager Stunned | - |
+| ``entity_salmon_ambient`` | Entity Salmon Ambient | - |
+| ``entity_salmon_death`` | Entity Salmon Death | - |
+| ``entity_salmon_flop`` | Entity Salmon Flop | - |
+| ``entity_salmon_hurt`` | Entity Salmon Hurt | - |
+| ``entity_sheep_ambient`` | Entity Sheep Ambient | - |
+| ``entity_sheep_death`` | Entity Sheep Death | - |
+| ``entity_sheep_hurt`` | Entity Sheep Hurt | - |
+| ``entity_sheep_shear`` | Entity Sheep Shear | - |
+| ``entity_sheep_step`` | Entity Sheep Step | - |
+| ``entity_shulker_ambient`` | Entity Shulker Ambient | - |
+| ``entity_shulker_bullet_hit`` | Entity Shulker Bullet Hit | - |
+| ``entity_shulker_bullet_hurt`` | Entity Shulker Bullet Hurt | - |
+| ``entity_shulker_close`` | Entity Shulker Close | - |
+| ``entity_shulker_death`` | Entity Shulker Death | - |
+| ``entity_shulker_hurt`` | Entity Shulker Hurt | - |
+| ``entity_shulker_hurt_closed`` | Entity Shulker Hurt Closed | - |
+| ``entity_shulker_open`` | Entity Shulker Open | - |
+| ``entity_shulker_shoot`` | Entity Shulker Shoot | - |
+| ``entity_shulker_teleport`` | Entity Shulker Teleport | - |
+| ``entity_silverfish_ambient`` | Entity Silverfish Ambient | - |
+| ``entity_silverfish_death`` | Entity Silverfish Death | - |
+| ``entity_silverfish_hurt`` | Entity Silverfish Hurt | - |
+| ``entity_silverfish_step`` | Entity Silverfish Step | - |
+| ``entity_skeleton_ambient`` | Entity Skeleton Ambient | - |
+| ``entity_skeleton_converted_to_stray`` | Entity Skeleton Converted To Stray | - |
+| ``entity_skeleton_death`` | Entity Skeleton Death | - |
+| ``entity_skeleton_horse_ambient`` | Entity Skeleton Horse Ambient | - |
+| ``entity_skeleton_horse_ambient_water`` | Entity Skeleton Horse Ambient Water | - |
+| ``entity_skeleton_horse_death`` | Entity Skeleton Horse Death | - |
+| ``entity_skeleton_horse_gallop_water`` | Entity Skeleton Horse Gallop Water | - |
+| ``entity_skeleton_horse_hurt`` | Entity Skeleton Horse Hurt | - |
+| ``entity_skeleton_horse_jump_water`` | Entity Skeleton Horse Jump Water | - |
+| ``entity_skeleton_horse_step_water`` | Entity Skeleton Horse Step Water | - |
+| ``entity_skeleton_horse_swim`` | Entity Skeleton Horse Swim | - |
+| ``entity_skeleton_hurt`` | Entity Skeleton Hurt | - |
+| ``entity_skeleton_shoot`` | Entity Skeleton Shoot | - |
+| ``entity_skeleton_step`` | Entity Skeleton Step | - |
+| ``entity_slime_attack`` | Entity Slime Attack | - |
+| ``entity_slime_death`` | Entity Slime Death | - |
+| ``entity_slime_death_small`` | Entity Slime Death Small | - |
+| ``entity_slime_hurt`` | Entity Slime Hurt | - |
+| ``entity_slime_hurt_small`` | Entity Slime Hurt Small | - |
+| ``entity_slime_jump`` | Entity Slime Jump | - |
+| ``entity_slime_jump_small`` | Entity Slime Jump Small | - |
+| ``entity_slime_squish`` | Entity Slime Squish | - |
+| ``entity_slime_squish_small`` | Entity Slime Squish Small | - |
+| ``entity_sniffer_death`` | Entity Sniffer Death | - |
+| ``entity_sniffer_digging`` | Entity Sniffer Digging | - |
+| ``entity_sniffer_digging_stop`` | Entity Sniffer Digging Stop | - |
+| ``entity_sniffer_drop_seed`` | Entity Sniffer Drop Seed | - |
+| ``entity_sniffer_eat`` | Entity Sniffer Eat | - |
+| ``entity_sniffer_happy`` | Entity Sniffer Happy | - |
+| ``entity_sniffer_hurt`` | Entity Sniffer Hurt | - |
+| ``entity_sniffer_idle`` | Entity Sniffer Idle | - |
+| ``entity_sniffer_scenting`` | Entity Sniffer Scenting | - |
+| ``entity_sniffer_searching`` | Entity Sniffer Searching | - |
+| ``entity_sniffer_sniffing`` | Entity Sniffer Sniffing | - |
+| ``entity_sniffer_step`` | Entity Sniffer Step | - |
+| ``entity_snow_golem_ambient`` | Entity Snow Golem Ambient | - |
+| ``entity_snow_golem_death`` | Entity Snow Golem Death | - |
+| ``entity_snow_golem_hurt`` | Entity Snow Golem Hurt | - |
+| ``entity_snow_golem_shear`` | Entity Snow Golem Shear | - |
+| ``entity_snow_golem_shoot`` | Entity Snow Golem Shoot | - |
+| ``entity_snowball_throw`` | Entity Snowball Throw | - |
+| ``entity_spider_ambient`` | Entity Spider Ambient | - |
+| ``entity_spider_death`` | Entity Spider Death | - |
+| ``entity_spider_hurt`` | Entity Spider Hurt | - |
+| ``entity_spider_step`` | Entity Spider Step | - |
+| ``entity_splash_potion_break`` | Entity Splash Potion Break | - |
+| ``entity_splash_potion_throw`` | Entity Splash Potion Throw | - |
+| ``entity_squid_ambient`` | Entity Squid Ambient | - |
+| ``entity_squid_death`` | Entity Squid Death | - |
+| ``entity_squid_hurt`` | Entity Squid Hurt | - |
+| ``entity_squid_squirt`` | Entity Squid Squirt | - |
+| ``entity_stray_ambient`` | Entity Stray Ambient | - |
+| ``entity_stray_death`` | Entity Stray Death | - |
+| ``entity_stray_hurt`` | Entity Stray Hurt | - |
+| ``entity_stray_step`` | Entity Stray Step | - |
+| ``entity_strider_ambient`` | Entity Strider Ambient | - |
+| ``entity_strider_death`` | Entity Strider Death | - |
+| ``entity_strider_eat`` | Entity Strider Eat | - |
+| ``entity_strider_happy`` | Entity Strider Happy | - |
+| ``entity_strider_hurt`` | Entity Strider Hurt | - |
+| ``entity_strider_retreat`` | Entity Strider Retreat | - |
+| ``entity_strider_saddle`` | Entity Strider Saddle | - |
+| ``entity_strider_step`` | Entity Strider Step | - |
+| ``entity_strider_step_lava`` | Entity Strider Step Lava | - |
+| ``entity_tadpole_death`` | Entity Tadpole Death | - |
+| ``entity_tadpole_flop`` | Entity Tadpole Flop | - |
+| ``entity_tadpole_grow_up`` | Entity Tadpole Grow Up | - |
+| ``entity_tadpole_hurt`` | Entity Tadpole Hurt | - |
+| ``entity_tnt_primed`` | Entity Tnt Primed | - |
+| ``entity_tropical_fish_ambient`` | Entity Tropical Fish Ambient | - |
+| ``entity_tropical_fish_death`` | Entity Tropical Fish Death | - |
+| ``entity_tropical_fish_flop`` | Entity Tropical Fish Flop | - |
+| ``entity_tropical_fish_hurt`` | Entity Tropical Fish Hurt | - |
+| ``entity_turtle_ambient_land`` | Entity Turtle Ambient Land | - |
+| ``entity_turtle_death`` | Entity Turtle Death | - |
+| ``entity_turtle_death_baby`` | Entity Turtle Death Baby | - |
+| ``entity_turtle_egg_break`` | Entity Turtle Egg Break | - |
+| ``entity_turtle_egg_crack`` | Entity Turtle Egg Crack | - |
+| ``entity_turtle_egg_hatch`` | Entity Turtle Egg Hatch | - |
+| ``entity_turtle_hurt`` | Entity Turtle Hurt | - |
+| ``entity_turtle_hurt_baby`` | Entity Turtle Hurt Baby | - |
+| ``entity_turtle_lay_egg`` | Entity Turtle Lay Egg | - |
+| ``entity_turtle_shamble`` | Entity Turtle Shamble | - |
+| ``entity_turtle_shamble_baby`` | Entity Turtle Shamble Baby | - |
+| ``entity_turtle_swim`` | Entity Turtle Swim | - |
+| ``entity_vex_ambient`` | Entity Vex Ambient | - |
+| ``entity_vex_charge`` | Entity Vex Charge | - |
+| ``entity_vex_death`` | Entity Vex Death | - |
+| ``entity_vex_hurt`` | Entity Vex Hurt | - |
+| ``entity_villager_ambient`` | Entity Villager Ambient | - |
+| ``entity_villager_celebrate`` | Entity Villager Celebrate | - |
+| ``entity_villager_death`` | Entity Villager Death | - |
+| ``entity_villager_hurt`` | Entity Villager Hurt | - |
+| ``entity_villager_no`` | Entity Villager No | - |
+| ``entity_villager_trade`` | Entity Villager Trade | - |
+| ``entity_villager_work_armorer`` | Entity Villager Work Armorer | - |
+| ``entity_villager_work_butcher`` | Entity Villager Work Butcher | - |
+| ``entity_villager_work_cartographer`` | Entity Villager Work Cartographer | - |
+| ``entity_villager_work_cleric`` | Entity Villager Work Cleric | - |
+| ``entity_villager_work_farmer`` | Entity Villager Work Farmer | - |
+| ``entity_villager_work_fisherman`` | Entity Villager Work Fisherman | - |
+| ``entity_villager_work_fletcher`` | Entity Villager Work Fletcher | - |
+| ``entity_villager_work_leatherworker`` | Entity Villager Work Leatherworker | - |
+| ``entity_villager_work_librarian`` | Entity Villager Work Librarian | - |
+| ``entity_villager_work_mason`` | Entity Villager Work Mason | - |
+| ``entity_villager_work_shepherd`` | Entity Villager Work Shepherd | - |
+| ``entity_villager_work_toolsmith`` | Entity Villager Work Toolsmith | - |
+| ``entity_villager_work_weaponsmith`` | Entity Villager Work Weaponsmith | - |
+| ``entity_villager_yes`` | Entity Villager Yes | - |
+| ``entity_vindicator_ambient`` | Entity Vindicator Ambient | - |
+| ``entity_vindicator_celebrate`` | Entity Vindicator Celebrate | - |
+| ``entity_vindicator_death`` | Entity Vindicator Death | - |
+| ``entity_vindicator_hurt`` | Entity Vindicator Hurt | - |
+| ``entity_wandering_trader_ambient`` | Entity Wandering Trader Ambient | - |
+| ``entity_wandering_trader_death`` | Entity Wandering Trader Death | - |
+| ``entity_wandering_trader_disappeared`` | Entity Wandering Trader Disappeared | - |
+| ``entity_wandering_trader_drink_milk`` | Entity Wandering Trader Drink Milk | - |
+| ``entity_wandering_trader_drink_potion`` | Entity Wandering Trader Drink Potion | - |
+| ``entity_wandering_trader_hurt`` | Entity Wandering Trader Hurt | - |
+| ``entity_wandering_trader_no`` | Entity Wandering Trader No | - |
+| ``entity_wandering_trader_reappeared`` | Entity Wandering Trader Reappeared | - |
+| ``entity_wandering_trader_trade`` | Entity Wandering Trader Trade | - |
+| ``entity_wandering_trader_yes`` | Entity Wandering Trader Yes | - |
+| ``entity_warden_agitated`` | Entity Warden Agitated | - |
+| ``entity_warden_ambient`` | Entity Warden Ambient | - |
+| ``entity_warden_angry`` | Entity Warden Angry | - |
+| ``entity_warden_attack_impact`` | Entity Warden Attack Impact | - |
+| ``entity_warden_death`` | Entity Warden Death | - |
+| ``entity_warden_dig`` | Entity Warden Dig | - |
+| ``entity_warden_emerge`` | Entity Warden Emerge | - |
+| ``entity_warden_heartbeat`` | Entity Warden Heartbeat | - |
+| ``entity_warden_hurt`` | Entity Warden Hurt | - |
+| ``entity_warden_listening`` | Entity Warden Listening | - |
+| ``entity_warden_listening_angry`` | Entity Warden Listening Angry | - |
+| ``entity_warden_nearby_close`` | Entity Warden Nearby Close | - |
+| ``entity_warden_nearby_closer`` | Entity Warden Nearby Closer | - |
+| ``entity_warden_nearby_closest`` | Entity Warden Nearby Closest | - |
+| ``entity_warden_roar`` | Entity Warden Roar | - |
+| ``entity_warden_sniff`` | Entity Warden Sniff | - |
+| ``entity_warden_sonic_boom`` | Entity Warden Sonic Boom | - |
+| ``entity_warden_sonic_charge`` | Entity Warden Sonic Charge | - |
+| ``entity_warden_step`` | Entity Warden Step | - |
+| ``entity_warden_tendril_clicks`` | Entity Warden Tendril Clicks | - |
+| ``entity_wind_charge_throw`` | Entity Wind Charge Throw | - |
+| ``entity_wind_charge_wind_burst`` | Entity Wind Charge Wind Burst | - |
+| ``entity_witch_ambient`` | Entity Witch Ambient | - |
+| ``entity_witch_celebrate`` | Entity Witch Celebrate | - |
+| ``entity_witch_death`` | Entity Witch Death | - |
+| ``entity_witch_drink`` | Entity Witch Drink | - |
+| ``entity_witch_hurt`` | Entity Witch Hurt | - |
+| ``entity_witch_throw`` | Entity Witch Throw | - |
+| ``entity_wither_ambient`` | Entity Wither Ambient | - |
+| ``entity_wither_break_block`` | Entity Wither Break Block | - |
+| ``entity_wither_death`` | Entity Wither Death | - |
+| ``entity_wither_hurt`` | Entity Wither Hurt | - |
+| ``entity_wither_shoot`` | Entity Wither Shoot | - |
+| ``entity_wither_skeleton_ambient`` | Entity Wither Skeleton Ambient | - |
+| ``entity_wither_skeleton_death`` | Entity Wither Skeleton Death | - |
+| ``entity_wither_skeleton_hurt`` | Entity Wither Skeleton Hurt | - |
+| ``entity_wither_skeleton_step`` | Entity Wither Skeleton Step | - |
+| ``entity_wither_spawn`` | Entity Wither Spawn | - |
+| ``entity_wolf_ambient`` | Entity Wolf Ambient | - |
+| ``entity_wolf_death`` | Entity Wolf Death | - |
+| ``entity_wolf_growl`` | Entity Wolf Growl | - |
+| ``entity_wolf_howl`` | Entity Wolf Howl | - |
+| ``entity_wolf_hurt`` | Entity Wolf Hurt | - |
+| ``entity_wolf_pant`` | Entity Wolf Pant | - |
+| ``entity_wolf_shake`` | Entity Wolf Shake | - |
+| ``entity_wolf_step`` | Entity Wolf Step | - |
+| ``entity_wolf_whine`` | Entity Wolf Whine | - |
+| ``entity_zoglin_ambient`` | Entity Zoglin Ambient | - |
+| ``entity_zoglin_angry`` | Entity Zoglin Angry | - |
+| ``entity_zoglin_attack`` | Entity Zoglin Attack | - |
+| ``entity_zoglin_death`` | Entity Zoglin Death | - |
+| ``entity_zoglin_hurt`` | Entity Zoglin Hurt | - |
+| ``entity_zoglin_step`` | Entity Zoglin Step | - |
+| ``entity_zombie_ambient`` | Entity Zombie Ambient | - |
+| ``entity_zombie_attack_iron_door`` | Entity Zombie Attack Iron Door | - |
+| ``entity_zombie_attack_wooden_door`` | Entity Zombie Attack Wooden Door | - |
+| ``entity_zombie_break_wooden_door`` | Entity Zombie Break Wooden Door | - |
+| ``entity_zombie_converted_to_drowned`` | Entity Zombie Converted To Drowned | - |
+| ``entity_zombie_death`` | Entity Zombie Death | - |
+| ``entity_zombie_destroy_egg`` | Entity Zombie Destroy Egg | - |
+| ``entity_zombie_horse_ambient`` | Entity Zombie Horse Ambient | - |
+| ``entity_zombie_horse_death`` | Entity Zombie Horse Death | - |
+| ``entity_zombie_horse_hurt`` | Entity Zombie Horse Hurt | - |
+| ``entity_zombie_hurt`` | Entity Zombie Hurt | - |
+| ``entity_zombie_infect`` | Entity Zombie Infect | - |
+| ``entity_zombie_step`` | Entity Zombie Step | - |
+| ``entity_zombie_villager_ambient`` | Entity Zombie Villager Ambient | - |
+| ``entity_zombie_villager_converted`` | Entity Zombie Villager Converted | - |
+| ``entity_zombie_villager_cure`` | Entity Zombie Villager Cure | - |
+| ``entity_zombie_villager_death`` | Entity Zombie Villager Death | - |
+| ``entity_zombie_villager_hurt`` | Entity Zombie Villager Hurt | - |
+| ``entity_zombie_villager_step`` | Entity Zombie Villager Step | - |
+| ``entity_zombified_piglin_ambient`` | Entity Zombified Piglin Ambient | - |
+| ``entity_zombified_piglin_angry`` | Entity Zombified Piglin Angry | - |
+| ``entity_zombified_piglin_death`` | Entity Zombified Piglin Death | - |
+| ``entity_zombified_piglin_hurt`` | Entity Zombified Piglin Hurt | - |
+| ``event_mob_effect_bad_omen`` | Event Mob Effect Bad Omen | - |
+| ``event_mob_effect_raid_omen`` | Event Mob Effect Raid Omen | - |
+| ``event_mob_effect_trial_omen`` | Event Mob Effect Trial Omen | - |
+| ``event_raid_horn`` | Event Raid Horn | - |
+| ``intentionally_empty`` | Intentionally Empty | - |
+| ``item_armor_equip_chain`` | Item Armor Equip Chain | - |
+| ``item_armor_equip_diamond`` | Item Armor Equip Diamond | - |
+| ``item_armor_equip_elytra`` | Item Armor Equip Elytra | - |
+| ``item_armor_equip_generic`` | Item Armor Equip Generic | - |
+| ``item_armor_equip_gold`` | Item Armor Equip Gold | - |
+| ``item_armor_equip_iron`` | Item Armor Equip Iron | - |
+| ``item_armor_equip_leather`` | Item Armor Equip Leather | - |
+| ``item_armor_equip_netherite`` | Item Armor Equip Netherite | - |
+| ``item_armor_equip_turtle`` | Item Armor Equip Turtle | - |
+| ``item_armor_equip_wolf`` | Item Armor Equip Wolf | - |
+| ``item_armor_unequip_wolf`` | Item Armor Unequip Wolf | - |
+| ``item_axe_scrape`` | Item Axe Scrape | - |
+| ``item_axe_strip`` | Item Axe Strip | - |
+| ``item_axe_wax_off`` | Item Axe Wax Off | - |
+| ``item_bone_meal_use`` | Item Bone Meal Use | - |
+| ``item_book_page_turn`` | Item Book Page Turn | - |
+| ``item_book_put`` | Item Book Put | - |
+| ``item_bottle_empty`` | Item Bottle Empty | - |
+| ``item_bottle_fill`` | Item Bottle Fill | - |
+| ``item_bottle_fill_dragonbreath`` | Item Bottle Fill Dragonbreath | - |
+| ``item_brush_brushing_generic`` | Item Brush Brushing Generic | - |
+| ``item_brush_brushing_gravel`` | Item Brush Brushing Gravel | - |
+| ``item_brush_brushing_gravel_complete`` | Item Brush Brushing Gravel Complete | - |
+| ``item_brush_brushing_sand`` | Item Brush Brushing Sand | - |
+| ``item_brush_brushing_sand_complete`` | Item Brush Brushing Sand Complete | - |
+| ``item_bucket_empty`` | Item Bucket Empty | - |
+| ``item_bucket_empty_axolotl`` | Item Bucket Empty Axolotl | - |
+| ``item_bucket_empty_fish`` | Item Bucket Empty Fish | - |
+| ``item_bucket_empty_lava`` | Item Bucket Empty Lava | - |
+| ``item_bucket_empty_powder_snow`` | Item Bucket Empty Powder Snow | - |
+| ``item_bucket_empty_tadpole`` | Item Bucket Empty Tadpole | - |
+| ``item_bucket_fill`` | Item Bucket Fill | - |
+| ``item_bucket_fill_axolotl`` | Item Bucket Fill Axolotl | - |
+| ``item_bucket_fill_fish`` | Item Bucket Fill Fish | - |
+| ``item_bucket_fill_lava`` | Item Bucket Fill Lava | - |
+| ``item_bucket_fill_powder_snow`` | Item Bucket Fill Powder Snow | - |
+| ``item_bucket_fill_tadpole`` | Item Bucket Fill Tadpole | - |
+| ``item_bundle_drop_contents`` | Item Bundle Drop Contents | - |
+| ``item_bundle_insert`` | Item Bundle Insert | - |
+| ``item_bundle_remove_one`` | Item Bundle Remove One | - |
+| ``item_chorus_fruit_teleport`` | Item Chorus Fruit Teleport | - |
+| ``item_crop_plant`` | Item Crop Plant | - |
+| ``item_crossbow_hit`` | Item Crossbow Hit | - |
+| ``item_crossbow_loading_end`` | Item Crossbow Loading End | - |
+| ``item_crossbow_loading_middle`` | Item Crossbow Loading Middle | - |
+| ``item_crossbow_loading_start`` | Item Crossbow Loading Start | - |
+| ``item_crossbow_quick_charge_1`` | Item Crossbow Quick Charge 1 | - |
+| ``item_crossbow_quick_charge_2`` | Item Crossbow Quick Charge 2 | - |
+| ``item_crossbow_quick_charge_3`` | Item Crossbow Quick Charge 3 | - |
+| ``item_crossbow_shoot`` | Item Crossbow Shoot | - |
+| ``item_dye_use`` | Item Dye Use | - |
+| ``item_elytra_flying`` | Item Elytra Flying | - |
+| ``item_firecharge_use`` | Item Firecharge Use | - |
+| ``item_flintandsteel_use`` | Item Flintandsteel Use | - |
+| ``item_glow_ink_sac_use`` | Item Glow Ink Sac Use | - |
+| ``item_goat_horn_play`` | Item Goat Horn Play | - |
+| ``item_goat_horn_sound_0`` | Item Goat Horn Sound 0 | - |
+| ``item_goat_horn_sound_1`` | Item Goat Horn Sound 1 | - |
+| ``item_goat_horn_sound_2`` | Item Goat Horn Sound 2 | - |
+| ``item_goat_horn_sound_3`` | Item Goat Horn Sound 3 | - |
+| ``item_goat_horn_sound_4`` | Item Goat Horn Sound 4 | - |
+| ``item_goat_horn_sound_5`` | Item Goat Horn Sound 5 | - |
+| ``item_goat_horn_sound_6`` | Item Goat Horn Sound 6 | - |
+| ``item_goat_horn_sound_7`` | Item Goat Horn Sound 7 | - |
+| ``item_hoe_till`` | Item Hoe Till | - |
+| ``item_honey_bottle_drink`` | Item Honey Bottle Drink | - |
+| ``item_honeycomb_wax_on`` | Item Honeycomb Wax On | - |
+| ``item_ink_sac_use`` | Item Ink Sac Use | - |
+| ``item_lodestone_compass_lock`` | Item Lodestone Compass Lock | - |
+| ``item_mace_smash_air`` | Item Mace Smash Air | - |
+| ``item_mace_smash_ground`` | Item Mace Smash Ground | - |
+| ``item_mace_smash_ground_heavy`` | Item Mace Smash Ground Heavy | - |
+| ``item_nether_wart_plant`` | Item Nether Wart Plant | - |
+| ``item_ominous_bottle_dispose`` | Item Ominous Bottle Dispose | - |
+| ``item_shield_block`` | Item Shield Block | - |
+| ``item_shield_break`` | Item Shield Break | - |
+| ``item_shovel_flatten`` | Item Shovel Flatten | - |
+| ``item_spyglass_stop_using`` | Item Spyglass Stop Using | - |
+| ``item_spyglass_use`` | Item Spyglass Use | - |
+| ``item_totem_use`` | Item Totem Use | - |
+| ``item_trident_hit`` | Item Trident Hit | - |
+| ``item_trident_hit_ground`` | Item Trident Hit Ground | - |
+| ``item_trident_return`` | Item Trident Return | - |
+| ``item_trident_riptide_1`` | Item Trident Riptide 1 | - |
+| ``item_trident_riptide_2`` | Item Trident Riptide 2 | - |
+| ``item_trident_riptide_3`` | Item Trident Riptide 3 | - |
+| ``item_trident_throw`` | Item Trident Throw | - |
+| ``item_trident_thunder`` | Item Trident Thunder | - |
+| ``item_wolf_armor_break`` | Item Wolf Armor Break | - |
+| ``item_wolf_armor_crack`` | Item Wolf Armor Crack | - |
+| ``item_wolf_armor_damage`` | Item Wolf Armor Damage | - |
+| ``item_wolf_armor_repair`` | Item Wolf Armor Repair | - |
+| ``music_creative`` | Music Creative | - |
+| ``music_credits`` | Music Credits | - |
+| ``music_disc_11`` | Music Disc 11 | - |
+| ``music_disc_13`` | Music Disc 13 | - |
+| ``music_disc_5`` | Music Disc 5 | - |
+| ``music_disc_blocks`` | Music Disc Blocks | - |
+| ``music_disc_cat`` | Music Disc Cat | - |
+| ``music_disc_chirp`` | Music Disc Chirp | - |
+| ``music_disc_creator`` | Music Disc Creator | - |
+| ``music_disc_creator_music_box`` | Music Disc Creator Music Box | - |
+| ``music_disc_far`` | Music Disc Far | - |
+| ``music_disc_mall`` | Music Disc Mall | - |
+| ``music_disc_mellohi`` | Music Disc Mellohi | - |
+| ``music_disc_otherside`` | Music Disc Otherside | - |
+| ``music_disc_pigstep`` | Music Disc Pigstep | - |
+| ``music_disc_precipice`` | Music Disc Precipice | - |
+| ``music_disc_relic`` | Music Disc Relic | - |
+| ``music_disc_stal`` | Music Disc Stal | - |
+| ``music_disc_strad`` | Music Disc Strad | - |
+| ``music_disc_wait`` | Music Disc Wait | - |
+| ``music_disc_ward`` | Music Disc Ward | - |
+| ``music_dragon`` | Music Dragon | - |
+| ``music_end`` | Music End | - |
+| ``music_game`` | Music Game | - |
+| ``music_menu`` | Music Menu | - |
+| ``music_nether_basalt_deltas`` | Music Nether Basalt Deltas | - |
+| ``music_nether_crimson_forest`` | Music Nether Crimson Forest | - |
+| ``music_nether_nether_wastes`` | Music Nether Nether Wastes | - |
+| ``music_nether_soul_sand_valley`` | Music Nether Soul Sand Valley | - |
+| ``music_nether_warped_forest`` | Music Nether Warped Forest | - |
+| ``music_overworld_badlands`` | Music Overworld Badlands | - |
+| ``music_overworld_bamboo_jungle`` | Music Overworld Bamboo Jungle | - |
+| ``music_overworld_cherry_grove`` | Music Overworld Cherry Grove | - |
+| ``music_overworld_deep_dark`` | Music Overworld Deep Dark | - |
+| ``music_overworld_desert`` | Music Overworld Desert | - |
+| ``music_overworld_dripstone_caves`` | Music Overworld Dripstone Caves | - |
+| ``music_overworld_flower_forest`` | Music Overworld Flower Forest | - |
+| ``music_overworld_forest`` | Music Overworld Forest | - |
+| ``music_overworld_frozen_peaks`` | Music Overworld Frozen Peaks | - |
+| ``music_overworld_grove`` | Music Overworld Grove | - |
+| ``music_overworld_jagged_peaks`` | Music Overworld Jagged Peaks | - |
+| ``music_overworld_jungle`` | Music Overworld Jungle | - |
+| ``music_overworld_lush_caves`` | Music Overworld Lush Caves | - |
+| ``music_overworld_meadow`` | Music Overworld Meadow | - |
+| ``music_overworld_old_growth_taiga`` | Music Overworld Old Growth Taiga | - |
+| ``music_overworld_snowy_slopes`` | Music Overworld Snowy Slopes | - |
+| ``music_overworld_sparse_jungle`` | Music Overworld Sparse Jungle | - |
+| ``music_overworld_stony_peaks`` | Music Overworld Stony Peaks | - |
+| ``music_overworld_swamp`` | Music Overworld Swamp | - |
+| ``music_under_water`` | Music Under Water | - |
+| ``particle_soul_escape`` | Particle Soul Escape | - |
+| ``ui_button_click`` | Ui Button Click | - |
+| ``ui_cartography_table_take_result`` | Ui Cartography Table Take Result | - |
+| ``ui_loom_select_pattern`` | Ui Loom Select Pattern | - |
+| ``ui_loom_take_result`` | Ui Loom Take Result | - |
+| ``ui_stonecutter_select_recipe`` | Ui Stonecutter Select Recipe | - |
+| ``ui_stonecutter_take_result`` | Ui Stonecutter Take Result | - |
+| ``ui_toast_challenge_complete`` | Ui Toast Challenge Complete | - |
+| ``ui_toast_in`` | Ui Toast In | - |
+| ``ui_toast_out`` | Ui Toast Out | - |
+| ``weather_rain`` | Weather Rain | - |
+| ``weather_rain_above`` | Weather Rain Above | - |

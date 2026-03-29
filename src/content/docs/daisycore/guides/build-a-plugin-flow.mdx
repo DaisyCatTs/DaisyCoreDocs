@@ -1,34 +1,27 @@
 ---
 title: Build a Plugin Flow
-description: Connect commands, menus, sidebars, and tablists in one believable DaisyCore plugin flow without forcing config keys for every single message.
+description: Connect commands, menus, sidebars, and tablists in one believable DaisyCore feature flow without forcing config keys for every message.
 ---
 
 # Build a Plugin Flow
 
-This guide shows how the main DaisyCore systems fit together in one believable feature instead of isolated toy snippets.
-
-<div class="premium-callout note">
-  <h3>What this page assumes</h3>
-  <ul>
-    <li>You already have a working DaisyCore bootstrap.</li>
-    <li>You have read the basics of commands, menus, scoreboards, and tablists.</li>
-  </ul>
-</div>
+This guide shows how the main DaisyCore systems fit together in one believable feature instead of disconnected snippets.
 
 ## What you'll build
 
-A `/profile` flow:
+A `/profile` flow where:
 
 - `/profile` opens a menu
 - the menu acts as the player's profile hub
 - a sidebar mirrors a few player stats
 - a tablist shows a simple welcome header and footer
 
-## Important rule before you start
+## The important rule before you start
 
-You can build this entire flow with plain strings and MiniMessage strings.
+You can build this entire flow with direct MiniMessage strings.
 
-Shared key-backed text is the scaling path for plugins that already keep messages in config or lang files. It is not a requirement for small or local UI text.
+Shared config-backed text is the scaling path for plugins that already keep text in config or lang files.
+It is not the requirement for a normal modern DaisyCore feature.
 
 ## Step 1: bootstrap DaisyCore once
 
@@ -53,7 +46,7 @@ class ProfilePlugin : JavaPlugin() {
 }
 ```
 
-## Step 2: build the flow with plain strings first
+## Step 2: build sidebar and tablist with direct MiniMessage strings
 
 ```kotlin
 fun profileSidebar(player: Player) =
@@ -71,7 +64,7 @@ fun profileTablist(player: Player) =
     }
 ```
 
-## Step 3: connect everything in one command group
+## Step 3: connect everything inside one command group
 
 ```kotlin
 @DaisyCommandSet
@@ -80,7 +73,7 @@ object ProfileCommands : DaisyCommandGroup({
         description("Open your profile tools")
 
         player {
-            replyMm("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
+            reply("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
 
             player.openMenu("Profile", rows = 3) {
                 background(Material.GRAY_STAINED_GLASS_PANE) {
@@ -91,12 +84,12 @@ object ProfileCommands : DaisyCommandGroup({
                     item(Material.PLAYER_HEAD) {
                         name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
                         lore(
-                            "<gray>Inline Daisy menu flow",
-                            "<white>Built for ${player.name}",
+                            "<gray>Inline Daisy menu flow</gray>",
+                            "<white>Built for ${player.name}</white>",
                         )
                     }
 
-                    messageMm("<gray>Clicked the profile card.</gray>")
+                    message("<gray>Clicked the profile card.</gray>")
                     closeOnClick()
                 }
             }
@@ -108,36 +101,42 @@ object ProfileCommands : DaisyCommandGroup({
 })
 ```
 
-## Step 4: switch to shared text only when your plugin is config-heavy
+## Step 4: move to shared text only when the plugin is config-heavy
 
-If your plugin keeps titles, lore, sidebars, and tablist text in config or lang files, install one shared `DaisyTextSource` and swap the local strings for `lang(...)`, `replyLang(...)`, `nameLang(...)`, `titleLang(...)`, `headerLang(...)`, and the related helpers.
+If your plugin keeps wording in config or lang files, install one shared text source and swap local strings for:
 
-That is when example keys like:
+- `replyLang(...)`
+- `lang(...)`
+- `nameLang(...)`
+- `titleLang(...)`
+- `headerLang(...)`
+- related text helpers
 
-- `messages.profile.opening`
-- `menus.profile.title`
-- `sidebar.profile.title`
-- `tablist.profile.header`
+That is the right time for config paths like:
 
-become useful. They are config paths, not required Daisy naming.
+- `profile.opening`
+- `profile.menu.title`
+- `profile.sidebar.title`
+- `profile.tablist.header`
+
+Those are useful config paths, not DaisyCore requirements.
 
 <div class="premium-callout current">
   <h3>Why this matters</h3>
-  <p>The same DaisyCore systems support both styles: local MiniMessage strings for quick feature code, and shared key-backed text for config-heavy plugins.</p>
+  <p>The same DaisyCore systems support both styles: direct MiniMessage strings for fast feature work, and shared key-backed text for config-heavy plugins.</p>
 </div>
 
 ## When to choose each style
 
-- use local strings for fast feature work and small plugins
-- use MiniMessage strings when you want rich formatting inline
-- use shared text keys when your plugin already stores text in config or lang files
-- use `Component` values when your plugin is already component-first
+- use direct MiniMessage strings for most feature-local UI and command feedback
+- use components when you want explicit low-level Adventure control
+- use shared config-backed text when your plugin already stores wording outside code
 
 <div class="page-next">
 
 ## Next steps
 
-- Learn the shared config/lang path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
-- Deepen the architecture view: [Why DaisyCore Is One Library](/daisycore/explanation/why-daisycore-is-one-library/)
+- Learn the shared config-backed text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
+- See the full cross-product example: [Full Ecosystem Example](/overview/full-ecosystem-example/)
 - Jump to the APIs: [Bootstrap API](/daisycore/reference/bootstrap-api/)
 </div>

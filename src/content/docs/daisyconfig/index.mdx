@@ -22,7 +22,7 @@ description: The typed YAML config layer for modern Paper plugins, with reload-s
   <div class="feature-card"><strong>Typed config mapping</strong><p>Replace `getString(...)` sprawl with explicit codecs and real config objects.</p></div>
   <div class="feature-card"><strong>Reload-safe handles</strong><p>Keep the last valid config in memory if a reload fails.</p></div>
   <div class="feature-card"><strong>DaisySeries-aware codecs</strong><p>Decode materials, sounds, item flags, enchantments, and potion effects directly from config-friendly strings.</p></div>
-  <div class="feature-card"><strong>DaisyCore text bridge</strong><p>Provide config-backed text to menus, sidebars, tablists, and command replies without bypassing DaisyCore’s render model.</p></div>
+  <div class="feature-card"><strong>DaisyCore text bridge</strong><p>Provide config-backed text to menus, sidebars, tablists, and command replies without bypassing DaisyCore's render model.</p></div>
 </div>
 
 ## Important safety rule
@@ -32,10 +32,15 @@ description: The typed YAML config layer for modern Paper plugins, with reload-s
   <p>DaisyConfig owns typed YAML and text-source data. DaisyCore still owns MiniMessage parsing, viewer-aware rendering, PlaceholderAPI integration, and fallback behavior when PlaceholderAPI is absent.</p>
 </div>
 
+<div class="premium-callout note">
+  <h3>Normal text workflow</h3>
+  <p>Use direct MiniMessage strings first. Use DaisyConfig-backed text when your plugin wants shared, reloadable, or admin-editable wording. DaisyConfig stores text; DaisyCore renders it.</p>
+</div>
+
 ## Next steps
 
 - Install it: [Install DaisyConfig](/daisyconfig/getting-started/install/)
 - Build a typed config: [First Config](/daisyconfig/getting-started/first-config/)
+- Decide when config text is worth it: [Config Text vs Direct MiniMessage](/daisyconfig/guides/when-to-use-config-text-vs-direct-minimessage/)
 - Pair it with DaisyCore: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
 - Pair it with DaisySeries: [Use DaisyConfig with DaisySeries](/daisyconfig/guides/use-daisyconfig-with-daisyseries/)
-

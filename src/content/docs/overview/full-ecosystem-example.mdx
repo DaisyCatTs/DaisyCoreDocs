@@ -1,0 +1,180 @@
+---
+title: Full Ecosystem Example
+description: See DaisyCore, DaisySeries, and DaisyConfig working together in one realistic profile-style plugin flow.
+---
+
+# Full Ecosystem Example
+
+This page shows the intended full-stack Daisy story:
+
+- **DaisyCore** owns runtime systems
+- **DaisySeries** owns parser-safe value decoding
+- **DaisyConfig** owns typed YAML and config-backed text
+
+## What this example builds
+
+A profile-style plugin where:
+
+- `/profile` opens a menu
+- the menu uses a configured icon and item flags
+- a sidebar and tablist use config-backed text
+- typed YAML stores a sound, enchantment, and potion effect
+- all user-facing rendering still flows through DaisyCore
+
+## 1. Typed config with DaisyConfig
+
+```kotlin
+data class ProfileUiConfig(
+    val icon: Material,
+    val feedbackSound: Sound,
+    val flags: Set<ItemFlag>,
+    val enchantment: Enchantment,
+    val effect: PotionEffectType,
+    val sidebarTitle: String,
+)
+
+val profileUiCodec =
+    objectCodec {
+        ProfileUiConfig(
+            icon = required("icon", materialCodec()),
+            feedbackSound = required("feedback_sound", soundCodec()),
+            flags = defaulted("flags", itemFlagsCodec(), emptySet()),
+            enchantment = required("enchantment", enchantmentCodec()),
+            effect = required("effect", potionEffectCodec()),
+            sidebarTitle = defaulted(
+                "sidebar_title",
+                stringCodec(),
+                "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>",
+            ),
+        )
+    }
+```
+
+## 2. Runtime bootstrap with DaisyCore
+
+```kotlin
+class ProfilePlugin : JavaPlugin() {
+    lateinit var daisy: DaisyPlatform
+        private set
+
+    lateinit var uiConfig: DaisyConfigHandle<ProfileUiConfig>
+        private set
+
+    override fun onEnable() {
+        ensureDefaultConfigResource("profile-ui.yml")
+        ensureDefaultConfigResource("lang.yml")
+
+        uiConfig = yamlConfigHandle("profile-ui.yml", profileUiCodec)
+        val langHandle = yamlTextConfigHandle(this, "lang.yml")
+
+        daisy =
+            DaisyPlatform.create(this) {
+                messages(langHandle.current.asDaisyTextSource())
+                commands()
+                menus()
+                scoreboards()
+                tablists()
+            }
+    }
+}
+```
+
+## 3. Values come from DaisySeries-backed codecs
+
+```yaml
+icon: diamond_sword
+feedback_sound: entity_player_levelup
+flags:
+  - hide_enchants
+enchantment: sharpness
+effect: slow_falling
+sidebar_title: "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"
+```
+
+Those values are clean because DaisyConfig is using DaisySeries codecs underneath.
+
+That means:
+
+- canonical config keys stay stable
+- aliases remain accepted where supported
+- value parsing logic is not rebuilt in your plugin
+
+## 4. Command, menu, sidebar, and tablist in one flow
+
+```kotlin
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        description("Open your profile tools")
+
+        player {
+            val config = plugin.uiConfig.current
+
+            reply("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
+
+            player.openMenu("Profile", rows = 3) {
+                slot(13) {
+                    item(config.icon) {
+                        name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+                        lore(
+                            "<gray>Enchant: <white>${DaisyEnchantments.displayName(config.enchantment)}</white>",
+                            "<gray>Effect: <white>${DaisyPotions.displayName(config.effect)}</white>",
+                        )
+                    }
+
+                    message("<gray>Clicked the profile card.</gray>")
+                    closeOnClick()
+                }
+            }
+
+            daisy.scoreboards?.show(
+                player,
+                sidebar {
+                    title(config.sidebarTitle)
+                    line("coins") {
+                        textLang("profile.sidebar.coins", viewer = player, "coins" to "1,250")
+                    }
+                },
+            )
+
+            daisy.tablists?.show(
+                player,
+                tablist {
+                    headerLang("profile.tablist.header", viewer = player, "player" to player.name)
+                    footerLang("profile.tablist.footer", viewer = player)
+                },
+            )
+        }
+    }
+})
+```
+
+## 5. The safety boundary
+
+This is the important production rule:
+
+- DaisyConfig stores and loads text
+- DaisyCore renders it
+
+That means:
+
+- DaisyConfig does **not** expand PlaceholderAPI directly
+- DaisySeries does **not** render text
+- DaisyCore remains the viewer-aware rendering owner
+
+## Why this full stack works well
+
+- DaisyCore keeps runtime systems coherent
+- DaisySeries keeps value parsing clean and config-safe
+- DaisyConfig keeps YAML, reloads, and text storage explicit
+
+The result is one believable plugin architecture instead of three disconnected libraries.
+
+<div class="page-next">
+
+## Next steps
+
+- Start with the runtime platform: [DaisyCore](/daisycore/)
+- See parser modules and values: [DaisySeries](/daisyseries/)
+- Learn the typed config layer: [DaisyConfig](/daisyconfig/)
+</div>

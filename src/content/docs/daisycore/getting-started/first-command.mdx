@@ -1,26 +1,34 @@
 ---
 title: First Command
-description: Create your first DaisyCore command with plain strings first, then layer in MiniMessage or config-backed text when you actually need it.
+description: Create your first DaisyCore command with MiniMessage-first strings, then scale into shared config-backed text only when your plugin needs it.
 ---
 
 # First Command
 
-This page shows the normal DaisyCore command workflow: define a command group, annotate it, and let `DaisyPlatform` discover it during startup.
+This page shows the normal DaisyCore command workflow:
 
-## What this page assumes
+- define a command group
+- annotate it with `@DaisyCommandSet`
+- let `DaisyPlatform` discover it at startup
+- use direct MiniMessage strings by default
 
-- you already completed [Install DaisyCore](/daisycore/getting-started/install/)
-- your plugin already creates a `DaisyPlatform` like the one shown in [First Plugin](/daisycore/getting-started/first-plugin/)
+## The important default
 
-## Start simple
+`reply("...")` is already MiniMessage-first.
 
-You do not need `replyLang(...)` for basic messages.
+That means this is normal DaisyCore code:
 
-Use:
+```kotlin
+reply("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
+```
 
-- `reply("...")` for plain strings
-- `replyMm("...")` for MiniMessage strings
-- `replyLang("...")` when the text lives in config or lang files
+You do **not** need:
+
+- a key
+- a `DaisyTextSource`
+- a config file
+
+just to send a normal formatted message.
 
 ## Step 1: create a command group
 
@@ -36,41 +44,13 @@ object ProfileCommands : DaisyCommandGroup({
         description("Open your profile tools")
 
         player {
-            reply("Opening your profile.")
+            reply("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
         }
     }
 })
 ```
 
-## Step 2: add MiniMessage when you want formatting
-
-```kotlin
-command("profile") {
-    description("Open your profile tools")
-
-    player {
-        replyMm("<gradient:#7dd3fc:#c4b5fd>Opening your profile.</gradient>")
-    }
-}
-```
-
-## Step 3: use config-backed text when your plugin already stores messages there
-
-If your plugin has a config or lang file, that is when `replyLang(...)` starts paying off.
-
-```kotlin
-command("profile") {
-    description("Open your profile tools")
-
-    player {
-        replyLang("messages.profile.opening", "player" to player.name)
-    }
-}
-```
-
-The key itself is just your plugin's own config path. DaisyCore is not forcing a special naming system. `messages.profile.opening` and `tablist.profile.header` are only examples of keys a config-driven plugin might already use.
-
-## Step 4: add a subcommand
+## Step 2: add a subcommand
 
 ```kotlin
 command("profile") {
@@ -78,15 +58,13 @@ command("profile") {
 
     subcommand("open") {
         player {
-            reply("Profile opened.")
+            reply("<green>Profile opened.</green>")
         }
     }
 }
 ```
 
-`command(...)`, `subcommand(...)`, and `player { ... }` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so library ownership is still obvious.
-
-## Step 5: keep async replies clean
+## Step 3: keep async replies clean
 
 ```kotlin
 subcommand("sync") {
@@ -96,27 +74,69 @@ subcommand("sync") {
         profileService.sync(player.uniqueId).replyResult(
             context = this,
             success = {
-                replyMm("<green>Profile synced for <white>${player.name}</white>.</green>")
+                reply("<green>Profile synced for <white>${player.name}</white>.</green>")
             },
             failure = { error ->
-                failLang("messages.profile.error", "error" to error.message.orEmpty())
+                fail("<red>Profile sync failed:</red> <gray>${error.message.orEmpty()}</gray>")
             },
         )
     }
 }
 ```
 
+## Step 4: use shared config-backed text only when it helps
+
+If your plugin already stores text in `lang.yml`, admin-editable config, or translation bundles, then `replyLang(...)` becomes the clean scaling path.
+
+```kotlin
+command("profile") {
+    description("Open your profile tools")
+
+    player {
+        replyLang("profile.opening", "player" to player.name)
+    }
+}
+```
+
+That key is just your plugin's own path.
+
+It is useful when you want:
+
+- reloadable text
+- shared wording across systems
+- localization
+- large config-driven message sets
+
+It is **not** required for a basic command.
+
+## Components still work
+
+If your plugin is already component-first, you can still send components directly:
+
+```kotlin
+reply(
+    Component.text("Profile opened.")
+        .color(NamedTextColor.AQUA)
+)
+```
+
+The recommended order is:
+
+1. direct MiniMessage strings
+2. components when you want explicit control
+3. config-backed keys when you want shared or reloadable text
+
 ## How discovery works
 
-When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for classes annotated with `@DaisyCommandSet`. Valid `DaisyCommandGroup` and `DaisyCommandProvider` implementations are loaded automatically.
+When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for types annotated with `@DaisyCommandSet`.
 
-That means you do not manually register this provider in normal usage.
+That means normal usage does **not** require manual command provider registration.
 
 <div class="page-next">
 
 ## Next steps
 
 - Open a UI from a command: [First Menu](/daisycore/getting-started/first-menu/)
-- Learn the shared config/lang text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
+- Learn the shared config-backed text path: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
 - Jump to API details: [Command DSL](/daisycore/reference/command-dsl/)
 </div>

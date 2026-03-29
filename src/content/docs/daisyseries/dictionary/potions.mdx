@@ -1,0 +1,74 @@
+---
+title: Potions Dictionary
+description: Canonical DaisySeries potion effect keys, display names, and curated aliases.
+---
+
+# Potions Dictionary
+
+Use these values for config-driven potion effect selection and effect-heavy gameplay systems.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `speed` and `slow_falling`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs like `minecraft:speed` are normalized on parse.
+
+## Quick config example
+
+```yaml
+effect: absorption
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyPotions.parse(config.effect)
+val key = DaisyPotions.key(value)
+val label = DaisyPotions.displayName(value)
+
+val typed = required("effect", potionEffectCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``absorption`` | Absorption | - |
+| ``bad_omen`` | Bad Omen | - |
+| ``blindness`` | Blindness | - |
+| ``conduit_power`` | Conduit Power | - |
+| ``darkness`` | Darkness | - |
+| ``dolphins_grace`` | Dolphins Grace | - |
+| ``fire_resistance`` | Fire Resistance | ``fire_res`` |
+| ``glowing`` | Glowing | - |
+| ``haste`` | Haste | - |
+| ``health_boost`` | Health Boost | - |
+| ``hero_of_the_village`` | Hero Of The Village | - |
+| ``hunger`` | Hunger | - |
+| ``infested`` | Infested | - |
+| ``instant_damage`` | Instant Damage | - |
+| ``instant_health`` | Instant Health | - |
+| ``invisibility`` | Invisibility | - |
+| ``jump_boost`` | Jump Boost | - |
+| ``levitation`` | Levitation | - |
+| ``luck`` | Luck | - |
+| ``mining_fatigue`` | Mining Fatigue | - |
+| ``nausea`` | Nausea | - |
+| ``night_vision`` | Night Vision | - |
+| ``oozing`` | Oozing | - |
+| ``poison`` | Poison | - |
+| ``raid_omen`` | Raid Omen | - |
+| ``regeneration`` | Regeneration | - |
+| ``resistance`` | Resistance | ``res`` |
+| ``saturation`` | Saturation | - |
+| ``slow_falling`` | Slow Falling | - |
+| ``slowness`` | Slowness | - |
+| ``speed`` | Speed | - |
+| ``strength`` | Strength | - |
+| ``trial_omen`` | Trial Omen | - |
+| ``unluck`` | Unluck | - |
+| ``water_breathing`` | Water Breathing | - |
+| ``weakness`` | Weakness | - |
+| ``weaving`` | Weaving | - |
+| ``wind_charged`` | Wind Charged | - |
+| ``wither`` | Wither | - |

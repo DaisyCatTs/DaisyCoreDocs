@@ -29,6 +29,10 @@ fun Player.openMenu(
 
 The inline `openMenu(title, rows) { ... }` form is the preferred quick-flow API.
 
+`message("...")` is the MiniMessage-first string path.
+
+`plainMessage("...")` is the explicit raw/plain escape hatch when you genuinely want literal text.
+
 ## Common builder features
 
 - `slot(...)`
@@ -37,7 +41,7 @@ The inline `openMenu(title, rows) { ... }` form is the preferred quick-flow API.
 - `render { ... }`
 - `onClick(...)`
 - `message(...)`
-- `messageMm(...)`
+- `plainMessage(...)`
 - `closeOnClick()`
 - `refreshOnClick(...)`
 - `onOpen { ... }`

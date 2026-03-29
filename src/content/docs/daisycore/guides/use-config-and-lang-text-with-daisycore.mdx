@@ -1,67 +1,32 @@
 ---
 title: Config and Lang Text
-description: Use plain strings and MiniMessage by default, then install one shared Daisy text source when your plugin already keeps text in config or lang files.
+description: Use direct MiniMessage strings by default, then install one shared text source only when your plugin actually wants config-backed text.
 ---
 
 # Config and Lang Text
 
-This guide shows the intended DaisyCore workflow for config-heavy plugins.
+This guide exists to make one thing crystal clear:
 
-But first, the important rule:
+You do **not** need keys for normal DaisyCore messages.
 
-<div class="premium-callout current">
-  <h3>Start simple</h3>
-  <p>You do not need keys for basic messages. DaisyCore already supports plain strings, MiniMessage strings, and components. Shared text keys are the clean scaling path for plugins that already store text in config or lang files.</p>
-</div>
+## The intended order
 
-## What to use when
+Use DaisyCore text in this order:
 
-- use `reply("...")` for plain command messages
-- use `replyMm("...")` for MiniMessage command messages
-- use plain strings in menu, sidebar, and tablist builders when the text is local
-- use shared lang keys when the text lives outside code
+1. direct MiniMessage strings
+2. `Component` values when you want explicit control
+3. shared config-backed keys when the plugin already stores text that way
 
-## Step 1: install a shared text source
+## Default path: direct MiniMessage strings
 
 ```kotlin
-object PluginText : DaisyTextSource {
-    override fun text(key: String): String? = pluginConfig.getString(key)
-
-    override fun textList(key: String): List<String> = pluginConfig.getStringList(key)
-}
-
-class MyPlugin : JavaPlugin() {
-    private lateinit var daisy: DaisyPlatform
-
-    override fun onEnable() {
-        daisy =
-            DaisyPlatform.create(this) {
-                messages(PluginText)
-                commands()
-                menus()
-                scoreboards()
-                tablists()
-            }
-    }
-}
-```
-
-That object is just the adapter between your plugin config and DaisyCore. If you already keep text in YAML, JSON, TOML, or some lang system, this is where you connect it.
-
-## Step 2: use plain strings and MiniMessage when the text is local
-
-```kotlin
-command("profile") {
-    player {
-        reply("Opening your profile.")
-        replyMm("<gradient:#7dd3fc:#c4b5fd>Ready.</gradient>")
-    }
-}
+reply("<gradient:#7dd3fc:#c4b5fd>Ready.</gradient>")
 
 player.openMenu("Profile", rows = 3) {
     slot(13) {
         item(Material.PLAYER_HEAD) {
             name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+            lore("<gray>Coins: <white>1,250</white>")
         }
     }
 }
@@ -75,79 +40,89 @@ tablist {
 }
 ```
 
-## Step 3: use shared keys when your plugin text already lives in config or lang files
+That is already the intended modern path.
+
+## When config-backed text becomes worth it
+
+Install a shared text source when you want:
+
+- reloadable wording
+- one shared source across commands, menus, sidebars, and tablists
+- localization
+- admin-editable text
+- a config-heavy plugin workflow
+
+## Preferred ecosystem path: DaisyConfig
+
+The cleanest path now is to let DaisyConfig load text and hand it into DaisyCore:
 
 ```kotlin
-@DaisyCommandSet
-object ProfileCommands : DaisyCommandGroup({
-    command("profile") {
-        player {
-            replyLang("messages.profile.opening", "player" to player.name)
-        }
+val langHandle = yamlTextConfigHandle(this, "lang.yml")
 
-        subcommand("sync") {
-            player {
-                loading()
-
-                profileService.sync(player.uniqueId).replyResult(
-                    context = this,
-                    success = {
-                        replyLang("messages.profile.synced", "player" to player.name)
-                    },
-                    failure = { error ->
-                        failLang("messages.profile.error", "error" to error.message.orEmpty())
-                    },
-                )
-            }
-        }
+val daisy =
+    DaisyPlatform.create(this) {
+        messages(langHandle.current.asDaisyTextSource())
+        commands()
+        menus()
+        scoreboards()
+        tablists()
     }
-})
 ```
+
+That keeps the product boundaries clean:
+
+- DaisyConfig stores and loads text
+- DaisyCore renders it
+
+## What shared keys look like
 
 ```kotlin
-player.openMenu(lang("menus.profile.title"), rows = 3) {
-    background(Material.GRAY_STAINED_GLASS_PANE) {
-        name(" ")
-    }
+replyLang("profile.ready", "player" to player.name)
 
-    slot(13) {
-        item(Material.PLAYER_HEAD) {
-            nameLang("menus.profile.card.name", viewer = player, "player" to player.name)
-            loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
-        }
+titleLang("profile.sidebar.title", viewer = player)
 
-        messageLang("messages.profile.clicked", "player" to player.name)
-        closeOnClick()
-    }
-}
+headerLang("profile.tablist.header", viewer = player, "player" to player.name)
 ```
 
-## What DaisyCore handles for you
+Those keys are your plugin's config paths.
 
-- key lookup through the installed `DaisyTextSource`
-- placeholder replacement with `Pair<String, Any?>`
+They are useful when the plugin is already text-by-config.
+
+They are not required for:
+
+- a hello-world command
+- a small menu
+- a local sidebar
+- a simple tablist
+
+## Placeholder-aware rendering stays in DaisyCore
+
+If config-backed text is used in:
+
+- commands
+- menus
+- sidebars
+- tablists
+
+then DaisyCore still owns:
+
 - MiniMessage parsing
-- viewer-aware PlaceholderAPI rendering when a player is available
-- shared text style across commands, menus, sidebars, and tablists
+- viewer-aware rendering
+- PlaceholderAPI integration
+- fallback behavior when PlaceholderAPI is absent
 
-## What those keys actually are
+That safety boundary does not change just because the text came from config.
 
-Keys like:
+<div class="premium-callout current">
+  <h3>Current default</h3>
+  <p>Use direct MiniMessage strings first. Use config-backed text when the plugin wants shared, reloadable, or translatable wording.</p>
+</div>
 
-- `messages.profile.opening`
-- `menus.profile.title`
-- `sidebar.profile.title`
-- `tablist.profile.header`
+<div class="page-next">
 
-are only example config paths.
+## Next steps
 
-They are not a DaisyCore requirement. They only make sense if your plugin already stores text by key. If your plugin does not, keep using local strings or components.
-
-## When DaisySeries belongs in the same plugin
-
-If your text flow also needs to parse materials, sounds, item flags, enchantments, or potion effects from config-heavy input, add [DaisySeries](/daisyseries/) beside DaisyCore instead of rebuilding parsing helpers locally.
-
-## Next step
-
-- See the full command surface: [Command DSL](/daisycore/reference/command-dsl/)
-- See the menu surface: [Menu DSL](/daisycore/reference/menu-dsl/)
+- Learn the DaisyConfig side of the bridge: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
+- See the full stack together: [Full Ecosystem Example](/overview/full-ecosystem-example/)
+- Jump to runtime text details: [Text Bridge](/daisyconfig/reference/text-bridge/)
+</div>

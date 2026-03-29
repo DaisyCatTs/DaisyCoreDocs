@@ -9,7 +9,7 @@ DaisyCore is meant to be the one dependency for normal plugin projects. You shou
 
 <div class="premium-callout current">
   <h3>What DaisyCore does not require</h3>
-  <p>You do not need a config-key text system just to get started. Plain strings, MiniMessage strings, and components all work before you ever install <code>messages(...)</code>.</p>
+  <p>You do not need a config-key text system just to get started. Direct strings in DaisyCore-facing text APIs are already MiniMessage-first, and components still work when you want explicit control.</p>
 </div>
 
 ## Requirements
@@ -47,8 +47,8 @@ dependencies {
 
 Most plugins start like this:
 
-- plain strings for local messages and titles
-- MiniMessage strings for rich formatting
+- direct MiniMessage strings for local messages and titles
+- components when you want explicit control
 - shared text keys later, when the plugin already stores text in config or lang files
 
 ## Pair it with DaisySeries when parsing gets config-heavy

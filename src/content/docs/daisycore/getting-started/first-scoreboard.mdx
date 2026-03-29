@@ -1,35 +1,36 @@
 ---
 title: First Scoreboard
-description: Show a simple DaisyCore sidebar with plain strings first, then add keyed lang-backed rendering when your plugin needs config-driven text.
+description: Show a DaisyCore sidebar with MiniMessage-first text, keyed lines, and shared config-backed text only when that fits the plugin.
 ---
 
 # First Scoreboard
 
-This page shows the modern DaisyCore sidebar path: keyed lines, session ownership, and text that can be plain, MiniMessage, or config-backed.
+This page shows the modern DaisyCore sidebar path:
 
-## What this page assumes
+- MiniMessage-first title and line text
+- keyed lines for targeted refresh
+- shared config-backed text later, not first
 
-<div class="premium-callout note">
-
-- your plugin has a `DaisyPlatform`
-- you enabled `scoreboards()`
-- you want a simple sidebar for one player-facing feature
-</div>
-
-## Step 1: start with plain strings or MiniMessage strings
+## Step 1: build a sidebar with direct MiniMessage strings
 
 ```kotlin
 fun profileSidebar(player: Player) =
     sidebar {
         title("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>")
+
         line("name") {
             text("<white>${player.name}</white>")
         }
+
         line("coins") {
             text("<gray>Coins: <white>1,250</white>")
         }
     }
 ```
+
+This is already the normal path.
+
+You do not need a config key just to render a sidebar title or line.
 
 ## Step 2: show it to a player
 
@@ -37,47 +38,50 @@ fun profileSidebar(player: Player) =
 val session = daisy.scoreboards?.show(player, profileSidebar(player))
 ```
 
-## Why keys matter
-
-Each line has a key like `name` or `coins`. DaisyCore uses those keys so a session can refresh specific lines instead of rebuilding everything blindly.
-
-This is why `line(key) { ... }` is the normal path instead of relying on anonymous lines only.
-
-## Step 3: refresh the parts that changed
+## Step 3: refresh only what changed
 
 ```kotlin
 session?.invalidate("coins")
 session?.refreshNow()
 ```
 
-Use `invalidate("coins")` when one keyed line changed. Use `refreshNow()` when you want a full recompute immediately.
+Sidebar lines are keyed so DaisyCore can refresh the right parts cleanly instead of blindly rebuilding everything.
 
-## Step 4: switch to shared config/lang text only when it helps
+That is why `line("coins") { ... }` is the normal path.
+
+## Step 4: use shared config-backed text when your plugin is already config-heavy
 
 ```kotlin
 fun profileSidebar(player: Player) =
     sidebar {
-        titleLang("sidebar.profile.title", viewer = player)
+        titleLang("profile.sidebar.title", viewer = player)
+
         line("coins") {
-            textLang("sidebar.profile.coins", viewer = player, "coins" to "1,250")
+            textLang("profile.sidebar.coins", viewer = player, "coins" to "1,250")
         }
     }
 ```
 
-Again, `sidebar.profile.title` is not a Daisy-only concept. It is just a config key path if your plugin stores text outside code.
+That becomes useful when you want:
 
-## What the current implementation focuses on
+- admin-editable sidebar text
+- localization
+- one shared text source across the plugin
+- reloadable UI wording
 
-- title rendering
+## Current runtime truth
+
+The public sidebar surface is intentionally focused on:
+
+- titles
 - keyed lines
-- plain strings, MiniMessage strings, or config-backed lang text
-- blank line support
 - targeted invalidation
-- safe cleanup when the player quits or the platform closes
+- clean player/session ownership
+- MiniMessage-first rendering through DaisyCore
 
 <div class="premium-callout current">
-  <h3>Current behavior</h3>
-  <p>The sidebar runtime is intentionally scoped to a stable, usable baseline. It focuses on predictable keyed updates and clean session ownership instead of packet-heavy public APIs.</p>
+  <h3>Current default</h3>
+  <p>Start with direct MiniMessage strings. Use shared key-backed text only when your plugin already stores sidebar text outside code.</p>
 </div>
 
 <div class="page-next">
@@ -85,6 +89,6 @@ Again, `sidebar.profile.title` is not a Daisy-only concept. It is just a config 
 ## Next steps
 
 - Add a header and footer too: [First Tablist](/daisycore/getting-started/first-tablist/)
-- Learn the current sidebar model: [Sidebar Refresh and Diffing](/daisycore/explanation/sidebar-refresh-and-diffing/)
+- Read the rendering model: [Sidebar Refresh and Diffing](/daisycore/explanation/sidebar-refresh-and-diffing/)
 - Jump to API details: [Sidebar DSL](/daisycore/reference/sidebar-dsl/)
 </div>

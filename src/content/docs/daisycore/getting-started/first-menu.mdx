@@ -1,30 +1,28 @@
 ---
 title: First Menu
-description: Open a simple DaisyCore menu with plain strings first, then use MiniMessage strings or lang-backed text when your plugin needs it.
+description: Open a DaisyCore menu with MiniMessage-first strings, then switch to shared config-backed text only when your plugin actually needs it.
 ---
 
 # First Menu
 
-This page shows the smallest useful menu flow: open a menu inline for a player, then understand what DaisyCore turns that into at runtime.
+This page shows the smallest useful DaisyCore menu flow:
 
-## What this page assumes
+- open a menu inline for a player
+- use direct MiniMessage strings for titles, names, lore, and click feedback
+- move to config-backed text only when the plugin is already config-heavy
 
-<div class="premium-callout note">
+## The important default
 
-- you already have a working DaisyCore bootstrap
-- you are comfortable with the command flow from [First Command](/daisycore/getting-started/first-command/)
-</div>
+In DaisyCore menu code, a `String` is treated as MiniMessage-capable by default.
 
-## Start simple
+That means all of these are normal:
 
-Menus do not require lang keys.
+- `player.openMenu("Profile", rows = 3)`
+- `name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")`
+- `lore("<gray>Profile hub</gray>")`
+- `message("<gray>Clicked the profile card.</gray>")`
 
-Use:
-
-- `player.openMenu("Title", rows = ...)` for plain text titles
-- `messageMm("...")` when you want MiniMessage click feedback
-- `name("...")` and `lore(...)` when plain strings are enough
-- `nameLang(...)` and `loreLang(...)` when the text comes from config/lang storage
+You do **not** need `messageMm(...)` as the primary path anymore.
 
 ## Step 1: open a menu inline
 
@@ -38,12 +36,12 @@ player.openMenu("Profile", rows = 3) {
         item(Material.PLAYER_HEAD) {
             name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
             lore(
-                "<gray>Inline Daisy menu flow",
-                "<white>Built for ${player.name}",
+                "<gray>Inline Daisy menu flow</gray>",
+                "<white>Built for ${player.name}</white>",
             )
         }
 
-        messageMm("<gray>Clicked the profile card.</gray>")
+        message("<gray>Clicked the profile card.</gray>")
         closeOnClick()
     }
 }
@@ -51,7 +49,29 @@ player.openMenu("Profile", rows = 3) {
 
 Inline opening is the main ergonomic path for quick plugin UI flows.
 
-## Step 2: switch to config-backed text only when you want it
+## Step 2: keep using direct strings while the text is local
+
+If the text belongs only to this feature, keep it local:
+
+```kotlin
+player.openMenu("<gradient:#7dd3fc:#c4b5fd>Profile</gradient>", rows = 3) {
+    slot(13) {
+        item(Material.PLAYER_HEAD) {
+            name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
+            lore(
+                "<gray>Coins: <white>1,250</white>",
+                "<gray>Rank: <white>Member</white>",
+            )
+        }
+    }
+}
+```
+
+That is already the normal modern Adventure + MiniMessage path.
+
+## Step 3: switch to shared config-backed text only when it helps
+
+If your plugin keeps UI text in config or lang files, then the shared key-backed helpers become useful:
 
 ```kotlin
 player.openMenu(lang("menus.profile.title"), rows = 3) {
@@ -61,39 +81,43 @@ player.openMenu(lang("menus.profile.title"), rows = 3) {
             loreLang("menus.profile.card.lore", viewer = player, "player" to player.name)
         }
 
-        messageLang("messages.profile.clicked", "player" to player.name)
+        messageLang("profile.clicked", "player" to player.name)
         closeOnClick()
     }
 }
 ```
 
-Those keys are just config paths. If your plugin keeps all text in config files, this becomes the cleaner long-term path. If not, plain strings are still fine.
+Those keys are just your plugin's own config paths.
 
-## Step 3: open it from a command
+They help when you want:
 
-```kotlin
-command("profile") {
-    player {
-        player.openMenu("Profile", rows = 3) {
-            slot(13) {
-                item(Material.PLAYER_HEAD) {
-                    name("<gradient:#7dd3fc:#c4b5fd>${player.name}</gradient>")
-                }
-            }
-        }
-    }
-}
-```
+- reloadable UI text
+- one shared source for commands, menus, sidebars, and tablists
+- localization
+- a config-heavy plugin style
+
+## Components still work
+
+If you want explicit control, item builders and menu flows still accept `Component` values where relevant.
+
+Use components when you already have component-building code.
+
+Use MiniMessage strings when you want the shortest default path.
 
 ## What a menu session is
 
-If you want reuse, keep a `DaisyMenu` value around. When a player opens it, DaisyCore creates a `DaisyMenuSession` for that player. That session holds runtime state like rendering and refresh lifecycle.
+When a player opens a menu, DaisyCore creates a per-player session for:
 
-For quick flows, inline opening is usually enough. DaisyCore still handles the session ownership under the hood.
+- rendering
+- invalidation
+- refresh lifecycle
+- close cleanup
+
+That is why inline menus stay short in user code while runtime ownership stays safe.
 
 <div class="premium-callout current">
-  <h3>Current behavior</h3>
-  <p>Menu definitions stay reusable while runtime state stays session-specific. That separation is one of the main reasons DaisyCore menus stay clean in plugin code.</p>
+  <h3>Current default</h3>
+  <p>Start with direct MiniMessage strings. Reach for lang/config keys only when the text is shared or reloadable across the plugin.</p>
 </div>
 
 <div class="page-next">
@@ -101,6 +125,6 @@ For quick flows, inline opening is usually enough. DaisyCore still handles the s
 ## Next steps
 
 - Add a sidebar beside the menu: [First Scoreboard](/daisycore/getting-started/first-scoreboard/)
-- Understand sessions better: [Menu Sessions](/daisycore/explanation/menu-sessions/)
+- See the current session model: [Menu Sessions](/daisycore/explanation/menu-sessions/)
 - Jump to API details: [Menu DSL](/daisycore/reference/menu-dsl/)
 </div>

@@ -1,18 +1,31 @@
 ---
 title: Roadmap
-description: The current Daisy ecosystem roadmap across DaisyCore and DaisySeries.
+description: The current Daisy ecosystem roadmap across DaisyCore, DaisySeries, and DaisyConfig.
 ---
 
 # Roadmap
 
 ## Current products
 
-- **DaisyCore**: the Paper platform product
-- **DaisySeries**: the lightweight parsing and enum utility product
+- **DaisyCore**: the runtime/platform product
+- **DaisySeries**: the parser/reference utility product
+- **DaisyConfig**: the typed YAML and reload-safe config product
+
+## Current ecosystem priority
+
+The current priority is ecosystem polish:
+
+- MiniMessage-first defaults
+- stronger production hardening
+- clearer docs
+- stronger cross-product examples
+- better reference coverage
+
+That work comes before another large new runtime subsystem.
 
 ## DaisyCore
 
-DaisyCore is focused on:
+DaisyCore currently focuses on:
 
 - platform bootstrap
 - commands
@@ -26,16 +39,35 @@ See the platform docs: [DaisyCore Overview](/daisycore/)
 
 ## DaisySeries
 
-The first DaisySeries starter pack ships:
+DaisySeries currently ships:
 
 - materials
 - sounds
 - item flags
-
-Planned later:
-
 - enchantments
 - potions
 
 See the utility docs: [DaisySeries Overview](/daisyseries/)
 
+## DaisyConfig
+
+DaisyConfig currently ships:
+
+- typed YAML mapping
+- reload-safe config handles
+- DaisySeries-backed codecs
+- DaisyCore-friendly text bridging
+
+See the config docs: [DaisyConfig Overview](/daisyconfig/)
+
+## Next major project after the current polish pass
+
+The recommended next large initiative is **DaisyConfig Phase 2**.
+
+That should focus on:
+
+- richer validation helpers
+- stronger object/schema ergonomics
+- better config composition
+- stronger full-stack Daisy examples
+- cleaner admin-editable text/config workflows

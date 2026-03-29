@@ -1,0 +1,45 @@
+---
+title: Item Flags Dictionary
+description: Canonical DaisySeries item flag keys and display names.
+---
+
+# Item Flags Dictionary
+
+Use these values for config-driven item metadata hiding and item builder settings.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `hide_enchants`.
+- Item flags currently do not ship curated aliases.
+- Use `parseMany(...)` or `itemFlagsCodec()` when reading a set of flags.
+
+## Quick config example
+
+```yaml
+flags: hide_additional_tooltip
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyItemFlags.parse(config.flags)
+val key = DaisyItemFlags.key(value)
+val label = DaisyItemFlags.displayName(value)
+
+val typed = required("flags", itemFlagsCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``hide_additional_tooltip`` | Hide Additional Tooltip | - |
+| ``hide_armor_trim`` | Hide Armor Trim | - |
+| ``hide_attributes`` | Hide Attributes | - |
+| ``hide_destroys`` | Hide Destroys | - |
+| ``hide_dye`` | Hide Dye | - |
+| ``hide_enchants`` | Hide Enchants | - |
+| ``hide_item_specifics`` | Hide Item Specifics | - |
+| ``hide_placed_on`` | Hide Placed On | - |
+| ``hide_stored_enchants`` | Hide Stored Enchants | - |
+| ``hide_unbreakable`` | Hide Unbreakable | - |

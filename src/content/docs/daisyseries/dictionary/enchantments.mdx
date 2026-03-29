@@ -1,0 +1,77 @@
+---
+title: Enchantments Dictionary
+description: Canonical DaisySeries enchantment keys, display names, and curated aliases.
+---
+
+# Enchantments Dictionary
+
+Use these values for config-driven enchantment types and enum-like enchantment selection.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `sharpness` and `fire_aspect`.
+- Curated aliases are accepted on input only.
+- Namespaced inputs like `minecraft:sharpness` are normalized on parse.
+
+## Quick config example
+
+```yaml
+enchantment: aqua_affinity
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyEnchantments.parse(config.enchantment)
+val key = DaisyEnchantments.key(value)
+val label = DaisyEnchantments.displayName(value)
+
+val typed = required("enchantment", enchantmentCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``aqua_affinity`` | Aqua Affinity | - |
+| ``bane_of_arthropods`` | Bane Of Arthropods | - |
+| ``binding_curse`` | Binding Curse | - |
+| ``blast_protection`` | Blast Protection | - |
+| ``breach`` | Breach | - |
+| ``channeling`` | Channeling | - |
+| ``density`` | Density | - |
+| ``depth_strider`` | Depth Strider | - |
+| ``efficiency`` | Efficiency | - |
+| ``feather_falling`` | Feather Falling | ``ff`` |
+| ``fire_aspect`` | Fire Aspect | - |
+| ``fire_protection`` | Fire Protection | - |
+| ``flame`` | Flame | - |
+| ``fortune`` | Fortune | - |
+| ``frost_walker`` | Frost Walker | - |
+| ``impaling`` | Impaling | - |
+| ``infinity`` | Infinity | - |
+| ``knockback`` | Knockback | ``kb`` |
+| ``looting`` | Looting | - |
+| ``loyalty`` | Loyalty | - |
+| ``luck_of_the_sea`` | Luck Of The Sea | - |
+| ``lure`` | Lure | - |
+| ``mending`` | Mending | - |
+| ``multishot`` | Multishot | - |
+| ``piercing`` | Piercing | - |
+| ``power`` | Power | - |
+| ``projectile_protection`` | Projectile Protection | - |
+| ``protection`` | Protection | ``prot`` |
+| ``punch`` | Punch | - |
+| ``quick_charge`` | Quick Charge | - |
+| ``respiration`` | Respiration | - |
+| ``riptide`` | Riptide | - |
+| ``sharpness`` | Sharpness | - |
+| ``silk_touch`` | Silk Touch | - |
+| ``smite`` | Smite | - |
+| ``soul_speed`` | Soul Speed | - |
+| ``sweeping_edge`` | Sweeping Edge | - |
+| ``swift_sneak`` | Swift Sneak | - |
+| ``thorns`` | Thorns | - |
+| ``unbreaking`` | Unbreaking | - |
+| ``vanishing_curse`` | Vanishing Curse | - |
+| ``wind_burst`` | Wind Burst | - |

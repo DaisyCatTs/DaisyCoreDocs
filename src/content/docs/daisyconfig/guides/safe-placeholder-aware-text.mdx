@@ -1,30 +1,71 @@
 ---
 title: Safe Placeholder-Aware Text
-description: Understand the DaisyConfig and DaisyCore rendering boundary for PlaceholderAPI-aware text.
+description: Understand the DaisyConfig and DaisyCore rendering boundary for Placeholder-aware text in commands, menus, sidebars, and tablists.
 ---
 
 # Safe Placeholder-Aware Text
 
-This is the locked ecosystem rule:
+This is the locked Daisy ecosystem rule:
 
 - DaisyConfig owns typed config and text-source data
 - DaisyCore owns render-time behavior
 
-That means DaisyConfig does **not**:
+## What that means in practice
+
+DaisyConfig does **not**:
+
 - call PlaceholderAPI directly
-- run a parallel placeholder engine
+- run a second placeholder engine
 - create a second viewer-aware rendering runtime
 
 If config-backed text is used in:
+
+- command replies
 - menu items
 - sidebars
 - tablists
-- command replies
 
-then DaisyCore still applies its current runtime truth:
+then DaisyCore still applies its normal runtime truth:
+
 - MiniMessage parsing
 - viewer-aware rendering
-- PlaceholderAPI fallback behavior
+- PlaceholderAPI integration
+- safe fallback behavior when PlaceholderAPI is absent
 
-That is the safety boundary.
+## Why this is safer
 
+This keeps responsibility boundaries clean:
+
+- config stays data-only
+- rendering stays in the runtime layer
+- Placeholder-aware behavior does not leak into generic config loading
+
+That is what makes the ecosystem safer and easier to reason about in production.
+
+## Example mental model
+
+```text
+lang.yml -> DaisyConfig loads text -> DaisyCore renders text -> player sees final output
+```
+
+Not:
+
+```text
+lang.yml -> DaisyConfig expands placeholders -> DaisyCore re-renders text again
+```
+
+The second model is exactly what Daisy avoids.
+
+<div class="premium-callout current">
+  <h3>Safety boundary</h3>
+  <p>DaisyConfig stores text. DaisyCore renders text. Placeholder-aware behavior belongs to DaisyCore only.</p>
+</div>
+
+<div class="page-next">
+
+## Next steps
+
+- Learn the bridge APIs: [Text Bridge](/daisyconfig/reference/text-bridge/)
+- See the normal integration path: [Use DaisyConfig with DaisyCore](/daisyconfig/guides/use-daisyconfig-with-daisycore/)
+- See the full stack together: [Full Ecosystem Example](/overview/full-ecosystem-example/)
+</div>

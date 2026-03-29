@@ -1,21 +1,31 @@
 ---
 title: Use DaisyConfig with DaisyCore
-description: Pair typed YAML config with DaisyCore runtime systems and text integration.
+description: Pair typed YAML config with DaisyCore runtime systems while keeping MiniMessage rendering and Placeholder safety inside DaisyCore.
 ---
 
 # Use DaisyConfig with DaisyCore
 
 Use DaisyCore for:
+
 - commands
 - menus
 - sidebars
 - tablists
 - runtime ownership
+- MiniMessage rendering
 
 Use DaisyConfig for:
+
 - typed YAML values
 - reload-safe config ownership
-- config-backed text sources
+- config-backed text
+
+## The important rule
+
+DaisyConfig stores and loads text.
+DaisyCore renders it.
+
+That means a clean integration looks like this:
 
 ```kotlin
 val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
@@ -30,13 +40,61 @@ val daisy =
     }
 ```
 
-## Important safety rule
+## What DaisyCore still owns
 
-DaisyConfig does not render placeholders itself.
+Even when the text came from config, DaisyCore still owns:
 
-It only supplies the text source. DaisyCore still owns:
 - MiniMessage parsing
 - viewer-aware rendering
 - PlaceholderAPI integration
-- safe fallback when PlaceholderAPI is absent
+- fallback behavior when PlaceholderAPI is absent
 
+## What DaisyConfig does not do
+
+DaisyConfig does **not**:
+
+- expand PlaceholderAPI directly
+- become a second rendering runtime
+- replace DaisyCore's UI/render model
+
+## Normal production pattern
+
+Use:
+
+- direct MiniMessage strings for feature-local text
+- DaisyConfig-backed text when you want shared, reloadable, or admin-editable wording
+
+That gives you the best of both models without mixing responsibilities.
+
+## Example
+
+```kotlin
+val profileHandle = yamlConfigHandle("profile-ui.yml", profileUiCodec)
+val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
+
+val daisy =
+    DaisyPlatform.create(plugin) {
+        messages(langHandle.current.asDaisyTextSource())
+        commands()
+        menus()
+        scoreboards()
+        tablists()
+    }
+
+val sidebar =
+    sidebar {
+        title(profileHandle.current.sidebarTitle)
+        line("coins") {
+            textLang("profile.sidebar.coins", viewer = player, "coins" to "1,250")
+        }
+    }
+```
+
+<div class="page-next">
+
+## Next steps
+
+- Learn the safety boundary directly: [Safe Placeholder-Aware Text](/daisyconfig/guides/safe-placeholder-aware-text/)
+- See the full stack together: [Full Ecosystem Example](/overview/full-ecosystem-example/)
+- Jump to the bridge details: [Text Bridge](/daisyconfig/reference/text-bridge/)
+</div>

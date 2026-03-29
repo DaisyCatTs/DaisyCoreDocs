@@ -1,0 +1,47 @@
+---
+title: Config Text vs Direct MiniMessage
+description: Choose between direct MiniMessage strings and config-backed text without mixing the two mental models.
+---
+
+# Config Text vs Direct MiniMessage
+
+Use **direct MiniMessage strings** when:
+
+- the text is local to one feature
+- you want the shortest path
+- the wording is not shared across the plugin
+- you are still building the first version of the feature
+
+```kotlin
+reply("<green>Profile ready.</green>")
+```
+
+Use **config-backed text** when:
+
+- admins should edit the wording
+- the same text appears in multiple systems
+- you want localization
+- you want text reloads without a rebuild
+
+```kotlin
+replyLang("profile.ready")
+```
+
+## The important rule
+
+Both are valid.
+
+The intended order is:
+
+1. direct MiniMessage strings first
+2. config-backed text when you want shared or reloadable wording
+
+## What DaisyConfig changes
+
+DaisyConfig makes the config-backed path cleaner.
+
+It does not make direct MiniMessage strings obsolete.
+
+## What DaisyCore still owns
+
+Even when the text came from config, DaisyCore still owns rendering.

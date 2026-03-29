@@ -1,6 +1,6 @@
 ---
 title: Text Bridge
-description: Use DaisyTextConfig and asDaisyTextSource to hand config-backed text into DaisyCore safely.
+description: Use DaisyTextConfig and asDaisyTextSource to hand config-backed text into DaisyCore safely without creating a second renderer.
 ---
 
 # Text Bridge
@@ -11,5 +11,44 @@ Main APIs:
 - `asDaisyTextSource()`
 - `yamlTextConfigHandle(plugin, "lang.yml")`
 
-This bridge provides text only. It does not do direct placeholder expansion.
+## What this bridge does
 
+The bridge turns config-backed text into a DaisyCore-compatible text source.
+
+That is useful when:
+
+- your plugin stores text in `lang.yml` or similar files
+- you want shared wording across commands, menus, sidebars, and tablists
+- you want reloadable text
+
+## What this bridge does not do
+
+The bridge provides text only.
+
+It does **not**:
+
+- render MiniMessage itself
+- expand PlaceholderAPI directly
+- replace DaisyCore's viewer-aware runtime rendering
+
+## Normal integration
+
+```kotlin
+val langHandle = yamlTextConfigHandle(plugin, "lang.yml")
+
+val daisy =
+    DaisyPlatform.create(plugin) {
+        messages(langHandle.current.asDaisyTextSource())
+        commands()
+        menus()
+        scoreboards()
+        tablists()
+    }
+```
+
+## Mental model
+
+- DaisyConfig stores text
+- DaisyCore renders text
+
+That is the correct production boundary.

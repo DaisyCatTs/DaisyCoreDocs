@@ -1,24 +1,17 @@
 ---
 title: First Tablist
-description: Show a simple DaisyCore tablist with plain strings first, then use config-backed text only when your plugin already stores it that way.
+description: Show a DaisyCore tablist with MiniMessage-first header and footer text, then move to shared config-backed text only when the plugin already uses it.
 ---
 
 # First Tablist
 
-This page shows the modern DaisyCore tablist path: per-player header and footer sessions with plain strings, MiniMessage strings, `Component` values, or shared config-backed text.
+This page shows the honest current DaisyCore tablist path:
 
-## What this page assumes
+- per-player header and footer sessions
+- MiniMessage-first strings by default
+- shared config-backed text only when it is useful
 
-<div class="premium-callout note">
-
-- you already have a `DaisyPlatform`
-- you enabled `tablists()`
-- you want a simple player-facing header and footer
-</div>
-
-## Start simple
-
-The easiest path is just `header("...")` and `footer("...")`.
+## Step 1: start with direct MiniMessage strings
 
 ```kotlin
 fun profileTablist(player: Player) =
@@ -28,7 +21,9 @@ fun profileTablist(player: Player) =
     }
 ```
 
-Those strings are good when your text is small and local to the feature.
+That is the normal path.
+
+Those strings are already DaisyCore-facing MiniMessage strings.
 
 ## Step 2: show it to a player
 
@@ -43,45 +38,56 @@ session?.refreshNow()
 session?.close()
 ```
 
-## Step 4: use shared config/lang text when your plugin already stores header/footer there
+## Step 4: use shared config-backed text when the plugin already stores header/footer there
 
 ```kotlin
 fun profileTablist(player: Player) =
     tablist {
-        headerLang("tablist.profile.header", viewer = player, "player" to player.name)
-        footerLang("tablist.profile.footer", viewer = player, "coins" to "1,250")
+        headerLang("profile.tablist.header", viewer = player, "player" to player.name)
+        footerLang("profile.tablist.footer", viewer = player, "coins" to "1,250")
     }
 ```
 
-`tablist.profile.header` is just an example config path. If your plugin keeps all player-facing strings in a lang or config file, this is the clean shared path. If not, the plain-string version is still the right default.
+Those keys are just your own plugin config paths.
+
+They only become useful when you want:
+
+- shared text across multiple systems
+- translation/localization
+- reloadable wording
+- config-managed UI text
 
 ## Components also work
 
 If your plugin is already component-first, the tablist builder also accepts `Component` values directly.
 
+The recommended order remains:
+
+1. direct MiniMessage strings
+2. components when you want explicit control
+3. key-backed text when the plugin already stores text that way
+
 ## Current scope
 
-The current public tablist API is intentionally simple:
+The current public tablist API intentionally focuses on:
 
 - header
 - footer
 - options
 - session refresh and cleanup
 
-That is the full honest public contract in this pass.
-
-It does not currently promise richer tab entry formatting or advanced packet-driven customization.
+It does **not** currently claim richer tab entry formatting or packet-heavy customization.
 
 <div class="premium-callout current">
-  <h3>Current behavior</h3>
-  <p>This page intentionally teaches only header and footer because that is the honest scope of the current public tablist API.</p>
+  <h3>Current default</h3>
+  <p>Use direct MiniMessage strings first. Shared config-backed text is the scaling path, not the starting requirement.</p>
 </div>
 
 <div class="page-next">
 
 ## Next steps
 
-- See all four systems together: [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
-- Read the tablist model honestly: [Tablist Rendering Model](/daisycore/explanation/tablist-rendering-model/)
+- See all major systems together: [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
+- Read the rendering model honestly: [Tablist Rendering Model](/daisycore/explanation/tablist-rendering-model/)
 - Jump to API details: [Tablist DSL](/daisycore/reference/tablist-dsl/)
 </div>
