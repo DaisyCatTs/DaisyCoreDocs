@@ -1,0 +1,40 @@
+---
+title: Pattern Types
+description: Parse banner pattern types, canonical keys, and display names with DaisySeries.
+---
+
+# Pattern Types
+
+`DaisyPatternTypes` is the banner pattern-type entrypoint.
+
+## What it does
+
+- parses normalized banner-pattern input
+- keeps canonical lowercase underscore keys stable
+- exposes UI-friendly display names
+- stays conservative on aliases until a real config need proves they help
+
+```kotlin
+val pattern = DaisyPatternTypes.parse("straight cross")
+val key = DaisyPatternTypes.key(pattern)
+val label = DaisyPatternTypes.displayName(pattern)
+```
+
+## Input examples
+
+- `small_stripes`
+- `small stripes`
+- `straight_cross`
+- `straight cross`
+
+## Alias policy
+
+Pattern types start with normalization-only parsing. DaisySeries does not add banner-design nicknames by default because the canonical names are already searchable and stable.
+
+## Runtime note
+
+Pattern types should be treated with the same runtime-honesty rule as other Paper content-like families: the parser does not promise more plain-JVM safety than the current Paper API actually provides.
+
+## DaisyConfig pairing
+
+Use [patternTypeCodec()](/daisyconfig/reference/config-codecs/) when banner or display pattern settings live in YAML.

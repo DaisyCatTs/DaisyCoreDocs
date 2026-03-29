@@ -37,14 +37,14 @@ import StepCard from '@components/StepCard.astro'
 <div class="feature-matrix">
   <div class="feature-card"><strong>No placeholder execution</strong><p>DaisyConfig stores text and config data only. It does not call PlaceholderAPI or run a second render pipeline.</p></div>
   <div class="feature-card"><strong>No viewer-aware rendering</strong><p>DaisyCore still owns MiniMessage parsing, viewer-aware rendering, and runtime UI behavior.</p></div>
-  <div class="feature-card"><strong>No parser ownership</strong><p>DaisySeries still owns canonical keys, aliases, and value parsing rules for materials, sounds, flags, enchantments, and potions.</p></div>
+  <div class="feature-card"><strong>No parser ownership</strong><p>DaisySeries still owns canonical keys, aliases, and value parsing rules for the broader modern Paper value surface, including materials, sounds, biomes, attributes, difficulties, particles, and more.</p></div>
 </div>
 
 <CrossProductCallout
   product="series"
   label="DaisyConfig depends on DaisySeries for canonical value decoding"
   href="/daisyconfig/guides/use-daisyconfig-with-daisyseries/"
-  description="Managed settings still decode materials, sounds, flags, enchantments, and potions through DaisySeries instead of copying parser rules locally."
+  description="Managed settings still decode modern Paper values through DaisySeries instead of copying parser rules locally."
 />
 
 <CrossProductCallout

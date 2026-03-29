@@ -1,0 +1,19 @@
+---
+title: Operation API
+description: Public DaisySeries attribute-modifier operation parsing helpers.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Operation API
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses an operation from canonical or normalized input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid operation input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries operation key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly operation label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns the alias set for an operation.', required: false },
+  ]}
+/>

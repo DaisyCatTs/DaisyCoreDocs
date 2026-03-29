@@ -1,0 +1,37 @@
+---
+title: Damage Causes
+description: Parse damage causes, canonical keys, and display names with DaisySeries.
+---
+
+# Damage Causes
+
+`DaisyDamageCauses` is the damage-cause entrypoint.
+
+## What it does
+
+- parses normalized damage-cause input
+- keeps canonical lowercase underscore keys stable
+- exposes friendly display names
+- avoids alias sprawl for a technical value family
+
+```kotlin
+val cause = DaisyDamageCauses.parse("entity attack")
+val key = DaisyDamageCauses.key(cause)
+val label = DaisyDamageCauses.displayName(cause)
+```
+
+## Input examples
+
+- `fire_tick`
+- `fire tick`
+- `entity_attack`
+- `entity attack`
+- `minecraft:entity_attack`
+
+## Alias policy
+
+Damage causes use normalization only. DaisySeries does not add a broad shortcut map here because the canonical names are already the clearest config form.
+
+## DaisyConfig pairing
+
+Use [damageCauseCodec()](/daisyconfig/reference/config-codecs/) when a managed or unmanaged YAML file should decode damage causes directly through DaisySeries.

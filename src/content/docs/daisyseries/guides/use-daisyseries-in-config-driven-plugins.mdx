@@ -21,6 +21,9 @@ DaisySeries is strongest when configs contain user-friendly strings that still n
 - default game modes
 - difficulties
 - block faces
+- damage causes
+- operations
+- banner pattern types
 - particles
 - statistics
 
@@ -41,6 +44,9 @@ val entity = DaisyEntities.parse(config.entity)
 val gameMode = DaisyGameModes.parse(config.gameMode)
 val difficulty = DaisyDifficulties.parse(config.difficulty)
 val facing = DaisyBlockFaces.parse(config.blockFace)
+val damageCause = DaisyDamageCauses.parse(config.damageCause)
+val operation = DaisyOperations.parse(config.operation)
+val pattern = DaisyPatternTypes.parse(config.pattern)
 val particle = DaisyParticles.parse(config.particle)
 val statistic = DaisyStatistics.parse(config.statistic)
 ```

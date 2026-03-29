@@ -1,0 +1,36 @@
+---
+title: Operations
+description: Parse attribute-modifier operations, canonical keys, and display names with DaisySeries.
+---
+
+# Operations
+
+`DaisyOperations` is the attribute-modifier operation entrypoint.
+
+## What it does
+
+- parses normalized operation input
+- keeps canonical keys stable
+- exposes readable display names
+- stays intentionally small because the underlying Paper family is already tiny
+
+```kotlin
+val operation = DaisyOperations.parse("multiply scalar 1")
+val key = DaisyOperations.key(operation)
+val label = DaisyOperations.displayName(operation)
+```
+
+## Input examples
+
+- `add_number`
+- `add number`
+- `multiply_scalar_1`
+- `multiply scalar 1`
+
+## Alias policy
+
+Operations use normalization only. There is no extra alias map because the three values are already clear and config-safe.
+
+## DaisyConfig pairing
+
+Use [operationCodec()](/daisyconfig/reference/config-codecs/) when config-owned attribute modifiers should decode through DaisySeries instead of local parsing glue.

@@ -183,6 +183,12 @@ $difficultyAliases = @{}
 
 $blockFaceAliases = @{}
 
+$damageCauseAliases = @{}
+
+$operationAliases = @{}
+
+$patternTypeAliases = @{}
+
 $particleAliases = @{
     "totem_of_undying" = @("totem")
 }
@@ -273,6 +279,27 @@ $blockFaces =
         New-Entry $key $blockFaceAliases[$key]
     }
 
+$damageCauses =
+    Get-StaticFieldNames 'org.bukkit.event.entity.EntityDamageEvent$DamageCause' 'org.bukkit.event.entity.EntityDamageEvent$DamageCause' |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $damageCauseAliases[$key]
+    }
+
+$operations =
+    Get-StaticFieldNames 'org.bukkit.attribute.AttributeModifier$Operation' 'org.bukkit.attribute.AttributeModifier$Operation' |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $operationAliases[$key]
+    }
+
+$patternTypes =
+    Get-StaticFieldNames "org.bukkit.block.banner.PatternType" "org.bukkit.block.banner.PatternType" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $patternTypeAliases[$key]
+    }
+
 $particles =
     Get-StaticFieldNames "org.bukkit.Particle" "org.bukkit.Particle" |
     ForEach-Object {
@@ -320,6 +347,9 @@ $index = @(
 "- [Game Modes](/daisyseries/dictionary/game-modes/)",
 "- [Difficulties](/daisyseries/dictionary/difficulties/)",
 "- [Block Faces](/daisyseries/dictionary/block-faces/)",
+"- [Damage Causes](/daisyseries/dictionary/damage-causes/)",
+"- [Operations](/daisyseries/dictionary/operations/)",
+"- [Pattern Types](/daisyseries/dictionary/pattern-types/)",
 "- [Particles](/daisyseries/dictionary/particles/)",
 "- [Statistics](/daisyseries/dictionary/statistics/)",
 ""
@@ -506,6 +536,51 @@ Write-DictionaryPage `
         "Block faces do not ship extra aliases beyond normalization."
     ) `
     -entries $blockFaces
+
+Write-DictionaryPage `
+    -slug "damage-causes" `
+    -title "Damage Causes Dictionary" `
+    -description "Canonical DaisySeries damage-cause keys and display names." `
+    -whatFor "Use these values for configured damage rules, filters, and event-driven gameplay settings." `
+    -yamlKey "damage_cause" `
+    -parserName "DaisyDamageCauses" `
+    -codecName "damageCauseCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``fire_tick`` and ``entity_attack``.",
+        "Damage causes do not ship extra aliases beyond normalization.",
+        "Namespaced inputs are normalized when provided."
+    ) `
+    -entries $damageCauses
+
+Write-DictionaryPage `
+    -slug "operations" `
+    -title "Operations Dictionary" `
+    -description "Canonical DaisySeries attribute-modifier operation keys and display names." `
+    -whatFor "Use these values for config-backed attribute modifiers and stat rule operations." `
+    -yamlKey "operation" `
+    -parserName "DaisyOperations" `
+    -codecName "operationCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``add_number`` and ``multiply_scalar_1``.",
+        "Operations do not ship extra aliases beyond normalization.",
+        "Spacing and kebab-case input normalize to the canonical DaisySeries key."
+    ) `
+    -entries $operations
+
+Write-DictionaryPage `
+    -slug "pattern-types" `
+    -title "Pattern Types Dictionary" `
+    -description "Canonical DaisySeries banner pattern-type keys and display names." `
+    -whatFor "Use these values for config-backed banner design, icon variation, and item-display pattern selection." `
+    -yamlKey "pattern" `
+    -parserName "DaisyPatternTypes" `
+    -codecName "patternTypeCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``small_stripes`` and ``straight_cross``.",
+        "Pattern types start with normalization-only parsing and no broad alias map.",
+        "Namespaced inputs are normalized when supported by the parser."
+    ) `
+    -entries $patternTypes
 
 Write-DictionaryPage `
     -slug "particles" `

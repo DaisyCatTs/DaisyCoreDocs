@@ -21,6 +21,9 @@ Use DaisySeries-backed codecs for values like:
 - game modes
 - difficulties
 - block faces
+- damage causes
+- operations
+- pattern types
 - particles
 - statistics
 
@@ -40,6 +43,9 @@ val profileUiCodec =
             gameMode = required("game_mode", gameModeCodec()),
             difficulty = required("difficulty", difficultyCodec()),
             facing = required("facing", blockFaceCodec()),
+            damageCause = required("damage_cause", damageCauseCodec()),
+            operation = required("operation", operationCodec()),
+            pattern = required("pattern", patternTypeCodec()),
             particle = required("particle", particleCodec()),
             statistic = required("statistic", statisticCodec()),
             sidebarTitle = defaulted("sidebar_title", stringCodec(), "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"),

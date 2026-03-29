@@ -1,0 +1,19 @@
+---
+title: Pattern Type API
+description: Public DaisySeries banner pattern-type parsing helpers.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Pattern Type API
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a banner pattern type from canonical or normalized input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid pattern-type input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries pattern-type key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly pattern-type label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns the alias set for a pattern type.', required: false },
+  ]}
+/>

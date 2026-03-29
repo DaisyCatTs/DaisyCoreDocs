@@ -9,7 +9,7 @@ DaisySeries is a lightweight utility library. Use it when you want config-safe p
 
 <div class="premium-callout current">
   <h3>Best fit</h3>
-  <p>DaisySeries is for plugins that already have config-heavy values like materials, sounds, item flags, enchantments, potion effects, biomes, particles, statistics, or entity types and want clean parsing without rebuilding helper utilities.</p>
+  <p>DaisySeries is for plugins that already have config-heavy values like materials, sounds, item flags, enchantments, potion effects, biomes, attributes, difficulties, damage causes, particles, statistics, or entity types and want clean parsing without rebuilding helper utilities.</p>
 </div>
 
 ## Requirements
@@ -28,32 +28,35 @@ repositories {
 }
 
 dependencies {
-    implementation("cat.daisy:DaisySeries:0.3.0")
+    implementation("cat.daisy:DaisySeries:0.4.0")
 }
 ```
 
 ## Narrower module installs
 
 ```kotlin
-implementation("cat.daisy:series-material:0.3.0")
-implementation("cat.daisy:series-sound:0.3.0")
-implementation("cat.daisy:series-itemflag:0.3.0")
-implementation("cat.daisy:series-enchantment:0.3.0")
-implementation("cat.daisy:series-potion:0.3.0")
-implementation("cat.daisy:series-biome:0.3.0")
-implementation("cat.daisy:series-villager-profession:0.3.0")
-implementation("cat.daisy:series-attribute:0.3.0")
-implementation("cat.daisy:series-entity:0.3.0")
-implementation("cat.daisy:series-game-mode:0.3.0")
-implementation("cat.daisy:series-difficulty:0.3.0")
-implementation("cat.daisy:series-blockface:0.3.0")
-implementation("cat.daisy:series-particle:0.3.0")
-implementation("cat.daisy:series-statistic:0.3.0")
+implementation("cat.daisy:series-material:0.4.0")
+implementation("cat.daisy:series-sound:0.4.0")
+implementation("cat.daisy:series-itemflag:0.4.0")
+implementation("cat.daisy:series-enchantment:0.4.0")
+implementation("cat.daisy:series-potion:0.4.0")
+implementation("cat.daisy:series-biome:0.4.0")
+implementation("cat.daisy:series-villager-profession:0.4.0")
+implementation("cat.daisy:series-attribute:0.4.0")
+implementation("cat.daisy:series-entity:0.4.0")
+implementation("cat.daisy:series-game-mode:0.4.0")
+implementation("cat.daisy:series-difficulty:0.4.0")
+implementation("cat.daisy:series-blockface:0.4.0")
+implementation("cat.daisy:series-damage-cause:0.4.0")
+implementation("cat.daisy:series-operation:0.4.0")
+implementation("cat.daisy:series-pattern-type:0.4.0")
+implementation("cat.daisy:series-particle:0.4.0")
+implementation("cat.daisy:series-statistic:0.4.0")
 ```
 
 <div class="premium-callout info">
   <h3>Current release state</h3>
-  <p>DaisySeries `0.3.0` is the current formal release of the modern parser surface, including villager professions, attributes, difficulties, and block faces. DaisyCore may still be snapshot-based in examples, but DaisySeries is now a released parser library.</p>
+  <p>DaisySeries `0.4.0` is the current formal release of the modern parser surface, including damage causes, operations, and pattern types. DaisyCore may still be snapshot-based in examples, but DaisySeries is now a released parser library.</p>
 </div>
 
 ## Next step

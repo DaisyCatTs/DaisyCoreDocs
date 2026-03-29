@@ -1,0 +1,38 @@
+---
+title: Operations Dictionary
+description: Canonical DaisySeries attribute-modifier operation keys and display names.
+---
+
+# Operations Dictionary
+
+Use these values for config-backed attribute modifiers and stat rule operations.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `add_number` and `multiply_scalar_1`.
+- Operations do not ship extra aliases beyond normalization.
+- Spacing and kebab-case input normalize to the canonical DaisySeries key.
+
+## Quick config example
+
+```yaml
+operation: add_number
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyOperations.parse(config.operation)
+val key = DaisyOperations.key(value)
+val label = DaisyOperations.displayName(value)
+
+val typed = required("operation", operationCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``add_number`` | Add Number | - |
+| ``add_scalar`` | Add Scalar | - |
+| ``multiply_scalar_1`` | Multiply Scalar 1 | - |

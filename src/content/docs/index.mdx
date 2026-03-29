@@ -20,7 +20,7 @@ import StepCard from '@components/StepCard.astro'
 
 <div class="value-strip">
   <div class="value-pill"><strong>DaisyCore</strong><span>Commands, menus, sidebars, tablists, MiniMessage text, placeholders, items, and lifecycle ownership.</span></div>
-  <div class="value-pill"><strong>DaisySeries</strong><span>Canonical keys, aliases, and parser-safe materials, sounds, enchantments, item flags, and potions.</span></div>
+  <div class="value-pill"><strong>DaisySeries</strong><span>Canonical keys, aliases, and parser-safe modern Paper values like materials, sounds, biomes, attributes, difficulties, particles, and more.</span></div>
   <div class="value-pill"><strong>DaisyConfig</strong><span>Typed YAML codecs, managed lifecycle, module bundles, DaisySeries-backed decoding, and DaisyCore text bridging.</span></div>
 </div>
 
@@ -29,7 +29,7 @@ import StepCard from '@components/StepCard.astro'
 <div class="feature-matrix">
   <div class="feature-card"><strong>Profile runtime flow</strong><p>Use DaisyCore when one feature spans a command, menu, sidebar, and tablist in one runtime-owned flow.</p></div>
   <div class="feature-card"><strong>Config-heavy plugin data</strong><p>Use DaisyConfig when YAML shape, migration safety, module bundles, and shared text ownership become the real maintenance problem.</p></div>
-  <div class="feature-card"><strong>Canonical parser layer</strong><p>Use DaisySeries when materials, sounds, flags, enchantments, or effects should stop leaking enum helpers through plugin code.</p></div>
+  <div class="feature-card"><strong>Canonical parser layer</strong><p>Use DaisySeries when config-heavy Paper values should stop leaking enum helpers through plugin code.</p></div>
   <div class="feature-card"><strong>Full stack plugin</strong><p>Use all three together when config ownership, canonical values, and runtime systems all matter in the same plugin.</p></div>
 </div>
 

@@ -1,0 +1,68 @@
+---
+title: Damage Causes Dictionary
+description: Canonical DaisySeries damage-cause keys and display names.
+---
+
+# Damage Causes Dictionary
+
+Use these values for configured damage rules, filters, and event-driven gameplay settings.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `fire_tick` and `entity_attack`.
+- Damage causes do not ship extra aliases beyond normalization.
+- Namespaced inputs are normalized when provided.
+
+## Quick config example
+
+```yaml
+damage_cause: block_explosion
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyDamageCauses.parse(config.damage_cause)
+val key = DaisyDamageCauses.key(value)
+val label = DaisyDamageCauses.displayName(value)
+
+val typed = required("damage_cause", damageCauseCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``block_explosion`` | Block Explosion | - |
+| ``campfire`` | Campfire | - |
+| ``contact`` | Contact | - |
+| ``cramming`` | Cramming | - |
+| ``custom`` | Custom | - |
+| ``dragon_breath`` | Dragon Breath | - |
+| ``drowning`` | Drowning | - |
+| ``dryout`` | Dryout | - |
+| ``entity_attack`` | Entity Attack | - |
+| ``entity_explosion`` | Entity Explosion | - |
+| ``entity_sweep_attack`` | Entity Sweep Attack | - |
+| ``fall`` | Fall | - |
+| ``falling_block`` | Falling Block | - |
+| ``fire`` | Fire | - |
+| ``fire_tick`` | Fire Tick | - |
+| ``fly_into_wall`` | Fly Into Wall | - |
+| ``freeze`` | Freeze | - |
+| ``hot_floor`` | Hot Floor | - |
+| ``kill`` | Kill | - |
+| ``lava`` | Lava | - |
+| ``lightning`` | Lightning | - |
+| ``magic`` | Magic | - |
+| ``melting`` | Melting | - |
+| ``poison`` | Poison | - |
+| ``projectile`` | Projectile | - |
+| ``sonic_boom`` | Sonic Boom | - |
+| ``starvation`` | Starvation | - |
+| ``suffocation`` | Suffocation | - |
+| ``suicide`` | Suicide | - |
+| ``thorns`` | Thorns | - |
+| ``void`` | Void | - |
+| ``wither`` | Wither | - |
+| ``world_border`` | World Border | - |
