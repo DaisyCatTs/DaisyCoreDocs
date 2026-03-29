@@ -1,0 +1,24 @@
+---
+title: Core Overview
+description: The core layer defines the platform ownership and shared runtime contracts that the higher-level systems build on.
+---
+
+# Core Overview
+
+The core layer holds the shared contracts DaisyCore uses across every subsystem: audience context, runtime handles, feature registration, and platform bootstrap boundaries.
+
+## What lives here
+
+- `DaisyPlatform`
+- lifecycle ownership
+- runtime handles and cleanup
+- the shared idea of an audience or viewer context
+
+## Why this matters
+
+Commands, menus, scoreboards, and tablists all rely on the same ownership model. That shared model is what lets DaisyCore feel like one library instead of a collection of unrelated utilities.
+
+## Learn next
+
+- Platform shape: [Bootstrap API](/daisycore/reference/bootstrap-api/)
+- Lifecycle details: [Runtime and Shutdown](/daisycore/explanation/runtime-and-shutdown/)

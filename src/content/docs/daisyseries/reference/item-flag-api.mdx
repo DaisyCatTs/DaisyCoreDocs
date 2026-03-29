@@ -1,0 +1,19 @@
+---
+title: Item Flag API
+description: Quick lookup for DaisySeries item-flag entrypoints.
+---
+
+# Item Flag API
+
+```kotlin
+object DaisyItemFlags : DaisySeriesParser<ItemFlag> {
+    fun parse(input: String): ItemFlag
+    fun parseOrNull(input: String): ItemFlag?
+    fun key(flag: ItemFlag): String
+    fun displayName(flag: ItemFlag): String
+    fun aliases(flag: ItemFlag): Set<String>
+    fun parseMany(inputs: Iterable<String>): Set<ItemFlag>
+    fun parseManyOrNull(inputs: Iterable<String>): Set<ItemFlag>?
+}
+```
+

@@ -1,0 +1,71 @@
+---
+title: DaisySeries
+description: Lightweight Kotlin-first parsing utilities for materials, sounds, item flags, canonical keys, and friendly names.
+---
+
+# DaisySeries
+
+<div class="home-hero">
+  <span class="home-kicker">The Lightweight Utility Toolkit</span>
+  <h2>Modern Paper-first enum parsing without dragging in a full platform.</h2>
+  <p>DaisySeries gives you clean config-safe parsing, canonical lowercase keys, friendly display names, and curated aliases for the values plugins constantly touch.</p>
+
+```kotlin
+dependencies {
+    implementation("cat.daisy:DaisySeries:0.1.0-SNAPSHOT")
+}
+```
+
+  <div class="home-actions">
+    <a class="home-button" href="/daisyseries/getting-started/install/">Start Here</a>
+    <a class="home-button-secondary" href="/daisyseries/reference/material-api/">Read the API</a>
+  </div>
+</div>
+
+<div class="value-strip">
+  <div class="value-pill"><strong>Starter pack</strong><span>Materials, sounds, and item flags ship first because they remove the most repeated plugin boilerplate immediately.</span></div>
+  <div class="value-pill"><strong>Config-safe</strong><span>Use lowercase keys for storage, display names for UI, and curated aliases for practical plugin input.</span></div>
+  <div class="value-pill"><strong>Works alone or with DaisyCore</strong><span>Use it as a standalone utility library or pair it with DaisyCore when your plugin also needs runtime systems.</span></div>
+</div>
+
+## What DaisySeries includes
+
+<div class="home-grid">
+  <div class="home-card">
+    <h3>Materials</h3>
+    <p>Parse config-friendly material names, get canonical keys, and render clean display names for UI.</p>
+  </div>
+  <div class="home-card">
+    <h3>Sounds</h3>
+    <p>Resolve modern Paper sound names from spaced, kebab-case, lowercase, or canonical inputs.</p>
+  </div>
+  <div class="home-card">
+    <h3>Item Flags</h3>
+    <p>Parse single flags or config lists and keep canonical output stable for serialization.</p>
+  </div>
+</div>
+
+## Start here
+
+<div class="path-grid">
+  <a class="home-card" href="/daisyseries/getting-started/install/">
+    <div class="path-step"><strong>1</strong><div><h3>Install</h3><p>Add DaisySeries as a lightweight utility dependency.</p></div></div>
+  </a>
+  <a class="home-card" href="/daisyseries/getting-started/first-parse/">
+    <div class="path-step"><strong>2</strong><div><h3>First Parse</h3><p>Parse materials, sounds, and item flags from config-like input.</p></div></div>
+  </a>
+  <a class="home-card" href="/daisyseries/guides/use-daisyseries-with-daisycore/">
+    <div class="path-step"><strong>3</strong><div><h3>Use with DaisyCore</h3><p>Keep runtime systems in DaisyCore and parsing helpers in DaisySeries.</p></div></div>
+  </a>
+  <a class="home-card" href="/daisyseries/migration/from-plugin-local-enum-helpers/">
+    <div class="path-step"><strong>4</strong><div><h3>Migrate Helpers</h3><p>Replace local enum wrappers with one consistent parser layer.</p></div></div>
+  </a>
+</div>
+
+## Current scope
+
+<div class="api-note">
+  <p><strong>Modern Paper first:</strong> DaisySeries does not try to be a giant legacy compatibility layer in v1.</p>
+  <p><strong>Alias policy:</strong> aliases are curated and practical, not fuzzy magic or exhaustive synonym maps.</p>
+</div>
+

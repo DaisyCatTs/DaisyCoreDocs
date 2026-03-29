@@ -1,0 +1,36 @@
+---
+title: Use DaisySeries with DaisyCore
+description: Pair DaisySeries parsing helpers with DaisyCore runtime systems.
+---
+
+# Use DaisySeries with DaisyCore
+
+Use DaisyCore when your plugin needs commands, menus, sidebars, or tablists.
+
+Use DaisySeries when those same flows also need config-heavy values like:
+
+- materials
+- sounds
+- item flags
+
+```kotlin
+val icon = DaisyMaterials.parse(config.icon)
+val clickSound = DaisySounds.parse(config.sound)
+
+player.openMenu("Profile", rows = 3) {
+    background(Material.GRAY_STAINED_GLASS_PANE) {
+        name(" ")
+    }
+}
+```
+
+## Recommended split
+
+- DaisyCore owns runtime, lifecycle, and UI
+- DaisySeries owns enum parsing, canonical keys, and friendly names
+
+## Related DaisyCore guides
+
+- [Build a Plugin Flow](/daisycore/guides/build-a-plugin-flow/)
+- [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
+

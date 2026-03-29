@@ -1,0 +1,106 @@
+---
+title: First Command
+description: Create your first DaisyCore command provider and let DaisyCore auto-load it at startup.
+---
+
+# First Command
+
+This page shows the normal DaisyCore command workflow: define a command group, annotate it, and let `DaisyPlatform` discover it during startup.
+
+## What this page assumes
+
+- you have already completed [Install DaisyCore](/daisycore/getting-started/install/)
+- your plugin already creates a `DaisyPlatform` like the one shown in [First Plugin](/daisycore/getting-started/first-plugin/)
+
+## What you'll build
+
+You will create a `/profile` command that only players can run.
+
+This page assumes your plugin already installs a shared `DaisyTextSource` during platform bootstrap.
+
+## Step 1: create a command group
+
+```kotlin
+package cat.daisy.example.command
+
+import cat.daisy.command.DaisyCommandGroup
+import cat.daisy.command.DaisyCommandSet
+
+@DaisyCommandSet
+object ProfileCommands : DaisyCommandGroup({
+    command("profile") {
+        description("Open your profile tools")
+
+        player {
+            replyLang("messages.profile.opening")
+        }
+    }
+})
+```
+
+## Step 2: add a subcommand
+
+```kotlin
+command("profile") {
+    description("Open your profile tools")
+
+    subcommand("open") {
+        player {
+            replyLang("messages.profile.opened")
+        }
+    }
+}
+```
+
+`command(...)`, `subcommand(...)`, and `player { ... }` stay short because they are DSL verbs. The long-lived public types stay Daisy-branded so the library ownership is obvious.
+
+## Step 3: use startup availability
+
+Use `enabled { ... }` when a command should depend on config or plugin state at startup.
+
+```kotlin
+sub("debug") {
+    enabled { plugin.config.getBoolean("commands.profile.debug") }
+
+    executePlayer {
+        reply("Debug mode.")
+    }
+}
+```
+
+Use `ignore(true)` if you want a simple hard off switch.
+
+## Step 4: keep async replies clean
+
+```kotlin
+subcommand("sync") {
+    player {
+        loading()
+
+        profileService.sync(player.uniqueId).replyResult(
+            context = this,
+            success = {
+                replyLang("messages.profile.synced", "player" to player.name)
+            },
+            failure = { error ->
+                failLang("messages.profile.error", "error" to error.message.orEmpty())
+            },
+        )
+    }
+}
+```
+
+## How discovery works
+
+When `commands()` is enabled in your `DaisyPlatform` builder, DaisyCore scans your plugin jar for classes annotated with `@DaisyCommandSet`. Valid `DaisyCommandGroup` and `DaisyCommandProvider` implementations are loaded automatically.
+
+That means you do not manually register this provider in normal usage.
+
+<div class="page-next">
+
+## Next steps
+
+- Learn the discovery model: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
+- Open a UI from a command: [First Menu](/daisycore/getting-started/first-menu/)
+- Jump to API details: [Command DSL](/daisycore/reference/command-dsl/)
+</div>

@@ -1,0 +1,25 @@
+---
+title: Item Flags
+description: Parse single item flags or config-heavy item-flag lists with DaisySeries.
+---
+
+# Item Flags
+
+`DaisyItemFlags` is built for the common config case where item flags come from string lists.
+
+## What it does
+
+- parses normalized single flag input
+- parses lists with `parseMany(...)`
+- returns canonical lowercase keys
+- exposes display names for UI
+
+```kotlin
+val flags = DaisyItemFlags.parseMany(listOf("hide enchants", "hide attributes"))
+```
+
+## Strict vs nullable
+
+- `parseMany(...)` throws on the first invalid input
+- `parseManyOrNull(...)` gives you a nullable fallback path
+

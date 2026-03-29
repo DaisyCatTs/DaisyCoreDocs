@@ -1,0 +1,37 @@
+---
+title: Scoreboards Overview
+description: DaisyCore scoreboards provide sidebar sessions, keyed lines, and shared placeholder-aware rendering.
+---
+
+# Scoreboards Overview
+
+DaisyCore scoreboards are sidebar-first. The current baseline focuses on clean API shape, keyed lines, and refresh-safe sessions.
+
+## Shape
+
+```kotlin
+val sidebar =
+    sidebar {
+        title(DaisyText.plain("Skyblock"))
+        line("balance") { DaisyText.plain("Coins: 1,250") }
+        blank()
+        line("online") { DaisyText.plain("Online: 42") }
+    }
+```
+
+## What you get
+
+- per-player sidebar sessions
+- keyed lines
+- conditional visibility
+- placeholder-aware render context
+- clean shutdown when the platform closes
+
+## Current behavior
+
+The current sidebar implementation is intentionally focused. It supports title rendering, keyed lines, blank lines, invalidate-by-key updates, and clean session ownership. It does not try to expose packet-level tricks as part of the public API.
+
+## Learn next
+
+- Tutorial: [First Scoreboard](/daisycore/getting-started/first-scoreboard/)
+- API reference: [Sidebar DSL](/daisycore/reference/sidebar-dsl/)

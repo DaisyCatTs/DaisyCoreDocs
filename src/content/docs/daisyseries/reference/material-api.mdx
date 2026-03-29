@@ -1,0 +1,19 @@
+---
+title: Material API
+description: Quick lookup for DaisySeries material entrypoints.
+---
+
+# Material API
+
+```kotlin
+object DaisyMaterials : DaisySeriesParser<Material> {
+    fun parse(input: String): Material
+    fun parseOrNull(input: String): Material?
+    fun key(material: Material): String
+    fun displayName(material: Material): String
+    fun aliases(material: Material): Set<String>
+    fun isBlock(material: Material): Boolean
+    fun isItem(material: Material): Boolean
+}
+```
+

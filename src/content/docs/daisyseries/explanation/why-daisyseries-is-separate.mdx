@@ -1,0 +1,30 @@
+---
+title: Why DaisySeries Is Separate
+description: DaisySeries stays separate from DaisyCore so the utility layer can remain lightweight and reusable.
+---
+
+# Why DaisySeries Is Separate
+
+DaisySeries is separate from DaisyCore because it solves a different problem.
+
+## DaisyCore
+
+DaisyCore is the platform product:
+
+- runtime ownership
+- commands
+- menus
+- sidebars
+- tablists
+
+## DaisySeries
+
+DaisySeries is the utility product:
+
+- parsing
+- canonical keys
+- friendly display names
+- curated aliases
+
+Keeping them separate gives users cleaner dependency choices while the docs site still presents them as one ecosystem.
+

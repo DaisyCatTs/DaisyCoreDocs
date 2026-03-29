@@ -1,0 +1,26 @@
+---
+title: Sounds
+description: Resolve modern Paper sound names through DaisySeries.
+---
+
+# Sounds
+
+`DaisySounds` keeps sound parsing modern and intentionally scoped.
+
+## What it does
+
+- parses normalized sound input
+- supports a small curated alias set
+- exposes canonical keys
+- exposes friendly display names
+
+```kotlin
+val sound = DaisySounds.parse("entity player levelup")
+val key = DaisySounds.key(sound)
+val label = DaisySounds.displayName(sound)
+```
+
+## Scope note
+
+DaisySeries is modern Paper-first. It does not try to ship a giant legacy sound compatibility map in v1.
+

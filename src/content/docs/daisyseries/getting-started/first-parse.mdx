@@ -1,0 +1,31 @@
+---
+title: First Parse
+description: Parse your first material, sound, and item-flag values with DaisySeries.
+---
+
+# First Parse
+
+Use DaisySeries when config-like input needs to become real Bukkit values without a pile of plugin-local helpers.
+
+```kotlin
+val icon = DaisyMaterials.parse("diamond sword")
+val sound = DaisySounds.parse("entity player levelup")
+val flags = DaisyItemFlags.parseMany(listOf("hide enchants", "hide attributes"))
+
+logger.info("Icon: ${DaisyMaterials.displayName(icon)} (${DaisyMaterials.key(icon)})")
+logger.info("Sound: ${DaisySounds.displayName(sound)}")
+logger.info("Flags: ${flags.joinToString { DaisyItemFlags.displayName(it) }}")
+```
+
+## What you get
+
+- strict `parse(...)`
+- nullable `parseOrNull(...)`
+- canonical `key(...)`
+- UI-friendly `displayName(...)`
+
+## Next steps
+
+- Learn the modules: [Materials](/daisyseries/modules/materials/), [Sounds](/daisyseries/modules/sounds/), and [Item Flags](/daisyseries/modules/item-flags/)
+- Pair it with runtime systems: [Use DaisySeries with DaisyCore](/daisyseries/guides/use-daisyseries-with-daisycore/)
+

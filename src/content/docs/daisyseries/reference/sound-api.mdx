@@ -1,0 +1,17 @@
+---
+title: Sound API
+description: Quick lookup for DaisySeries sound entrypoints.
+---
+
+# Sound API
+
+```kotlin
+object DaisySounds : DaisySeriesParser<Sound> {
+    fun parse(input: String): Sound
+    fun parseOrNull(input: String): Sound?
+    fun key(sound: Sound): String
+    fun displayName(sound: Sound): String
+    fun aliases(sound: Sound): Set<String>
+}
+```
+

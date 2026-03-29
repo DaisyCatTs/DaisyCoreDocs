@@ -1,0 +1,45 @@
+---
+title: Item Builder API
+description: Quick lookup for DaisyCore item builders used across menus and inventory UI.
+---
+
+# Item Builder API
+
+<div class="premium-callout note">
+  <h3>Quick lookup</h3>
+  <p>This page is the compact reference view for the shared item layer used across menus and other inventory UI.</p>
+</div>
+
+## Main types
+
+<div class="reference-grid">
+  <div class="reference-panel">
+    <h3>Primary models</h3>
+    <ul>
+      <li><code>DaisyItemSpec</code></li>
+      <li><code>DaisyItemBuilder</code></li>
+    </ul>
+  </div>
+  <div class="reference-panel">
+    <h3>Typical use</h3>
+    <p>Build item definitions for menus without repeating item-meta boilerplate in every render block.</p>
+  </div>
+</div>
+
+## Main entrypoint
+
+```kotlin
+fun item(material: Material, block: DaisyItemBuilder.() -> Unit): DaisyItemSpec
+```
+
+## Common builder features
+
+- material selection
+- display name
+- lore
+- menu-friendly item construction
+
+## Read next
+
+- Foundation overview: [Items](/daisycore/items/overview/)
+- Tutorial usage: [First Menu](/daisycore/getting-started/first-menu/)

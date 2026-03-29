@@ -1,0 +1,69 @@
+---
+title: First Plugin
+description: Bootstrap DaisyCore in a Paper plugin.
+---
+
+# First Plugin
+
+This is the simplest good starting point when you want DaisyCore to own your plugin runtime.
+
+## What you'll build
+
+<div class="doc-section">
+By the end of this page, you will have a Paper plugin that creates a `DaisyPlatform` during startup and closes it during shutdown.
+</div>
+
+```kotlin
+object MyTextSource : DaisyTextSource {
+    override fun text(key: String): String? =
+        when (key) {
+            "messages.ready" -> "<#f38ba8>Daisy is ready."
+            else -> null
+        }
+
+    override fun textList(key: String): List<String> = emptyList()
+}
+
+class MyPlugin : JavaPlugin() {
+    private lateinit var daisy: DaisyPlatform
+
+    override fun onEnable() {
+        daisy =
+            DaisyPlatform.create(this) {
+                messages(MyTextSource)
+                commands()
+                menus()
+            }
+    }
+
+    override fun onDisable() {
+        daisy.close()
+    }
+}
+```
+
+## What this bootstrap does
+
+- creates the shared DaisyCore runtime
+- installs one shared Daisy text source for commands and menus
+- auto-loads command providers by scanning your plugin jar for `@DaisyCommandSet`
+- enables menu services
+
+## Why this matters
+
+`DaisyPlatform` is the object that owns the DaisyCore systems you enabled. It is responsible for lifecycle cleanup, so closing it during plugin shutdown is not optional boilerplate. It is how your menus, sidebars, tablists, and command runtime get cleaned up safely.
+
+<div class="premium-callout current">
+  <h3>Current behavior</h3>
+  <p>The platform builder is the one public bootstrap path DaisyCore wants plugin users to learn first. It keeps lifecycle ownership and service initialization in one place.</p>
+</div>
+
+<div class="page-next">
+
+## Next steps
+
+- Create your first auto-loaded command: [First Command](/daisycore/getting-started/first-command/)
+- Learn the shared text flow: [Config and Lang Text](/daisycore/guides/use-config-and-lang-text-with-daisycore/)
+- Learn how command discovery works: [Auto-Loaded Commands](/daisycore/guides/auto-loaded-commands/)
+- Understand platform ownership: [Runtime and Shutdown](/daisycore/explanation/runtime-and-shutdown/)
+</div>

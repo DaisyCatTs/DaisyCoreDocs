@@ -1,0 +1,32 @@
+---
+title: Config-Driven Plugins
+description: Use DaisySeries to keep config-heavy plugin code smaller and cleaner.
+---
+
+# Config-Driven Plugins
+
+DaisySeries is strongest when configs contain user-friendly strings that still need to become real Bukkit enums.
+
+## Typical inputs
+
+- menu icon materials
+- click or feedback sounds
+- item flag lists
+
+## Recommended pattern
+
+Parse once near the configuration edge, then use canonical keys and display names everywhere else.
+
+```kotlin
+val icon = DaisyMaterials.parse(config.icon)
+val sound = DaisySounds.parse(config.sound)
+val flags = DaisyItemFlags.parseMany(config.flags)
+```
+
+## Why this is cleaner
+
+- fewer `valueOf(...)` wrappers
+- fewer local alias maps
+- fewer scattered `name.lowercase()` calls
+- one consistent error model
+

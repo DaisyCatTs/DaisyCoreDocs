@@ -1,0 +1,27 @@
+---
+title: Migration
+description: Replace plugin-local enum parsing helpers with DaisySeries.
+---
+
+# Migration
+
+Use DaisySeries to replace:
+
+- `Material.valueOf(...)` wrappers
+- hand-written alias maps
+- repeated lowercase serialization
+- one-off friendly-name helpers
+
+## Typical replacements
+
+```kotlin
+val material = DaisyMaterials.parse(config.icon)
+val key = DaisyMaterials.key(material)
+val label = DaisyMaterials.displayName(material)
+```
+
+## Next steps
+
+- [Install DaisySeries](/daisyseries/getting-started/install/)
+- [First Parse](/daisyseries/getting-started/first-parse/)
+

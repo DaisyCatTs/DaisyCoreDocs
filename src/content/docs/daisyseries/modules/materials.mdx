@@ -1,0 +1,31 @@
+---
+title: Materials
+description: Parse materials, emit canonical keys, and render clean display names with DaisySeries.
+---
+
+# Materials
+
+`DaisyMaterials` is the material entrypoint.
+
+## What it does
+
+- parses normalized material input
+- supports curated aliases like `gapple`
+- exposes canonical lowercase keys
+- exposes friendly display names
+- exposes `isBlock(...)` and `isItem(...)`
+
+```kotlin
+val material = DaisyMaterials.parse("minecraft:diamond_sword")
+val key = DaisyMaterials.key(material)
+val label = DaisyMaterials.displayName(material)
+```
+
+## Input examples
+
+- `diamond_sword`
+- `diamond sword`
+- `diamond-sword`
+- `minecraft:diamond_sword`
+- `gapple`
+

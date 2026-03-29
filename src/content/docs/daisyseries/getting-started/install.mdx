@@ -1,0 +1,41 @@
+---
+title: Install DaisySeries
+description: Add DaisySeries to a modern Paper plugin project.
+---
+
+# Install DaisySeries
+
+DaisySeries is a lightweight utility library. Use it when you want config-safe parsing helpers without adopting a full runtime platform.
+
+## Requirements
+
+- Java 21
+- Kotlin 2.3.x
+- Paper 1.21.x
+
+## Gradle Kotlin DSL
+
+```kotlin
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation("cat.daisy:DaisySeries:0.1.0-SNAPSHOT")
+}
+```
+
+## Narrower module installs
+
+```kotlin
+implementation("cat.daisy:series-material:0.1.0-SNAPSHOT")
+implementation("cat.daisy:series-sound:0.1.0-SNAPSHOT")
+implementation("cat.daisy:series-itemflag:0.1.0-SNAPSHOT")
+```
+
+## Next step
+
+Parse your first config-heavy values with [First Parse](/daisyseries/getting-started/first-parse/).
+
