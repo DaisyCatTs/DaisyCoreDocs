@@ -1,0 +1,19 @@
+---
+title: Villager Profession API
+description: Public DaisySeries villager-profession parsing helpers.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Villager Profession API
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a villager profession from normalized modern input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid villager-profession input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries villager-profession key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly villager-profession label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Lists the small accepted spacing aliases for a profession.', required: false },
+  ]}
+/>

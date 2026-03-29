@@ -1,0 +1,33 @@
+---
+title: Difficulties
+description: Parse difficulties, canonical keys, and display names with DaisySeries.
+---
+
+# Difficulties
+
+`DaisyDifficulties` is the difficulty entrypoint.
+
+## What it does
+
+- parses normalized difficulty input
+- keeps the surface intentionally tiny
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val difficulty = DaisyDifficulties.parse("hard")
+val key = DaisyDifficulties.key(difficulty)
+val label = DaisyDifficulties.displayName(difficulty)
+```
+
+## Input examples
+
+- `peaceful`
+- `easy`
+- `normal`
+- `hard`
+- `minecraft:hard`
+
+## Alias policy
+
+Difficulties do not ship extra aliases beyond normalization. The value family is already small and obvious.

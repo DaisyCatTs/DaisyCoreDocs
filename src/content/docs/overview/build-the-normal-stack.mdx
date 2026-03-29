@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation("cat.daisy:DaisySeries:0.2.0")
+    implementation("cat.daisy:DaisySeries:0.3.0")
     implementation("cat.daisy:config-all:0.2.0")
     implementation("cat.daisy:DaisyCore:0.1.0-SNAPSHOT")
 }
@@ -41,7 +41,7 @@ dependencies {
 
 Current suite release state:
 
-- DaisySeries is released as `0.2.0`
+- DaisySeries is released as `0.3.0`
 - DaisyConfig is released as `0.2.0`
 - DaisyCore is still the intentional snapshot in this example
 
@@ -53,7 +53,9 @@ data class SpawnSettings(
     val icon: Material,
     val readySound: Sound,
     val spawnBiome: Biome,
+    val spawnDifficulty: Difficulty,
     val readyParticle: Particle,
+    val spawnFacing: BlockFace,
 )
 
 val spawnSettingsCodec =
@@ -63,7 +65,9 @@ val spawnSettingsCodec =
             icon = required("spawn.icon", materialCodec()),
             readySound = required("spawn.ready_sound", soundCodec()),
             spawnBiome = required("spawn.biome", biomeCodec()),
+            spawnDifficulty = required("spawn.difficulty", difficultyCodec()),
             readyParticle = required("spawn.ready_particle", particleCodec()),
+            spawnFacing = required("spawn.facing", blockFaceCodec()),
         )
     }
 ```
@@ -71,6 +75,7 @@ val spawnSettingsCodec =
 Ownership here:
 
 - DaisySeries codecs parse `Material`, `Sound`, `Biome`, and `Particle`
+- DaisySeries codecs also parse `Difficulty` and `BlockFace`
 - DaisyConfig owns the file and typed decode
 - DaisyCore is not involved yet
 
@@ -84,7 +89,9 @@ spawn:
   icon: compass
   ready_sound: entity_player_levelup
   biome: cherry_grove
+  difficulty: hard
   ready_particle: totem_of_undying
+  facing: north_east
 ```
 
 ```yaml

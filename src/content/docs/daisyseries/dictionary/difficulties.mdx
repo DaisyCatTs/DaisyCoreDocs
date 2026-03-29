@@ -1,0 +1,39 @@
+---
+title: Difficulties Dictionary
+description: Canonical DaisySeries difficulty keys and display names.
+---
+
+# Difficulties Dictionary
+
+Use these values for world rules, gameplay defaults, and config-backed difficulty choices.
+
+## Canonical key rules
+
+- Canonical keys are lowercase names like `peaceful` and `hard`.
+- Difficulties do not ship extra aliases beyond normalization.
+- Namespaced inputs are normalized when provided.
+
+## Quick config example
+
+```yaml
+difficulty: easy
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyDifficulties.parse(config.difficulty)
+val key = DaisyDifficulties.key(value)
+val label = DaisyDifficulties.displayName(value)
+
+val typed = required("difficulty", difficultyCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``easy`` | Easy | - |
+| ``hard`` | Hard | - |
+| ``normal`` | Normal | - |
+| ``peaceful`` | Peaceful | - |

@@ -1,0 +1,19 @@
+---
+title: Attribute API
+description: Public DaisySeries attribute parsing helpers.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Attribute API
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses an attribute from normalized modern input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid attribute input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries attribute key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly attribute label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Lists the accepted prefixed forms for an attribute.', required: false },
+  ]}
+/>

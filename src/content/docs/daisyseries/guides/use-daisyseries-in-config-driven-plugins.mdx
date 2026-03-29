@@ -15,8 +15,12 @@ DaisySeries is strongest when configs contain user-friendly strings that still n
 - enchantments
 - potion effects
 - biome names
+- villager professions
+- attributes
 - entity types
 - default game modes
+- difficulties
+- block faces
 - particles
 - statistics
 
@@ -31,8 +35,12 @@ val flags = DaisyItemFlags.parseMany(config.flags)
 val enchantment = DaisyEnchantments.parse(config.enchantment)
 val effect = DaisyPotions.parse(config.effect)
 val biome = DaisyBiomes.parse(config.biome)
+val profession = DaisyVillagerProfessions.parse(config.profession)
+val attribute = DaisyAttributes.parse(config.attribute)
 val entity = DaisyEntities.parse(config.entity)
 val gameMode = DaisyGameModes.parse(config.gameMode)
+val difficulty = DaisyDifficulties.parse(config.difficulty)
+val facing = DaisyBlockFaces.parse(config.blockFace)
 val particle = DaisyParticles.parse(config.particle)
 val statistic = DaisyStatistics.parse(config.statistic)
 ```

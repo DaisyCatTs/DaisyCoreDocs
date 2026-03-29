@@ -15,8 +15,12 @@ Use DaisySeries-backed codecs for values like:
 - enchantments
 - potion effects
 - biomes
+- villager professions
+- attributes
 - entity types
 - game modes
+- difficulties
+- block faces
 - particles
 - statistics
 
@@ -30,8 +34,12 @@ val profileUiCodec =
             enchantment = required("enchantment", enchantmentCodec()),
             effect = required("effect", potionEffectCodec()),
             biome = required("biome", biomeCodec()),
+            profession = required("profession", villagerProfessionCodec()),
+            attribute = required("attribute", attributeCodec()),
             entity = required("entity", entityTypeCodec()),
             gameMode = required("game_mode", gameModeCodec()),
+            difficulty = required("difficulty", difficultyCodec()),
+            facing = required("facing", blockFaceCodec()),
             particle = required("particle", particleCodec()),
             statistic = required("statistic", statisticCodec()),
             sidebarTitle = defaulted("sidebar_title", stringCodec(), "<gradient:#7dd3fc:#c4b5fd>Profile</gradient>"),

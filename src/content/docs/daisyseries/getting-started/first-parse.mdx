@@ -21,8 +21,12 @@ val flags = DaisyItemFlags.parseMany(listOf("hide enchants", "hide attributes"))
 val enchantment = DaisyEnchantments.parse("sharpness")
 val effect = DaisyPotions.parse("slow falling")
 val biome = DaisyBiomes.parse("cherry grove")
+val profession = DaisyVillagerProfessions.parse("tool smith")
+val attribute = DaisyAttributes.parse("attack damage")
 val entity = DaisyEntities.parse("zombie villager")
 val gameMode = DaisyGameModes.parse("surv")
+val difficulty = DaisyDifficulties.parse("hard")
+val facing = DaisyBlockFaces.parse("north-east")
 val particle = DaisyParticles.parse("totem")
 val statistic = DaisyStatistics.parse("player kills")
 
@@ -31,6 +35,8 @@ logger.info("Sound: ${DaisySounds.displayName(sound)}")
 logger.info("Flags: ${flags.joinToString { DaisyItemFlags.displayName(it) }}")
 logger.info("Enchant: ${DaisyEnchantments.displayName(enchantment)}")
 logger.info("Effect: ${DaisyPotions.displayName(effect)}")
+logger.info("Profession: ${DaisyVillagerProfessions.displayName(profession)}")
+logger.info("Attribute: ${DaisyAttributes.displayName(attribute)}")
 ```
 
 ## What you get
@@ -54,5 +60,5 @@ The goal is not just parsing. The goal is replacing all the repetitive plugin-lo
 
 ## Next steps
 
-- Learn the modules: [Materials](/daisyseries/modules/materials/), [Sounds](/daisyseries/modules/sounds/), [Item Flags](/daisyseries/modules/item-flags/), [Enchantments](/daisyseries/modules/enchantments/), [Potions](/daisyseries/modules/potions/), [Biomes](/daisyseries/modules/biomes/), [Entity Types](/daisyseries/modules/entities/), [Game Modes](/daisyseries/modules/game-modes/), [Particles](/daisyseries/modules/particles/), and [Statistics](/daisyseries/modules/statistics/)
+- Learn the modules: [Materials](/daisyseries/modules/materials/), [Sounds](/daisyseries/modules/sounds/), [Item Flags](/daisyseries/modules/item-flags/), [Enchantments](/daisyseries/modules/enchantments/), [Potions](/daisyseries/modules/potions/), [Biomes](/daisyseries/modules/biomes/), [Villager Professions](/daisyseries/modules/villager-professions/), [Attributes](/daisyseries/modules/attributes/), [Entity Types](/daisyseries/modules/entities/), [Game Modes](/daisyseries/modules/game-modes/), [Difficulties](/daisyseries/modules/difficulties/), [Block Faces](/daisyseries/modules/block-faces/), [Particles](/daisyseries/modules/particles/), and [Statistics](/daisyseries/modules/statistics/)
 - Pair it with runtime systems: [Use DaisySeries with DaisyCore](/daisyseries/guides/use-daisyseries-with-daisycore/)

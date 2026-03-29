@@ -1,0 +1,33 @@
+---
+title: Block Faces
+description: Parse block faces, canonical keys, and display names with DaisySeries.
+---
+
+# Block Faces
+
+`DaisyBlockFaces` is the block-face entrypoint.
+
+## What it does
+
+- parses normalized directional input
+- exposes canonical lowercase keys
+- exposes friendly display names
+- keeps alias policy limited to normalization
+
+```kotlin
+val facing = DaisyBlockFaces.parse("north-east")
+val key = DaisyBlockFaces.key(facing)
+val label = DaisyBlockFaces.displayName(facing)
+```
+
+## Input examples
+
+- `north`
+- `up`
+- `north-east`
+- `north east`
+- `south_south_west`
+
+## Runtime note
+
+Block faces are plain enum-style values on Paper, so this module behaves like the simplest DaisySeries families and is safe to use directly in JVM tests.

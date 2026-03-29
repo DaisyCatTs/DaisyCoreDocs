@@ -1,0 +1,54 @@
+---
+title: Block Faces Dictionary
+description: Canonical DaisySeries block-face keys and display names.
+---
+
+# Block Faces Dictionary
+
+Use these values for direction-based config, menu orientation, and placement-facing settings.
+
+## Canonical key rules
+
+- Canonical keys are lowercase underscore names like `north_east`.
+- Directional hyphen and space input is normalized on parse.
+- Block faces do not ship extra aliases beyond normalization.
+
+## Quick config example
+
+```yaml
+facing: down
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyBlockFaces.parse(config.facing)
+val key = DaisyBlockFaces.key(value)
+val label = DaisyBlockFaces.displayName(value)
+
+val typed = required("facing", blockFaceCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``down`` | Down | - |
+| ``east`` | East | - |
+| ``east_north_east`` | East North East | - |
+| ``east_south_east`` | East South East | - |
+| ``north`` | North | - |
+| ``north_east`` | North East | - |
+| ``north_north_east`` | North North East | - |
+| ``north_north_west`` | North North West | - |
+| ``north_west`` | North West | - |
+| ``self`` | Self | - |
+| ``south`` | South | - |
+| ``south_east`` | South East | - |
+| ``south_south_east`` | South South East | - |
+| ``south_south_west`` | South South West | - |
+| ``south_west`` | South West | - |
+| ``up`` | Up | - |
+| ``west`` | West | - |
+| ``west_north_west`` | West North West | - |
+| ``west_south_west`` | West South West | - |

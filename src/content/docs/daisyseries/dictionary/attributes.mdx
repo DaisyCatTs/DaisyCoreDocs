@@ -1,0 +1,66 @@
+---
+title: Attributes Dictionary
+description: Canonical DaisySeries attribute keys, display names, and accepted aliases.
+---
+
+# Attributes Dictionary
+
+Use these values for stat rules, modifiers, requirements, and config-backed attribute selection.
+
+## Canonical key rules
+
+- Canonical keys remove raw enum prefixes such as `generic_` or `player_`.
+- Prefixed forms are still accepted on input when plugin configs already use them.
+- Namespaced Mojang-style inputs are normalized into the DaisySeries canonical key.
+
+## Quick config example
+
+```yaml
+attribute: armor
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyAttributes.parse(config.attribute)
+val key = DaisyAttributes.key(value)
+val label = DaisyAttributes.displayName(value)
+
+val typed = required("attribute", attributeCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``armor`` | Armor | - |
+| ``armor_toughness`` | Armor Toughness | - |
+| ``attack_damage`` | Attack Damage | - |
+| ``attack_knockback`` | Attack Knockback | - |
+| ``attack_speed`` | Attack Speed | - |
+| ``block_break_speed`` | Block Break Speed | - |
+| ``block_interaction_range`` | Block Interaction Range | - |
+| ``burning_time`` | Burning Time | - |
+| ``entity_interaction_range`` | Entity Interaction Range | - |
+| ``explosion_knockback_resistance`` | Explosion Knockback Resistance | - |
+| ``fall_damage_multiplier`` | Fall Damage Multiplier | - |
+| ``flying_speed`` | Flying Speed | - |
+| ``follow_range`` | Follow Range | - |
+| ``gravity`` | Gravity | - |
+| ``jump_strength`` | Jump Strength | - |
+| ``knockback_resistance`` | Knockback Resistance | - |
+| ``luck`` | Luck | - |
+| ``max_absorption`` | Max Absorption | - |
+| ``max_health`` | Max Health | - |
+| ``mining_efficiency`` | Mining Efficiency | - |
+| ``movement_efficiency`` | Movement Efficiency | - |
+| ``movement_speed`` | Movement Speed | - |
+| ``oxygen_bonus`` | Oxygen Bonus | - |
+| ``safe_fall_distance`` | Safe Fall Distance | - |
+| ``scale`` | Scale | - |
+| ``sneaking_speed`` | Sneaking Speed | - |
+| ``spawn_reinforcements`` | Spawn Reinforcements | - |
+| ``step_height`` | Step Height | - |
+| ``submerged_mining_speed`` | Submerged Mining Speed | - |
+| ``sweeping_damage_ratio`` | Sweeping Damage Ratio | - |
+| ``water_movement_efficiency`` | Water Movement Efficiency | - |

@@ -24,6 +24,14 @@ function Convert-ToSeriesKey([string]$name) {
     return $name.ToLowerInvariant()
 }
 
+function Convert-ToAttributeKey([string]$name) {
+    $key = $name.ToLowerInvariant()
+    $key = $key -replace '^generic_', ''
+    $key = $key -replace '^player_', ''
+    $key = $key -replace '^zombie_', ''
+    return $key
+}
+
 function Convert-ToDisplayName([string]$key) {
     return (
         $key -split "_" |
@@ -154,6 +162,14 @@ $biomeAliases = @{
     "the_end" = @("end")
 }
 
+$villagerProfessionAliases = @{
+    "toolsmith" = @("tool_smith")
+    "weaponsmith" = @("weapon_smith", "weaponsmith")
+    "leatherworker" = @("leather_worker")
+}
+
+$attributeAliases = @{}
+
 $entityAliases = @{
     "mooshroom" = @("mushroom_cow")
 }
@@ -162,6 +178,10 @@ $gameModeAliases = @{
     "survival" = @("surv")
     "spectator" = @("spec")
 }
+
+$difficultyAliases = @{}
+
+$blockFaceAliases = @{}
 
 $particleAliases = @{
     "totem_of_undying" = @("totem")
@@ -211,6 +231,20 @@ $biomes =
         New-Entry $key $biomeAliases[$key]
     }
 
+$villagerProfessions =
+    Get-StaticFieldNames 'org.bukkit.entity.Villager$Profession' 'org.bukkit.entity.Villager$Profession' |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $villagerProfessionAliases[$key]
+    }
+
+$attributes =
+    Get-StaticFieldNames "org.bukkit.attribute.Attribute" "org.bukkit.attribute.Attribute" |
+    ForEach-Object {
+        $key = Convert-ToAttributeKey $_
+        New-Entry $key $attributeAliases[$key]
+    }
+
 $entities =
     Get-StaticFieldNames "org.bukkit.entity.EntityType" "org.bukkit.entity.EntityType" |
     ForEach-Object {
@@ -223,6 +257,20 @@ $gameModes =
     ForEach-Object {
         $key = Convert-ToSeriesKey $_
         New-Entry $key $gameModeAliases[$key]
+    }
+
+$difficulties =
+    Get-StaticFieldNames "org.bukkit.Difficulty" "org.bukkit.Difficulty" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $difficultyAliases[$key]
+    }
+
+$blockFaces =
+    Get-StaticFieldNames "org.bukkit.block.BlockFace" "org.bukkit.block.BlockFace" |
+    ForEach-Object {
+        $key = Convert-ToSeriesKey $_
+        New-Entry $key $blockFaceAliases[$key]
     }
 
 $particles =
@@ -266,8 +314,12 @@ $index = @(
 "- [Enchantments](/daisyseries/dictionary/enchantments/)",
 "- [Potions](/daisyseries/dictionary/potions/)",
 "- [Biomes](/daisyseries/dictionary/biomes/)",
+"- [Villager Professions](/daisyseries/dictionary/villager-professions/)",
+"- [Attributes](/daisyseries/dictionary/attributes/)",
 "- [Entity Types](/daisyseries/dictionary/entities/)",
 "- [Game Modes](/daisyseries/dictionary/game-modes/)",
+"- [Difficulties](/daisyseries/dictionary/difficulties/)",
+"- [Block Faces](/daisyseries/dictionary/block-faces/)",
 "- [Particles](/daisyseries/dictionary/particles/)",
 "- [Statistics](/daisyseries/dictionary/statistics/)",
 ""
@@ -366,6 +418,36 @@ Write-DictionaryPage `
     -entries $biomes
 
 Write-DictionaryPage `
+    -slug "villager-professions" `
+    -title "Villager Professions Dictionary" `
+    -description "Canonical DaisySeries villager-profession keys, display names, and accepted aliases." `
+    -whatFor "Use these values for villager-role settings, NPC defaults, and config-backed profession selection." `
+    -yamlKey "profession" `
+    -parserName "DaisyVillagerProfessions" `
+    -codecName "villagerProfessionCodec" `
+    -rules @(
+        "Canonical keys are lowercase profession names like ``toolsmith`` and ``weaponsmith``.",
+        "Spacing helpers like ``tool smith`` normalize to the canonical DaisySeries key.",
+        "Legacy names like ``blacksmith`` are intentionally not part of the parser contract."
+    ) `
+    -entries $villagerProfessions
+
+Write-DictionaryPage `
+    -slug "attributes" `
+    -title "Attributes Dictionary" `
+    -description "Canonical DaisySeries attribute keys, display names, and accepted aliases." `
+    -whatFor "Use these values for stat rules, modifiers, requirements, and config-backed attribute selection." `
+    -yamlKey "attribute" `
+    -parserName "DaisyAttributes" `
+    -codecName "attributeCodec" `
+    -rules @(
+        "Canonical keys remove raw enum prefixes such as ``generic_`` or ``player_``.",
+        "Prefixed forms are still accepted on input when plugin configs already use them.",
+        "Namespaced Mojang-style inputs are normalized into the DaisySeries canonical key."
+    ) `
+    -entries $attributes
+
+Write-DictionaryPage `
     -slug "entities" `
     -title "Entity Types Dictionary" `
     -description "Canonical DaisySeries entity-type keys, display names, and accepted aliases." `
@@ -394,6 +476,36 @@ Write-DictionaryPage `
         "Game modes stay intentionally small and modern."
     ) `
     -entries $gameModes
+
+Write-DictionaryPage `
+    -slug "difficulties" `
+    -title "Difficulties Dictionary" `
+    -description "Canonical DaisySeries difficulty keys and display names." `
+    -whatFor "Use these values for world rules, gameplay defaults, and config-backed difficulty choices." `
+    -yamlKey "difficulty" `
+    -parserName "DaisyDifficulties" `
+    -codecName "difficultyCodec" `
+    -rules @(
+        "Canonical keys are lowercase names like ``peaceful`` and ``hard``.",
+        "Difficulties do not ship extra aliases beyond normalization.",
+        "Namespaced inputs are normalized when provided."
+    ) `
+    -entries $difficulties
+
+Write-DictionaryPage `
+    -slug "block-faces" `
+    -title "Block Faces Dictionary" `
+    -description "Canonical DaisySeries block-face keys and display names." `
+    -whatFor "Use these values for direction-based config, menu orientation, and placement-facing settings." `
+    -yamlKey "facing" `
+    -parserName "DaisyBlockFaces" `
+    -codecName "blockFaceCodec" `
+    -rules @(
+        "Canonical keys are lowercase underscore names like ``north_east``.",
+        "Directional hyphen and space input is normalized on parse.",
+        "Block faces do not ship extra aliases beyond normalization."
+    ) `
+    -entries $blockFaces
 
 Write-DictionaryPage `
     -slug "particles" `

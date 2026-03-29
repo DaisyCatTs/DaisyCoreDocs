@@ -1,0 +1,33 @@
+---
+title: Villager Professions
+description: Parse villager professions, canonical keys, and display names with DaisySeries.
+---
+
+# Villager Professions
+
+`DaisyVillagerProfessions` is the villager-profession entrypoint.
+
+## What it does
+
+- parses normalized profession input
+- keeps aliases intentionally minimal
+- exposes canonical lowercase keys
+- exposes friendly display names
+
+```kotlin
+val profession = DaisyVillagerProfessions.parse("tool smith")
+val key = DaisyVillagerProfessions.key(profession)
+val label = DaisyVillagerProfessions.displayName(profession)
+```
+
+## Input examples
+
+- `toolsmith`
+- `tool-smith`
+- `tool smith`
+- `weaponsmith`
+- `weapon smith`
+
+## Alias policy
+
+Villager professions stay conservative. DaisySeries accepts the useful smith/worker spacing variants, but it does not add legacy compatibility names like `blacksmith`.

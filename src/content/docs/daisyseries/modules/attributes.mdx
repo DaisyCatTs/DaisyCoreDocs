@@ -1,0 +1,33 @@
+---
+title: Attributes
+description: Parse attributes, canonical keys, and display names with DaisySeries.
+---
+
+# Attributes
+
+`DaisyAttributes` is the attribute entrypoint.
+
+## What it does
+
+- parses normalized attribute input
+- strips noisy enum prefixes out of canonical output
+- exposes stable lowercase keys
+- exposes friendly display names
+
+```kotlin
+val attribute = DaisyAttributes.parse("attack damage")
+val key = DaisyAttributes.key(attribute)
+val label = DaisyAttributes.displayName(attribute)
+```
+
+## Input examples
+
+- `attack_damage`
+- `attack damage`
+- `generic_attack_damage`
+- `minecraft:generic.attack_damage`
+- `max_health`
+
+## Canonical key rules
+
+Attributes serialize to the clean DaisySeries form like `attack_damage` or `block_interaction_range`, not the raw prefixed enum name.

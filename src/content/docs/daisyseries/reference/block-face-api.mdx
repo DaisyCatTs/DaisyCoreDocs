@@ -1,0 +1,19 @@
+---
+title: Block Face API
+description: Public DaisySeries block-face parsing helpers.
+---
+
+import ReferenceTable from '@components/ReferenceTable.astro'
+
+# Block Face API
+
+<ReferenceTable
+  filterable={false}
+  rows={[
+    { name: 'parse', type: 'enum', description: 'Parses a block face from canonical or normalized directional input.', required: true },
+    { name: 'parseOrNull', type: 'enum', description: 'Returns null for invalid block-face input.', required: false },
+    { name: 'key', type: 'string', description: 'Returns the canonical DaisySeries block-face key.', required: true },
+    { name: 'displayName', type: 'string', description: 'Returns a UI-friendly block-face label.', required: true },
+    { name: 'aliases', type: 'object', description: 'Returns the alias set for a block face.', required: false },
+  ]}
+/>

@@ -1,0 +1,50 @@
+---
+title: Villager Professions Dictionary
+description: Canonical DaisySeries villager-profession keys, display names, and accepted aliases.
+---
+
+# Villager Professions Dictionary
+
+Use these values for villager-role settings, NPC defaults, and config-backed profession selection.
+
+## Canonical key rules
+
+- Canonical keys are lowercase profession names like `toolsmith` and `weaponsmith`.
+- Spacing helpers like `tool smith` normalize to the canonical DaisySeries key.
+- Legacy names like `blacksmith` are intentionally not part of the parser contract.
+
+## Quick config example
+
+```yaml
+profession: armorer
+```
+
+## Quick usage example
+
+```kotlin
+val value = DaisyVillagerProfessions.parse(config.profession)
+val key = DaisyVillagerProfessions.key(value)
+val label = DaisyVillagerProfessions.displayName(value)
+
+val typed = required("profession", villagerProfessionCodec())
+```
+
+## Reference values
+
+| Canonical key | Display name | Accepted aliases |
+| --- | --- | --- |
+| ``armorer`` | Armorer | - |
+| ``butcher`` | Butcher | - |
+| ``cartographer`` | Cartographer | - |
+| ``cleric`` | Cleric | - |
+| ``farmer`` | Farmer | - |
+| ``fisherman`` | Fisherman | - |
+| ``fletcher`` | Fletcher | - |
+| ``leatherworker`` | Leatherworker | ``leather_worker`` |
+| ``librarian`` | Librarian | - |
+| ``mason`` | Mason | - |
+| ``nitwit`` | Nitwit | - |
+| ``none`` | None | - |
+| ``shepherd`` | Shepherd | - |
+| ``toolsmith`` | Toolsmith | ``tool_smith`` |
+| ``weaponsmith`` | Weaponsmith | ``weapon_smith``, ``weaponsmith`` |
